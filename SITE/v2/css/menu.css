@@ -1,0 +1,220 @@
+@charset "UTF-8";
+
+    ul{
+    list-style: none;} 
+
+    nav{
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    z-index: 1000;
+    height: 60px;
+    position: fixed;
+    padding: 0px;
+    transition: background ease .5s;} 
+
+    nav a.nameSite{
+    width: 30%;
+    color:white;
+    font-size: 220%;
+    margin: 0px 0px 0px 1.1vw;
+    line-height: 60px;
+    font-family: 'Arial', sans-serif;}
+
+    nav ul{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    height: 100%;
+    padding: 0px;}
+    
+    nav ul li{
+    height: 100%;
+    outline: none;}
+
+    nav ul li a{
+    outline: none;
+    line-height: 60px;
+    padding: 0px 12px 0px 12px;
+    color: white;
+    font-family: 'Times New Roman', sans-serif;
+    font-size: 100%;}
+
+    .cor{
+    background-color: rgb(39, 128, 128); 
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.5);}
+
+    .bg-color:hover{
+    background-color: darkcyan;}
+
+    #sobre{
+    padding-right: 12px;}
+    
+    .linksMenu{
+    display: flex;
+    flex-direction: row;
+    width: 75%;}
+
+    #Login{
+    font-family: 'Times New Roman', sans-serif;
+    cursor: pointer;
+    color: white;}
+
+    li#Cadastro a{
+    color: white;
+    font-family: 'Times New Roman', sans-serif;}
+
+    ul#items-sobre li{
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    text-align: center;  
+    border: 1px solid rgba(0, 0, 0, 0.062);  
+    padding: 0px 10px 0px 10px;
+    background-color:rgb(39, 128, 128) ;}
+
+    #textSobre{
+    cursor: pointer;
+    line-height: 60px;
+    padding: 0px 12px 0px 12px;
+    color: white;
+    font-family: 'Times New Roman', sans-serif;
+    font-size: 100%;}
+
+    #items-sobre li a{
+    font-size: 14px;
+    font-family: Georgia, 'Times New Roman', Times, serif;}
+
+    i.rotate{
+    color: #fff;
+    margin-left: 5px;
+    font-size: 16px;
+    position: absolute;
+    margin-top:19px;
+    width: 15px;
+    height: 20px;
+    transition: all ease .3s;}
+
+    ul#items-sobre{
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transition: all ease-in-out .2s ;
+    min-width: 100px;
+    position: absolute;}
+
+/*HOVER*/
+
+    #items-sobre li:hover {
+    background-color:darkcyan;} 
+
+    #items-sobre li:hover a{
+    color: rgba(5, 4, 4, 0.75);} 
+
+
+    #sobre:hover .rotate{
+    transform-origin:5px 12px;
+    transform: rotate(180deg);}
+
+@media (max-width:991px){
+    ul#items-sobre li{
+    box-shadow: -1px -1px 3px rgba(0,0,0,0.1);}
+
+    nav#menu{
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+}
+
+@media (min-width:761px)  and (max-width:991px){
+    nav#menu{
+    height: 50px;
+    background-color: rgb(39, 128, 128);  
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.5);}
+    
+    nav a.nameSite{
+    line-height: 50px;}
+
+    #menu ul li#Cadastro a{
+    font-size: 95%;}
+    
+    #menu ul li a{
+    line-height: 50px;
+    font-size: 95%;}
+
+    nav a.nameSite{
+    font-size:160%;
+    line-height: 50px;}
+}
+
+@media (min-width:401px) and (max-width: 760px){
+    .nameSite{
+    font-size: 28px;}
+
+    nav#menu{
+    height: 40px;
+    background-color: rgb(39, 128, 128);}
+
+    #menu ul li#Cadastro a{
+    line-height: 40px;
+    font-size: 80%;}
+    
+    #menu ul li#Cadastro a{
+    font-size: 0%;
+    font-size: 90%;}
+
+    #menu ul li a{
+    line-height: 40px;
+    padding: 0px 9px 0px 9px;
+    font-size: 90%;}
+    
+
+    nav a.nameSite{
+    font-size:130%;
+    line-height: 38.5px;}
+
+}
+
+@media (min-width:401px) and (max-width: 660px){
+
+    #menu ul li#Cadastro a{
+    font-size: 95%;
+    font-size: 80%;}
+
+    #menu ul li a{
+    line-height: 40px;
+    padding: 0px 9px 0px 9px;
+    font-size: 80%;}
+
+    nav#menu{
+    height: 40px;}
+
+    nav a.nameSite{
+    font-size:120%;
+    line-height: 40px;}
+}
+
+
+@media (min-width: 301px) and (max-width:400px){
+    nav a.nameSite{
+    font-size: 100%;
+    line-height: 39px;}
+
+    nav#menu{
+    height: 40px;
+    background-color: rgb(39, 128, 128);}
+
+    #menu ul li#Cadastro a{
+    line-height: 40px;
+    font-size: 55%;}
+    
+    #menu ul li a{
+    line-height: 40px;
+    padding: 0px 7px 0px 7px;
+    font-size: 55%;}
+}

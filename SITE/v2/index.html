@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <title>CORREÇÕES</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/style.min.css">
+
+    <!-- My styles CSS -->
+    <link rel="stylesheet" href="css/events.css">
+    <link href="css/style.scss">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/notificacoes.css">
+    <link rel="stylesheet" href="css/btNavigationBar.css">
+    <link rel="stylesheet" href="css/login.css">
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script> 
+
+    <!-- Font Awesome -->
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow|Julius+Sans+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/bc2be06805.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+
+</head>
+
+<body> 
+
+
+<!-- MENU -->
+    <nav id="menu">
+
+        <a class="nameSite"  href="#">COTIL Amigável</a>
+
+        <div class="linksMenu">
+
+            <ul>
+                <li class="bg-color none">
+                    <a href="#"><span>TUTORIA</span></a>
+                </li>
+
+                <li class="bg-color none">
+                    <a href="#">CALENDÁRIO</a>
+                </li>
+
+                <li id="sobre" class="bg-color none" >
+
+                    <span>
+                        <span id="textSobre">SOBRE<i  id="icon-sobre" class="fas fa-sort-down rotate"></i></span>
+                    </span>
+
+                    <ul id="items-sobre">
+                        <li><a href="#">Projeto Tutoria</li></a>
+                        <li><a href="envolvidos.html">Envolvidos</li></a>
+                    </ul>
+
+                </li>
+
+                <li id="Login" class="bg-color" onclick="openLogin()" >
+                    <a>LOGIN</a>
+                </li>
+
+                <li id="Cadastro" class="bg-color">
+                    <a href="cadastro.html">CADASTRE-SE</a>
+                </li>
+            </ul>
+
+        </div>
+        
+    </nav>
+
+    <!-- LOGIN MODAL -->
+
+        <div id="loginModal">
+
+            <div id="body-login" style="overflow-y:auto">
+
+                <div id="header-login">
+                    <span id="btn-close-modal" onclick="closeLogin()" >X</span>
+                    <span id="loginTitle" >Login</span>
+                </div>
+                <div id="conteudo-login" style="margin-top: -10px;">
+
+                    <div class="inputsLogin "  >
+                        <img alt=""> 
+
+                            <span  >Usuário</span>
+                            <input type="text" id="username"  placeholder="Username" label="Informe seu usuário">
+
+                            <span  >Senha</span>
+                            <input type="password" maxlength="15" style="margin-top: 15px;" id="password" placeholder="Informe sua senha">
+                    </div>
+
+                        <input type="checkbox" name="" style="margin: 25px 0px 10px 11%;">
+                        <span style="margin: 0px 0px 10px 0px;">Manter dados salvos?</span>
+
+                </div>
+                
+                <div id="footer-login">
+                    <input type="button" id="confirmation" value="Confirmar">
+                    <p>Ainda não possui uma conta? Cadastre-se <a href="#">aqui</a>.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+<!-- IMAGEM DO EVENTOS -->
+<img src="img/events.jpeg" class="imgMenu" alt="" srcset="">
+
+<div class="bottomNavigationBar">
+
+        <ul>
+            <li>
+                    <span>
+                        <a href="#" class="linkBar"  >
+                            <i class="far fas fa-user-friends">
+                            </i>
+                            <span class="tutoria">Tutoria</span>
+                        </a>
+                    </span>
+            </li>
+
+            <li>
+                <span>
+                    <a href="#" class="linkBar" >
+                        <i class="far fa-calendar-alt"></i>
+                        <span class="tutoria">Calendário </span>
+                    </a>
+                </span>
+        </li>
+
+        <li  id="sobre" class="border-none"> 
+            <span>
+                
+                <ul id="items-sobre">
+                    <li><a href="#">Projeto Tutoria</li></a>
+                    <li><a href="envolvidos.html">Envolvidos</li></a>
+                </ul>
+                <a href="#" class="linkBar" >
+                    <i class="fas fa-book"></i>
+
+                    <span class="tutoria">Sobre</span>
+                    <!-- <i class="fas fa-sort-down rotate"></i> -->
+                </a>
+            </span>
+        </li>
+    </ul>
+
+</div>
+
+    <!-- INICIO  -->
+    <!-- <article class="row Inicio p-4" >
+    <section class="row col-lg-9 col-md-10 col-sm-10 section" style="background-image: url('img/paper2.jpg'); background-size: 100% 100%;" >
+        <hgroup class="col-lg-12 hgroup">
+            <h1>Seja Bem Vindo!</h1>
+            <h2>Algumas informações:</h2>
+        </hgroup>
+
+        <div class="item col-lg-11 col-sm-12">
+
+            <h3 class="titulo"><i class="far fa-check-circle fa-fw ">&nbsp;</i>DE ALUNO PARA ALUNO</h3>
+
+            <span class="text">Desenvolvido por alunos do curso de informática para os demais alunos do colégio,
+                com base em ideais propostas pela professora de enfermagem Daniele Zuza. </span>
+        </div>
+        
+        
+        <div class="item col-lg-11">
+
+            <h3 class="titulo"><i class="far fa-check-circle fa-fw ">&nbsp;</i>TOTALMENTE CONFIÁVEL</h3>
+
+            <span class="text">Garantimos total segurança no sistema - total privacidade de
+                seus dados ao criar uma conta de usuário.</span>
+        </div>
+
+        <div class="item col-lg-11">
+
+            <h3 class="titulo"><i class="far fa-check-circle fa-fw">&nbsp;</i>NOTIFICAÇÃO DE EVENTOS</h3>
+
+            <span class="text"  >Ao se cadastrar poderá receber notificações sobre alguns dos eventos que ocorrerão
+                no colégio, então não perca tempo!</span>
+
+            </div>
+        </section>
+    </article> -->
+
+<!-- EVENTOS -->
+
+<section id="cardDeck" >
+
+    <header id="headerInicio">
+
+        <h1 id="tituloEventos">Eventos</h1>
+            <p id="textoEventos">
+                Por muito tempo sistema de panfletos e murais se provou ineficiente
+                para a divulgação de eventos organizados no colégio por mim, professora de enfermagem, Daniele Zuza e,
+                portanto,
+                julgamos que se fez necessário aumentar a visibilidade deles através da criação de um novo meio de
+                divulgação, este site, então convido você, caro leitor e aluno do COTIL a se juntar a nós.
+            </p>
+    </header>
+
+    <article class="row col-lg-12 ">
+
+        <div class="col-lg-12 proxEvents">
+            <span > <i> Próximos Eventos:</i></span>
+        </div>
+
+        <div class="cardBody col-lg-8 col-md-10 col-sm-11 mt-3 ">
+
+                <div class="col-lg-12 visivel" id="conteudo1" >
+
+                    <div class="card-title col-lg-12">
+                        <h5>Roda de Conversa</h5>
+                    </div>
+
+                    <div  class="cardText col-lg-12 mt-2" id="text1">
+                        Quia non numquam eius efds modi tempora
+                        dfsea incidunt ut
+                        gUt sda enim ad minima veniam, quis asddfsea incidunt ut
+                        dfsea incidunt ut quia non numquam eius efds modi tempora   quia non numquam eius efds modi temporadfsea incidunt utgUt sda enim ad minima veniam, quis asddfsea incidunt ut
+                        dfsea incidunt ut quia non numquam eius efds modi tempora   quia non numquam eius efds modi temporadfsea incidunt ut
+                        gUt sda enim ad minima veniam, quis asddfsea incidunt utgUt 
+                    </div>
+
+                    <div>
+                        <input type="button" value="Mais informações" class="verMais" id="verMais1" onclick="verificar('conteudo1','conteudo2')">
+                    </div>        
+
+                </div>
+
+                <div class="col-lg-12 invisivel p-0 m-0" id="conteudo2"  >
+
+
+                    <div  class="cardText2 col-lg-12 mt-4" id="text2" >
+
+                        <div class="row col-lg-12" >
+                            <div class="col-lg-6 col-md-12 col-sm-12 date">
+                                <h1  class="col-lg-12">Data: 22/04/20</h1>
+                                <h2 class="col-lg-12">~ Segunda-Feira</h2>
+                            </div>
+
+                            <div class="col-lg-6 col-md-12 col-sm-12 hour">
+                                
+                                <div>
+                                    <h2 class="col-lg-12">Início: 12:05</h2>
+                                </div>
+
+                                <div>
+                                    <h2 class="col-lg-12">Término: 12:50</h2>
+                                </di>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 mt-4">
+
+                            <h4 class="tituloInformacoes col-lg-12">Local:</h4><span class="txtInformacoes">Vamos nos reunir na sala 12 que fica no segundo andar. </span>
+
+                            <h4 class="tituloInformacoes col-lg-12 mt-4">Observações:</h4><p class="txtInformacoes">Talvez eu me atrase um pouquinho, mas podem aguardar em frente a sala que eu chego logo.
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <div>
+                        <input type="button" value="Voltar" class="verMenos" id="verMais2" onclick="verificar('conteudo1','conteudo2')">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </article> 
+
+</section>
+
+<section id="eventos-passados" >
+
+        <header id="headerInicio" style="margin-bottom: 10vw;"  >
+            <div class="col-lg-12 galeriaEventosTitle  ">
+                <span> GALERIA DE EVENTOS</span>
+            </div>
+                <p id="textoEventos"  >
+                    Por muito tempo sistema de panfletos e murais se provou ineficiente
+                    para a divulgação de eventos organizados no colégio por mim, professora de enfermagem, Daniele Zuza e,
+                    portanto,
+                    julgamos que se fez necessário aumentar a visibilidade deles através da criação de um novo meio de
+                    divulgação, este site, então convido você, caro leitor e aluno do COTIL a se juntar a nós.
+                </p>
+        </header>
+
+        <article class="row col-lg-12 ">
+
+            <div class="cardBody sombra col-lg-8 col-md-10 col-sm-11 mt-3 ">
+
+                <div class="col-lg-12" id="past-events-1" >
+
+                    <div class="card-title col-lg-12">
+                        <h5>Roda de Conversa</h5>
+                        <h6>Data: 22/04/2020</h6>
+                    </div>
+
+                    <div  class="cardText col-lg-12 mt-2" id="text3">
+                        Quia non numquam eius efds modi tempora
+                        dfsea incidunt ut
+                        gUt sda enim ad minima veniam, quis asddfsea incidunt ut
+                        dfsea incidunt ut quia non numquam eius efds modi tempora   quia non numquam eius efds modi temporadfsea incidunt utgUt sda enim ad minima veniam, quis asddfsea incidunt ut
+                        dfsea incidunt ut quia non numquam eius efds modi tempora   quia non numquam eius efds modi temporadfsea incidunt ut
+                        gUt sda enim ad minima veniam, quis asddfsea incidunt utgut 
+                    </div>
+
+
+                    <div>
+                        <input type="button" class="verFotos ml-3" value="Ver Fotos" data-toggle="modal"
+                        onclick="openModal('past-events-1')"></input>
+                    </div>        
+
+                </div>
+
+            </div>
+
+    </article> 
+
+    <div class="paginacao" aria-label="...">
+
+        <ul class="pagination">
+
+            <li class="page-item">
+
+            <a class="page-link d-none buttonPagee ">Anterior</a>
+
+            </li>
+
+            <li class="page-item Active"><a class="page-link buttonPagination" href="#">1</a></li>
+
+            <li class="page-item"><a class="page-link buttonPagination" href="#">2</a></li>
+
+            <li class="page-item "><a class="page-link buttonPagination" href="#">3</a></li>
+
+            <li class="page-item"><a class="page-link buttonPagination" style=" pointer-events: none;" href="#">...</a></li>
+
+            <li class="page-item"><a class="page-link buttonPagination" href="#">27</a></li>
+
+            <li class="page-item">
+
+                <a class="page-link buttonPagination buttonProx" href="#!">></a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+    <!-- GALERIA -->
+
+    <div id="galeryImages" class="galeria-fotos">
+    <header id="close-galery">
+        <span onclick="closeModal()" >X</span>
+    </header>
+    
+        <div class="exibir">
+            <img src="/img/fundoVermelho.jpg" id="imagem-exibir" alt="">
+            <span id="text-img"></span>
+        </div>
+
+
+    <div id="footer-galery">
+        <span class="ant">&lt;</span>
+        <div class="images">
+
+            <div>
+                <img src="img/fundoVermelho.jpg" class="img-view" alt="Tirada em 22/04/2020 às 12:22">
+            </div>
+
+            <div>
+                <img src="img/fundoVerde.jpg"  class="img-view" alt="Tirada em 22/04/2020 às 12:23">
+            </div>
+
+            <div>
+                <img src="img/fundoAzul.jpg"  class="img-view" alt="Tirada em 22/04/2020 às 12:25">
+            </div>
+
+            <div>
+                <img src="img/fundoLaranja.jpg"  class="img-view" alt="Tirada em 22/04/2020 às 12:27">
+            </div>
+
+            <div>
+                <img src="img/fundoRoxo.png"  class="img-view" alt="Tirada em 22/04/2020 às 12:35">
+            </div>
+
+            <div>
+                <img src="img/fundoRosa.png"  class="img-view" alt="Tirada em 22/04/2020 às 12:42">
+            </div>
+
+            <div>
+                <img src="img/fundoColorido.jpg"   class="img-view" alt="Tirada em 22/04/2020 às 12:50">
+            </div>
+
+        </div>
+        <span  class="prox">&gt;</span>
+    </div>
+    </div>
+
+    <!-- FOOTER -->
+
+<footer class="page-footer font-small unique-color-dark">
+
+    <div style="background-color: #6351ce;height: auto;">
+        <div class="container">
+
+            <div class="row py-3 d-flex align-items-center">
+
+
+                <div class="col-md-12 col-sm-12 col-lg-12 text-lg-center text-md-center text-sm-center mb-0">
+                    <h6 class="mb-0">Ative as notificações para acompanhar os novos eventos!</h6>
+                </div>
+            
+            </div>
+
+        </div>
+    </div>
+
+
+<div class="container text-center text-md-left mt-5">
+
+    <div class="row mt-3">
+
+        <div class="col-md-3 col-lg-4 col-xl-3 my-auto mx-auto">
+            <h6 class="text-uppercase font-weight-bold">COTIL Amigável</h6>
+            <hr class="deep-purple accent-2 mb-3 mt-0 d-inline-block mx-auto" style="width: 60px;">
+            <p style="color: rgba(242,246,248,1);">Aqui poderia ficar uma mensagem que voce gostaria de deixar. O Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão. </p>
+        </div>
+
+
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 mt-3">
+
+            <h6 class="text-uppercase font-weight-bold">Suporte</h6>
+
+            <hr class="deep-purple accent-2 mb-3 mt-0 d-inline-block mx-auto" style="width: 60px;">
+
+            <p>
+                <a href="#!"  >Como alterar minhas informações?</a>
+            </p>
+
+            <p>
+                <a href="#!">Como agendar uma tutoria?</a>
+            </p>
+
+            <p>
+                <a href="#!">Esqueci minha senha, o que fazer?</a>
+            </p>
+
+        </div>
+
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+            <h6 class="text-uppercase font-weight-bold">Links Adicionais</h6>
+
+            <hr class="deep-purple accent-2 mb-3 mt-0 d-inline-block mx-auto" style="width: 60px;">
+
+            <p>
+                <a href="#!">Colégio Técnico de Limeira</a>
+            </p>
+
+            <p>
+                <a href="#!">Projeto Tutoria</a>
+            </p>
+
+            <p>
+                <a href="#!"> Desenvolvedores</a>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="https://mdbootstrap.com/education/bootstrap/"> CotilAmigável.com</a>
+    </div>
+
+</footer>
+
+
+    <notification id="notificacao-actived" class="notificacao noti-none">
+        <span id="icone-notification"><i class="fa fa-bell"></i></span>
+        <span id="status" class="font-weight-bold" >Notificações Ativadas</span>
+    </notification>
+
+    <notification id="notificacao-disabled" class="notificacao" >
+        <span id="icone-notification-disabled"><i class="fas fa-bell-slash"></i></span>
+        <span id="status" class="font-weight-bold">Notificações Desativadas</span>
+    </notification>
+
+
+<!-- My JS -->
+<script src="js/menu.js"></script>
+<script src="js/galeria.js"></script>
+<script src="js/login.js"></script>
+<script src="js/notification.js"></script>
+<script src="js/bottomNavigationBar.js"></script>
+<script src="js/events.js"></script>
+
+    <script type="text/javascrpit" src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script type="text/javascrpit" src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script type="text/javascrpit" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

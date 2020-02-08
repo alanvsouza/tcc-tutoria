@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <title>Site</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=0.5,maximum-scale=1">
+
+<link rel="stylesheet" type="text/css" href="STYLE2.css">
+
+<link href="https://fonts.googleapis.com/css?family=Archivo+Narrow|Julius+Sans+One&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/bc2be06805.js"></script>
+
+<link href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet"> 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+
+
+
+
+$(window).on('scroll', function(){
+  if($(window).scrollTop() > 50) {
+    $('nav').addClass('cor');
+  }
+  else
+  {
+    $('nav').removeClass('cor');
+  }
+
+})
+
+
+
+// $(window).on('scroll', function(){
+//   if($(window).scrollTop() > 50) {
+//     $('.sidebar').addClass('descer');
+//   }
+//   else
+//   {
+//     $('.sidebar').removeClass('descer');
+//   }
+// })
+
+$(window).on('scroll', function(){
+  if($(window).scrollTop() > 920 ) {
+    $('.invisibel').addClass('apareca1');
+  }
+   else
+  {
+    $('.invisibel').removeClass('apareca1');
+  }
+})
+
+
+
+$(window).on('scroll', function(){
+  if($(window).scrollTop() > 1400) {
+    $('.invisibel2').addClass('apareca2');
+  }
+  else
+  {
+    $('.invisibel2').removeClass('apareca2');
+  }
+})
+
+$(window).on('scroll', function(){
+  if($(window).scrollTop() > 1800) {
+    $('.invisibel3').addClass('apareca3');
+  }
+  else
+  {
+    $('.invisibel3').removeClass('apareca3');
+  }
+})
+
+
+
+</script>
+
+</head>
+<body>
+
+
+  
+    <div class="parent calculo" >
+      <span ><i class="fa fa-bell"></i></span>
+  
+  </div>
+
+
+
+<nav class="navbar-light navbar-expand-md navbar-light container-fluid nav" style="height: auto;z-index: 15;" > 
+        
+  <a  class=" mb-0 nav-link FonteNomeSite margintop mt-1 mr-auto" href="#" style="color: white;">TITULO</a>
+
+         
+ <button class="ml-auto navbar-toggler navbar-light topo " style="height: auto;background-color: white ; " onclick="toggleNav()"aria-expanded="false" aria-label="Toggle navigation" type="button"><span class="navbar navbar-toggler-icon margin "></span></button>
+   
+
+            
+
+<div class="collapse navbar-collapse mt-1"   >
+    <ul class="navbar-nav ml-auto"> 
+       <li class="TextoMenu" >
+            <a class="nav-link" style="font-size: 16px;color: white;padding: 10px;padding-top: 15px;margin:0;" href="#">TUTORIA</a>
+       </li>    
+
+<li class="nav-item dropdown TextoMenu">
+    <a class="dropdown-toggle nav-link" style="font-size: 16px;padding: 10px;padding-top: 15px;margin:0;color: white;" href="#" data-toggle="dropdown" id="#navDrop">SOBRE</a>
+        <div class="dropdown-menu">
+            <a  class="dropdown-item " style="font-size: 15px;" href="#">Projeto Tutoria</a>
+            <a  class="dropdown-item " style="font-size: 15px;" href="envolvidos.html">Envolvidos</a>
+        </div>
+</li>
+
+<li class="TextoMenu " >
+<a data-target="#loginModal"  data-toggle="modal" class="nav-link"  href="#" style="color: white;font-size: 16px;padding: 10px;padding-top: 15px;margin:0;">LOGIN</a>
+</li>   
+
+      <li class="Cadastro">
+            <a class="nav-link" style="color: white;margin-top: 4.5px;padding: 7px;margin-left: 20px;font-weight: 700;"  href="#">CADASTRE-SE</a>
+      </li>
+
+                </ul>
+            </div>
+        </nav>
+
+   
+
+<div class="sidebar WhateverYourNavIs" style="z-index: 16;font-size: 16.5px;" >
+      
+     <div class=" navbar-open  list-group">
+
+        <div >
+		     <a  href="#" data-toggle="collapse" aria-expanded="false" class=" nav-link dropdown-toggle1">
+		        <i class="fas fa-user-friends fa-fw" aria-hidden="true"  style="margin-left: 10px;padding: 21px;height: 50px;text-align: center;"></i>&nbsp; Tutoria
+		    </a>
+
+     </div>   
+
+
+<li class="nav-link list-group-item  " href="#" style="background-color: #273478;" >
+
+
+    <a  href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class=" nav-link dropdown-toggle1">
+
+        <i class="fas fa-users fa-fw" aria-hidden="true"  style="margin-left: -4px;padding: 21px;height: 50px;text-align: center;"></i>&nbsp; Sobre
+
+    </a>
+
+
+    <ul class="collapse list-unstyled dropdown-menu  " id="homeSubmenu" >
+
+             <li> 
+
+                 <a href="#" class="dropdown-item  " style="font-size: 15px;text-decoration: none;" >Projeto Tutoria</a>
+
+             </li>
+
+             <li>
+
+                 <a href="envolvidos.html" class="dropdown-item"  style="font-size: 15px;text-decoration: none;" >Envolvidos</a>
+
+            </li>           
+    </ul> 
+
+ </li>    
+
+   
+
+<a class="list-group-item  nav-link" data-target="#loginModal"  data-toggle="modal"  href="#" style="background-color: #273478;"><i  style="margin-left: 3px; height: 50px;padding: 21px;text-align: center;" class="fas fa-user-alt fa-fw" aria-hidden="true"></i>&nbsp; Login</a>
+
+
+<a class="list-group-item  nav-link" href="#" style="background-color: #273478;"><i  style="margin-left: 3px; height: 50px;padding: 21px;text-align: center;" class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; Cadastro</a>
+
+<!-- <a class="list-group-item  nav-link" href="#" style="background-color: #273478;"><i  style="margin-left: 3px;height: 50px;padding:21px;text-align: center;" class="fas fa-cog fa-fw" aria-hidden="true"></i>&nbsp; Configurações</a> -->
+
+</div>
+        
+        <script type="text/javascript">
+        function toggleNav()
+        {
+            document.querySelector(".sidebar").classList.toggle("navbar-open");
+        }
+        </script>
+
+
+ </div>
+
+ 
+
+  
+  <div style="top: 20%;margin: auto;" class="modal fade collapse" id="loginModal"  role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true" >
+  <ul style="list-style: none;text-decoration: none;">
+  <li>
+            
+                            <div class="modal-dialog">
+                                <div class="modal-content"> 
+                                    <div class="modal-header">
+                                        <h3 class="modal-title " style="color: blue;font-size: 22px">Faça seu login:</h3>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body ">
+                                        <div class="form-group">
+                                        <input type="text" style="font-size: 17px;" name="username" class="form-control" placeholder="Nome">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" style="font-size: 17px;" name="password" class="form-control" placeholder="Senha">
+                                    </div>
+
+                                    </div>
+                                    <div class="modal-footer  ">
+                                        <span  class="mr-auto ml-4" style="font-size: 14px;">Ainda não possui uma conta? <a href="#">Cadastre-se</a></span>
+                                    <button type="submite" class="btn btn-success  FonteTextos " style="font-size: 18px;">Entrar</button>
+                                        </li>
+                </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+              
+<div class="bd-example " style="   background-image: linear-gradient(90deg, #433db0 , #4180c1  ,#3d52ac,#3d60aa); ">
+
+  <div id="carouselExampleCaptions" class="carousel slide " data-ride="carousel">
+
+         <ol class="carousel-indicators">
+
+            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+
+            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+
+            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+
+         </ol> 
+
+    <div class="carousel-inner">
+
+      <div class="carousel-item active">
+
+        <diV class="img-site d-block w-100 imagem imgx" style="height: 100vh;">  </diV>
+
+         <div class="carousel-caption  ">
+
+           <h1 style="color: orange;margin-bottom: 50px;margin: auto;min-width: 200px;" class="mb-3 tituloCarousel">BEM VINDO AO SITE!</h1>
+           <p style="max-width: auto;" class="textoCarousel textoCarouselEspecial  ">Aqui você encontrará informações sobre saúde em geral, sobre o projeto tutoria e sobre os eventos organiados  por mim, professora de enfermagem, Daniele Zuza </p>  
+        </div>
+
+      </div>
+
+    <div class="carousel-item" >
+
+       <div class="carousel-item active">
+
+        <diV class="img-site2 d-block w-100 imagem imgx" style="height: 100vh;"></diV>
+
+          <div class="carousel-caption topo2 textCarrosel">
+
+           <h1 style="color: orange;margin-bottom: 50px;margin: auto;" class="mb-3 tituloCarousel">JUNTE-SE A NÓS</h1>
+
+           <p  style="max-width: auto;"  class="textoCarousel">Participe de nossos eventos de roda de conversa, sessão cinema e balada.</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+      <div class="carousel-item" >
+
+       <div class="carousel-item active">
+
+        <diV class="img-site3 d-block w-100 imagem imgx" style="height: 100vh;"> </diV>
+
+          <div class="carousel-caption d-none d-md-block texotCarrosel ">
+
+           <h1 style="color: orange;font-size: 40px;margin-bottom: 50px;margin: auto;">Projeto Tutoria</h1>
+
+           <p  style="font-size: 22px;max-width: auto;text-align: center;"  class="textoCarousel" >Saiba mais sobre o projeto tutoria clicando aqui.</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+ </div> 
+
+
+    <!-- <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next"  href="#carouselExampleCaptions" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>  -->
+
+  </div>
+
+</div>
+
+
+
+<div  class="row" style="margin: auto;min-height:100vh;padding-top:30px;padding-bottom:30px;justify-content: center;background-image: url(img/boni.jpg);background-repeat: no-repeat; background-attachment: center;">
+
+
+
+<div  class="  col-lg-4 mb" style=" max-width: 350px;margin: auto; top: 50%;position: relative;">
+
+      <div class="title">
+
+        <h2 style="color:#005bff ;text-align: left;width: auto;" ><i class="far fa-check-circle fa-fw  title ">&nbsp;</i>De aluno para aluno</h2>
+
+      </div>
+
+            <div style="width: 100%;margin:auto;" class="FonteTextos2 mt-3 mb-4 ">
+                
+                <span style="color: white;">Desenvolvido por alunos do curso de informática para os demais alunos do colégio, com base em ideais propostas pela professora de enfermagem Daniele Zuza. </span>
+
+            </div>  
+</div>
+
+      <div  style="margin: auto; max-width: 350px;width: 100%;top: 30%;" class=" col-md-12 col-lg-4 " >
+
+         <div class="title">
+
+           <h2 style="color:#005bff ;text-align: left;width: auto;" ><i class="far fa-check-circle fa-fw "></i>100% Confiável</h2>
+
+          </div>
+
+         <div style="width: 100%;margin:auto;" class="FonteTextos2 mt-3 mb-4"> 
+
+            <span style="color: white;">Certificado ISO 9126 garante a total segurança do sistema - total privacidade de seus dados ao criar uma conta de usuário.</span>
+
+         </div> 
+
+    </div>
+
+    <div class="  col-md-12 col-lg-4"  style="margin:auto; max-width: 350px;top: 30%;">
+
+      <div class="title">
+
+        <h2 style="color:#005bff ;text-align: left;" ><i class="far fa-check-circle fa-fw">&nbsp;</i>Notificação de Eventos</h2>
+
+      </div>
+
+        <div style="width: 100%;margin:auto; " class="FonteTextos2 mt-3 mb-4 ">
+
+            <span  style="color: white;">Ao se cadastrar poderá receber notificações sobre alguns dos eventos que ocorrerão no colégio, então não perca tempo!</span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+ 
+    <!-- Cards -->
+
+
+
+
+ 
+
+
+ <div  style="background-color:#232767;height: auto;" class="card-deck alturaDiv" >
+  
+    
+       <!--    <img src="img/evte.png" class="col-lg-6 mt-3 col-md-6 col-sm-12 " class="img-responsive img-fluid" style="background-attachment: center;"> -->
+
+            <div class=" container col-lg-11 col-md-11 col-sm-11 mb-5" style="margin-top: 60px;">
+
+                <h1 style="color:black;" class="TituloTextos" >Eventos</h1>
+
+                <p class="FonteTextos" style="color: white;">Por muito tempo  sistema de panfletos e murais se provou ineficiente para a divulgação de eventos organizados no colégio por mim, professora de enfermagem, Daniele Zuza e, portanto, julgamos que se fez necessário aumentar a visibilidade deles através da criação de um novo meio de divulgação, este site, então convido você, caro leitor e aluno do COTIL a se juntar a nós. </p>
+
+            </div>
+
+
+<div class="row col-lg-11 mt-5 margin" style="width: auto;margin-bottom: 100px;">
+         
+    <img src="img/paisagem2.jpg" style="border-radius: 10px 10px 10px 10px ;" class=" invisibel col-lg-4 height col-md-6 col-sm-12 margin " alt="...">
+    
+  <div class="col-lg-8 col-md-6 col-sm-12 mt-3 invisibel" style="margin: auto;" >
+
+ 
+      <div class="card col-lg-12 col-md-12 mudarCor Padding" style="border-radius: 5px 5px 5px 5px;box-shadow: 0.5rem 0.5rem 3rem rgba(0,0,0,0.2);background-color: #26266a;margin-left: 0px;">
+       
+
+        <div class="card-body col-sm-12 col-lg-11 col-md-12" >
+   
+          <h5 class="card-title FonteTextos" style="font-size: 25px;color: black;">Titulo 1</h5>
+
+          <p class="card-text FonteTextos margin" style="color: white;font-size: 18px;">quia non numquam eius efds modi tempora dfsea incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut sda enim ad minima veniam, quis asd dsa nostrum exercitationem ullam corporis suscipit laboriosam, equatur, asd vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?.  </p>
+
+          <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target=".bd-example-modal-xl" style="font-size: 17px;border-radius:3px;">Ver mais</button>
+
+       </div>
+
+     </div>
+
+   </div>
+
+</div>
+
+<div class="row col-lg-11 mt-5 margin" style="width: auto;margin-bottom: 100px;">
+         
+ <img src="img/paisagem3.jpg" style="border-radius: 10px 10px 10px 10px ;" class=" invisibel2 col-lg-4 height col-md-6 col-sm-12" alt="...">
+    
+  <div class="col-lg-8 col-md-6 col-sm-12 mt-3 invisibel2  " style="margin: auto;" >
+
+ 
+  <div class="card col-lg-12 col-md-12 mudarCor Padding " style="border-radius: 5px 5px 5px 5px;box-shadow: 0.5rem 0.5rem 3rem rgba(0,0,0,0.2);background-color: #26266a;margin-left: 0px;">
+       
+       <div class="card-body col-sm-12 col-lg-12 col-md-12  " >
+   
+          <h5 class="card-title FonteTextos" style="font-size: 25px;color: black;">Titulo 2</h5>
+
+          <p class="card-text FonteTextos" style="color: white;font-size: 18px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum </p>
+
+          <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target=".bd-example-modal-xl" style="font-size: 17px;border-radius:3px;">Ver mais</button>
+
+       </div>
+
+      </div>
+
+    </div>
+
+   </div>
+
+
+<div class="row col-lg-11 mt-5 margin" style="width: auto;margin-bottom: 50px;margin-bottom: 100px;">
+         
+    <img src="img/paisagem4.jpg" style="border-radius: 10px 10px 10px 10px ;" class=" invisibel3 col-lg-4 height col-md-6 col-sm-12" alt="...">
+    
+  <div class="col-lg-8 col-md-6 col-sm-12 mt-3 invisibel3  " style="margin: auto;" >
+
+ 
+      <div class="card col-lg-12 col-md-12 mudarCor Padding " style="border-radius: 5px 5px 5px 5px;box-shadow: 0.5rem 0.5rem 3rem rgba(0,0,0,0.2);background-color: #26266a;margin-left: 0px;">
+       
+
+        <div class="card-body col-sm-12 col-lg-12 col-md-12  " >
+   
+          <h5 class="card-title FonteTextos" style="font-size: 25px;color: black;">Titulo 3</h5>
+
+          <p class="card-text FonteTextos" style="color: white;font-size: 18px;">ASed ut perspiciatis unde omnis iste natus error sit voluptatem sd accusantium ds sdfs doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architesequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed". </p>
+
+  <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target=".bd-example-modal-xl" style="font-size: 17px;border-radius:3px;">Ver mais</button>
+        </div>
+
+      </div>
+    </div>
+
+   </div>
+
+ <div aria-label="..."  style="margin: auto;font-size: 22px;margin-bottom: 50px;margin-top: 20px;display: flex;flex-wrap: wrap">
+
+     <ul class="pagination" style="">
+
+	    <li class="page-item ">
+
+	     <!--  <a class="page-link disabled buttonPagee ">Anterior</a> -->
+
+	    </li>
+
+<li class="page-item active"><a class="page-link buttonPagee" href="#">1</a></li>
+
+
+<li class="page-item"><a class="page-link buttonPagee" href="#">2</a></li>
+
+		     <li class="page-item "><a class="page-link buttonPagee" href="#">3</a></li>
+
+			     <li class="page-item">
+
+			       <a class="page-link buttonPagee" href="#!">Próximo</a>
+
+			    </li>
+
+	 </ul>
+
+  </div>
+
+</div>
+
+<div class="modal fade bd-example-modal-xl container-fluid" tabindex="-1" role="dialog" aria-hidden="true" style="overflow-y:auto 1;z-index: 9878687;">
+
+  <div class="modal-dialog modal-xl" style="padding: 10px;">
+
+    <div class="modal-content" style="font-size: 18px;">
+
+      <div class="modal-header" style="font-size: 25px;">
+
+        <h5 class="modal-title" id="exampleModalCenterTitle" style="font-size: 25px;">TITULO</h5>
+  <h5 class="modal-title" id="exampleModalCenterTitle" style="font-size: 25px;margin-left: 20%;">IMAGENS</h5>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+          <span aria-hidden="true">&times;</span>
+
+        </button>
+
+      </div>
+
+	 <div class="container-fluid col-lg-12">
+
+
+  <ul class="diferente container-fluid col-lg-12 col-md-12 col-sm-12">
+<a href="#img1"><img src="img/paisagem.jpg" class="min col-lg-12 col-md-12 col-sm-12 mt-5 "></a>
+ <a href="#img2"><img src="img/paisagem2.jpg" class="min col-lg-12 col-md-12 col-sm-12 mt-5 "></a>
+<a href="#img3"><img src="img/paisagem3.jpg" class="min col-lg-12 col-md-12 col-sm-12 mt-5"></a>
+ <a href="#img4"><img src="img/paisagem4.jpg" class="min col-lg-12 col-md-12 col-sm-12 mt-5"></a>
+  </ul>
+<div class="row">
+
+  <div class="lbox row " id="img1">
+   <div class="box_img">
+    <a href="#img4" class="botao" id="prev">&#171;</a>
+    <a href="#" class="botao" id="close">X</a>
+    <img src="img/paisagem.jpg" class="col-lg-12 col-md-12 col-sm-12 img-responsive img-fluid thumbnail ">
+    <a href="#img2" class="botao" id="next">&#187;</a>
+   </div>
+  </div>
+
+  <div class="lbox  row" id="img2">
+   <div class="box_img  ">
+    <a href="#img1" class="botao" id="prev">&#171;</a>
+    <a href="#" class="botao" id="close">X</a>
+    <img src="img/paisagem2.jpg" class="img-responsive col-lg-12 col-md-12 col-sm-12 img-fluid thumbnail">
+    <a href="#img3" class="botao" id="next">&#187;</a>
+   </div>
+  </div>
+
+  <div class="lbox row" id="img3">
+   <div class="box_img  ">
+    <a href="#img2" class="botao" id="prev">&#171;</a>
+    <a href="#" class="botao" id="close">X</a>
+    <img src="img/paisagem3.jpg" class="img-responsive col-lg-12 col-md-12 col-sm-12 img-fluid thumbnail ">
+    <a href="#img4" class="botao" id="next">&#187;</a>
+   </div>
+  </div>
+
+  <div class="lbox row" id="img4">
+   <div class="box_img">
+    <a href="#img3" class="botao" id="prev">&#171;</a>
+    <a href="#" class="botao" id="close">X</a>
+    <img src="img/paisagem4.jpg" class="img-responsive col-lg-12 col-md-12 col-sm-12 img-fluid thumbnail">
+    <a href="#img1" class="botao" id="next">&#187;</a>
+   </div>
+  </div>
+
+</div>
+	  </div>
+
+    </div>
+
+  </div>
+
+</div>
+   
+    
+</div>
+
+    <!-- <div class="col-lg-4 col-md-6 col-sm-10 mt-5  invisibel3" style="margin: auto;">
+      <div class="card" style="border-radius: 5px 5px 5px 5px;box-shadow: 0.5rem 0.5rem 3rem rgba(0,0,0,0.2);">
+        <img href="#"  src="img/paisagem4.jpg" style="border-radius: 5px 5px 0px 0px;" class="card-img-top img-responsive height"  alt="...">
+
+        <div class="card-body col-sm-12"  >
+          <h5 class="card-title FonteTextos" style="font-size: 25px;color: black;">Titulo 3</h5>
+          <p class="card-text FonteTextos">ASed ut perspiciatis unde omnis iste natus error sit voluptatem sd accusantium ds sdfs doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architesequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed".</p>      
+          <span ><a href="#" class="nav-link" style="font-size: 18px;color: blue;width: 87.3px;margin-left: -6px;">Ver mais</a></span>
+        
+        </div>
+      </div>
+    </div>
+ -->
+
+
+
+  
+
+
+  <div style="background-color: #202063;margin: auto;margin-bottom: " class="mt-0">
+
+    <div class="row col-lg-11 col-sm-12 col-md-9 row " style=" margin:auto;margin-bottom: 100px;">
+
+      <div  class=" " style="margin-top: 0px;margin: auto;margin-top: 50px;">
+
+         <span class="  mb-3 " style="color: black;text-align: none;font-size: 30px;">Saiba mais sobre a iniciativa</span>
+
+          <p class=" mt-4 FonteTextos" style="color: white;">
+
+          O sistema de panfletos e murais se provou ineficiente para a divulgação de eventos organizados por mim, professora de enfermagem Daniele Zuza e, portanto, acreditamos que se faz necessário aumentar a visibilidade deles através da implementação de um novo meio de divulgação...
+
+          </p>
+
+      </div>
+
+    </div>
+
+
+         <div class="row " style="margin-top: -60px;" >
+
+           <div class="col-lg-11 col-md-11 col-sm-12  container align-self-center row" style="margin: auto;">
+
+               <img src="img/paisagem2.jpg" class="col-lg-5 col-md-12 col-sm-12 heightt ">
+
+                  <div class="col-lg-6" style="align-items: center;align-content: center;">
+
+                    <h1   class=" mb-4 col-md-12 mt-5 col-sm-12 " style="color: black;font-size: 22px;font-weight:" >First featurette heading. It’ll blow your mind.</h1>
+
+                    <p class=" col-md-12 col-lg-12 FonteTextos col-sm-12" style="color: white;">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height actionhis is a lead-in to additional content. This card haen longer st to show that equal height action.his is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+
+                 </div>
+            </div>
+
+          </div>
+        
+            <hr style="width: 100%;margin-bottom: 50px;margin-top: 50px;color:black;background: black;">
+              <p></p>
+            </hr>
+
+    <div class="col-lg-11 col-md-11 col-sm-12  container align-self-center row" style="margin: auto;align-items: center;align-content: center;">
+
+               
+
+                  <div class="col-lg-6" style="margin-bottom: 100px;">
+
+                    <h1   class=" mb-4 col-md-12 mt-5 col-sm-12 " style="color: black;font-size: 22px;font-weight:" >First featurette heading. It’ll blow your mind.</h1>
+
+                    <p class=" col-md-12 col-lg-12 FonteTextos col-sm-12" style="color: white;">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height actionhis is a lead-in to additional content. This card haen longer st to show that equal height action.his is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+
+                 </div>
+                 <img src="img/paisagem2.jpg" class="col-lg-5 col-md-12 col-sm-12 heightt mb-5">
+
+
+            </div>
+    
+  </div>
+
+
+
+
+
+
+        
+
+
+        <!--<div class="row site-footer" style="background-color:#223566;height:auto;font-size: 15px; color: white;">
+            <div style="margin: auto;text-align: center;">
+                <img src="img/unicamp.png" class="image wp-image-24 attachment-full size-full " style="padding-left: 50px;">
+            </div>
+
+            <div class="col-lg-3  col-md-6 col-sm-3 mt-5 mb-3" style="margin: auto;text-align: center;">
+            
+                <h2 class="ml-5" style=" font-weight: bold;">Informações adicionais</h2>
+                
+                    <ul style="margin-left: auto;position: relative; background: red;">
+                        <li>Colégio Técnico de Limeira</li>
+                        <li>Professores envolvidos</li>
+                        <li>Desenvolvedores</li>    
+                    </ul>
+                
+
+            
+            </div>
+        </div>-->
+
+
+  
+
+
+
+      <!-- <div class="site-footer col-lg-12 " style="background-color:#223566;height:auto;font-size: 15px; color: white;text-align: center;justify-content: center;">
+
+<div class="col-lg-12 row">
+
+            <div class="col-lg-3 col-md-6 col-sm-12 mt-2 mb-3">
+
+                <img src="img/unicamp.png" class="image wp-image-24 attachment-full size-full " style="">
+
+            </div>
+
+            <div class="col-lg-3  col-md-6 col-sm-12 mt-5 mb-3 " style="color: white; text-align: center;">
+                
+                <h2 class="ml-5" style=" font-weight: bold;">Informações adicionais</h2>
+
+                <ul style=" margin:auto;width: 100%;">
+
+                    <li><a href="https://www.cotil.unicamp.br" >Colégio Técnico de Limeira</a></li>
+
+                    <li><a href="#">Professores envolvidos</li></a>
+
+                    <li><a href="#">Desenvolvedores</li></a>    
+
+                </ul>
+            
+            </div>
+
+            
+        
+        
+             <div class="col-lg-3 col-md-6 col-sm-12 mt-5 mb-3 " style="color: white;text-align: center;">
+
+               <div style="text-align: center;">
+
+                <h2 class="ml-5" style=" font-weight: bold;">Contatos</h2>
+
+                <ul>
+                    <li><a href="#">Telefone do Colégio: </li></a>
+
+                    <li><a href="#">Email dos desenvolvedores</li></a>
+
+                    <li><a href="#">Email dos colaboradores</li></a>
+
+                </ul>
+
+            </div>
+               
+            </div>
+
+             <div class="col-lg-3 col-md-6 col-sm-12 mt-5 mb-3" style="text-align: center;">
+
+                <h2 class="ml-5" style=" font-weight: bold;">Ajuda</h2>
+
+                <ul style="margin: auto;">
+
+                    <li><a href="#">Como alterar minhas informações?</li></a>
+
+                    <li><a href="#">Como agendar uma tutoria?</li></a>
+
+                    <li><a href="#">Esqueci minha senha, o que fazer?</li></a>
+
+                </ul>
+
+             </div>
+
+           </div>
+        
+</div>
+ -->
+
+
+<footer class="page-footer font-small blue pt-4" style="background-color:#3b39a1;font-size: 15px;min-height: 250px;font-family: 'Source Sans Pro', sans-serif; ">
+
+
+  <div class="container-fluid text-center text-md-left" style="min-height: 250px;">
+
+ 
+    <div class="row">
+
+  
+      <div class="col-md-4 mt-md-0 mt-3 margin" style="margin: auto;display: flex;justify-content: center;margin-top: 40px;height: 250px;">
+
+        
+        
+         <img src="img/unicamp.png" class="image  " style="width: 200px;height: 200px;margin-top: 5%;">
+
+      </div>
+   
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+     
+      <div class="col-md-4 mb-md-0 mt-3" >
+
+
+        <h1 class="text-uppercase mb-2" style="color: black;margin-top: 50px;">Informações adicionais</h1>
+
+        <ul class="list-unstyled" style="margin-top: 10px;" >
+          <li >
+            <a href="#!"  style="color: white;">Colégio Técnico de Limeira</a>
+          </li>
+          <li>
+            <a href="#!"  style="color: white;">Professores envolvidos</a>
+          </li>
+          <li>
+            <a href="#!" style="color: white;">Desenvolvedores</a>
+          </li>
+        
+        </ul>
+
+      </div>
+    
+ 
+      <div class="col-md-4 mb-md-0 mb-3 mt-3">
+
+        <h1 class="text-uppercase mb-2" style="color: black;margin-top: 50px;">Ajuda</h1>
+
+        <ul class="list-unstyled" style="margin-top: 10px;">
+          <li>
+            <a href="#!" class="mb-2 mt-1" style="color: white;">Como alterar minhas informações?</a>
+          </li>
+          <li>
+            <a href="#!" class="mb-2 mt-1"  style="color: white;">Como agendar uma tutoria?</a>
+          </li>
+          <li>
+            <a href="#!"  class="mb-2 mt-1" style="color: white;">Esqueci minha senha, o que fazer?</a>
+          </li>
+         
+        </ul>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+  <div class="footer-copyright text-center py-3" style="color: black; border-top: 1px solid 	#4055b8;">© 2019 Copyright:
+    <a href="https://mdbootstrap.com/education/bootstrap/" style="color: #005bff ;">algumacoisa.com</a>
+  </div>
+ 
+
+</footer>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

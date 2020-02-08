@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="cadastro.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <style>
+            .FonteNomeSite{
+                font-family: 'Archivo Black', sans-serif; 
+                font-size: 35px;
+                color: #2d4773;
+            }
+            a.nounderline:link  { 
+                text-decoration:none; 
+                color:black;
+            } 
+            body{
+              height: 800px;
+            }
+         
+
+     
+        </style>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script type="text/javascript">
+
+
+
+
+$(window).on('scroll', function(){
+  if($(window).scrollTop() > 50) {
+    $('nav').addClass('cor');
+  }
+  else
+  {
+    $('nav').removeClass('cor');
+  }
+
+})
+
+
+
+$(window).on('scroll', function(){
+  if($(window).scrollTop() > 50) {
+    $('.sidebar').addClass('descer');
+  }
+  else
+  {
+    $('.sidebar').removeClass('descer');
+  }
+})
+
+$(window).on('scroll', function(){
+  if($(window).scrollTop() > 920 ) {
+    $('.invisibel').addClass('apareca1');
+  }
+   else
+  {
+    $('.invisibel').removeClass('apareca1');
+  }
+})
+
+
+
+$(window).on('scroll', function(){
+  if($(window).scrollTop() > 1400) {
+    $('.invisibel2').addClass('apareca2');
+  }
+  else
+  {
+    $('.invisibel2').removeClass('apareca2');
+  }
+})
+
+$(window).on('scroll', function(){
+  if($(window).scrollTop() > 1800) {
+    $('.invisibel3').addClass('apareca3');
+  }
+  else
+  {
+    $('.invisibel3').removeClass('apareca3');
+  }
+})
+
+
+
+</script>
+
+         <!--Tirei o estilo da tag html para não bugar o site-->
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>Cadastro</title>
+        <meta charset="utf-8">
+    </head>
+    <body style="background-image: url(img/paisagemCadastro.jpg);background-repeat: no-repeat;background-size: 100% 100%;background-attachment: center;">
+
+        <!--Deixei a navbar igual à da home-->
+       <nav class="navbar-light navbar-expand-md navbar-light container-fluid nav" style="height: auto;z-index: 15;" > 
+        
+  <a  class=" mb-0 nav-link FonteNomeSite margintop mt-1 mr-auto" href="#" style="color: rgba(8, 0, 117, 1);">COTIL Amigável</a>
+
+         
+ <button class="ml-auto navbar-toggler navbar-light topo " style="height: auto;background-color: white;" onclick="toggleNav()"aria-expanded="false" aria-label="Toggle navigation" type="button"><span class="navbar navbar-toggler-icon margin "></span></button>
+   
+
+            
+
+<div class="collapse navbar-collapse mt-1"   >
+    <ul class="navbar-nav ml-auto"> 
+       <li class="TextoMenu" >
+            <a class="nav-link" style="font-size: 16px;color: black;padding: 10px;padding-top: 15px;margin:0;" href="#">TUTORIA</a>
+       </li>    
+
+<li class="nav-item dropdown TextoMenu">
+    <a class="dropdown-toggle nav-link" style="font-size: 16px;padding: 10px;padding-top: 15px;margin:0;color: black;" href="#" data-toggle="dropdown" id="#navDrop">SOBRE</a>
+        <div class="dropdown-menu">
+            <a  class="dropdown-item " style="font-size: 15px;" href="#">Projeto Tutoria</a>
+            <a  class="dropdown-item " style="font-size: 15px;" href="envolvidos.html">Envolvidos</a>
+        </div>
+</li>
+
+<li class="TextoMenu " >
+<a data-target="#loginModal"  data-toggle="modal" class="nav-link"  href="#" style="color: black;font-size: 16px;padding: 10px;padding-top: 15px;margin:0;">LOGIN</a>
+</li>   
+
+      <li class="Cadastro">
+            <a class="nav-link" style="color: white;margin-top: 4.5px;padding: 7px;margin-left: 20px;font-weight: 400;"  href="#">CADASTRE-SE</a>
+      </li>
+
+                </ul>
+            </div>
+        </nav>
+              
+                 
+              
+              <div class="sidebar" style="z-index: 16;font-size: 15px;" >
+                      
+                      <div class=" navbar-open  list-group">
+              
+                      <div class="list-group" style="font-size:15px;">
+              
+                 <a  href="#" data-toggle="collapse" aria-expanded="false" class=" nav-link dropdown-toggle1">
+                      <i class="fas fa-user-friends fa-fw" aria-hidden="true"  style="margin-left: 10px;padding-top: 21px;height: 50px;"></i>&nbsp; Tutoria
+                  </a>
+              
+                     </div>   
+              
+              
+              <li class="nav-link list-group-item  AA" href="#" style="background-color: #273478;" >
+              
+                  <a  href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class=" nav-link dropdown-toggle">
+                      <i class="fas fa-users fa-fw" aria-hidden="true"  style="margin-left: -4px;padding-top: 21px;height: 50px;"></i>&nbsp; Sobre
+                  </a>
+              
+              
+                  <ul class="collapse list-unstyled dropdown-menu  " id="homeSubmenu" >
+                           <li> 
+                               <a href="#" class="dropdown-item  " style="font-size: 15px;text-decoration: none;" >Projeto Tutoria</a>
+                           </li>
+                           <li>
+                               <a href="envolvidos.html" class="dropdown-item"  style="font-size: 15px;text-decoration: none;" >Envolvidos</a>
+                          </li>           
+                  </ul>           
+              </li>    
+              
+                 
+              
+              
+              <a class="list-group-item  nav-link" data-target="#loginModal"  data-toggle="modal"  href="#" style="background-color: #273478;"><i  style="margin-left: 3px; height: 50px;padding-top: 16px;" class="fas fa-user-alt fa-fw" aria-hidden="true"></i>&nbsp; Login</a>
+              
+              
+              <a class="list-group-item  nav-link" href="#" style="background-color: #273478;"><i  style="margin-left: 3px; height: 50px;padding-top: 16px;" class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; Cadastre-se</a>
+              
+              <a class="list-group-item  nav-link" href="#" style="background-color: #273478;"><i  style="margin-left: 3px;height: 50px;padding-top: 16px;" class="fas fa-cog fa-fw" aria-hidden="true"></i>&nbsp; Configurações</a>
+              
+              </div>
+                      
+                      <script type="text/javascript">
+                      function toggleNav()
+                      {
+                          document.querySelector(".sidebar").classList.toggle("navbar-open");
+                      }
+                      </script>
+              
+              
+               </div>
+              
+               
+              
+                
+                <div style="top: 20%;margin: auto;" class="modal fade collapse" id="loginModal"  role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true" >
+                <ul style="list-style: none;text-decoration: none;">
+                <li>
+                          
+                                          <div class="modal-dialog">
+                                              <div class="modal-content"> 
+                                                  <div class="modal-header">
+                                                      <h3 class="modal-title " style="color: blue;font-size: 22px">Faça seu login:</h3>
+                                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                  </div>
+                                                  <div class="modal-body ">
+                                                      <div class="form-group">
+                                                      <input type="text" style="font-size: 17px;" name="username" class="form-control" placeholder="Nome">
+                                                  </div>
+                                                  <div class="form-group">
+                                                      <input type="password" style="font-size: 17px;" name="password" class="form-control" placeholder="Senha">
+                                                  </div>
+              
+                                                  </div>
+                                                  <div class="modal-footer  ">
+                                                      <span  class="mr-auto ml-4" style="font-size: 14px;">Ainda não possui uma conta? <a href="#">Cadastre-se</a></span>
+                                                  <button type="submite" class="btn btn-success  FonteTextos " style="font-size: 18px;">Entrar</button>
+                                                      </li>
+                              </ul>
+              
+                                                  </div>
+                                              </div>
+                                          </div>
+              
+                                      </div>
+        <!--fim da navbar-->            
+
+        <!--Corpo principal do documento-->
+        <main>
+            <h1 style="text-align: center; margin-top: 15rem; margin-bottom: 0px; color: white;font-size: 35px;">Faça seu cadastro</h1> 
+            <!--Criei uma div por fora da antiga, para agrupá-la em uma linha-->            
+            <div class="row align-items-center">
+              <!--   <div class="col-md-2"></div>
+                <div class="card col-md-3 col-sm-12" style="width: 18rem; margin-top: 4%;">
+                    <img src="img/foto-beijaflor.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vitae lacinia dolor, vel ullamcorper eros. Cras eu ex tincidunt, sagittis ex id, placerat diam. In nec massa eget dui pulvinar pellentesque sit amet eget nisl. Pellentesque at nulla libero. Quisque a ipsum quis mi sagittis blandit sed eget odio. Duis aliquam tristique congue.</p>
+                    </div>
+                  </div> -->
+
+                <div class="container col-lg-11 col-md-4 col-sm-12" style="margin-top: 5%;">
+                    <div class="row">                                                
+                        <div class="col-md-12">
+                         <form class="needs-validation" style=" border-width: 1px; padding: 15px; border-radius: 5px;">
+                                <div class="form-row align-items-center" style="height: 50px">
+                                    <div class="col-md-6 col-sm-6" style="text-align: center;"><h4><a href="login.html" class="nounderline">Login</a></h4></div>
+                                    <div class="col-md-6 col-sm-6" style="text-align: center;"><h4>Cadastre-se</h4></div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-12">
+                                        <label for="nome" class="labelTitle">Nome:</label>
+                                        <input type="text" class="form-control input" id="nome" placeholder="Alan Souza">                        
+                                    </div>
+                                </div>
+                                <div class="row">                    
+                                    <div class="form-group col-md-12 mt-2">
+                                        <label for="enderecoEmail" class="labelTitle">Endereço de E-mail:</label>
+                                        <input type="email" class="form-control input" id="enderecoEmail" placeholder="nome@exemplo.com" >
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <label for="curso" class="labelTitle">Curso:</label>
+                                        <select class="form-control curso" id="curso">
+                                        <option>Informática</option>
+                                        <option>Mecânica</option>
+                                        <option>Qualidade</option>
+                                        <option>Edificações</option>
+                                        <option>Geodésia e Cartografia</option>
+                                        </select>
+                                    </div>                                       
+                                    <div class="form-group col-md-4">
+                                            <label for="anoIngresso" class="labelTitle">Ano de Ingresso:</label>
+                                            <input type="number" class="form-control input" id="anoIngresso" min="2016" max="2019" value="2018">
+                                    </div>
+                                </div>
+                                <div class="row"> 
+                                    <div class="form-group col-md-12">
+                                            <label for="senha" class="labelTitle">Senha:</label>
+                                            <input type="password" class="form-control input" id="senha" placeholder="*******">
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                            <label for="confSenha" class="labelTitle">Confirmação de Senha:</label>
+                                            <input type="password" class="form-control input" id="confSenha" placeholder="*******">
+                                    </div>
+                                </div>
+                                <small class="form-text text-muted" id="help">*Suas informações não serão compartilhadas</small>
+                                <div class="text-right">
+                                    <button type="submit" class="btn btn-info">Confirmar Cadastro</button>
+                                </div>            
+                            </form>
+                        </div>                                                  
+                    </div>                            
+                </div>
+            </div>   
+        </main>
+
+<!--         <footer class="row site-footer" style="background-color:#223566;height:auto;font-size: 15px; color: white;margin:auto; margin-top: 10%;">
+            <div class="col-lg-3 col-md-6 col-sm-12 mt-2 mb-3">
+                <img src="img/unicamp.png" class="image wp-image-24 attachment-full size-full " style="padding-left: 50px;">
+            </div>
+
+            <div class="col-lg-3  col-md-6 col-sm-12 mt-5 mb-3 " style="color: white; text-align: left;">
+                
+                <h2 class="ml-5" style=" font-weight: bold;">Informações adicionais</h2>
+                <ul style=" margin:auto;width: 100%;">
+                    <li><a href="https://www.cotil.unicamp.br" >Colégio Técnico de Limeira</a></li>
+                    <li><a href="#">Professores envolvidos</li></a>
+                    <li><a href="#">Desenvolvedores</li></a>	
+                </ul>
+            
+            </div>
+        
+                <div class="col-lg-3 col-md-6 col-sm-12 mt-5 mb-3 " style="color: white;">
+                    <div style="text-align: left;">
+                <h2 class="ml-5" style=" font-weight: bold;">Contatos</h2>
+                <ul>
+                    <li><a href="#">Telefone do Colégio: </li></a>
+                    <li><a href="#">Email dos desenvolvedores</li></a>
+                    <li><a href="#">Email dos colaboradores</li></a>
+                </ul>
+            
+                </div>
+                </div>
+    
+                <div class="col-lg-3 col-md-6 col-sm-12 mt-5 mb-3" style="text-align: left;">
+                <h2 class="ml-5" style=" font-weight: bold;margin: auto;">Ajuda</h2>
+
+                <ul style="margin: auto;">
+                    <li><a href="#">Como alterar minhas informações?</li></a>
+                    <li><a href="#">Como agendar uma tutoria?</li></a>
+                    <li><a href="#">Esqueci minha senha, o que fazer?</li></a>
+                </ul>
+                </div>
+            </footer> -->
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>
