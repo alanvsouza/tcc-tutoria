@@ -1,0 +1,213 @@
+﻿@charset "UTF-8";
+
+*{
+padding: 0px;
+margin: 0px;}
+
+h1,h2,h3,h4{
+padding: 0px;}
+
+nav{
+margin: 0px;
+position: absolute;
+top: 0px;
+left: 0px;
+width: 100%;
+height: 65px;
+display: flex;
+flex-direction: row;
+position: fixed;
+z-index: 1000;
+border-bottom: 1px solid rgba(0, 0, 0, 0.151);
+background-color: #ffffff;}
+
+nav ul{
+width: auto;
+margin-left: auto;
+display: flex;
+flex-direction: row;
+height: 65px;
+padding: 0px;}
+
+nav ul li{
+min-width: auto;
+width: auto;
+padding: 0px 20px 0px 20px;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+height: 100%;}
+
+nav div a{
+transition: color .2s linear;
+color: #292827;
+text-decoration: none;
+font-family: 'Josefin Sans';
+font-size: 16.5px;
+line-height: 64px;
+width: auto;}
+
+nav div a:hover{
+color: #ff8817;
+text-decoration: none;}
+
+header{
+padding: 0px;
+margin: 0px;
+display: flex;
+flex-direction: row;
+width: 100%;
+height: 100%;}
+
+h1{
+width: 100%;
+line-height: 17.5px;
+font-size: 100px;
+font-family: 'Berkshire Swash',sans-serif;}
+
+#logo-site{
+background-image: url('../img/logoSite.jpg');
+background-size: cover 100%;
+background-position:  center;
+background-repeat: no-repeat;
+width: 215px;
+margin: auto auto auto 40px;
+padding: 0px;
+height: 62px;}
+
+a.name-site{
+width: auto;
+padding: 0px;
+color: black;
+text-decoration: none;
+cursor: pointer;
+height: 100%;
+font-size: 40px;
+margin-left: 5%;}
+
+h2{
+font-size:70px;
+color: #dd7003;
+padding-bottom: 0px;
+font-family: 'Berkshire Swash';}
+
+a.actived{
+color: #ff8817;}
+
+a.name-site:hover{
+color: black;}
+
+.container-fluid{
+height: 100%;
+width: 100%;
+display: flex;
+flex-direction: row;}
+
+.links-menu{
+width: 100%;
+display: flex;
+flex-direction: row;   
+margin-right: 5%;
+padding: 0px;}
+
+.login{
+cursor: pointer;}
+
+a.login:hover{
+color: #ff8817;}
+
+/*SOBRE*/
+
+.tutoria{
+cursor: pointer;
+transition: color .2s linear;}
+
+.tutoria:hover{
+color: #ff8817;    
+cursor: pointer;}
+
+ul#items-sobre li{
+text-align: center;  
+width: 100%;
+font-size: 14px;
+height: auto;
+padding: 0px 25px 0px 25px;
+background-color:rgb(255, 255, 255);
+border: 1px solid rgba(170, 168, 168, 0.2);
+box-shadow: 1px 1px 5px rgba(158, 158, 158, 0.205);
+border-top: none;}
+
+ul#items-sobre li a{
+width: 100%;
+font-size: 14px;}
+
+ul#items-sobre{
+display: flex;
+flex-direction: column;
+opacity: 0;
+visibility: hidden;
+transition: all ease-in-out .2s ;
+position: absolute;
+top: 65.4px;
+margin-left: 10px;}
+
+span.icon-menu{
+background-image: url('../img/menu.png');
+background-size: cover;
+background-repeat: no-repeat;
+width: 75px;
+height: 40px;
+padding: 0px;
+margin:auto 2% auto auto;
+cursor: pointer;
+display: none;}
+
+@media (max-width: 991px){
+
+.sumir{
+display: none;}
+
+span.icon-menu{
+display:block;
+width: 50px;
+background-size: contain;
+height:35px;}
+
+}
+
+@media (min-width: 401px) and (max-width: 575px){
+
+    a.name-site{
+    font-size: 35px;
+    }
+}
+
+@media (max-width: 400px){
+
+    a.name-site{
+    line-height: 0px;
+    font-size: 33px;}
+
+    span.icon-menu{
+    display:block;
+    width: 40px;
+    background-size: contain;
+    height:35px;}
+
+}
+
+
+@media (max-width: 300px){
+
+    a.name-site{
+    line-height: 0px;
+    font-size: 27px;}
+
+    span.icon-menu{
+    display:block;
+    width: 30px;
+    background-size: contain;
+    height:27px;}
+
+}

@@ -1,0 +1,116 @@
+.img-events{
+width: 100%;
+height: 120vh;
+min-height: 750px;
+padding: 0px;
+background-image: url('../img/backgroundPTutoria.jpg');
+background-size: cover;
+background-position: bottom center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+position: relative;}
+
+.img-events::before{
+width: 100%;
+height: 100%;
+padding: 0px;
+position: absolute;
+content: '';
+background-color: rgba(32, 32, 32, 0.45)}
+
+.img-events div{
+padding: 0px;
+color: #EEEEEE;
+text-align: center;
+padding-top: 40vh;
+font-family: 'Berkshire Swash';}
+
+.img-events div h2{
+padding: 0px;
+position: relative;
+color: #FF8800;
+text-align: center;
+margin: 75px auto 0px auto;
+font-size: 35px;
+font-family: 'Josefin Sans',sans-serif;}
+
+.img-events div h3{
+position: relative;
+color: #EEEEEE;
+text-align: center;
+font-size: 30px;
+padding: 0px;
+padding-top: 10px;
+font-family: 'Josefin Sans',sans-serif;}
+
+
+@media(max-width: 1151px){
+    .img-events{
+    height: 100vh;
+    max-height: 100vh;}
+}
+
+@media(min-width: 767px)  and (max-width: 991px){
+
+    .img-events div{
+    padding-top: 230px; }
+
+    .img-events div h1 {
+    font-size: 5em;}
+
+    .img-events div h2 {
+    font-size: 2.8em;}
+
+    .img-events div h3{
+    font-size: 2em;}
+
+}
+
+@media(min-width: 576px)  and (max-width: 767px){
+    .img-events div{
+    padding-top: 250px;
+    padding: 0px 20px;}
+
+    .img-events div h1 {
+    font-size: 4.2em;}
+    
+    .img-events div h2 {
+    font-size: 2.2em;}
+    
+    .img-events div h3{
+    font-size: 1.6em;}
+}
+
+@media (min-width: 401px) and (max-width: 575px){
+    .img-events div{
+    padding: 200px 10px;}
+
+    .img-events div h1 {
+    line-height: 50px;
+    font-size: 4em;}
+    
+    .img-events div h2 {
+    font-size: 2em;}
+    
+    .img-events div h3{
+    font-size: 1.5em;}
+}
+
+
+@media (max-width: 400px){
+
+    .img-events div{
+    padding: 170px 10px;}
+    
+    .img-events div{
+    padding: 0px 12px;}
+
+    .img-events div h1 {
+    font-size: 2.8em;}
+    
+    .img-events div h2 {
+    font-size: 1.7em;}
+    
+    .img-events div h3{
+    font-size: 1.3em;}
+}
