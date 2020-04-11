@@ -26,79 +26,61 @@
     <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Josefin+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 </head>
 
 <body> 
+    
+    <?php 
+        include("nav.php");
+    ?>
 
-
-
-    <nav>
-            <h1><a href="#" class="name-site"> Cotil Amigável</a></h1>
-            <!-- <div id="logo-site"></div> -->
-            <div class="links-menu sumir">
-                <ul id="list-navbar">
-                    <li><a class="actived" href="#">Eventos</a></li>
-                    <li><a href="#">Calendário</a></li>
-
-                    <li id="sobre" class="tutoria">
-                        <a style="cursor: pointer;">Tutoria</a>
-                        <ul id="items-sobre">
-                            <li><a href="projetoTutoria.html">Projeto Tutoria</li></a>
-                            <li style="border-top: 1px solid rgba(143, 143, 143, 0.568);"><a href="#">Agendar Tutoria</li></a>
-                        </ul>
-                    </li>
-
-                    <li><a  class="login" onclick="openLogin()" >Login</a></li>
-                    <li><a href="cadastro.html">Cadastro</a></li>
-                </ul>
-            </div>
-            <span class="icon-menu"></span>
-    </nav>
-
-        <div class="img-events">
-            <div>
-                <h1 style="position: relative;">Cotil Amigável.</h1> 
-                <h2>Novos Eventos Toda Semana</h2>
-                <h3>Roda de Conversa / Sessão Cinema e Muito Mais!</h3>
-            </div>
+    <div class="img-events">
+        <div>
+            <h1 style="position: relative;">Cotil Amigável</h1> 
+            <h2>Novos Eventos Toda Semana</h2>
+            <h3>Roda de Conversa / Sessão Cinema e Muito Mais!</h3>
         </div>
+    </div>
 
 
     <!-- LOGIN MODAL -->
 
     <div id="loginModal">
 
-    <div id="body-login" style="overflow-y:auto">
+        <div id="body-login" style="overflow-y:auto">
 
-        <div id="header-login">
-            <span id="btn-close-modal" onclick="closeLogin()" >X</span>
-            <span id="loginTitle" >Login</span>
-        </div>
-        <div id="conteudo-login" style="margin-top: -10px;">
+            <div id="header-login">
+                <span id="btn-close-modal" class="material-icons" onclick="closeLogin()">close</span>
+                <!--<span id="btn-close-modal" onclick="closeLogin()" >X</span>-->
+                <span id="loginTitle" >Login</span>
+            </div> <!-- header-login -->
 
-            <div class="inputsLogin "  >
-                <img alt=""> 
+            <div id="conteudo-login" style="margin-top: -10px;">
 
-                    <span  >Usuário</span>
-                    <input type="text" id="username"  placeholder="Username" label="Informe seu usuário">
+                <div class="inputsLogin">
+                    <img alt=""> 
+                        <span  >Usuário</span>
+                        <input type="text" id="username"  placeholder="Username" label="Informe seu usuário">
 
-                    <span  >Senha</span>
-                    <input type="password" maxlength="15" style="margin-top: 15px;" id="password" placeholder="Informe sua senha">
-            </div>
+                        <span  >Senha</span>
+                        <input type="password" maxlength="15" style="margin-top: 15px;" id="password" placeholder="Informe sua senha">
+                </div> <!-- inputs-login -->
 
                 <input type="checkbox" name="" style="margin: 25px 0px 10px 11%;">
                 <span style="margin: 0px 0px 10px 0px;">Manter dados salvos?</span>
 
-        </div>
-        
-        <div id="footer-login">
-            <input type="button" id="confirmation" value="Acessar">
-            <p>Ainda não possui uma conta? Cadastre-se <a href="#">aqui</a>.</p>
-        </div>
+            </div> <!-- conteudo-login -->
+            
+            <div id="footer-login">
+                <input type="button" id="confirmation" value="Acessar">
+                <p>Ainda não possui uma conta? Cadastre-se <a href="#">aqui</a>.</p>
+            </div> <!-- footer-login -->
 
-    </div>
+        </div> <!-- body-login -->
 
-</div>
+    </div> <!-- loginModal -->
 
 <div 
 style="position: fixed;
@@ -120,13 +102,13 @@ id="navbar">
                 <li id="sobre" class="tutoria">
                     <a style="cursor: pointer;" class="item-navbar">Tutoria</a>
                         <ul id="items-sobre">
-                            <li><a href="projetoTutoria.html" class="item-navbar">Projeto Tutoria</li></a>
+                            <li><a href="projetoTutoria.php" class="item-navbar">Projeto Tutoria</li></a>
                             <li style="border-top: 1px solid rgba(143, 143, 143, 0.568);" class="item-navbar"><a href="#">Envolvidos</li></a>
                         </ul>
                     </li>
 
                     <li><a  class="login item-navbar" onclick="openLogin()" >Login</a></li>
-                    <li><a href="cadastro.html" class="item-navbar">Cadastro</a></li>
+                    <li><a href="cadastro.php" class="item-navbar">Cadastro</a></li>
     </ul>
 </div>
 
@@ -155,7 +137,7 @@ id="navbar">
             <div class="direction">
                 <div id="img-calendar" ></div>
                     <div class="" id="info-events">
-                        <h2>Próxmos Eventos</h2>
+                        <h2>Próximos Eventos</h2>
                         <h3>Esses são os próximos eventos que estão marcados para ocorrer.</h3>
                         <h4>Atualizado em 23 de março de 2020</h4>
                     </div>
@@ -233,7 +215,7 @@ id="navbar">
                 <li><a class="actived" href="#">Como marcar uma Tutoria?</a></li>
                 <li><a href="#">Desenvolvedores</a></li>
                 <li><a href="https://www.cotil.unicamp.br/portal/">Colégio Técnico de Limeira</a></li>
-                <li><a href="projetoTutoria.html">Projeto Tutoria</a></li>
+                <li><a href="projetoTutoria.php">Projeto Tutoria</a></li>
                 <li><a href="#">Esqueceu sua senha?</a></li>
             </ul>
         </div>

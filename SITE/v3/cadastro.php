@@ -25,7 +25,7 @@
 </head>
 <body>
         <div class="center">
-            <a href="index.html" class="title">COTIL Amigável</a>
+            <a href="index.php" class="title">COTIL Amigável</a>
         </div>
         <form class="col-lg-8 col-md-9 col-sm-11 col-11 p-0" action="#" method="post" id="form">
             
