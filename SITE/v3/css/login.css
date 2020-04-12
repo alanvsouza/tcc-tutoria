@@ -1,6 +1,6 @@
 /* LOGIN MODAL */
 
-    #loginModal{ 
+    form#loginModal{ 
     transition: all ease-in-out .6s;
     position: absolute;
     top: -300%;
@@ -36,7 +36,7 @@
     justify-content: center;
     padding-top: 30px;
     margin-left: 40px;
-    font-size: 230%;}
+    font-size: 275%;}
 
     div#conteudo-login{
     margin-top: 20px;
@@ -85,11 +85,10 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    display: block;
     float: right;
     margin: -7px 7px 0px auto;
     margin-top: 9px;
-    font-size: 220%;
+    font-size: 270%;
     cursor: pointer;}
 
     #conteudo-login{
@@ -106,7 +105,8 @@
     margin-top: 15px;}
 
     #footer-login a{
-    color: rgb(255, 157, 0);}
+    font-weight: 600;
+    color: rgb(255, 145, 0);}
 
     #footer-login a:hover{
     text-decoration: none;}

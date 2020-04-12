@@ -15,17 +15,16 @@
     <link href="css/style.scss">
     <link rel="stylesheet" href="css/imgEvents.css">
     <link rel="stylesheet" href="css/events.css">
-    <link rel="stylesheet" href="css/menu.css">    
+    <link rel="stylesheet" href="css/nav.css">    
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/navside.css">
 
     <!-- Font Awesome -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Josefin+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 </head>
@@ -36,6 +35,14 @@
         include("nav.php");
     ?>
 
+    <?php 
+        include("navside.php");
+    ?> 
+
+    <?php 
+        include("login.php");
+    ?>
+
     <div class="img-events">
         <div>
             <h1 style="position: relative;">Cotil Amigável</h1> 
@@ -43,74 +50,6 @@
             <h3>Roda de Conversa / Sessão Cinema e Muito Mais!</h3>
         </div>
     </div>
-
-
-    <!-- LOGIN MODAL -->
-
-    <div id="loginModal">
-
-        <div id="body-login" style="overflow-y:auto">
-
-            <div id="header-login">
-                <span id="btn-close-modal" class="material-icons" onclick="closeLogin()">close</span>
-                <!--<span id="btn-close-modal" onclick="closeLogin()" >X</span>-->
-                <span id="loginTitle" >Login</span>
-            </div> <!-- header-login -->
-
-            <div id="conteudo-login" style="margin-top: -10px;">
-
-                <div class="inputsLogin">
-                    <img alt=""> 
-                        <span  >Usuário</span>
-                        <input type="text" id="username"  placeholder="Username" label="Informe seu usuário">
-
-                        <span  >Senha</span>
-                        <input type="password" maxlength="15" style="margin-top: 15px;" id="password" placeholder="Informe sua senha">
-                </div> <!-- inputs-login -->
-
-                <input type="checkbox" name="" style="margin: 25px 0px 10px 11%;">
-                <span style="margin: 0px 0px 10px 0px;">Manter dados salvos?</span>
-
-            </div> <!-- conteudo-login -->
-            
-            <div id="footer-login">
-                <input type="button" id="confirmation" value="Acessar">
-                <p>Ainda não possui uma conta? Cadastre-se <a href="#">aqui</a>.</p>
-            </div> <!-- footer-login -->
-
-        </div> <!-- body-login -->
-
-    </div> <!-- loginModal -->
-
-<div 
-style="position: fixed;
-top: 65px;
-left: 0;
-width: 250px;
-height:100vh;
-background-color: #FAFAFA;
-border-right: 1px solid rgba(192,192,192,.2);
-z-index: 1001;
-transition: transform .15s linear;
-box-shadow: 1px 1px 2px rgba(192,192,192,.2);
-transform: translateX(-250px);
-overflow: auto" 
-id="navbar">
-    <ul class="list-navbar">
-        <li><a class="actived item-navbar" href="#">Eventos</a></li>
-            <li><a href="#" class="item-navbar">Calendário</a></li>
-                <li id="sobre" class="tutoria">
-                    <a style="cursor: pointer;" class="item-navbar">Tutoria</a>
-                        <ul id="items-sobre">
-                            <li><a href="projetoTutoria.php" class="item-navbar">Projeto Tutoria</li></a>
-                            <li style="border-top: 1px solid rgba(143, 143, 143, 0.568);" class="item-navbar"><a href="#">Envolvidos</li></a>
-                        </ul>
-                    </li>
-
-                    <li><a  class="login item-navbar" onclick="openLogin()" >Login</a></li>
-                    <li><a href="cadastro.php" class="item-navbar">Cadastro</a></li>
-    </ul>
-</div>
 
 <section>
 <div class="shape-fill"></div>
@@ -200,8 +139,6 @@ id="navbar">
 </article>
 </section>
 
-
-
 <footer>
     <div class="shape-fill2"></div>
     <div class="img-footer">
@@ -239,10 +176,10 @@ id="navbar">
 
 
 <!-- My JS -->
-<script src="js/menu.js"></script>
+<script src="js/nav.js"></script>
 <script src="js/login.js"></script>
 <script src="js/events.js"></script>
-<script src="js/navbar.js"></script>
+<script src="js/navside.js"></script>
 <script type="text/javascrpit" src="node_modules/jquery/dist/jquery.slim.min.js"></script>
 <script type="text/javascrpit" src="node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script type="text/javascrpit" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>

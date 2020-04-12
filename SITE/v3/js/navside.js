@@ -1,6 +1,6 @@
 var iconMenu = document.querySelector('span.icon-menu');
 var aberto = false;
-var navbar = document.querySelector('div#navbar');
+var navside = document.querySelector('div#navside');
 
 var windowHeight = altura();
 var windowWidth = largura();
@@ -14,9 +14,9 @@ function largura(){
 windowWidth = window.innerWidth;
 
 if(windowWidth >= 991 && aberto == true){
-navbar.style.transitionDuration = '0s';
-closeNavbar();
-navbar.style.transitionDuration = '.15s';}
+navside.style.transitionDuration = '0s';
+closeNavside();
+navside.style.transitionDuration = '.15s';}
 
 return windowWidth}
 
@@ -24,19 +24,19 @@ function altura(){
     windowHeight = window.innerHeight;
     return windowHeight}
 
-iconMenu.addEventListener('click', function navbar(){
+iconMenu.addEventListener('click', function navside(){
 
 if(aberto == false)
-openNavbar();
+openNavside();
 else
-closeNavbar();
+closeNavside();
 });
 
 
-function openNavbar(){
+function openNavside(){
 aberto = true;
-navbar.style.transform = 'translateX(0px)'}
+navside.style.transform = 'translateX(0px)'}
 
-function closeNavbar(){
+function closeNavside(){
 aberto = false;
-navbar.style.transform = 'translateX(-250px)'}
+navside.style.transform = 'translateX(-250px)'}

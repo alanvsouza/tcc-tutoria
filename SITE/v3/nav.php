@@ -1,9 +1,9 @@
 <nav>
-    <h1><a href="#" class="name-site"> Cotil Amigável</a></h1>
+    <h1><a href="index.php" class="name-site"> Cotil Amigável</a></h1>
     <!-- <div id="logo-site"></div> -->
     <div class="links-menu sumir">
         <ul id="list-navbar">
-            <li><a class="actived" href="#">Eventos</a></li>
+            <li><a class="actived" href="index.php">Eventos</a></li>
             <li><a href="#">Calendário</a></li>
 
             <li id="sobre" class="tutoria">

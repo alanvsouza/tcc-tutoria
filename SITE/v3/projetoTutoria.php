@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto Tutoria - Cotil Amigável</title>
+    <title>Cotil Amigável - Projeto Tutoria</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/style.min.css">
 
     <!-- My styles CSS -->
     <link href="css/style.scss">
-    <link rel="stylesheet" href="css/menu.css"> 
+    <link rel="stylesheet" href="css/nav.css"> 
     <link rel="stylesheet" href="css/imgEvents.css">   
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/projetoTutoria.css">
-    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/navside.css">
     <link rel="stylesheet" href="css/style_Envolvidos.css">
 
     <!-- Bootstrap JS -->
@@ -27,104 +27,32 @@
     <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Josefin+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/bc2be06805.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <!-- Lodash -->
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
 </head>
 <body>
 
-    <nav>
-        <h1><a href="index.html" class="name-site"> Cotil Amigável</a></h1>
-        <!-- <div id="logo-site"></div> -->
-        <div class="links-menu sumir">
-            <ul id="list-navbar">
-                <li><a  href="#">Eventos</a></li>
-                <li><a href="#">Calendário</a></li>
+    <?php 
+        include("nav.php");
+    ?>
 
-                <li id="sobre" class="tutoria">
-                    <a style="cursor: pointer;" class="actived">Tutoria</a>
-                    <ul id="items-sobre">
-                        <li><a href="projetoTutoria.html">Projeto Tutoria</li></a>
-                        <li style="border-top: 1px solid rgba(143, 143, 143, 0.568);"><a href="#">Agendar Tutoria</li></a>
-                    </ul>
-                </li>
+    <?php 
+        include("navside.php");
+    ?> 
 
-                <li><a  class="login" onclick="openLogin()" >Login</a></li>
-                <li><a href="cadastro.html">Cadastro</a></li>
-            </ul>
-        </div>
-        <span class="icon-menu"></span>
-</nav>
+    <?php 
+        include("login.php");
+    ?>
 
-            <div class="img-events" >
-                <div>
-                    <h1 style="position: relative;">Projeto Tutoria</h1> 
-                    <h2>Consulte os Horários e Marque uma Tutoria! </h2>
-                    <h3>Nossos Tutores são Professores do COTIL</h3>
-                </div>
+        <div class="img-events" >
+            <div>
+                <h1 style="position: relative;">Projeto Tutoria</h1> 
+                <h2>Consulte os Horários e Marque uma Tutoria! </h2>
+                <h3>Nossos Tutores são Professores do COTIL</h3>
             </div>
-
-
-<!-- LOGIN MODAL -->
-
-<div id="loginModal">
-
-    <div id="body-login" style="overflow-y:auto">
-
-        <div id="header-login">
-            <span id="btn-close-modal" onclick="closeLogin()" >X</span>
-            <span id="loginTitle" >Login</span>
         </div>
-        <div id="conteudo-login" style="margin-top: -10px;">
-
-            <div class="inputsLogin "  >
-                <img alt=""> 
-
-                    <span  >Usuário</span>
-                    <input type="text" id="username"  placeholder="Username" label="Informe seu usuário">
-
-                    <span  >Senha</span>
-                    <input type="password" maxlength="15" style="margin-top: 15px;" id="password" placeholder="Informe sua senha">
-            </div>
-
-                <input type="checkbox" name="" style="margin: 25px 0px 10px 11%;">
-                <span style="margin: 0px 0px 10px 0px;">Manter dados salvos?</span>
-
-        </div>
-        
-        <div id="footer-login">
-            <input type="button" id="confirmation" value="Acessar">
-            <p>Ainda não possui uma conta? Cadastre-se <a href="#">aqui</a>.</p>
-        </div>
-
-    </div>
-
-</div>
-
-<div 
-style="position: fixed;
-top: 65px;
-left: 0;
-width: 250px;
-height:100vh;
-background-color: white;
-border-right: 1px solid rgba(0,0,0,.1);
-z-index: 1001;
-transition: transform .15s linear;
-box-shadow: 1px 1px 2px #D3D3D3;
-transform: translateX(-250px);
-overflow-y: auto;" 
-id="navbar">
-    <ul class="list-navbar">
-        <li><a class="actived item-navbar" href="#">Eventos</a></li>
-            <li><a href="#" class="item-navbar">Calendário</a></li>
-            <li><a href="projetoTutoria.html" class="item-navbar">Projeto Tutoria</li></a>
-            <li><a href="#" class="item-navbar">Envolvidos</li></a>
-            <li><a  class="login item-navbar" onclick="openLogin()" >Login</a></li>
-            <li><a href="cadastro.html" class="item-navbar">Cadastro</a></li>
-    </ul>
-</div>
-
 
 <section>
     <div class="shape-fill"></div>
@@ -311,8 +239,6 @@ id="navbar">
         
         </section>
 
-
-
 <footer>
     <div class="shape-fill2"></div>
     <div class="img-footer">
@@ -340,9 +266,9 @@ id="navbar">
 
 
 <!-- My JS -->
-<script src="js/menu.js"></script>
+<script src="js/nav.js"></script>
 <script src="js/login.js"></script>
-<script src="js/navbar.js"></script>
+<script src="js/navside.js"></script>
 <script src="js/envolvidos.js"></script>
 
 
