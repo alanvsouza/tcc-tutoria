@@ -1,4 +1,5 @@
 var login = document.querySelector('div#loginModal');
+var heightAtual;
 
 function openLogin(){
     loginModal.style.visibility = 'visible';

@@ -7,7 +7,7 @@
             <li><a href="#">Calendário</a></li>
 
             <li id="sobre" class="tutoria">
-                <a style="cursor: pointer;">Tutoria</a>
+                <a>Tutoria</a>
                 <ul id="items-sobre">
                     <li><a href="projetoTutoria.php">Projeto Tutoria</li></a>
                     <li style="border-top: 1px solid rgba(143, 143, 143, 0.568);"><a href="#">Agendar Tutoria</li></a>

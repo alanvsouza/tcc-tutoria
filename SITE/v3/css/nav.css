@@ -1,19 +1,13 @@
 ﻿@charset "UTF-8";
 
-*{
-padding: 0px;
-margin: 0px;}
-
 h1,h2,h3,h4{
 padding: 0px;}
 
 nav{
-margin: 0px;
-position: absolute;
-top: 0px;
-left: 0px;
-width: 100%;
+width: 100vw;
 height: 65px;
+margin: 0px;
+padding: 0px;
 display: flex;
 flex-direction: row;
 position: fixed;
@@ -22,43 +16,30 @@ border-bottom: 1px solid rgba(0, 0, 0, 0.151);
 background-color: #ffffff;}
 
 nav ul{
-width: auto;
-margin-left: auto;
+width: 100%;
+padding: 0px;
+margin: auto auto auto 100px;
 display: flex;
-flex-direction: row;
-height: 65px;
-padding: 0px;}
+flex-direction: row;}
 
 nav ul li{
-min-width: auto;
-width: auto;
+height: 65px;
+line-height: 67px;
 padding: 0px 20px 0px 20px;
-display: flex;
-flex-direction: row;
-align-items: center;
-justify-content: center;
-height: 100%;}
+list-style: none;}
 
 nav div a{
-transition: color .2s linear;
-color: #292827;
-text-decoration: none;
+font-size: 19px;
 font-family: 'Josefin Sans';
-font-size: 17.5px;
-margin-top: 3px;
-width: auto;}
+text-decoration: none;
+color: #292827;
+width: auto;
+display: flex;
+flex-direction: row;}
 
 nav div a:hover{
 color: #ff8817;
 text-decoration: none;}
-
-header{
-padding: 0px;
-margin: 0px;
-display: flex;
-flex-direction: row;
-width: 100%;
-height: 100%;}
 
 h1{
 width: 100%;
@@ -66,25 +47,18 @@ line-height: 17.5px;
 font-size: 100px;
 font-family: 'Berkshire Swash',sans-serif;}
 
-#logo-site{
-background-image: url('../img/logoSite.jpg');
-background-size: cover 100%;
-background-position:  center;
-background-repeat: no-repeat;
-width: 215px;
-margin: auto auto auto 40px;
-padding: 0px;
-height: 62px;}
-
 a.name-site{
 width: auto;
-padding: 0px;
-color: black;
-text-decoration: none;
-cursor: pointer;
-height: 100%;
+max-width: 250px;
+margin-left: 4%;
+line-height: 65px;
 font-size: 40px;
-margin-left: 5%;}
+padding: 0px;
+text-decoration: none;
+display: flex;
+align-items: center;
+cursor: pointer;
+color: black;}
 
 h2{
 font-size:70px;
@@ -94,9 +68,6 @@ font-family: 'Berkshire Swash';}
 
 a.actived{
 color: #ff8817;}
-
-a.name-site:hover{
-color: black;}
 
 .container-fluid{
 height: 100%;
@@ -108,7 +79,6 @@ flex-direction: row;}
 width: 100%;
 display: flex;
 flex-direction: row;   
-margin-right: 5%;
 padding: 0px;}
 
 .login{
@@ -127,12 +97,16 @@ transition: color .2s linear;}
 color: #ff8817;    
 cursor: pointer;}
 
+ul#items-sobre{
+width: auto;
+margin: 0px;
+transform: translateX(-35px);
+position: relative;
+padding: 0px;}
+
 ul#items-sobre li{
-text-align: center;  
-width: 100%;
-font-size: 14px;
-height: auto;
-padding: 17.5px 25px 17.5px 25px;
+font-size: 14px; 
+padding: 0px;
 background-color:rgb(255, 255, 255);
 border: 1px solid rgba(170, 168, 168, 0.2);
 box-shadow: 1px 1px 5px rgba(158, 158, 158, 0.205);
@@ -140,7 +114,10 @@ border-top: none;}
 
 ul#items-sobre li a{
 width: 100%;
-font-size: 14px;}
+padding: 0px 15px 0px 15px;
+font-size: 15.5px;
+display: flex;
+justify-content: center;}
 
 ul#items-sobre{
 display: flex;
@@ -149,8 +126,7 @@ opacity: 0;
 visibility: hidden;
 transition: all ease-in-out .2s ;
 position: absolute;
-top: 65.4px;
-margin-left: 10px;}
+top: 65.47px;}
 
 span.icon-menu{
 background-image: url('../img/menu.png');
@@ -165,49 +141,60 @@ display: none;}
 
 @media (max-width: 991px){
 
-.sumir{
-display: none;}
-
-span.icon-menu{
-display:block;
-width: 50px;
-background-size: contain;
-height:35px;}
-
-}
-
-@media (min-width: 401px) and (max-width: 575px){
+    nav{
+    height: 55px;}   
 
     a.name-site{
-    font-size: 35px;}
+    height: 55px;
+    line-height: 55px;
+    font-size: 40px;}
 
-}
-
-@media (max-width: 400px){
-
-    a.name-site{
-    line-height: 0px;
-    font-size: 33px;}
+    .sumir{
+    display: none;}
 
     span.icon-menu{
     display:block;
-    width: 40px;
+    width: 50px;
     background-size: contain;
     height:35px;}
-
+}
+@media(min-width: 576px)  and (max-width: 767px){
+    a.name-site{
+    max-width: 220px;
+    margin-left: 4%;
+    font-size: 30px;}
 }
 
+@media (min-width: 401px) and (max-width: 575px){
+    a.name-site{
+    max-width: 220px;
+    margin-left: 3.5%;
+    font-size: 31px;}
+
+    span.icon-menu{
+    width: 45px;
+    height: 30px;}
+}
+
+@media (max-width: 400px){
+    a.name-site{
+    max-width: 210px;
+    margin-left: 2.5%;
+    font-size: 29px;}
+
+    span.icon-menu{
+    width: 33px;
+    height:27px;}
+}
 
 @media (max-width: 300px){
 
     a.name-site{
-    line-height: 0px;
+    max-width: 200px;
+    margin-left: 5%;
     font-size: 27px;}
 
     span.icon-menu{
-    display:block;
     width: 30px;
-    background-size: contain;
     height:27px;}
-
 }

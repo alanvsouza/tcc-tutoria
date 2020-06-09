@@ -1,13 +1,13 @@
 <form id="loginModal" method="POST">
 
-<div id="body-login" style="overflow-y:auto">
+<div id="body-login" style="overflow-y:auto;">
 
     <div id="header-login">
         <span id="btn-close-modal" class="material-icons" onclick="closeLogin()">close</span>
         <span id="loginTitle" >Login</span>
     </div> <!-- header-login -->
 
-    <div id="conteudo-login" style="margin-top: -10px;">
+    <div id="conteudo-login">
 
         <div class="inputsLogin">
             <img alt=""> 
@@ -31,4 +31,3 @@
 </div> <!-- body-login -->
 
 </form> <!-- loginModal -->
-

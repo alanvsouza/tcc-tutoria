@@ -1,14 +1,5 @@
 .img-events{
-width: 100%;
-height: 120vh;
-min-height: 750px;
-padding: 65px 0px 0px 0px;
-background-image: url('../img/backgrounEvents.jpg') !important;
-background-size: cover;
-background-position: bottom center;
-background-repeat: no-repeat;
-background-attachment: fixed;
-position: relative;}
+background-image: url('../img/backgrounEvents.jpg') !important;}
 
 .shape-fill{
 background-image: url('../img/shapeFill.png');
@@ -21,15 +12,27 @@ margin: 0px;
 box-sizing: border-box;
 position: relative;}
 
+.shape-fill2{
+background-image: url('../img/shapFill2.png');
+background-size: 100% 100%;
+width: 100%;
+height: 150px;
+max-height: 100%;
+padding: 0px;
+margin: 0px;
+position: relative;
+transform: rotate(180deg);}
+
 .flex-box{
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
-padding: 50px 5% 100px 5%;
+padding: 50px 5% 40px 5%;
 background-color: #FAFAFA;
 min-height: 500px;}
 
 .column-one{
+text-align: left;
 height: auto;
 padding: 0px 40px 0px 0px;}
 
@@ -49,7 +52,7 @@ padding: 0px 0px 13px 0px;
 border-bottom: 2px dashed black;}
 
 .column-one p{
-    text-align: justify;
+text-align: justify;
 font-family: 'Josefin Sans';
 font-size: 17px;
 font-weight: 400;}
@@ -57,7 +60,7 @@ font-weight: 400;}
 #btn-ver-calendario{
 color: white;
 background-color: rgb(7, 16, 19);
-padding: 7px 20px 7px 20px;
+padding: 8px 17px 8px 17px;
 width: 210px;
 outline: 0;
 font-family: 'Josefin Sans';
@@ -73,9 +76,7 @@ background-color: #dd7003;}
 .column-two{
 background-image: url('../img/EventosPessoas.jpg');
 background-size: 100% 100%;
-width:  450px;
-min-height: 400px;
-max-height: 450px;
+max-height: 400px;
 height: auto;
 position: relative;}
 
@@ -89,7 +90,7 @@ top: 0;
 background-color: rgba(255, 105, 0, .15);}
 
 section#prox-events{
-padding: 0px;
+padding: 0px 0px 40px 0px;
 margin: 0px;
 background-color: #FFFAF2;
 height: auto;
@@ -97,37 +98,43 @@ width: 100%;}
 
 #header-events{
 display: flex;
-padding: 30px 0px 50px 0px;
-flex-direction: row;}
+flex-direction: row;
+margin: auto;
+padding: 0px 0px 30px 0px;}
 
 div.direction{
 display: flex;
 flex-direction: row;
 justify-content: center;
+padding: 0px 10px 0px 10px;
 align-items: center;}
 
 .info-box{
 display: flex;
-flex-direction: row;  
+flex-direction: row; 
+justify-content: center;
+margin: auto;
 width: 100%;
-padding: 50px 40px 30px 50px;}
+padding: 40px 0px 30px 0px;}
 
 #info-events{
-margin: -5px 0px 0px 20px;}
+padding: 0px;
+width: 100%;
+margin: 0px;}
 
 #info-events h2{
-font-size:64px;
+font-size:55px;
 color: #dd7003;
 font-family: 'Berkshire Swash';}
 
 #info-events h3{
 font-size:30px;
-padding: 0px;
 color: #272727;
 font-weight: 700;
 font-family: 'Montserrat';}
 
 #info-events h4{
+width: 100%;
 font-size:18px;
 display: block;
 float: left;
@@ -137,12 +144,13 @@ font-family: 'Josefin Sans';}
 #img-calendar{
 background-image: url('../img/calendar.png');
 background-size: cover;
-min-width: 140px;
+min-width: 155px;
+margin:0px 15px 0px 5px;
 background-repeat: no-repeat;
-min-height: 140px;}
+min-height: 155px;}
 
 #cards-events{
-padding: 20px 50px 20px 50px;
+padding: 10px 15px 0px 15px;
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
@@ -160,8 +168,7 @@ color: black;}
 
 .card-img-top{
 width: 100%;
-min-height: 250px;
-max-height: 250px;}
+height: 250px;}
 
 .card-body h5{
 font-size: 25px;
@@ -180,22 +187,26 @@ margin: auto;}
 .card-body small.details{
 transition: color .2s linear;
 font-size: 15.5px;
+padding: 0px 10px 0px 10px;
 color: slategray;
 font-weight:500;
 font-family: 'Josefin Sans';}
 
-.card:hover .details{
-color: rgb(3, 114, 77);}
-
-#card1 .card:hover{
-transform: translateY(-20px);}
-
-#card2 .card:hover{
-transform: translateY(-20px);}
-
-#card3 .card:hover{
-transform: translateY(-20px);}
-
+button#btn-ver-galeriaEventos{
+display: block;
+width: 250px;
+font-size: 20px;
+margin: 20px auto 10px auto;
+padding: 10px 0px 10px 0px;
+background-color: #212529;
+border: solid 1px rgb(207, 207, 207);
+border-bottom: 1px solid rgb(141, 141, 141);
+border-right: 1px solid rgb(141, 141, 141);
+border-width: 5px;
+outline: none;
+color: white;
+border-radius: 50px;
+font-family: 'Josefin Sans', sans-serif;}
 
 @media(max-width: 1151px){
 
@@ -205,8 +216,7 @@ transform: translateY(-20px);}
     background-size: cover;
     height: 120px;}
 
-    #info-events h2 {
-    margin-top: 20px;
+    #info-events h2{
     font-size: 2.7rem;}
 
     #info-events h3 {
@@ -214,31 +224,40 @@ transform: translateY(-20px);}
 
     #header-events{
     padding: 0px 0px 20px 0px;}
+
+    .column-one{    
+    text-align: center;
+    height: auto;
+    padding: 0px 40px 0px 0px;}
+
+    .column-one h3{
+    border-bottom: 0px dashed black;}
 }
 
 @media (max-width: 991px){
 
+    .shape-fill, .shape-fill2{
+    height: 100px;}
+
     .flex-box{
-    flex-direction: column-reverse;
-    padding: 30px 30px 0px 30px;}
+    padding: 0px 30px 0px 30px;}
 
     .column-two{
-    margin: 0px auto 0px auto;
-    width: 100%;
-    padding: 0px;}
+    margin: 0px auto 20px auto;
+    padding: 0px;
+    width: 100%;}
 
     #cards-events{
     padding: 10px;}
-
-    .card{
-    margin-top: 40px;}
 }
 
-@media (max-width: 600px){
+@media (min-width: 992px){
 
-    .shape-fill,.shape-fill2{
-    display: none;}
+    #card1 .card:hover,#card2 .card:hover,#card3 .card:hover{
+    transform: translateY(-20px);}
 
+    .card:hover .details{
+    color: rgb(3, 114, 77);}
 }
 
 @media(min-width: 767px)  and (max-width: 991px){
@@ -248,20 +267,20 @@ transform: translateY(-20px);}
     height: auto;}
 
     .column-one h2 {
-    font-size: 3em;}
+    font-size: 4em;}
 
     .column-one h3 {
-    font-size: 1.5em;}
+    font-size: 1.7em;}
 
     .column-one p{
-    margin-bottom: 35px;}
+    margin-bottom: 45px;}
 
     div button#btn-ver-calendario{
     display: block;
     margin: auto}
 
 	.column-two {
-    padding: 0px 50px 0px 50px;
+    padding: 0px 50px 20px 50px;
     min-height: 400px;} 
 
     .info-box div#img-calendar{
@@ -272,25 +291,26 @@ transform: translateY(-20px);}
     min-width: 100px;
     min-height: 100px;}
 
-    #info-events{
-    padding: 0px;}
-
     #info-events h2 {
-    margin-top: 20px;
-    font-size: 2.4em;}
+    font-size: 2.6em;}
 
     #info-events h3 {
-    font-size: 1.2em;}
-}
+    font-size: 1.6em;}
 
+    #info-events p {
+    font-size: 1.3em;}
+
+    .card-img-top{
+    height: 170px;}
+}
 
 @media(min-width: 576px)  and (max-width: 767px){
 
     .flex-box{
-    padding: 27px 27px 0px 27px;}
+    padding: 0px 27px 0px 27px;}
 
     .column-one{
-    padding: 50px 0px 40px 0px;
+    padding: 20px 0px 40px 0px;
     height: auto;}
 
     .column-one h2 {
@@ -317,28 +337,33 @@ transform: translateY(-20px);}
     min-height: 130px;}
 
     #info-events h2 {
-    font-size: 2.1em;}
+    font-size: 2.3em;}
 
     #info-events h3 {
-    font-size: 1.1em;}
+    font-size: 1.5em;}
 
     #info-events h4 {
-    font-size: .9em;}
+    font-size: 1.1em;}
+
+    .card-img-top{
+    height: 150px;}
+
+    .card{
+    margin-top: 25px;}
 }
 
 @media (min-width: 401px) and (max-width: 575px){
 
+    .card-img-top{
+    height: 140px;}
+    
     .flex-box{
-    padding: 27px 27px 0px 27px;}
-
-    .column-one{
-    padding: 50px 0px 40px 0px;
-    height: auto;}
+    padding: 0px 27px 0px 27px;}
 
     .column-one h2 {
     font-size: 3em;}
 
-    .column-one h3 {
+    .column-one h3{
     font-size: 1.5em;}
 
     .column-one p{
@@ -351,44 +376,60 @@ transform: translateY(-20px);}
 	.column-two {
     min-height: 300px} 
 
-    .info-box div#img-calendar{
-    padding: 0px;
-    margin: 25px 0px 0px 15px;
-    background-size: contain;
-    min-width: 120px;
-    min-height: 130px;}
-
     .info-box{
-    padding: 20px 0px 0px 0px;
+    padding: 0px;
     margin: auto;}
 
+    #img-calendar{
+    display: none;}
+
     #info-events h2 {
-    font-size: 1.9em;}
+    text-align: center;
+    font-size: auto;}
 
     #info-events h3 {
+    text-align: center;
     font-weight: 600;
     padding-right: 15px;
-    font-size: .9em;}
+    font-size: 1.4em;}
 
     #info-events h4 {
+    text-align: center;
     padding-right: 10px;
-    font-size: .9em;}
+    font-size: 1em;}
 
     .card{
-    margin-top: 30px;}
+    margin-top: 25px;}
+}
+
+@media (max-width: 576px){
+
+    .flex-box{
+    padding: 10px 5% 40px 5%;
+    margin-top: 0px;}
+
+    .column-one{
+    padding: 20px 0px 50px 0px;
+    height: auto;}
+
+    #info-events h3{
+    padding: 0px 27px 0px 27px;
+    }
 }
 
 @media (max-width: 400px){
 
-    .shape-fill{
-    height: 100px;}
+    .info-box{
+    padding: 0px 0px 20px 0px;}
+
+    #img-calendar{
+    display: none;}
+
+    .card-img-top{
+    height: 150px;}
 
     .flex-box{
-    padding: 27px 27px 0px 27px;}
-
-    .column-one{
-    padding: 30px 0px 40px 0px;
-    height: auto;}
+    padding: 0px 27px 0px 27px;}
 
     .column-one h2 {
     font-size: 2.6em;}
@@ -407,14 +448,8 @@ transform: translateY(-20px);}
 	.column-two {
     background-position: center center;
     background-size: cover;
-    height: auto;} 
-
-    .info-box div#img-calendar{
-    padding: 0px;
-    margin: 25px 0px 0px 0px;
-    background-size: contain;
-    min-width: 120px;
-    min-height: 130px;}
+    height: 100%;
+    min-height: 300px;} 
 
     .info-box{
     padding: 20px 0px 0px 0px;
@@ -423,30 +458,29 @@ transform: translateY(-20px);}
     div.direction{
     flex-direction: column-reverse;}
 
-    #info-events h2 {
-    font-size: 2.1em;}
+    #info-events h2{
+    text-align: center;
+    font-size: 2em;}
 
-    #info-events h3 {
+    #info-events h3{
+    text-align: center;
     font-weight: 600;
     padding-right: 15px;
     font-size: 1.2em;}
 
-    #info-events h4 {
-    padding-right: 10px;
+    #info-events h4{
+    text-align: center;
     font-size: 1em;}
 
     #card1{
     margin-top: 15px;}
 
-    #card2{
-    margin-top: 30px;}
-
-    #card3{
+    #card2,#card3{
     margin-top: 30px;}
 
     #cards-events{
     padding: 0px;}
 
     .card{
-    margin-top: 25px;}
+    margin-top: 0px;}
 }

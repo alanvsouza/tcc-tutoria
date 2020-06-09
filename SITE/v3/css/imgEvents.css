@@ -1,65 +1,76 @@
 .img-events{
 width: 100%;
-height: 120vh;
-min-height: 750px;
-padding: 0px;
+height: 110vh;
+min-height: 400px;
+padding-top: 65px;
 background-image: url('../img/backgroundPTutoria.jpg');
 background-size: cover;
 background-position: bottom center;
 background-repeat: no-repeat;
-background-attachment: fixed;
-position: relative;}
+background-attachment: fixed;}
 
 .img-events::before{
 width: 100%;
-height: 100%;
+height: 110vh;
+min-height: 400px;
 padding: 0px;
 position: absolute;
+top: 0;
+left: 0;
 content: '';
 background-color: rgba(32, 32, 32, 0.45)}
 
 .img-events div{
-padding: 0px;
-color: #EEEEEE;
+width: 100%;
+height: 100%;
+padding: 0px 7.5px 0px 7.5px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
 text-align: center;
-padding-top: 40vh;
+margin: auto;
+font-family: 'Berkshire Swash';
+position: relative;}
+
+.img-events div h1{
+color: #EEEEEE;
+padding: 0px 20px 0px 20px;
 font-family: 'Berkshire Swash';}
 
 .img-events div h2{
-padding: 0px;
-position: relative;
 color: #FF8800;
 text-align: center;
-margin: 75px auto 0px auto;
+margin: 50px auto 10px auto;
 font-size: 35px;
 font-family: 'Josefin Sans',sans-serif;}
 
 .img-events div h3{
-position: relative;
 color: #EEEEEE;
+position: relative;
 text-align: center;
 font-size: 30px;
-padding: 0px;
-padding-top: 10px;
 font-family: 'Josefin Sans',sans-serif;}
 
 
 @media(max-width: 1151px){
     .img-events{
-    height: 100vh;
-    max-height: 100vh;}
+    height: 100vh;}
 }
 
-@media(min-width: 767px)  and (max-width: 991px){
+@media(max-width: 991px){
+    .img-events div h2 {
+    margin-top: 25px;}
+}
 
-    .img-events div{
-    padding-top: 230px; }
+
+@media(min-width: 767px)  and (max-width: 991px){
 
     .img-events div h1 {
     font-size: 5em;}
 
     .img-events div h2 {
-    font-size: 2.8em;}
+    font-size: 2.5em;}
 
     .img-events div h3{
     font-size: 2em;}
@@ -67,43 +78,24 @@ font-family: 'Josefin Sans',sans-serif;}
 }
 
 @media(min-width: 576px)  and (max-width: 767px){
-    .img-events div{
-    padding-top: 250px;
-    padding: 0px 20px;}
 
     .img-events div h1 {
-    font-size: 4.2em;}
+    font-size: 3.2em;}
     
     .img-events div h2 {
-    font-size: 2.2em;}
-    
-    .img-events div h3{
-    font-size: 1.6em;}
-}
-
-@media (min-width: 401px) and (max-width: 575px){
-    .img-events div{
-    padding: 200px 10px;}
-
-    .img-events div h1 {
-    line-height: 50px;
-    font-size: 4em;}
-    
-    .img-events div h2 {
-    font-size: 2em;}
+    font-size: 1.8em;}
     
     .img-events div h3{
     font-size: 1.5em;}
 }
 
+@media (min-width: 501px) and (max-width: 575px){
 
-@media (max-width: 400px){
+    .img-events{
+    height: 80vh;}
 
-    .img-events div{
-    padding: 170px 10px;}
-    
-    .img-events div{
-    padding: 0px 12px;}
+    .img-events::before{
+    height: 80vh;}
 
     .img-events div h1 {
     font-size: 2.8em;}
@@ -112,5 +104,43 @@ font-family: 'Josefin Sans',sans-serif;}
     font-size: 1.7em;}
     
     .img-events div h3{
-    font-size: 1.3em;}
+    font-size: 1.4em;}
+}
+
+
+@media (min-width: 401px) and (max-width: 500px){
+
+    .img-events{
+    height: 80vh;}
+
+    .img-events::before{
+    height: 80vh;}
+
+    .img-events div h1 {
+    font-size: 2.7em;}
+    
+    .img-events div h2 {
+    font-size: 1.5em;}
+    
+    .img-events div h3{
+    font-size: 1.2em;}
+
+}
+
+
+@media (max-width: 400px){
+    .img-events{
+    height: 70vh;}
+
+    .img-events::before{
+    height: 70vh;}
+
+    .img-events div h1 {
+    font-size: 2.7em;}
+    
+    .img-events div h2 {
+    font-size: 1.5em;}
+    
+    .img-events div h3{
+    font-size: 1.2em;}
 }
