@@ -538,7 +538,7 @@ ResultSet rs = null;
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void formComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentMoved
-       this.setLocation(0,0);
+       
     }//GEN-LAST:event_formComponentMoved
 
     private void txtEvtPesquisarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEvtPesquisarKeyPressed
