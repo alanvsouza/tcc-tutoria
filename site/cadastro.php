@@ -1,3 +1,5 @@
+<?php require_once 'vendor/autoload.php'; ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -77,7 +79,7 @@
                 </div>
             </div>
 
-        <input method="post" id="btn-submit" type="submit"  value="Cadastrar">
+        <input method="post" id="btn-submit" type="submit" value="Cadastrar">
     </div>
 
     <div id="aviso2">
