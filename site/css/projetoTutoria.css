@@ -1,0 +1,241 @@
+section{
+width: 100%;
+height: auto;
+margin: 0px;
+padding: 0px;
+background-color: #FAFAFA;}
+
+section div{
+padding: 20px 100px 10px 100px;}
+
+.shape-fill{
+background-image: url('../img/shapeFill.png');
+background-size: 100% 100%;
+width: 100%;
+height: 150px;
+max-height: 100%;
+padding: 0px;
+margin: 0px;
+box-sizing: border-box;
+position: relative;}
+
+.shape-fill2{
+background-image: url('../img/shapFill2.png');
+background-size: 100% 100%;
+width: 100%;
+height: 150px;
+max-height: 100%;
+padding: 0px;
+margin: 0px;
+position: relative;
+transform: rotate(180deg);}
+
+.flex-box {
+padding: 70px 50px 0px 50px;
+display: flex;
+flex-direction: row;
+align-items: center;}
+
+div.column-one{
+margin: 0px;
+padding: 0px 40px 0px 20px;
+display: flex;
+flex-direction: column;
+align-self: flex-end;}
+
+.flex-box p{
+font-size: 17px;
+font-weight: 400;
+font-family: 'Josefin Sans',sans-serif;
+text-align: justify;}
+
+div.column-one h1{
+font-size: 45px;
+margin: auto;
+text-align: left;
+font-family: 'Berkshire Swash';
+padding: 0px 0px 25px 0px;}
+
+div.column-two{
+display: block;
+width:  450px;
+min-height: 400px;
+max-height: 450px;
+background-image: url('../img/womens-conversation.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center center;}
+
+div.column-two::before{
+position: absolute;
+content: '';
+width: 100%;
+height: 100%;
+left: 0;
+top: 0;
+background-color: rgba(255, 105, 0, .15);}
+
+div.column-three{
+display: flex;
+flex-direction: row;
+padding: 0px 70px 30px 70px;}
+
+div.column-three p{
+font-size: 17px;
+font-family: 'Josefin Sans',sans-serif;
+text-align: justify;}
+
+.envolvidos{
+background-color: #FFFAF2;
+padding: 0px;
+margin: 0px;}
+
+#header-events{
+width: 100%;
+margin: 0px;
+padding: 0px 20px 0px 20px;
+display: flex;
+flex-direction: row;}
+
+div.direction{
+display: flex;
+flex-direction: row;}
+
+div#info-events{
+width: 100%;
+display: flex;
+flex-direction: column;
+margin: 15px auto 0px auto;
+padding: 0px 0px 20px 0px;}
+
+div#info-events p{
+text-align: justify;
+font-size: 16.4px;
+font-family: 'Josefin Sans', sans-serif;
+margin: 30px auto 0px auto;}
+
+#info-events h2{
+text-align: center;
+font-size:64px;
+color: #dd7003;
+font-family: 'Berkshire Swash';
+padding: 0px;}
+
+#info-events h3{
+font-size:30px;
+padding: 0px;
+color: #272727;
+font-weight: 700;
+font-family: 'Montserrat';
+text-align: center;
+margin: auto;
+padding: 10px 0px 0px 0px;}
+
+div#info-events ul{
+display:flex; 
+flex-direction: row;
+flex-wrap: wrap;
+width: 100%;
+margin: 20px 0px 0px 0px;
+padding: 0px !important;
+list-style: none;
+text-decoration: none;}
+
+div#info-events ul li{
+display:flex; 
+flex-direction: row;
+flex-wrap: wrap;
+align-items: center;
+width: 100%;
+font-size: 16px;
+list-style: none;
+text-decoration: none;
+color: rgb(7, 94, 255);}
+
+div#info-events ul li a{
+text-decoration: none;
+margin:7px auto;
+font-size: 18px;
+font-family: 'Josefin Sans', sans-serif;
+color: rgb(7, 94, 255);}
+
+@media (max-width: 1100px){
+    div.column-one h1{
+    font-size: 35px;}
+
+    #info-events h2{
+    font-size:50px;}
+
+    #info-events h3{
+    font-size:27px;}
+}
+
+@media (max-width: 991px){
+    .shape-fill, .shape-fill2{
+    height: 100px;}
+
+    .flex-box{
+    padding: 20px;
+    flex-direction: column;}
+
+    div.column-one{
+    padding: 0px;}
+
+    div.column-one h1{
+    text-align: center;
+    font-size: 40px;}
+
+    div.column-two{
+    width: 100%;}
+
+    div.column-three{
+    padding: 0px 20px 30px 20px;}
+
+    #info-events h2{
+    font-size:37px;}
+
+    #info-events h3{
+    font-size:22px;
+    text-align: justify;}
+
+    div#info-events{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: none;
+    justify-content: none;
+    padding: 0px;}
+
+    div.direction{
+    display: flex;
+    flex-direction: column-reverse;}
+}
+
+@media (max-width: 500px){
+
+    div.column-one h1{
+    font-size: 30px;}
+}
+
+@media (max-width: 400px){
+
+    div.column-one h1{
+    font-size: 30px;}
+
+    #info-events h2{
+    margin: 0px;
+    padding: 0px;
+    font-size:30px;}
+
+    #info-events h3{
+    padding: 5px 0px 0px 0px;
+    font-size:19px;}
+
+    div#info-events ul li a{
+    text-decoration: none;
+    margin:7px auto;
+    font-size: 16.2px;
+    font-family: 'Josefin Sans', sans-serif;
+    color: rgb(7, 94, 255);}
+}
+
