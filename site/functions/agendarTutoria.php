@@ -49,15 +49,10 @@ function renderizarProfessores($connection_info) {
 }
 
 function renderizarInformacoes($id, $connection_info) {
-    $hostname = $connection_info["hostname"];
-    $dbname = $connection_info["dbname"];
-    $username = $connection_info["username"];
-    $password = $connection_info["password"];
-
     try {
-        $conn = connect($hostname, $dbname, $username, $password);
+        $conn = connect($connection_info);
 
-        $sql = "SELECT nometutor,descricao FROM tbtutor WHERE idtutor = $id";
+        $sql = "SELECT nometutor, descricao FROM tbtutor WHERE idtutor = $id";
         
         $result = $conn->query($sql);
         

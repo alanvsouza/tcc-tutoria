@@ -1,7 +1,6 @@
 <?php
-    include("functions/acesso.php");
-    include 'calendario.php';    
-    $id_primeiro_professor;
+    // include("functions/acesso.php");
+    include 'calendario.php';        
 ?>
 
 <!DOCTYPE html>

@@ -18,26 +18,28 @@ foreach($_POST as $chave=> $valor){
 
 }
 
-    require("conexao.php");
-    $nome = mysqli_real_escape_string($conexao, $_POST['nome']);
-    $email = mysqli_real_escape_string($conexao,$_POST['email']);
-    $curso = mysqli_real_escape_string($conexao,$_POST['curso']);
-    $ano = mysqli_real_escape_string($conexao,$_POST['ano']);
-    $login = mysqli_real_escape_string($conexao,$_POST['login']);
-    $senha = mysqli_real_escape_string($conexao,$_POST['senha']);
-    $senha = $senha . 'cotilamigavel';
+require("../db/credentials.php");
+require("../db/db_connect.php");
 
-    $query = "insert into tbaluno (nomealuno,login,senha,email,curso,anoingresso) values ('{$nome}','{$login}',md5('{$senha}'),'{$email}','{$curso}','{$ano}')";
-    $result = mysqli_query($conexao, $query);
-    $_SESSION['cadastro_sucesso'] = true;
+$nome = $_POST["nome"];
+$email = $_POST['email'];
+$curso = $_POST['curso'];
+$ano = $_POST['ano'];
+$login = $_POST['login'];
+$senha = $_POST['senha'];
+$anoingresso = $_POST['ano'];
+$senha = md5($senha . 'cotilamigavel');
+
+try {
+    $conn = connect($connection_info);
+
+    $sql = "INSERT INTO tbaluno (nomealuno, login, senha, email, curso, anoingresso) VALUES ('$nome', '$login', '$senha', '$email', '$curso', '$anoingresso')";
+    $conn->exec($sql);
+
+    $_SESSION['cadastro_sucesso'] = true;    
+
     header('Location: ../login.php');
+} catch(PDOException $e) {
+    echo $e;
+}
 
-// $row = mysqli_affected_rows($result);
-// if ($row) {
-//     header('Location: projetoTutoria.php');
-// } else {
-//     exit();
-// }
-
-
-?>
