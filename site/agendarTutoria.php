@@ -1,6 +1,6 @@
 <?php
-    // include("functions/acesso.php");
-    include 'calendario.php';        
+    include("functions/acesso.php");
+    include('calendario.php');
 ?>
 
 <!DOCTYPE html>

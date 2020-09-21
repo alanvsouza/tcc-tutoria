@@ -4,13 +4,8 @@ require("db/db_connect.php");
 error_reporting(0);
 
 function renderizarProfessores($connection_info) {
-    $hostname = $connection_info["hostname"];
-    $dbname = $connection_info["dbname"];
-    $username = $connection_info["username"];
-    $password = $connection_info["password"];
-
     try {
-        $conn = connect($hostname, $dbname, $username, $password);
+        $conn = connect($connection_info);
 
         $sql = "SELECT idtutor, nometutor, foto FROM tbtutor ORDER BY nometutor";
         

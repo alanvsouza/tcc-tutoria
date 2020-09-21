@@ -1,3 +1,8 @@
+<?php    
+    error_reporting(0);
+    session_start();
+?>
+
 <nav>
     <h1><a href="index.php" class="name-site"> Cotil Amigável</a></h1>
     <!-- <div id="logo-site"></div> -->
@@ -14,14 +19,17 @@
                 </ul>
             </li> 
             <?php
-                if (!isset($_SESSION['usuario'])):
-            ?>
-                <li><a  class="login" href="login.php">Login</a></li>
-                <li><a href="cadastro.php">Cadastro</a></li>
-            <?php
-                endif;
+                if (!isset($_SESSION['usuario'])) {
+                    echo 
+                    "<li><a class='login' href='login.php'>Login</a></li>
+                    <li><a href='cadastro.php'>Cadastro</a></li>";
+                }
+            ?>                
+            <?php                
                 if(isset($_SESSION['usuario'])){
-                    echo ' <li><a href="cadastro.php">ICONE</a></li>';
+                    echo 
+                    '<li><a href="cadastro.php">Icone</a></li>
+                    <li><a href="functions/logout.php">Logout</a></li>';
                 }
             ?>
         </ul> 
