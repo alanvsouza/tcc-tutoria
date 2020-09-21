@@ -1,18 +1,19 @@
 <?php
 
+require("db/db_connect.php");
 error_reporting(0);
 
 function renderizarProfessores($connection_info) {
     $result;
     $hostname = $connection_info["hostname"];
+    $dbname = $connection_info["dbname"];
     $username = $connection_info["username"];
     $password = $connection_info["password"];
 
     try {
-        $conn = new PDO("mysql:host=$hostname;dbname=cl18152", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);      
+        $conn = connect($hostname, $dbname, $username, $password);
 
-        $sql = "SELECT idtutor, nometutor, foto FROM tbtutor";
+        $sql = "SELECT idtutor, nometutor, foto FROM tbtutor ORDER BY nometutor";
         
         $result = $conn->query($sql);
         
@@ -51,14 +52,14 @@ function renderizarProfessores($connection_info) {
 function renderizarInformacoes($id, $connection_info) {
     $result;
     $hostname = $connection_info["hostname"];
+    $dbname = $connection_info["dbname"];
     $username = $connection_info["username"];
     $password = $connection_info["password"];
 
     try {
-        $conn = new PDO("mysql:host=$hostname;dbname=cl18152", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
+        $conn = connect($hostname, $dbname, $username, $password);
 
-        $sql = "SELECT nometutor FROM tbtutor WHERE idtutor = " . $id;
+        $sql = "SELECT nometutor FROM tbtutor WHERE idtutor = $id";
         
         $result = $conn->query($sql);
         

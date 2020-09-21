@@ -1,7 +1,7 @@
 <?php
     include 'calendario.php';    
 
-    $connection_info = array("hostname"=>"143.106.241.3", "username"=>"cl18152", "password"=>"cl*07062002");
+    $id_primeiro_professor;
 ?>
 
 <!DOCTYPE html>
@@ -43,15 +43,14 @@
 
 <div id="content">
     <div id="sidebar">
-        <ul id="list-profs">       
+        <ul id="list-profs">   
             <?php renderizarProfessores($connection_info); ?>
         </ul>
     </div>
     <div id="body">
         <?php
-            if($_SERVER["REQUEST_METHOD"] == "GET") {
+            if($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"]))
                 renderizarInformacoes($_GET["id"], $connection_info);
-            }            
         ?>                
     </div>
 </div>
@@ -60,6 +59,7 @@
 <script type="text/javascript" src="js/navside.js"></script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/calendario.js"></script>
+<script src="js/selecionarPrimeiroProf.js"></script>
 
 <?php
     echo '<script  type="text/javascript">function teste(teste){console.log(teste)}</script>';
