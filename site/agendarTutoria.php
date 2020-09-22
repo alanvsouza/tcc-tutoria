@@ -49,7 +49,7 @@
     <div id="body">
         <?php
             if($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"]))
-            renderizarInformacoes($_GET["id"], $connection_info);
+                renderizarInformacoes($_GET["id"], $connection_info);
         ?>                
     </div>
 </div>
@@ -59,6 +59,24 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/calendario.js"></script>
 <script type="text/javascript" src="js/selecionarPrimeiroProf.js"></script>
+
+<script type="text/javascript">
+    function dataTutoria(data){
+        let dataFormatada = data.split("/");
+        data = dataFormatada[1] + "/" + dataFormatada[0]  + "/" + dataFormatada[2];
+        
+        let inputData = document.querySelector("input#data-selecionada");
+        let fakeData = document.querySelector("#fakeData");
+        let submitFakeData = document.querySelector("#submitFakeData");
+        let idProf = document.querySelector("form input#idProf");
+
+        inputData.value = data;
+        fakeData.value = data;
+        idProf.value = <?= $_GET["id"] ?>;
+        
+        submitFakeData.click();
+    }
+</script>
 
 <!-- <script type="text/javascrpit" src="node_modules/jquery/dist/jquery.slim.min.js"></script>
 <script type="text/javascrpit" src="node_modules/popper.js/dist/umd/popper.min.js"></script>
