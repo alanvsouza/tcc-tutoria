@@ -33,15 +33,22 @@
         </div>-->
     </div>
 
-
-    <div id="aviso">
-        <span>Todos os campos são obrigatórios e as informações poderão posteriormente ser alteradas no perfil</span>
-    </div>
+    <?php
+    session_start();
+    if(isset($_SESSION["errosCadastro"])){
+        echo $_SESSION["errosCadastro"];
+        unset($_SESSION["errosCadastro"]);
+    }else{
+    echo '<div id="aviso">
+        <span>Todos os campos são obrigatórios! Suas informações poderão ser alteradas no perfil</span>
+    </div>';
+    }
+    ?>
 
     <div id="body" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="flex-row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-0">
-            <input required class="input col-lg-5 col-md-10 col-sm-11 col-11" placeholder="Informe seu nome completo" maxlength="50" type="text" id="nome" name="nome">
-            <input required class="input col-lg-5 col-md-10 col-sm-11 col-11" placeholder="Informe seu e-mail" maxlength="50" type="text" id="email" name="email">
+            <input  class="input col-lg-5 col-md-10 col-sm-11 col-11" placeholder="Informe seu nome completo" maxlength="50" type="text" id="nome" name="nome">
+            <input  class="input col-lg-5 col-md-10 col-sm-11 col-11" placeholder="Informe seu e-mail" maxlength="50" type="text" id="email" name="email">
         </div>
 
         <div class="flex-row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-0 m-0" id="selects">
@@ -71,10 +78,10 @@
 
             <div class="flex-row p-0  col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class=" col-xl-5 col-lg-5 col-md-10 col-sm-11 col-11  p-0 m-auto">
-                    <input required class="input col-lg-12" id="login" name="login" placeholder="Informe um login de usuário" maxlength="50" type="text">
+                    <input  class="input col-lg-12" id="login" name="login" placeholder="Informe um login de usuário" maxlength="50" type="text">
                 </div>
                 <div class="col-xl-5 col-lg-5 col-md-10 col-sm-11 col-11 p-0 m-auto">
-                    <input required class="input col-lg-12" id="senha" name="senha" maxlength="20" placeholder="Informe uma senha" type="password">
+                    <input  class="input col-lg-12" id="senha" name="senha" maxlength="20" placeholder="Informe uma senha" type="password">
                     <i class="fa fa-eye" id="olho" aria-hidden="true"></i>
                 </div>
             </div>
