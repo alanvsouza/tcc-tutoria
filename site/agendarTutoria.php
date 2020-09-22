@@ -1,6 +1,10 @@
 <?php
     include("functions/acesso.php");
     include('calendario.php');
+
+    if($_SERVER["REQUEST_METHOD"] == "GET") {
+        echo $_GET["data"];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -76,14 +80,21 @@
 
     echo '<script  type="text/javascript">
     function dataTutoria(data){
-        console.log(data);
-    }</script>';
+        let inputData = document.querySelector("#data-selecionada");
+        let fakeData = document.querySelector("#fakeData");
+        let submitFakeData = document.querySelector("#submitFakeData");
+        let idProf = document.querySelector("form input#idProf")
 
-    print_r($data = explode("/","09/21/2020"));
+        inputData.value = data;
+        fakeData.value = data;
+        idProf.value = ' . $_GET["id"] . '
+
+        submitFakeData.click();
+    }</script>';
+    
     $dayMonth = gregoriantojd($data[0],$data[1],$data[2]);
     $weekMonth = substr(jddayofweek($dayMonth, 1),0,3);
-    $value = $dias[$weekMonth];
-    print_r($value);
+    $value = $dias[$weekMonth];    
 
     try {
         $conn = connect($connection_info);
@@ -95,8 +106,7 @@
         $conn = null;
     } catch(PDOException $e) {
         echo "Connection failed";
-    }
-    print_r($result);
+    }    
 ?>
 
 <!-- <script type="text/javascrpit" src="node_modules/jquery/dist/jquery.slim.min.js"></script>

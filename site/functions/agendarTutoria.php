@@ -54,7 +54,7 @@ function renderizarInformacoes($id, $connection_info) {
         $conn = null;
     } catch(PDOException $e) {
         echo "Connection failed";
-    }
+        }
 
     
     $row = $result->fetch();
@@ -80,16 +80,28 @@ function renderizarInformacoes($id, $connection_info) {
             </div>
 
             <div class='col-lg-7 col-md-7 col-sm-11 col-11 column' id='horarios-professor'>
-                    <span style='font-size:17px;font-weight: 600;'>Data selecionada:</span> <input type='text' disabled value='20/09/2020' id='data-selecionada'>
-                    <table id='table-professor'>
-                        <tr bgcolor='#f2f2f2'><th >Inicio</><th>Término</th><th>Local</th></tr>
-                        <tr class='ativado'><td >12:00</td><td>12:45</td><td>Sala 10</td></tr>
-                        <tr class='ativado'><td>13:00</td><td>13:40</td><td>Sala 11</td></tr>
-                        <tr class='desativado'><td>15:30</td><td>15:45</td><td>Sala 4</td></tr>
-                        <tr class='ativado'><td >14:00</td><td>15:00</td><td>Sala 7</td></tr>
-                    </table>
+                <table id='table-professor'>
+                    <tr bgcolor='#f2f2f2'><th >Inicio</><th>Término</th><th>Local</th></tr>
+                    <tr class='ativado'><td >12:00</td><td>12:45</td><td>Sala 10</td></tr>
+                    <tr class='ativado'><td>13:00</td><td>13:40</td><td>Sala 11</td></tr>
+                    <tr class='desativado'><td>15:30</td><td>15:45</td><td>Sala 4</td></tr>
+                    <tr class='ativado'><td >14:00</td><td>15:00</td><td>Sala 7</td></tr>
+                </table>
+
+                <form method='POST' action='agendamentoTutoria.php'>
+                    <span style='font-size:17px;font-weight: 600;'>Data selecionada:</span> 
+                    <input type='text' name='data' disabled placeholder='20/09/2020' id='data-selecionada'>
+                    <input type='hidden' name='professor' value='" . $id . "'>
+                    <div class='col-lg-12 column'><input type='button' id='btn-agendar' value='Agendar Tutoria'></div>
+                </form>
+
+                <form method='GET' action='" . $_SERVER['PHP_SELF'] . "'>
+                    <input id='fakeData' type='hidden' name='data'>
+                    <input id='idProf' type='hidden' name='id'>
+                    <input id='submitFakeData' type='submit' hidden>
+                </form>
             </div>
         </div>
-        <div class='col-lg-12 column'><input type='button' id='btn-agendar' value='Agendar Tutoria'></div>
+        
     </div>";
 }
