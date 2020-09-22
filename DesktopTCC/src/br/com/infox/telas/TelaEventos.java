@@ -4,14 +4,15 @@ import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 //a linha abaio importa recursos da biblioteca rs2xml.jar
 import net.proteanit.sql.DbUtils;
@@ -29,6 +30,8 @@ Image icono;
         
         conexao = ModuloConexao.conector();
     }
+    
+   
     
     private void pesquisar_evento(){
     String sql = "select nome as Nome,dataevento as Data, inicio as Inicio,termino as Término,descricao as Descrição,localevento as Local,idevento as ID from tbeventos where nome like ?";
@@ -58,7 +61,8 @@ Image icono;
     }
     
      private void adicionarEvento(){
-        String sql = "insert into tbeventos (nome,dataevento,inicio,termino,descricao,localevento) values(?,?,?,?,?,?)";
+         
+        String sql = "insert into tbeventos (nome,dataevento,inicio,termino,descricao,localevento,image) values(?,?,?,?,?,?,?)";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1,txtEvtNome.getText());
@@ -67,7 +71,7 @@ Image icono;
             pst.setString(4,txtEvtTermino.getText());
             pst.setString(5,taEvtDescricao.getText());
             pst.setString(6,txtEvtLocal.getText());
-            
+            pst.setString(7, "fundoColorido.png");
             int verificarCampos = camposObrigatorios();
             
             if (verificarCampos != 1){
@@ -81,7 +85,7 @@ Image icono;
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Falha ao inserir o evento");
+           JOptionPane.showMessageDialog(null,e);
         }
     }
     
@@ -184,7 +188,7 @@ Image icono;
             } catch (IOException e){
                 e.printStackTrace();
             }
-        }
+        };
     }
  
     @SuppressWarnings("unchecked")
@@ -222,7 +226,7 @@ Image icono;
         setMaximizable(true);
         setTitle("Cadastro de Eventos");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(894, 550));
+        setPreferredSize(new java.awt.Dimension(894, 521));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -303,7 +307,11 @@ Image icono;
             }
         });
 
-        txtEvtData.setText(" YYYY/mm/dd - outro formato da erro");
+        txtEvtData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEvtDataActionPerformed(evt);
+            }
+        });
         txtEvtData.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtEvtDataKeyPressed(evt);
@@ -450,7 +458,7 @@ Image icono;
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtEvtTermino, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnExcluirImg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAdicionarImg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -519,7 +527,7 @@ Image icono;
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAdicionarImg, btnExcluirImg});
 
-        setBounds(0, 0, 895, 521);
+        setBounds(0, 0, 883, 521);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtEvtLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEvtLocalActionPerformed
@@ -609,6 +617,10 @@ Image icono;
     private void btnExcluirImgMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluirImgMouseClicked
         lblEvtFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/addUser.png")));
     }//GEN-LAST:event_btnExcluirImgMouseClicked
+
+    private void txtEvtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEvtDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEvtDataActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

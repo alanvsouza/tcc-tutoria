@@ -24,6 +24,7 @@ TelaEventos telaeventos;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Gerenciamento");
+        setPreferredSize(new java.awt.Dimension(879, 514));
         setResizable(false);
 
         desktop.setPreferredSize(new java.awt.Dimension(640, 507));
@@ -36,7 +37,7 @@ TelaEventos telaeventos;
         );
         desktopLayout.setVerticalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 513, Short.MAX_VALUE)
+            .addGap(0, 521, Short.MAX_VALUE)
         );
 
         MenCadTut.setText("Cadastro");
@@ -88,10 +89,10 @@ TelaEventos telaeventos;
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
+            .addComponent(desktop, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        setSize(new java.awt.Dimension(895, 573));
+        setSize(new java.awt.Dimension(895, 580));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
