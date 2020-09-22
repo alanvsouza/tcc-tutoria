@@ -34,15 +34,16 @@
     </div>
 
     <?php
-    session_start();
-    if(isset($_SESSION["errosCadastro"])){
-        echo $_SESSION["errosCadastro"];
-        unset($_SESSION["errosCadastro"]);
-    }else{
-    echo '<div id="aviso">
-        <span>Todos os campos são obrigatórios! Suas informações poderão ser alteradas no perfil</span>
-    </div>';
-    }
+        session_start();
+
+        if(isset($_SESSION["errosCadastro"])){
+            echo $_SESSION["errosCadastro"];
+            unset($_SESSION["errosCadastro"]);
+        }else{
+        echo '<div id="aviso">
+            <span>Todos os campos são obrigatórios! Suas informações poderão ser alteradas no perfil</span>
+        </div>';
+        }
     ?>
 
     <div id="body" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -86,12 +87,12 @@
                 </div>
             </div>
 
-        <input method="post" id="btn-submit" type="submit"  value="Cadastrar">
+        <input id="btn-submit" type="submit"  value="Cadastrar">
     </div>
 
     <div id="aviso2">
         <span>Já possui uma conta? Então acesse a página de <a class="link" href="login.php">login</a> para ter acesso completo ao site</span>
-    </div>
+    </div>    
 </form>
 
     <script src="js/cadastro.js"></script>
