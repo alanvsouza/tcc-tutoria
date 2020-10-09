@@ -37,6 +37,9 @@
     <?php 
         include("nav.php");
         include("navside.php");
+        include("db/credentials.php");
+        include("db/db_connect.php");
+        include("functions/projetoTutoria.php");
     ?>
 
         <div class="img-events" >
@@ -49,6 +52,7 @@
 
 <section>
     <div class="shape-fill"></div>
+
         <div class="col-lg-12 flex-box"  >
             <div class="col-lg-6 col-md-12 column-one">
                 <h1>O que é uma Tutoria?</h1>
@@ -86,155 +90,14 @@
                     <h3>Esses são os professores do Colégio Técnico de Limeira que temos como tutores.</h3>
                     <p>Os professors do COTIL que se disporam a realizar as tutorias podem ser vistos logo abaixo. Aqui você podera também conferir uma breve descrição sobre eles, bem como ter acesso as suas mídias sociais. </p>
                     <ul class="w-100 p-0">
-                        <li class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-6">  <a class="ancora" href="#tamioli">José Tamioli</a>  </li>
-                        <li class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-6">  <a class="ancora" href="#alberto">Carlos Alberto</a>  </li>
-                        <li class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-6">  <a class="ancora" href="#joaquina">Maria Joaquina</a>  </li>
-                        <li class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-6">  <a class="ancora" href="#machado">Alberto Machado</a>  </li>
-                        <li class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-6">  <a class="ancora" href="#coelho">Gustavo Coelho</a>  </li>
-                        <li class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-6">  <a class="ancora" href="#camargo">Jessica Camargo</a>  </li>
-                        <li class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-6">  <a class="ancora" href="#andrade">Pedro Andrade</a>  </li>
+                        <?php renderizarLinksProfessores($connection_info); ?>
                     </ul>
         </div>
 </header>
 
     <section class="envolvidos" class="col-lg-12">
             <div class="cards col-lg-12 col-sm-12">
-
-                <article class="card-prof col-xl-5 col-lg-7 col-md-9 col-sm-11 col-10" id="tamioli" name="tamioli">
-                    <div class="imagem col-lg-5 col-md-5 col-sm-5 col-12">
-                        <img src="img-professores/1.png" alt="">
-                    </div>
-
-                    <div class="col-lg-7 col-md-7 col-sm-7 col-12 information-main">
-                        <header>
-                            <h1>José Tamioli</h1>
-                        </header>
-                        <span>
-                            Lorem Ipsum is simply dummy text of typesetting industry. Lorem k a galley of type and scrambled it to make a type specimen k a galley of type and scrambled it to make a type specimen
-                        </span>
-                        <ul class="rede-social">
-                            <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
-                            <li><a href="#"><i class="fab fa-google-plus-square"></i></a></li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="card-prof col-xl-5 col-lg-7 col-md-9 col-sm-11 col-10" id="alberto" name="alberto">
-                    <div class="imagem col-lg-5 col-md-5 col-sm-5 col-12">
-                        <img src="img-professores/3.png" alt="">
-                    </div>
-                    <div class="col-lg-7 col-md-7 col-sm-7 col-12 information-main">
-                        <header>
-                            <h1>Carlos Alberto</h1>
-                        </header>
-                        <span>
-                            Lorem Ipsum is simply dummy text. Lorem k a galley of type and scrambled it to make a type specimen Lorem Ipsum is simply dummy text of the printing and typesetting industry and scrambled it. 
-                        </span>
-                        <ul class="rede-social">
-                            <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
-                            <li><a href="#"><i class="fab fa-google-plus-square"></i></a></li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="card-prof col-xl-5 col-lg-7 col-md-9 col-sm-11 col-10" id="joaquina" name="joaquina">
-                    <div class="imagem col-lg-5 col-md-5 col-sm-5 col-12">
-                        <img src="img-professores/4.png" alt="">
-                    </div>
-                    <div class="col-lg-7 col-md-7 col-sm-7 col-12 information-main">
-                        <header>
-                            <h1>Maria Joaquina</h1>
-                        </header>
-                        <span>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem k a galley of type and scrambled it to make a type specimen Lorem Ipsum is simply dummy text of the printing and typesetting.
-                        </span>
-                        <ul class="rede-social">
-                            <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
-                            <li><a href="#"><i class="fab fa-google-plus-square"></i></a></li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="card-prof col-xl-5 col-lg-7 col-md-9 col-sm-11 col-10" id="machado" name="machado">
-                    <div class="imagem col-lg-5 col-md-5 col-sm-5 col-12">
-                        <img src="img-professores/5.png" alt="">
-                    </div>
-                    <div class="col-lg-7 col-md-7 col-sm-7 col-12 information-main">
-                        <header>
-                            <h1>Alberto Machado</h1>
-                        </header>
-                        <span>
-                            Lorem Ipsum is simply dummy text of the printing. Lorem k a galley of type and scrambled it to make a type specimen Lorem Ipsum is simply dummy text of industry. And scrambled it to make a type
-                        </span>
-                        <ul class="rede-social">
-                            <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
-                            <li><a href="#"><i class="fab fa-google-plus-square"></i></a></li>
-                        </ul>
-                    </div>
-                </article>
-
-                
-                <article class="card-prof col-xl-5 col-lg-7 col-md-9 col-sm-11 col-10" id="coelho" name="coelho">
-                    <div class="imagem col-lg-5 col-md-5 col-sm-5 col-12">
-                        <img src="img-professores/21.png" alt="">
-                    </div>
-                    <div class="col-lg-7 col-md-7 col-sm-7 col-12 information-main">
-                        <header>
-                            <h1>Gustavo Coelho</h1>
-                        </header>
-                        <span>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem dummy text of the printing industry k a galley of type and scrambled it to make a type specimen Lorem Ipsum is simply .
-                        </span>
-                        <ul class="rede-social">
-                            <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
-                            <li><a href="#"><i class="fab fa-google-plus-square"></i></a></li>
-                        </ul>
-                    </div>
-                </article>
-
-                
-                <article class="card-prof col-xl-5 col-lg-7 col-md-9 col-sm-11 col-10" id="camargo" name="camargo">
-                    <div class="imagem col-lg-5 col-md-5 col-sm-5 col-12">
-                        <img src="img-professores/23.png" alt="">
-                    </div>
-                    <div class="col-lg-7 col-md-7 col-sm-7 col-12 information-main">
-                        <header>
-                            <h1>Jessica Costa</h1>
-                        </header>
-                        <span>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem k a galley of type and scrambled it to make a type specimen Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                        </span>
-                        <ul class="rede-social">
-                            <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
-                            <li><a href="#"><i class="fab fa-google-plus-square"></i></a></li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="card-prof col-xl-5 col-lg-7 col-md-9 col-sm-11 col-10" id="andrade"  name="andrade">
-                    <div class="imagem col-lg-5 col-md-5 col-sm-5 col-12">
-                        <img src="img-professores/24.png" alt="">
-                    </div>
-                    <div class="col-lg-7 col-md-7 col-sm-7 col-12 information-main">
-                        <header>
-                            <h1>Pedro Andrade</h1>
-                        </header>
-                        <span>
-                            Lorem Ipsum is simply dummy text of the printing industry. Lorem k a galley of type and scrambled it to make a type specimen Lorem Ipsum is simply dummy text of the printing and typesetting industry. And scrambled it to make a
-                        </span>
-                        <ul class="rede-social">
-                            <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>             
-                            <li><a href="#"><i class="fab fa-google-plus-square"></i></a></li>
-                        </ul>
-                    </div>
-                </article>
+            <?php renderizarProfessores($connection_info); ?>
             </div>
         
         </section>
