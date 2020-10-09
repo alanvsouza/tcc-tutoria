@@ -1,0 +1,18 @@
+Informações do BD:
+
+hostname: 143.106.241.3
+Port: 3306
+username: cl18152
+senha: cl*07062002
+
+Observações do Desktop:
+
+Nós inportamos duas coisas para o proejto: uma biblioteca - a do conector jdbc pra fazer a conexão com o BD - 
+e um um JAR que é 0 r2xml que estamos enviando dentro da pasta DesktopTCC. Estou avisando porque ele pode pedir para 
+importar novamente essas duas coisas, ele com certeza vai dar um erro quando você abrir o projeto, mas tente executar
+pra ver se vai, caso não vá acho que vai quer ter que importar um ou dos itens novamente.
+
+Observação do WEB
+
+O campo login do cadastro deve ser único, mas não existe um aviso ainde dizendo que o login foi duplicado, ele simples-
+mente não vai gravar no BD o novo usuário.
