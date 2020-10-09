@@ -77,12 +77,10 @@
     </header>
 
 <article id="cards-events"  class="col-lg-12 col-12 ">
-
     <?php
         include("db/credentials.php");
         include("functions/eventos.php");
     ?>
-
 </article>
 <button id="btn-ver-galeriaEventos">Galeria de Eventos</button>
 </section>
