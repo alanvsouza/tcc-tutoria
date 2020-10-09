@@ -48,9 +48,7 @@
 
 <section class="m-0">
 <div class="shape-fill"></div>
-
     <div class="col-lg-12 flex-box" id="bem-vindo">
-
         <div class="col-lg-6 col-md-12 column-one">
             <h2>Bem-Vindo!</h2>
             <h3>Fique li&shy;ga&shy;do nos no&shy;vos even&shy;tos ati&shy;van&shy;do as no&shy;ti&shy;fi&shy;ca&shy;ções!</h3>
