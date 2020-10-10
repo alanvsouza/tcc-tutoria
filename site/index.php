@@ -48,19 +48,17 @@
 
 <section class="m-0">
 <div class="shape-fill"></div>
-
     <div class="col-lg-12 flex-box" id="bem-vindo">
 
         <div class="col-lg-6 col-md-12 column-one">
             <h2>Bem-Vindo!</h2>
             <h3>Fique li&shy;ga&shy;do nos no&shy;vos even&shy;tos ati&shy;van&shy;do as no&shy;ti&shy;fi&shy;ca&shy;ções!</h3>
-            <p>Os even&shy;tos são or&shy;ga&shy;ni&shy;za&shy;dos pela pro&shy;fe&shy;sso&shy;ra de en&shy;fer&shy;ma&shy;gem Daniele Zuza. Você pode acom&shy;panha-los consul&shy;tando nosso calen&shy;dário ou ver os pró&shy;xi&shy;mos even&shy;tos que ocorre&shy;rão logo abaixo.</p>
-            <button class="mt-3" id="btn-ver-calendario">Ver Calendário</button>
+            <p>Os even&shy;tos são or&shy;ga&shy;ni&shy;za&shy;dos pela pro&shy;fe&shy;sso&shy;ra de en&shy;fer&shy;ma&shy;gem Daniele Zuza. Você pode acom&shy;panha-los ati&shy;van&shy;do as noti&shy;fica&shy;ções e con&shy;fer&shy;indo os pró&shy;xi&shy;mos even&shy;tos que ocorre&shy;rão logo abaixo.</p>
+            <button class="mt-2" id="btn-ver-eventos">Ver Eventos</button>
         </div>
 
     <div class="col-lg-6 col-md-11 column-two"></div>
     </div>
-
 </section>
 
 <section id="prox-events" class="col-lg-12 col-12" style="border-top: 1px solid rgba(150, 150, 151,0.3);" >

@@ -20,7 +20,7 @@ background-color: #ffffff;}
 nav ul{
 width: 100%;
 padding: 0px;
-margin: auto auto auto calc(100% - 600px);
+margin: auto auto auto calc(100% - 460px);
 display: flex;
 flex-direction: row;}
 

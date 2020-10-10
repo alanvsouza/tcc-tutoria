@@ -5,8 +5,11 @@ margin: 0px;
 padding: 0px;
 background-color: #FAFAFA;}
 
-section div{
-padding: 20px 100px 10px 100px;}
+/* section div{
+padding: 20px 100px 10px 100px;} */
+
+section.texto-projeto {
+border-bottom: 1px solid rgba(150, 150, 151,0.3);} 
 
 .shape-fill{
 background-image: url('../img/shapeFill.png');
@@ -20,7 +23,7 @@ box-sizing: border-box;
 position: relative;}
 
 .shape-fill2{
-background-image: url('../img/shapFill2.png');
+background-image: url('../img/shapeFill.png');
 background-size: 100% 100%;
 width: 100%;
 height: 150px;
@@ -117,6 +120,7 @@ margin: 30px auto 0px auto;}
 #info-events h2{
 text-align: center;
 font-size:64px;
+margin-top: 20px;
 color: #dd7003;
 font-family: 'Berkshire Swash';
 padding: 0px;}

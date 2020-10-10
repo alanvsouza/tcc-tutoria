@@ -2,7 +2,7 @@
     text-decoration: none;}
 
     .cards{
-    padding: 0px;
+    padding: 0px 0px 40px 0px;
     margin: 0px;
     width: 100%;
     height: auto;
@@ -14,7 +14,7 @@
     width: 100%;
     height: auto;
     min-height: 250px;
-    margin: 30px auto;
+    margin: 20px auto;
     padding: 0px;
     display: flex;
     flex-direction: row;

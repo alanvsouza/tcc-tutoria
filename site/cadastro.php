@@ -39,10 +39,6 @@
         if(isset($_SESSION["errosCadastro"])){
             echo '<div class="errosCadastro"> '.$_SESSION["errosCadastro"].' </div>';
             unset($_SESSION["errosCadastro"]);
-        }else{
-        echo '<div id="aviso">
-            <span>Todos os campos são obrigatórios! Suas informações poderão ser alteradas no perfil</span>
-        </div>';
         }
     ?>
 
@@ -91,7 +87,7 @@
     </div>
 
     <div id="aviso2">
-        <span>Já possui uma conta? Então acesse a página de <a class="link" href="login.php">login</a> para ter acesso completo ao site</span>
+        <span> <a href="login.php">Já possui uma conta? Então efetue o login para ter acesso completo ao nosso site!</a></span>
     </div>    
 </form>
 

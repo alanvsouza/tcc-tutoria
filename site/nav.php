@@ -9,8 +9,6 @@
     <div class="links-menu sumir">
         <ul id="list-navbar">
             <li><a class="actived" href="index.php">Eventos</a></li>
-            <li><a href="#">Calendário</a></li>
-
             <li id="sobre" class="tutoria">
                 <a>Tutoria</a>
                 <ul id="items-sobre">
