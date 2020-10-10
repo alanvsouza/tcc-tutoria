@@ -19,7 +19,7 @@ $i = 0;
 
 while($row = $result->fetch()){
     $data = (str_replace('-','/', $row['dataevento']));
-    echo '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-8 col-11 cardTranslateY cardWidth" id="'."card".$i.'">
+    echo '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-8 col-12 cardTranslateY cardWidth" id="'."card".$i.'">
     <div class="card mb-3">
         <img src="img/'.$row['image'].'" class="card-img-top" alt="...">
             <div class="card-body">
