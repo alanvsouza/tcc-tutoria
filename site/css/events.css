@@ -36,7 +36,7 @@ min-height: 500px;}
 .column-one{
 text-align: left;
 height: auto;
-margin: 0px;
+margin: -20px 0px 0px 0px;
 padding: 0px 40px 0px 0px;}
 
 .column-one h2{
@@ -49,18 +49,18 @@ font-family: 'Berkshire Swash';}
 font-family: 'Montserrat';
 color: #272727;
 font-size: 32px;
-margin: 13px 0px 13px 0px;
+padding: 0px 0px 20px 0px;
 font-weight: bold;
-padding: 0px 0px 13px 0px;
 border-bottom: 2px dashed black;}
 
 .column-one p{
+margin-top: 20px;
 text-align: justify;
 font-family: 'Josefin Sans';
 font-size: 17px;
 font-weight: 400;}
 
-#btn-ver-calendario{
+#btn-ver-eventos{
 color: white;
 background-color: rgb(7, 16, 19);
 padding: 8px 17px 8px 17px;
@@ -73,7 +73,7 @@ font-size: 17px;
 border: none;
 transition: background .2s linear;}
 
-#btn-ver-calendario:hover{
+#btn-ver-eventos:hover{
 background-color: #dd7003;}
 
 .column-two{
@@ -298,7 +298,7 @@ font-family: 'Josefin Sans', sans-serif;}
     .column-one p{
     margin-bottom: 45px;}
 
-    div button#btn-ver-calendario{
+    div button#btn-ver-eventos{
     display: block;
     margin: auto}
 
@@ -349,7 +349,7 @@ font-family: 'Josefin Sans', sans-serif;}
     .column-one p{
     margin-bottom: 35px;}
 
-    div button#btn-ver-calendario{
+    div button#btn-ver-eventos{
     display: block;
     margin: auto}
 
@@ -399,7 +399,7 @@ font-family: 'Josefin Sans', sans-serif;}
     .column-one p{
     margin-bottom: 35px;}
 
-    div button#btn-ver-calendario{
+    div button#btn-ver-eventos{
     display: block;
     margin: auto}
 
@@ -475,7 +475,7 @@ font-family: 'Josefin Sans', sans-serif;}
     font-size: 1em;
     margin-bottom: 35px;}
 
-    div button#btn-ver-calendario{
+    div button#btn-ver-eventos{
     display: block;
     margin: auto}
 
