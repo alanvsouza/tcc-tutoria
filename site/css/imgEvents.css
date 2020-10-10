@@ -78,7 +78,6 @@ font-family: 'Josefin Sans',sans-serif;}
 }
 
 @media(min-width: 576px)  and (max-width: 767px){
-
     .img-events div h1 {
     font-size: 3.2em;}
     
@@ -92,10 +91,10 @@ font-family: 'Josefin Sans',sans-serif;}
 @media (min-width: 501px) and (max-width: 575px){
 
     .img-events{
-    height: 80vh;}
+    height: 60vh;}
 
     .img-events::before{
-    height: 80vh;}
+    height: 60vh;}
 
     .img-events div h1 {
     font-size: 2.8em;}
@@ -111,10 +110,10 @@ font-family: 'Josefin Sans',sans-serif;}
 @media (min-width: 401px) and (max-width: 500px){
 
     .img-events{
-    height: 80vh;}
+    height: 60vh;}
 
     .img-events::before{
-    height: 80vh;}
+    height: 60vh;}
 
     .img-events div h1 {
     font-size: 2.7em;}
@@ -124,16 +123,14 @@ font-family: 'Josefin Sans',sans-serif;}
     
     .img-events div h3{
     font-size: 1.2em;}
-
 }
-
 
 @media (max-width: 400px){
     .img-events{
-    height: 70vh;}
+    height: 55vh;}
 
     .img-events::before{
-    height: 70vh;}
+    height: 55vh;}
 
     .img-events div h1 {
     font-size: 2.7em;}
