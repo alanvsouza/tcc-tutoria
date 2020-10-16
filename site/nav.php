@@ -1,6 +1,7 @@
 <?php    
     error_reporting(0);
     session_start();
+    include("./functions/pegarInfosAluno.php");
 ?>
 
 <nav>
@@ -22,12 +23,20 @@
                     "<li><a class='login' href='login.php'>Login</a></li>
                     <li><a href='cadastro.php'>Cadastro</a></li>";
                 }
-            ?>                
+            ?>
             <?php                
                 if(isset($_SESSION['usuario'])){
+                    $icon = getFotoAluno();
+
+                    if($icon == null)
+                        $icon = "<i style='margin-top: 10px; font-size: 45px; text-align: center;' class='far fa-user-circle'></i>";
+                    else
+                        $icon = "<img style='width: 50px; border-radius: 50%; margin-top: 7px;' src='img-alunos/" . $icon . "' />";
+
                     echo 
-                    '<li><a href="cadastro.php">Icone</a></li>
-                    <li><a href="functions/logout.php">Logout</a></li>';
+                    '<li><a href="functions/logout.php">Logout</a></li>
+                    <li><a href="cadastro.php">' . $icon . '</a></li>'
+                    ;
                 }
             ?>
         </ul> 
