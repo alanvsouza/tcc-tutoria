@@ -73,6 +73,7 @@
                         <h3>Esses são os pró&shy;xi&shy;mos even&shy;tos que es&shy;tão mar&shy;ca&shy;dos pa&shy;ra oco&shy;rrer.</h3>
                         <h4>Atualizado em 17 de novembro de 2021</h4>
                     </div>
+                </div>
             </div>
         </div>
     </header>
