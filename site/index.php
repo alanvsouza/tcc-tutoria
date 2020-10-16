@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/notification.css">
     <link rel="stylesheet" href="css/navside.css">
+    <link rel="stylesheet" href="css/galeriaEventos.css">
 
     <!-- Font Awesome -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
@@ -84,7 +85,143 @@
     ?>
 
 </article>
+
 <button id="btn-ver-galeriaEventos">Galeria de Eventos</button>
+
+<div id="modal-galeria-eventos" class="col-lg-12 visibilidade-modal">
+
+    <div class="header-modal col-lg-12">
+        <span class="title-galeria">Galeria de Eventos</span>
+        <i id="close-galeria" class="fas fa-times "></i>
+    </div>
+
+    <div class="body-galeria-eventos">
+        <div class="row">
+            <div class="card-galeria">
+                <div class="img-card-galeria"></div>
+                <div class="header-card-galeria"><span></span><span></span></div>
+                <div class="body-card-galeria"></div>
+                <div class="footer-card-galeria"></div>
+            </div>
+            <div class="card-galeria">
+                <div class="img-card-galeria"></div>
+                <div class="header-card-galeria"><span></span><span></span></div>
+                <div class="body-card-galeria"></div>
+                <div class="footer-card-galeria"></div>
+            </div>
+            <div class="card-galeria">
+                <div class="img-card-galeria"></div>
+                <div class="header-card-galeria"><span></span><span></span></div>
+                <div class="body-card-galeria"></div>
+                <div class="footer-card-galeria"></div>
+            </div>
+            <div class="card-galeria">
+                <div class="img-card-galeria"></div>
+                <div class="header-card-galeria"><span></span><span></span></div>
+                <div class="body-card-galeria"></div>
+                <div class="footer-card-galeria"></div>
+            </div>
+            <div class="card-galeria">
+                <div class="img-card-galeria"></div>
+                <div class="header-card-galeria"><span></span><span></span></div>
+                <div class="body-card-galeria"></div>
+                <div class="footer-card-galeria"></div>
+            </div>
+            <div class="card-galeria">
+                <div class="img-card-galeria"></div>
+                <div class="header-card-galeria"><span></span><span></span></div>
+                <div class="body-card-galeria"></div>
+                <div class="footer-card-galeria"></div>
+            </div>
+            <div class="card-galeria">
+                <div class="img-card-galeria"></div>
+                <div class="header-card-galeria"><span></span><span></span></div>
+                <div class="body-card-galeria"></div>
+                <div class="footer-card-galeria"></div>
+            </div>
+            <div class="card-galeria">
+                <div class="img-card-galeria"></div>
+                <div class="header-card-galeria"><span></span><span></span></div>
+                <div class="body-card-galeria"></div>
+                <div class="footer-card-galeria"></div>
+            </div>
+            <div class="card-galeria">
+                <div class="img-card-galeria"></div>
+                <div class="header-card-galeria"><span></span><span></span></div>
+                <div class="body-card-galeria"></div>
+                <div class="footer-card-galeria"></div>
+            </div>
+            <div class="card-galeria">
+                <div class="img-card-galeria"></div>
+                <div class="header-card-galeria"><span></span><span></span></div>
+                <div class="body-card-galeria"></div>
+                <div class="footer-card-galeria"></div>
+            </div>
+            <div class="card-galeria">
+                <div class="img-card-galeria"></div>
+                <div class="header-card-galeria"><span></span><span></span></div>
+                <div class="body-card-galeria"></div>
+                <div class="footer-card-galeria"></div>
+            </div>
+            <div class="card-galeria">
+                <div class="img-card-galeria"></div>
+                <div class="header-card-galeria"><span></span><span></span></div>
+                <div class="body-card-galeria"></div>
+                <div class="footer-card-galeria"></div>
+            </div>
+            <div class="card-galeria">
+                <div class="img-card-galeria"></div>
+                <div class="header-card-galeria"><span></span><span></span></div>
+                <div class="body-card-galeria"></div>
+                <div class="footer-card-galeria"></div>
+            </div>
+            <div class="card-galeria">
+                <div class="img-card-galeria"></div>
+                <div class="header-card-galeria"><span></span><span></span></div>
+                <div class="body-card-galeria"></div>
+                <div class="footer-card-galeria"></div>
+            </div>
+            <div class="card-galeria">
+                <div class="img-card-galeria"></div>
+                <div class="header-card-galeria"><span></span><span></span></div>
+                <div class="body-card-galeria"></div>
+                <div class="footer-card-galeria"></div>
+            </div>
+            <div class="card-galeria">
+                <div class="img-card-galeria"></div>
+                <div class="header-card-galeria"><span></span><span></span></div>
+                <div class="body-card-galeria"></div>
+                <div class="footer-card-galeria"></div>
+            </div>
+            <div class="card-galeria">
+                <div class="img-card-galeria"></div>
+                <div class="header-card-galeria"><span></span><span></span></div>
+                <div class="body-card-galeria"></div>
+                <div class="footer-card-galeria"></div>
+            </div>
+            <div class="card-galeria">
+                <div class="img-card-galeria"></div>
+                <div class="header-card-galeria"><span></span><span></span></div>
+                <div class="body-card-galeria"></div>
+                <div class="footer-card-galeria"></div>
+            </div>
+            <div class="card-galeria">
+                <div class="img-card-galeria"></div>
+                <div class="header-card-galeria"><span></span><span></span></div>
+                <div class="body-card-galeria"></div>
+                <div class="footer-card-galeria"></div>
+            </div>
+            <div class="card-galeria">
+                <div class="img-card-galeria"></div>
+                <div class="header-card-galeria"><span></span><span></span></div>
+                <div class="body-card-galeria"></div>
+                <div class="footer-card-galeria"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 </section>
 
 <div class="shape-fill2"></div>
@@ -129,6 +266,7 @@
 <script src="js/notification.js"></script>
 <script src="js/classEdit.js"></script>
 <script src="js/createCards.js"></script>
+<script src="js/galeriaEventos.js"></script>
 
 <!-- 
 <script type="text/javascrpit" src="node_modules/jquery/dist/jquery.slim.min.js"></script>

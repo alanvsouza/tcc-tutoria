@@ -28,7 +28,7 @@ padding: 65px 0px 0px 0px;}
 
 div#sidebar{
 width: 300px;
-height: 100vh;
+height: calc(100vh - 65px);
 overflow-y: auto;
 overflow-x: hidden;
 margin: 0px;
@@ -293,7 +293,7 @@ background-color: #5c5c5c;
 font-size: 16px;
 border-radius:2px;
 padding: 0px 8px 3px 8px;
-margin: 0px;
+margin: 10px 0px 0px 0px;
 border: 1px solid #666;
 box-shadow: 2px 2px 7x gray;}
 
