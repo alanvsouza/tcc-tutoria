@@ -1,67 +1,23 @@
 <?php
 session_start();
-// require_once("../db/credentials.php");
-// require_once("../db/db_connect.php");
+require_once "../vendor/autoload.php";
 
-require_once("../db/db_connect2.php");
+$senha = md5($_POST['senha'] . "cotilamigavel");
 
-$erroCadastro = false;
-$row = null;
+$aluno = new \App\Model\Aluno($_POST['nome'],
+    $_POST['login'], 
+    $senha,
+    $_POST['email'], 
+    $_POST['curso'], 
+    $_POST['ano']);
 
-$nome = $_POST['nome'];
-$login = $_POST['login'];
-$senha = $_POST['senha'];
-$email = $_POST['email'];
+if(\App\Model\AlunoService::checkCredentials($aluno)):
+    $alunoDao = new \App\Model\AlunoDAO();
 
-try {
+    $alunoDao->create($aluno);
 
-    $stmt = $pdo->prepare("select idaluno from tbaluno where login = :login");
-    $stmt->bindParam(':login', $login);
-    $stmt->execute();
-
-} catch(PDOException $e) {
-    echo $e;
-}
-
-if(strlen($nome) == 0 || strlen($login) == 0  || strlen($senha) == 0  || strlen($email) == 0){
-    $erroCadastro = true;
-    $_SESSION['errosCadastro'] = "Preencha todos os campos!";
-} else if($row["COUNT(idaluno)"] != false){
-    $erroCadastro = true;
-    $_SESSION =  "O login já está em uso!";
-}
-else if(substr_count($email,'@') != 1 || substr_count($email,'.') < 1 ||  substr_count($email,'.') == 0){            
-    $erroCadastro = true;
-    $_SESSION['errosCadastro'] =  "Informe um e-mail válido!";
-}
-else if(stristr($senha,"'")){            
-    $erroCadastro = true;
-    $_SESSION['errosCadastro'] =  "Caractere ( ' ) inválido!";
-}
-else if($row = $stmt->fetch()){            
-    $erroCadastro = true;
-    $_SESSION['errosCadastro'] =  "Login de usuário indisponível!";
-}
-
-if($erroCadastro == true) header('Location: ../cadastro.php');
-else {
-    $curso = $_POST['curso'];
-    $anoingresso = $_POST['ano'];
-    $senha = md5($senha . 'cotilamigavel');
-
-    try {
-        $stmt = $pdo->prepare("insert into tbaluno (nomealuno, login, senha, email, curso, anoingresso) VALUES (:nome, :login, :senha, :email, :curso, :anoingresso)");
-        $stmt->bindParam(':nome', $nome);
-        $stmt->bindParam(':login', $login);
-        $stmt->bindParam(':senha', $senha);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':curso', $curso);
-        $stmt->bindParam(':anoingresso', $anoingresso);
-        $stmt->execute();
-
-        $_SESSION['cadastro_sucesso'] = true;    
-        header('Location: ../login.php');
-    } catch(PDOException $e) {
-        echo $e;
-    }
-}
+    $_SESSION['cadastro_sucesso'] = true;
+    header('Location: ../login.php');
+else:
+    header('Location: ../cadastro.php');
+endif;

@@ -1,7 +1,7 @@
 <?php    
     error_reporting(0);
     session_start();
-    require_once("functions/pegarInfosAluno.php");
+    require_once("functions/pegarInfosAluno.php");    
 ?>
 
 <nav>
@@ -22,10 +22,7 @@
                     echo 
                     '<li><a class="login" href="login.php">Login</a></li>
                     <li><a href="cadastro.php">Cadastro</a></li>';
-                }
-            ?>
-            <?php                
-                if(isset($_SESSION['usuario'])){
+                } else {
                     $icon = getFotoAluno();
 
                     if($icon == null)
@@ -43,3 +40,5 @@
     </div> 
     <span class="icon-menu"></span>
 </nav>
+
+<script src="js/nav.js"></script>

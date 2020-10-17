@@ -1,4 +1,8 @@
-﻿<!doctype html>
+﻿<?php
+    session_start();
+?>
+
+<!doctype html>
 <html lang="pt-br">
 
 <head>
@@ -30,6 +34,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
 
+    <!-- FavIcon -->
+    <link rel="icon" href="img/logoSite.jpg">
 </head>
 
 <body> 
@@ -80,9 +86,10 @@
 
 <article id="cards-events"  class="col-lg-12 col-12 ">
 
-    <?php
+    <?php        
         include("db/credentials.php");
-        include("functions/eventos.php");
+        include("./db/db_connect");
+        include("functions/eventos.php");        
     ?>
 
 </article>
@@ -269,7 +276,7 @@
 
 
 <!-- My JS -->
-<script src="js/nav.js"></script>
+<!-- <script src="js/nav.js"></script> -->
 <script src="js/navside.js"></script>
 <script src="js/notification.js"></script>
 <script src="js/classEdit.js"></script>

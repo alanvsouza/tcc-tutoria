@@ -12,17 +12,19 @@ window.addEventListener('resize', function () {
     windowHeight = altura();
 });
 
-function largura(){
+function largura() {
     windowWidth = window.innerWidth;
-    return windowWidth}
+    return windowWidth
+}
 
-function altura(){
+function altura() {
     windowHeight = window.innerHeight;
-    return windowHeight}
+    return windowHeight
+}
 
 
 sobre.addEventListener('mouseover', function (){
-    sobreMouse = true;
+    sobreMouse = true;    
     sobreList.style.visibility = 'visible';
     sobreList.style.opacity = '1';
 });

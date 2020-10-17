@@ -1,19 +1,19 @@
 <?php
-require("db/db_connect.php");
 
-$hostname = $connection_info["hostname"];
-$dbname = $connection_info["dbname"];
-$username = $connection_info["username"];
-$password = $connection_info["password"];
+error_reporting(6143);
 
-    try {
-        $conn = connect($hostname, $dbname, $username, $password);
-        $sql = "SELECT * from tbeventos WHERE dataevento >= DATE_FORMAT(CURRENT_DATE, '%d/%c/%Y')";
-        $result = $conn->query($sql);
-        $conn = null;
-    } catch(PDOException $e) {
-        echo "Connection failed";
-    }
+if (!function_exists('connect')) { 
+    require("db/db_connect.php");
+}
+
+try {
+    $conn = connect();    
+    $sql = "SELECT * from tbeventos WHERE dataevento >= DATE_FORMAT(CURRENT_DATE, '%d/%c/%Y')";
+    $result = $conn->query($sql);
+    $conn = null;
+} catch(PDOException $e) {
+    echo "Connection failed";
+}
 
 $i = 0;
 
