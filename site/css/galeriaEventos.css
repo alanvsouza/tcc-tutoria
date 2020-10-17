@@ -1,3 +1,8 @@
+div.body-galeria-eventos::-webkit-scrollbar-track {background-color: #bbbaba;}
+div.body-galeria-eventos::-webkit-scrollbar {width: 7px;height:6px;background: #F4F4F4;}
+div.body-galeria-eventos::-webkit-scrollbar-thumb {background: rgb(93, 93, 93);}
+
+
 div#modal-galeria-eventos{
     position:fixed;
     top:100vh;
@@ -18,19 +23,20 @@ div.visibilidade-modal{
 
 div.header-modal{
     width: 100%;
-    line-height: 50px;
-    margin:0px;
+    margin: 0px;
     padding: 0px;
     border-bottom: 1px solid rgb(206, 206, 206);
-    padding-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 i.fa-times{
-    font-size: 50px;
+    font-size: 45px;
     padding: 0px;
-    top: 5px;
+    top: -22px;
     position: absolute;
-    left: calc(100% - 60px);
+    left: calc(100% - 50px);
     cursor: pointer;
 }
 
@@ -67,16 +73,32 @@ div.cards-galeria-rows{
     height:100%;
 }
 
-div.body-galeria-eventos::-webkit-scrollbar-track {
-    background-color: #bbbaba;
+div.filtro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
     
-div.body-galeria-eventos::-webkit-scrollbar {
-    width: 7px;
-    height:6px;
-    background: #F4F4F4;
+div.filtro span{
+    font-size: 20px;
+    font-weight: 500;
+    margin-right: 10px;
 }
     
-div.body-galeria-eventos::-webkit-scrollbar-thumb {
-    background: rgb(93, 93, 93);
+input.filtro-evento{
+    margin: 0px 15px 0px 0px;
+    height: 30px;
 }
+    
+input#btn-filtrar{
+    width: 100px;
+    height: 35px;
+    padding: 0px;
+    margin: 0px;
+    font-size: 20px;
+    border-radius: 1px;
+    border: none;
+    color: white;
+    background-color: rgb(7, 16, 19);
+}
+

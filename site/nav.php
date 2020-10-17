@@ -1,7 +1,7 @@
 <?php    
     error_reporting(0);
     session_start();
-    include("./functions/pegarInfosAluno.php");
+    require_once("functions/pegarInfosAluno.php");
 ?>
 
 <nav>
@@ -20,8 +20,8 @@
             <?php
                 if (!isset($_SESSION['usuario'])) {
                     echo 
-                    "<li><a class='login' href='login.php'>Login</a></li>
-                    <li><a href='cadastro.php'>Cadastro</a></li>";
+                    '<li><a class="login" href="login.php">Login</a></li>
+                    <li><a href="cadastro.php">Cadastro</a></li>';
                 }
             ?>
             <?php                

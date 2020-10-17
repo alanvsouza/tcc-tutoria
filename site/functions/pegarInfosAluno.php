@@ -1,17 +1,12 @@
 <?php
 
-require("db/db_connect.php");
-session_start();
-
-function getFotoAluno() {    
-    $conn = connect();
-    $usuario = $_SESSION['usuario'];
-    
-    $row;
-    
+function getFotoAluno(){    
+require_once("db/db_connect.php");
+$usuario = $_SESSION['usuario'];
     try {
-        $conn = connect($connection_info);
-    
+
+        $conn = connect();
+
         $sql = "SELECT foto FROM tbaluno WHERE `login` = '$usuario'";
         
         $result = $conn->query($sql);

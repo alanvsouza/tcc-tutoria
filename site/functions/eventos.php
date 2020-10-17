@@ -8,7 +8,7 @@ $password = $connection_info["password"];
 
     try {
         $conn = connect($hostname, $dbname, $username, $password);
-        $sql = "SELECT * from cl18152.tbeventos WHERE dataevento >= DATE_FORMAT(CURRENT_DATE, '%d/%c/%Y');";
+        $sql = "SELECT * from tbeventos WHERE dataevento >= DATE_FORMAT(CURRENT_DATE, '%d/%c/%Y')";
         $result = $conn->query($sql);
         $conn = null;
     } catch(PDOException $e) {

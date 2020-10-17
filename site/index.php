@@ -91,9 +91,16 @@
 
 <div id="modal-galeria-eventos" class="col-lg-12 visibilidade-modal">
 
-    <div class="header-modal col-lg-12">
-        <span class="title-galeria">Galeria de Eventos</span>
-        <i id="close-galeria" class="fas fa-times "></i>
+    <div class="header-modal col-lg-12 row">
+        <div class="col-lg-3"><span class="title-galeria">Galeria de Eventos</span></div>
+        <div class="col-lg-7 filtro">
+            <span class="span-evento">Nome:</span>
+            <input class="filtro-evento" id="filtro-evento-nome" type="text" name="filtro-nome" placeholder="Nome do evento">
+            <span class="span-evento">Data:</span>
+            <input class="filtro-evento" id="filtro-evento-data" type="date" name="filtro-data">
+            <input id="btn-filtrar" type="button" value="Procurar">
+        </div>
+        <div class="col-lg-2"> <i id="close-galeria" class="fas fa-times "></i></div>
     </div>
 
     <div class="body-galeria-eventos">
