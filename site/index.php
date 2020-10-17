@@ -97,7 +97,6 @@
 <button id="btn-ver-galeriaEventos">Galeria de Eventos</button>
 
 <div id="modal-galeria-eventos" class="col-lg-12 visibilidade-modal">
-
     <div class="header-modal col-lg-12 row">
         <div class="col-lg-3"><span class="title-galeria">Galeria de Eventos</span></div>
         <div class="col-lg-7 filtro">
@@ -111,12 +110,17 @@
     </div>
 
     <div class="body-galeria-eventos">
-        <div class="row">
+        <div class="row m-0 p-0">
             <div class="card-galeria">
-                <div class="img-card-galeria"></div>
-                <div class="header-card-galeria"><span></span><span></span></div>
-                <div class="body-card-galeria"></div>
-                <div class="footer-card-galeria"></div>
+                <div class="card-galeria-image">
+                    <div class="shadow">
+                        <span class="title-galeria-card">Roda de Conversa</span>
+                        <div class="card-galeria-descricao"><span>Amet curabitur odio netus ante ornare ipsum nam nisl inceptos varius, duis himenaeos phasellus vel ex integer commodo imperdiet vitae. Vulputate tempor molestie iaculis posuere eget primis, lectus blandit nunc consequat libero nisi aenean, class laoreet venenatis ridiculus felis. Tempor ipsum per dolor integer ex, urna dui cursus conubia in faucibus, nam habitant et quam</span></div>
+                        <div class="card-galeria-data"><span>20 de agosto de 2021</span></div>
+                        <button closs="btn-galeria-fotos" id="btn-card-galeria1" type="submit"><span>Ver Fotos</span></button>
+                    </div>
+                </div>
+    
             </div>
             <div class="card-galeria">
                 <div class="img-card-galeria"></div>
@@ -280,7 +284,6 @@
 <script src="js/navside.js"></script>
 <script src="js/notification.js"></script>
 <script src="js/classEdit.js"></script>
-<script src="js/createCards.js"></script>
 <script src="js/galeriaEventos.js"></script>
 
 <!-- 

@@ -1,5 +1,3 @@
-include("conexao.php");
-
 
 /*<?php
 $sql = "SELECT * FROM tbeventos";
