@@ -153,14 +153,11 @@ div.card-galeria-data span{
     font-family: 'Josefin Sans';
 }
 
-button.btn-galeria-fotos{
-    width: auto;
-    min-width: 70px;
+button[type="submit"].btn-galeria-fotos{
+    width: 100%;
     background-color: black;
     color: white;
     height: 30px;
-    line-height: 50px;
-    text-align: center;
     margin: auto;
     border: 1px solid white;
     border-radius: 2px;
