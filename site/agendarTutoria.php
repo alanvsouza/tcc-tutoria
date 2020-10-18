@@ -1,4 +1,5 @@
 <?php
+    error_reporting(6143);
     include("functions/acesso.php");
 ?>
 
