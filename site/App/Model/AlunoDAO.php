@@ -2,8 +2,10 @@
 
 namespace App\Model;
 
-class AlunoDAO {
-    public function create(Aluno $a) {
+class AlunoDAO
+{
+    public function create(Aluno $a)
+    {
         $query = "INSERT INTO `tbaluno` (`nomealuno`, `login`, `senha`, `email`, `curso`, `anoingresso`) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = Connection::getConn()->prepare($query);
 
@@ -17,7 +19,8 @@ class AlunoDAO {
         $stmt->execute();
     }
 
-    public function readByLogin($login) {
+    public function readByLogin($login)
+    {
         $query = "SELECT * from `tbaluno` WHERE login = ?";
         $stmt = Connection::getConn()->prepare($query);
 
@@ -25,7 +28,7 @@ class AlunoDAO {
 
         $stmt->execute();
 
-        if($stmt->rowCount() > 0):
+        if ($stmt->rowCount() > 0) :
             $result = $stmt->fetch(\PDO::FETCH_ASSOC);
             return $result;
         endif;
@@ -33,11 +36,11 @@ class AlunoDAO {
         return null;
     }
 
-    public function update(Aluno $aluno) {
-
+    public function update(Aluno $aluno)
+    {
     }
 
-    public function delete($id) {
-
+    public function delete($id)
+    {
     }
 }

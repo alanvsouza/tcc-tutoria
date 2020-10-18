@@ -1,5 +1,7 @@
 ﻿<?php
     session_start();
+    
+    require_once "vendor/autoload.php";
 ?>
 
 <!doctype html>
@@ -85,13 +87,15 @@
     </header>
 
 <article id="cards-events"  class="col-lg-12 col-12 ">
-
-    <?php        
-        include("db/credentials.php");
-        include("./db/db_connect");
-        include("functions/eventos.php");        
+    <?php 
+        error_reporting(6143);
+    
+        \App\Model\EventoService::renderizarEventos();
+        $eventoDao = new \App\Model\EventoDAO();
+        
+        $imgs = $eventoDao->readImagensEventoById("2");
+        var_dump($imgs);
     ?>
-
 </article>
 
 <button id="btn-ver-galeriaEventos">Galeria de Eventos</button>
