@@ -5,7 +5,7 @@ namespace App\Model;
 class EventoDAO {
     public function readAllFromToday()
     {
-        $query = "SELECT * from tbeventos WHERE dataevento >= DATE_FORMAT(CURDATE(), '%d-%c-%Y');";
+        $query = "SELECT * FROM tbeventos WHERE DATE_FORMAT(NOW(), '%Y-%m-%d') <= dataevento;";
         $stmt = Connection::getConn()->prepare($query);
 
         $stmt->execute();

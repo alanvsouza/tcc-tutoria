@@ -42,4 +42,16 @@ class AlunoService
 
         return !$error;
     }
+    
+    public static function getFotoPerfil()
+    {
+        $usuario = $_SESSION['usuario'];
+        
+        if(isset($usuario)):        
+            $alunoDao = new AlunoDAO();
+            return $alunoDao->readFotoPerfilByLogin($usuario)['foto'];
+        endif;               
+        
+        return null;
+    }
 }

@@ -1,7 +1,6 @@
-﻿<?php
-    session_start();
-    
+﻿<?php        
     require_once "vendor/autoload.php";
+    \App\Model\Session::startSession();
 ?>
 
 <!doctype html>
@@ -87,15 +86,7 @@
     </header>
 
 <article id="cards-events"  class="col-lg-12 col-12 ">
-    <?php 
-        error_reporting(6143);
-    
-        \App\Model\EventoService::renderizarEventos();
-        $eventoDao = new \App\Model\EventoDAO();
-        
-        $imgs = $eventoDao->readImagensEventoById("2");
-        var_dump($imgs);
-    ?>
+    <?php \App\Model\EventoService::renderizarEventos(); ?>
 </article>
 
 <button id="btn-ver-galeriaEventos">Galeria de Eventos</button>

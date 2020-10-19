@@ -1,7 +1,6 @@
-<?php    
-    error_reporting(0);
-    session_start();
-    require_once("functions/pegarInfosAluno.php");    
+<?php            
+    require_once "vendor/autoload.php";
+    \App\Model\Session::startSession();
 ?>
 
 <nav>
@@ -23,7 +22,7 @@
                     '<li><a class="login" href="login.php">Login</a></li>
                     <li><a href="cadastro.php">Cadastro</a></li>';
                 } else {
-                    $icon = getFotoAluno();
+                    $icon = \App\Model\AlunoService::getFotoPerfil();
 
                     if($icon == null)
                         $icon = "<i style='margin-top: 10px; font-size: 45px; text-align: center;' class='far fa-user-circle'></i>";

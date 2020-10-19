@@ -1,6 +1,7 @@
 <?php
-    error_reporting(6143);
-    include("functions/acesso.php");
+    require_once "vendor/autoload.php";
+    \App\Model\Session::startSession();
+    include("functions/acesso.php");    
 ?>
 
 <!DOCTYPE html>

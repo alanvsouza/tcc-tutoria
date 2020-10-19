@@ -1,14 +1,9 @@
-<?php
-    session_start(); 
-
-    function conec(){
-        require_once("db/credentials.php");
-        require_once("db/db_connect.php");
-        
+<?php    
+    function conec(){               
         $data = null;
         $dias = array(
         "Mon"=>"segunda",
-        "Tur"=>"terca", 
+        "Tur"=>"terca",
         "Wed"=>"quarta", 
         "Thu"=> "quinta",
         "Fri"=>"sexta",
@@ -22,22 +17,22 @@
         $id = $_GET["id"];
 
         $unix_time_stamp = strtotime($data);
-        $dia = $dias[date("D", $unix_time_stamp)];        
+        $dia = $dias[date("D", $unix_time_stamp)];
 
-        $row = null;
+//         $row = null;
 
-        try {
-            $conn = connect($connection_info);
-            $sql = "SELECT `horarios` FROM `tbhorarios` WHERE `idprofessor` = $id AND `diaSemana` = '$dia'";            
+//         try {
+//             $conn = connect($connection_info);
+//             $sql = "SELECT `horarios` FROM `tbhorarios` WHERE `idprofessor` = $id AND `diaSemana` = '$dia'";            
 
-            $result = $conn->query($sql);            
+//             $result = $conn->query($sql);            
             
-            $row = $result->fetch();  
+//             $row = $result->fetch();  
 
-            $conn = null;
-        } catch(PDOException $e) {
-            echo "Connection failed";
-        }                
+//             $conn = null;
+//         } catch(PDOException $e) {
+//             echo "Connection failed";
+//         }                
 
         $horarios = explode(";", $row["horarios"]);        
         $values = array();
