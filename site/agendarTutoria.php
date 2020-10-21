@@ -1,7 +1,7 @@
 <?php
     require_once "vendor/autoload.php";
     \App\Model\Session::startSession();
-    include("functions/acesso.php");    
+    include("functions/acesso.php");
 ?>
 
 <!DOCTYPE html>
@@ -33,26 +33,28 @@
 </head>
 <body>
 
-<?php    
+<?php
+    error_reporting(6143);
+
     include("nav.php");
     include("navside.php");
     include('calendario.php');
-    include("db/credentials.php");
-    include("db/db_connect.php");
-    include("functions/agendarTutoria.php");
+//    include("db/credentials.php");
+//    include("db/db_connect.php");
+//    include("functions/agendarTutoria.php");
 ?>
 
 <div id="content">
     <div id="sidebar">
         <ul id="list-profs">   
-            <?php renderizarProfessores($connection_info); ?>
+            <?php \App\Model\TutorService::renderizarProfessoresAgendamentoTutoria(); ?>
         </ul>
     </div>
     <div id="body">
         <?php
-            if($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"]))
-                renderizarInformacoes($_GET["id"], $connection_info);
-        ?>                
+            if(isset($_GET['id']))
+                \App\Model\TutorService::renderizarInformacoes($_GET['id']);
+        ?>
     </div>
 </div>
 

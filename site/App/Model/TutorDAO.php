@@ -19,13 +19,12 @@ class TutorDAO
         return null;
     }
     
-    public function readHorarioDiaById($id, $diaSemana)
-    {        
-        $query = "SELECT `horarios` FROM `tbhorarios` WHERE `idprofessor` = ? AND `diaSemana` = ?";
+    public function readHorariosDiaById($id)
+    {
+        $query = "SELECT `horarios` FROM `tbhorarios` WHERE `idprofessor` = ?";
         $stmt = Connection::getConn()->prepare($query);
 
         $stmt->bindParam(1, $id);
-        $stmt->bindParam(2, $diaSemana);
 
         if($stmt->rowCount() > 0):
             $result = $stmt->fetch();

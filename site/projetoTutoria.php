@@ -93,7 +93,7 @@
 
 <section class="envolvidos" class="col-lg-12">
         <div class="cards col-lg-12 col-sm-12">
-            <?php \App\Model\TutorService::renderizarProfessores(); ?>
+            <?php \App\Model\TutorService::renderizarProfessoresProjetoTutoria(); ?>
         </div>
 </section>
 

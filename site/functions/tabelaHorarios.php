@@ -1,4 +1,6 @@
-<?php    
+<?php
+    require_once "../vendor/autoload.php";
+
     function conec(){               
         $data = null;
         $dias = array(
@@ -19,20 +21,20 @@
         $unix_time_stamp = strtotime($data);
         $dia = $dias[date("D", $unix_time_stamp)];
 
-//         $row = null;
+        $row = null;
 
-//         try {
-//             $conn = connect($connection_info);
-//             $sql = "SELECT `horarios` FROM `tbhorarios` WHERE `idprofessor` = $id AND `diaSemana` = '$dia'";            
+         try {
+             $conn = connect($connection_info);
+             $sql = "SELECT `horarios` FROM `tbhorarios` WHERE `idprofessor` = $id AND `diaSemana` = '$dia'";
 
-//             $result = $conn->query($sql);            
+             $result = $conn->query($sql);
             
-//             $row = $result->fetch();  
+             $row = $result->fetch();
 
-//             $conn = null;
-//         } catch(PDOException $e) {
-//             echo "Connection failed";
-//         }                
+             $conn = null;
+         } catch(PDOException $e) {
+             echo "Connection failed";
+         }
 
         $horarios = explode(";", $row["horarios"]);        
         $values = array();
@@ -45,13 +47,13 @@
     }
 
     function criarTabelaHorarios(){
-        $horarios = conec();                
+        $horarios = conec();
         
         echo 
         '<div class="col-lg-7 col-md-7 col-sm-11 col-11 column" id="horarios-professor">
             <table id="table-professor">
                 <tr><th >Inicio</><th>Término</th><th>Local</th></tr>';
-                foreach($horarios as $horario) {           
+                foreach($horarios as $horario) {
                     echo "<tr class='ativado'><td>$horario[0]</td><td>$horario[1]</td><td></td></tr>";
                 }         
         echo '</table>';

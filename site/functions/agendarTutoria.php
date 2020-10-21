@@ -38,8 +38,14 @@ function renderizarProfessores($connection_info) {
     }
 }
 
-function renderizarInformacoes($id, $connection_info) {
+public static function renderizarInformacoes($id) {
     require_once("functions/tabelaHorarios.php");
+
+    $query = "SELECT `nometutor`, `descricao` FROM tbtutor WHERE idtutor = ?";
+    $stmt = Connection::getConn()->prepare($query);
+
+    $stmt->bindParam(1, $id);
+
     try {
         $conn = connect($connection_info);
 
