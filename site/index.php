@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="css/notification.css">
     <link rel="stylesheet" href="css/navside.css">
     <link rel="stylesheet" href="css/galeriaEventos.css">
+    <link rel="stylesheet" href="css/cardsEventos.css">
 
     <!-- Font Awesome -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
@@ -85,9 +86,15 @@
         </div>
     </header>
 
-<article id="cards-events"  class="col-lg-12 col-12 ">
-    <?php \App\Model\EventoService::renderizarEventos(); ?>
-</article>
+<div class="container">
+    <?php 
+        error_reporting(6143);
+    
+        \App\Model\EventoService::renderizarEventos();
+        $eventoDao = new \App\Model\EventoDAO();
+
+    ?>
+</div>
 
 <button id="btn-ver-galeriaEventos">Galeria de Eventos</button>
 

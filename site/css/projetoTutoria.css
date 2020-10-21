@@ -1,17 +1,14 @@
 section{
-width: 100%;
-height: auto;
 margin: 0px;
 padding: 0px;
+width: 100%;
+height: 100%;
 background-color: #FAFAFA;}
-
-/* section div{
-padding: 20px 100px 10px 100px;} */
 
 section.texto-projeto {
 border-bottom: 1px solid rgba(150, 150, 151,0.3);} 
 
-.shape-fill{
+.img-ondas{
 background-image: url('../img/shapeFill.png');
 background-size: 100% 100%;
 width: 100%;
@@ -22,7 +19,7 @@ margin: 0px;
 box-sizing: border-box;
 position: relative;}
 
-.shape-fill2{
+.img-ondas2{
 background-image: url('../img/shapeFill.png');
 background-size: 100% 100%;
 width: 100%;
@@ -46,11 +43,11 @@ display: flex;
 flex-direction: column;
 align-self: flex-end;}
 
-.flex-box p{
-font-size: 17px;
-font-weight: 400;
-font-family: 'Josefin Sans',sans-serif;
-text-align: justify;}
+section.texto-projeto p{ 
+font-size: 16px;
+line-height: 24px;
+font-family: 'Montserrat', sans-serif;
+color: rgb(32, 32, 32);}
 
 div.column-one h1{
 font-size: 45px;
@@ -60,10 +57,9 @@ font-family: 'Berkshire Swash';
 padding: 0px 0px 25px 0px;}
 
 div.column-two{
+width: 350px;
+height: 350px;
 display: block;
-width:  450px;
-min-height: 400px;
-max-height: 450px;
 background-image: url('../img/womens-conversation.jpg');
 background-size: cover;
 background-repeat: no-repeat;
@@ -82,11 +78,6 @@ div.column-three{
 display: flex;
 flex-direction: row;
 padding: 0px 70px 30px 70px;}
-
-div.column-three p{
-font-size: 17px;
-font-family: 'Josefin Sans',sans-serif;
-text-align: justify;}
 
 .envolvidos{
 background-color: #FAFAFA;
@@ -121,15 +112,15 @@ margin: 30px auto 0px auto;}
 text-align: center;
 font-size:64px;
 margin-top: 20px;
-color: #dd7003;
+color: #ff8206;
 font-family: 'Berkshire Swash';
 padding: 0px;}
 
 #info-events h3{
 font-size:30px;
 padding: 0px;
-color: #272727;
-font-weight: 700;
+color: #494949;
+font-weight: 500;
 font-family: 'Montserrat';
 text-align: center;
 margin: auto;
@@ -175,7 +166,7 @@ color: rgb(7, 94, 255);}
 }
 
 @media (max-width: 991px){
-    .shape-fill, .shape-fill2{
+    .img-ondas, .img-ondas2{
     height: 100px;}
 
     .flex-box{
@@ -200,7 +191,7 @@ color: rgb(7, 94, 255);}
 
     #info-events h3{
     font-size:22px;
-    text-align: justify;}
+    text-align: center;}
 
     div#info-events{
     width: 100%;

@@ -58,29 +58,21 @@ class TutorService
             if($foto == null)
                 $foto = "defaultPicture.png";
 
-            echo '
-            <article class="card-prof col-xl-5 col-lg-7 col-md-9 col-sm-11 col-10" 
-                id="'.str_replace(" ","-",(trim($nome))).'" name="' .
-                str_replace("é","e",str_replace(" ","-",(trim($nome)))).'"
-                >
-                <div class="imagem col-lg-5 col-md-5 col-sm-5 col-12">
-                    <img src="img-professores/'.$foto.'" alt="">
-                </div>
-    
-                <div class="col-lg-7 col-md-7 col-sm-7 col-12 information-main">
-                    <header>
-                        <h1>'.$nome.'</h1>
-                    </header>
-                    <span>
-                        '.$descricao.'
-                    </span>
-                    <ul class="rede-social">
-                        <li><a href=' . $redesSociais["facebook"] . '"><i class="fab fa-facebook-square"></i></a></li>
-                        <li><a href=' . $redesSociais["twitter"] . '"><i class="fab fa-twitter-square"></i></a></li>
-                        <li><a href=' . $redesSociais["linkedin"] . '"><i class="fab fa-linkedin"></i></a></li>
-                    </ul>
-                </div>
-            </article>';
+                echo 
+                '<div class="card-container mt-4" id="'.str_replace(" ","-",(trim($nome))).'" name="'.str_replace("é","e",str_replace(" ","-",(trim($nome)))).'">
+                    <img class="round" src="img-professores/'.$foto.'" alt="user" />
+                    <h3>'.$nome.'</h3>
+                    <h6>Professora de X</h6>
+                    <p class="justify">'.$descricao.'</p>
+                    <div class="skills">
+                        <ul>
+                            <li>Linkedin</li>
+                            <li>Twitter</li>
+                            <li>Facebook</li>
+                            <li>Instagram</li>
+                        </ul>
+                    </div>
+                </div>';
         endfor;
     }
     
@@ -88,7 +80,7 @@ class TutorService
     {
         $tutorDao = new TutorDAO();
         $tutores = $tutorDao->readAll();
-               
+
         for($i = 0; $i < sizeof($tutores); $i++):
             $row = $tutores[$i];
         

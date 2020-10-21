@@ -124,17 +124,21 @@ div.shadow{
 
 span.title-galeria-card{
     width: 100%;
-    display: block;
-    text-align: center;
+    height: 15%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 23px;
     color: rgb(0, 225, 255);
-    margin-top: 10px;
     font-family: 'Josefin Sans';
 }
 
 div.card-galeria-descricao span{
     width: 100%;
-    display: block;
+    height: 65%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: justify;
     padding: 0px 20px 5px 20px;
     font-size: 15.5px;
@@ -143,9 +147,21 @@ div.card-galeria-descricao span{
     font-family: 'Josefin Sans';
 }
 
+div.card-galeria-descricao {
+    width: 100%;
+    height: 50%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
 div.card-galeria-data span{
     width: 100%;
-    display: block;
+    height: 5%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 0px 20px 5px 20px;
     font-size: 14px;
     color:rgb(255, 101, 6);    
@@ -154,9 +170,11 @@ div.card-galeria-data span{
 }
 
 input[type="button"].btn-galeria-fotos{
-    width: 50%;
+    width: 150px;
     margin: 5px auto 0px auto;
-    height: 35px;
+    padding: 0px;
+    height: 40px;
+    line-height: 0px;
     position: relative;
     background-color: black;
     display: block;
@@ -164,4 +182,49 @@ input[type="button"].btn-galeria-fotos{
     border: 1px solid rgba(231, 230, 230, 0.801);
     border-radius: 2px;
     box-shadow: 1px 1px 8px rgba(149, 149, 149, 0.308);
+}
+
+
+@media (max-width: 1300px){
+    
+    span.title-galeria-card{
+        font-size: 17px;
+    }
+
+    div.card-galeria-descricao span{
+        font-size: 14px;
+    }
+
+    div.card-galeria-data span{
+        font-size: 13px;
+    }
+
+    input[type="button"].btn-galeria-fotos{
+        width: 120px;
+        height: 35px;
+        font-size: 14px;
+    }
+
+}
+
+@media (min-width: 991px) and (max-width: 1200px){
+
+    span.title-galeria-card{
+        font-size: 16px;
+    }
+
+    div.card-galeria-descricao span{
+        font-size: 12px;
+    }
+
+    div.card-galeria-data span{
+        font-size: 11px;
+    }
+
+    input[type="button"].btn-galeria-fotos{
+        width: 120px;
+        height: 30px;
+        font-size: 13px;
+    }
+
 }

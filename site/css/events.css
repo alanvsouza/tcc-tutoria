@@ -51,7 +51,7 @@ padding: 0px 40px 0px 0px;}
 
 .column-one h2{
 font-size:70px;
-color: #dd7003;
+color: #ff8206;
 padding-bottom: 0px;
 font-family: 'Berkshire Swash';}
 
@@ -65,10 +65,9 @@ border-bottom: 2px dashed black;}
 
 .column-one p{
 margin-top: 20px;
-text-align: justify;
-font-family: 'Josefin Sans';
-font-size: 17px;
-font-weight: 400;}
+font-size: 16px;
+line-height: 24px;
+font-family: 'Montserrat', sans-serif;}
 
 #btn-ver-eventos{
 color: white;
@@ -84,7 +83,7 @@ border: none;
 transition: background .2s linear;}
 
 #btn-ver-eventos:hover{
-background-color: #dd7003;}
+background-color: #f06d15;}
 
 .column-two{
 background-image: url('../img/EventosPessoas.jpg');
@@ -106,7 +105,6 @@ background-color: rgba(255, 105, 0, .15);}
 section#prox-events{
 padding: 0px 0px 40px 0px;
 margin: 0px;
-background-color: #FFFAF2;
 background-color: #FAFAFA;
 height: auto;
 width: 100%;}
@@ -115,7 +113,7 @@ width: 100%;}
 display: flex;
 flex-direction: row;
 margin: auto;
-padding: 0px 0px 30px 0px;}
+padding: 0px;}
 
 div.direction{
 display: flex;
@@ -138,7 +136,7 @@ margin: 0px;}
 
 #info-events h2{
 font-size:50px;
-color: #dd7003;
+color: #ff8206;
 font-family: 'Berkshire Swash';}
 
 #info-events h3{
@@ -163,57 +161,11 @@ margin:0px 15px 15px 5px;
 background-repeat: no-repeat;
 min-height: 155px;}
 
-#cards-events{
-padding: 10px 15px 0px 15px;
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-align-items: center;
-justify-content: center;
-align-content: flex-start;
-margin: auto;}
-
-.card{
-transition: all .3s linear;
-border: 1px solid rgba(0, 0, 0, 0.322);
-height: auto;
-background-color: rgb(255, 255, 255);
-color: black;}
-
-div.cardTranslateY{
-transition: all .2s linear;}
-
-.card-img-top{
-width: 100%;
-height: 250px;}
-
-.card-body h5{
-font-size: 25px;
-font-family: 'Berkshire Swash';
-color: rgb(223, 105, 2);}
-
-.card-body p.card-content{
-font-size: 17px;
-text-align: justify;
-color: #13161a;
-font-family: 'Josefin Sans';}
-
-.card-body div span{
-margin: auto;}
-
-.card-body small.details{
-transition: color .2s linear;
-font-size: 15.5px;
-padding: 0px 10px 0px 10px;
-color: slategray;
-font-weight:500;
-font-family: 'Josefin Sans';}
-
 button#btn-ver-galeriaEventos{
 display: block;
 width: 250px;
 font-size: 20px;
-margin: 20px auto 10px auto;
+margin: 30px auto 10px auto;
 padding: 10px 0px 10px 0px;
 background-color: #212529;
 border: solid 1px rgb(207, 207, 207);
@@ -236,7 +188,6 @@ font-family: 'Josefin Sans', sans-serif;}
     div#bem-vindo{
     margin: auto;
     max-width: 80%;}
-
 }
 
 @media(max-width: 1151px){
@@ -251,10 +202,7 @@ font-family: 'Josefin Sans', sans-serif;}
     font-size: 2.7rem;}
 
     #info-events h3 {
-    font-size: 1.4em;}
-
-    #header-events{
-    padding: 0px 0px 20px 0px;}
+    font-size: 1.4em;} 
 
     .column-one{    
     text-align: center;
@@ -277,9 +225,6 @@ font-family: 'Josefin Sans', sans-serif;}
     padding: 0px;
     height:320px;
     width: 90%;}
-
-    #cards-events{
-    padding: 10px;}
 }
 
 @media (min-width: 992px){
@@ -515,9 +460,6 @@ font-family: 'Josefin Sans', sans-serif;}
     #info-events h4{
     text-align: center;
     font-size: 1em;}
-
-    #cards-events{
-    padding: 0px;}
 
     .card{
     margin-top: 0px;}

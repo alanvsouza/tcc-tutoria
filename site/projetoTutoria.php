@@ -50,8 +50,8 @@
 </div>
 
 <section class="texto-projeto">
-    <div class="shape-fill"></div>
-        <div class="col-lg-12 flex-box">
+    <div class="img-ondas col-lg-12 col-md-12"></div>
+    <div class="col-lg-12 flex-box">
             <div class="col-lg-6 col-md-12 column-one">
                 <h1>O que é uma Tutoria?</h1>
                 <p> Segundo Argüís “A Tutoria é uma atividade inerente à função do professor, que se
@@ -68,7 +68,6 @@
             </div>
             <div class="col-lg-6 col-md-12 column-two"></div>
     </div>
-
     <div class="col-lg-12 col-md-12 column-three">
         <p style="margin-top:  10px;">Portanto, considera-se uma modalidade da atividade docente, que compreende um conjunto
             sistematizado de ações educativas centradas no aluno envolvido no programa, a ser
@@ -84,15 +83,11 @@
     <div id="info-events" class="col-xl-10 col-lg-9 col-md-11 col-sm-12 col-12">
             <h2>Professores envolvidos</h2> 
             <h3>Esses são os professores do Colégio Técnico de Limeira que temos como tutores.</h3>
-            <p>Os professors do COTIL que se disporam a realizar as tutorias podem ser vistos logo abaixo. Aqui você poderá também conferir uma breve descrição sobre eles, bem como ter acesso as suas mídias sociais. </p>
-            <ul class="w-100 p-0">
-                <?php \App\Model\TutorService::renderizarLinksProfessores(); ?>
-            </ul>
     </div>
 </header>
 
-<section class="envolvidos" class="col-lg-12">
-        <div class="cards col-lg-12 col-sm-12">
+<section class="envolvidos">
+        <div class="cards">
             <?php \App\Model\TutorService::renderizarProfessoresProjetoTutoria(); ?>
         </div>
 </section>
