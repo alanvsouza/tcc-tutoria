@@ -93,7 +93,7 @@
 </section>
 
 <footer>
-    <div class="shape-fill2"></div>
+    <div class="img-ondas2"></div>
 
     <div class="img-footer">
         <div id="conteudo">
