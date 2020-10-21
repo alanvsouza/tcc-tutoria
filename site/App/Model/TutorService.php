@@ -122,10 +122,6 @@ class TutorService
             $data = $_GET["data"];
         }
 
-//    <div class='calendario' class='col-lg-4 col-md-4 col-sm-7 col-11'>
-//      "; montaCalendario(); echo "
-//    </div>
-
         echo "
         <div id='professor' class='m-0 p-0'>
             <div class='col-lg-12 m-0' id='description'>
@@ -141,10 +137,9 @@ class TutorService
     
         <div class='col-lg-12'>
             <div id='agendar-tutoria'  class='col-lg-12' >
-                    <form method='POST' action='" . $_SERVER['PHP_SELF'] . "'>
-                        <input type='date' />
-                    </form>
-                    "; self::renderizarTabelaHorarios($id); echo "
+                    <div class='calendario' class='col-lg-4 col-md-4 col-sm-7 col-11'>
+                      "; montaCalendario(); echo "
+                    </div>
                     <form method='POST' action='agendamentoTutoria.php'>
                         <div class='linha'>
                             <span  class='col-lg-4 id='span-data'>Data selecionada:</span> 
