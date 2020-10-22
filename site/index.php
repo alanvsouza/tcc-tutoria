@@ -100,147 +100,96 @@
 
 <div id="modal-galeria-eventos" class="col-lg-12 visibilidade-modal">
     <div class="header-modal col-lg-12 row">
-        <div class="col-lg-3"><span class="title-galeria">Galeria de Eventos</span></div>
-        <div class="col-lg-7 filtro">
-            <span class="span-evento">Nome:</span>
+        <div class="col-lg-12 filtro">
+            <!-- <span class="span-evento">Nome:</span>
             <input class="filtro-evento" id="filtro-evento-nome" type="text" name="filtro-nome" placeholder="Nome do evento">
             <span class="span-evento">Data:</span>
             <input class="filtro-evento" id="filtro-evento-data" type="date" name="filtro-data">
-            <input id="btn-filtrar" type="button" value="Procurar">
+            <input id="btn-filtrar" type="button" value="Procurar"> -->
+            <i id="close-galeria" class="fas fa-times"></i>
         </div>
-        <div class="col-lg-2"> <i id="close-galeria" class="fas fa-times "></i></div>
+
     </div>
 
-    <div class="body-galeria-eventos">
-        <div class="row m-0 p-0">
-            <div class="card-galeria">
-                <div class="card-galeria-image">
-                    <div class="shadow">
-                        <span class="title-galeria-card">Roda de Conversa</span>
-                        <div class="card-galeria-descricao"><span>Amet curabitur odio netus ante ornare ipsum nam nisl inceptos varius, duis himenaeos phasellus vel ex integer commodo imperdiet vitae. Vulputate tempor molestie iaculis posuere eget primis, lectus blandit nunc consequat libero nisi aenean, class laoreet venenatis ridiculus felis. Tempor ipsum per dolor integer ex, urna dui cursus conubia in faucibus, nam habitant et quam</span></div>
-                        <div class="card-galeria-data"><span>20 de agosto de 2021</span></div>
-                        <input class="btn-galeria-fotos" value="VER FOTOS" type="button">
-                    </div>
+    <div class="content-wrapper">
+            <div class="card-novo">
+                <a href="#" class="card-novo__card-link"></a>
+                <img src="https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="" class="card-novo__image">
+                <div class="card-novo__card-text">
+                    <h2 class="card-novo__title">Festa na casa do Del Rey parte 22</h2>
+                    <div class="card-novo__card-date">29/02/2021</div>
+                        <div class="card-novo__card-detalhes">
+                            <p class="card-novo__card-descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
+                            <a href="#" class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
+                        </div>
                 </div>
-    
             </div>
-            <div class="card-galeria">
-                <div class="img-card-galeria"></div>
-                <div class="header-card-galeria"><span></span><span></span></div>
-                <div class="body-card-galeria"></div>
-                <div class="footer-card-galeria"></div>
-            </div>
-            <div class="card-galeria">
-                <div class="img-card-galeria"></div>
-                <div class="header-card-galeria"><span></span><span></span></div>
-                <div class="body-card-galeria"></div>
-                <div class="footer-card-galeria"></div>
-            </div>
-            <div class="card-galeria">
-                <div class="img-card-galeria"></div>
-                <div class="header-card-galeria"><span></span><span></span></div>
-                <div class="body-card-galeria"></div>
-                <div class="footer-card-galeria"></div>
-            </div>
-            <div class="card-galeria">
-                <div class="img-card-galeria"></div>
-                <div class="header-card-galeria"><span></span><span></span></div>
-                <div class="body-card-galeria"></div>
-                <div class="footer-card-galeria"></div>
-            </div>
-            <div class="card-galeria">
-                <div class="img-card-galeria"></div>
-                <div class="header-card-galeria"><span></span><span></span></div>
-                <div class="body-card-galeria"></div>
-                <div class="footer-card-galeria"></div>
-            </div>
-            <div class="card-galeria">
-                <div class="img-card-galeria"></div>
-                <div class="header-card-galeria"><span></span><span></span></div>
-                <div class="body-card-galeria"></div>
-                <div class="footer-card-galeria"></div>
-            </div>
-            <div class="card-galeria">
-                <div class="img-card-galeria"></div>
-                <div class="header-card-galeria"><span></span><span></span></div>
-                <div class="body-card-galeria"></div>
-                <div class="footer-card-galeria"></div>
-            </div>
-            <div class="card-galeria">
-                <div class="img-card-galeria"></div>
-                <div class="header-card-galeria"><span></span><span></span></div>
-                <div class="body-card-galeria"></div>
-                <div class="footer-card-galeria"></div>
-            </div>
-            <div class="card-galeria">
-                <div class="img-card-galeria"></div>
-                <div class="header-card-galeria"><span></span><span></span></div>
-                <div class="body-card-galeria"></div>
-                <div class="footer-card-galeria"></div>
-            </div>
-            <div class="card-galeria">
-                <div class="img-card-galeria"></div>
-                <div class="header-card-galeria"><span></span><span></span></div>
-                <div class="body-card-galeria"></div>
-                <div class="footer-card-galeria"></div>
-            </div>
-            <div class="card-galeria">
-                <div class="img-card-galeria"></div>
-                <div class="header-card-galeria"><span></span><span></span></div>
-                <div class="body-card-galeria"></div>
-                <div class="footer-card-galeria"></div>
-            </div>
-            <div class="card-galeria">
-                <div class="img-card-galeria"></div>
-                <div class="header-card-galeria"><span></span><span></span></div>
-                <div class="body-card-galeria"></div>
-                <div class="footer-card-galeria"></div>
-            </div>
-            <div class="card-galeria">
-                <div class="img-card-galeria"></div>
-                <div class="header-card-galeria"><span></span><span></span></div>
-                <div class="body-card-galeria"></div>
-                <div class="footer-card-galeria"></div>
-            </div>
-            <div class="card-galeria">
-                <div class="img-card-galeria"></div>
-                <div class="header-card-galeria"><span></span><span></span></div>
-                <div class="body-card-galeria"></div>
-                <div class="footer-card-galeria"></div>
-            </div>
-            <div class="card-galeria">
-                <div class="img-card-galeria"></div>
-                <div class="header-card-galeria"><span></span><span></span></div>
-                <div class="body-card-galeria"></div>
-                <div class="footer-card-galeria"></div>
-            </div>
-            <div class="card-galeria">
-                <div class="img-card-galeria"></div>
-                <div class="header-card-galeria"><span></span><span></span></div>
-                <div class="body-card-galeria"></div>
-                <div class="footer-card-galeria"></div>
-            </div>
-            <div class="card-galeria">
-                <div class="img-card-galeria"></div>
-                <div class="header-card-galeria"><span></span><span></span></div>
-                <div class="body-card-galeria"></div>
-                <div class="footer-card-galeria"></div>
-            </div>
-            <div class="card-galeria">
-                <div class="img-card-galeria"></div>
-                <div class="header-card-galeria"><span></span><span></span></div>
-                <div class="body-card-galeria"></div>
-                <div class="footer-card-galeria"></div>
-            </div>
-            <div class="card-galeria">
-                <div class="img-card-galeria"></div>
-                <div class="header-card-galeria"><span></span><span></span></div>
-                <div class="body-card-galeria"></div>
-                <div class="footer-card-galeria"></div>
-            </div>
-        </div>
-    </div>
 
+            <div class="card-novo">
+                <a href="#" class="card-novo__card-link"></a>
+                <img src="https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="" class="card-novo__image">
+                <div class="card-novo__card-text">
+                    <h2 class="card-novo__title">Roda de Conversa com o Alan</h2>
+                    <div class="card-novo__card-date">22/02/2021</div>
+                        <div class="card-novo__card-detalhes">
+                            <p class="card-novo__card-descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
+                            <a href="#" class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
+                        </div>
+                </div>
+            </div>
+
+            <div class="card-novo">
+                <a href="#" class="card-novo__card-link"></a>
+                <img src="https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="" class="card-novo__image">
+                <div class="card-novo__card-text">
+                    <h2 class="card-novo__title">Show de talentos com o Tawara</h2>
+                    <div class="card-novo__card-date">15/02/2021</div>
+                        <div class="card-novo__card-detalhes">
+                            <p class="card-novo__card-descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
+                            <a href="#" class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
+                        </div>
+                </div>
+            </div>
+
+            <div class="card-novo">
+                <a href="#" class="card-novo__card-link"></a>
+                <img src="https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="" class="card-novo__image">
+                <div class="card-novo__card-text">
+                    <h2 class="card-novo__title">Oficina de Dança com o Victor</h2>
+                    <div class="card-novo__card-date">09/02/2021</div>
+                        <div class="card-novo__card-detalhes">
+                            <p class="card-novo__card-descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
+                            <a href="#" class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
+                        </div>
+                </div>
+            </div>
+
+            <div class="card-novo">
+                <a href="#" class="card-novo__card-link"></a>
+                <img src="https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="" class="card-novo__image">
+                <div class="card-novo__card-text">
+                    <h2 class="card-novo__title">Sessão cinema com o Del Rey</h2>
+                    <div class="card-novo__card-date">02/02/2021</div>
+                        <div class="card-novo__card-detalhes">
+                            <p class="card-novo__card-descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
+                            <a href="#" class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
+                        </div>
+                </div>
+            </div>
+
+            <div class="card-novo">
+                <a href="#" class="card-novo__card-link"></a>
+                <img src="https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="" class="card-novo__image">
+                <div class="card-novo__card-text">
+                    <h2 class="card-novo__title">Show de Talentos com geral</h2>
+                    <div class="card-novo__card-date">10/12/2020</div>
+                        <div class="card-novo__card-detalhes">
+                            <p class="card-novo__card-descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
+                            <a href="#" class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
+                        </div>
+                </div>
+            </div>
+    </div>
 </div>
 
 </section>
