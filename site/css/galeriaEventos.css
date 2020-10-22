@@ -1,20 +1,25 @@
-div.body-galeria-eventos::-webkit-scrollbar-track {background-color: #bbbaba;}
-div.body-galeria-eventos::-webkit-scrollbar {width: 7px;height:6px;background: #F4F4F4;}
-div.body-galeria-eventos::-webkit-scrollbar-thumb {background: rgb(93, 93, 93);}
-
+@import url('<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">');
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400|Poppins:300,400,800&display=swap');
 
 div#modal-galeria-eventos{
-    position:fixed;
+    overflow-y: visible;
+    position: fixed;
     top:100vh;
     left:0;
     width: 100%;
     height: 100%;
+    overflow-y: auto;
     margin: 0px;
     padding: 0px;
     z-index:1005;
     transition: all 0.3s linear;
     background-color:white;
 }
+
+div#modal-galeria-eventos::-webkit-scrollbar-track {background-color: #bbbaba;}
+div#modal-galeria-eventos::-webkit-scrollbar {width: 7px;height:6px;background: #F4F4F4;}
+div#modal-galeria-eventos::-webkit-scrollbar-thumb {background: rgb(93, 93, 93);}
+
 
 div.visibilidade-modal{
     opacity:0;
@@ -25,7 +30,6 @@ div.header-modal{
     width: 100%;
     margin: 0px;
     padding: 0px;
-    border-bottom: 1px solid rgb(206, 206, 206);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -33,27 +37,16 @@ div.header-modal{
 }
 
 i.fa-times{
-    font-size: 45px;
+    font-size: 55px;
     padding: 0px;
-    top: -22px;
-    position: absolute;
-    left: calc(100% - 55px);
+    margin-top: 5px;
     cursor: pointer;
 }
 
-div.cards-galeria-rows{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height:100%;
+div.filtro{
+    height: 50px;
 }
 
-div.filtro{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-    
 div.filtro span{
     font-size: 20px;
     font-weight: 500;
@@ -79,152 +72,151 @@ input#btn-filtrar{
     background-color: rgb(7, 16, 19);
 }
 
-span.title-galeria{
-    font-size: 30px;
-    font-family: 'Berkshire Swash';
-    color: #dd7003;
-    line-height: 55px;
-    margin-left: 8px;
-}
-
-div.body-galeria-eventos{
-    width: 100%;
-    height: calc(100% - 55px);
-    margin: 0px;
-    padding: 0px;
-    overflow-x: hidden;
-    background-color: rgb(230, 230, 230);
-}
-
-div.card-galeria{
-    width: 33.333%;
-    height: 300px;
-    background-color: rgb(206, 206, 206);
-    border: 1px solid beige;
-    border-radius: 4px;
+.content-wrapper {
+    margin: 0 auto;
+    max-width: 100vw;
+    height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0.5rem;
 }
 
-div.card-galeria-image{
-    background-image: url('../img/EventosPessoas.jpg');
-    background-size: 100% 100%;
+.card-novo {
+    border: 0px solid aqua;
+    margin: 0.5rem;
+    height: 20rem;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    flex: 1;
+    min-width: 290px;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+    /* -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0); */
+}
+
+.card-novo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    display: inline-block;}
-
-div.shadow{
-    transition: all .4s linear;
-    width: 100%;
-    height:100%;
-    display: inline-block;
-    visibility: visible;
-    opacity: 1;
-    background-color:#00000085;}
-
-span.title-galeria-card{
-    width: 100%;
-    height: 15%; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 23px;
-    color: rgb(0, 225, 255);
-    font-family: 'Josefin Sans';
+    background: rgba(0, 0, 0, 0) linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.7) 80%);;
+    z-index: 0;
 }
 
-div.card-galeria-descricao span{
+.card-novo__card-link {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 65%; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: justify;
-    padding: 0px 20px 5px 20px;
-    font-size: 15.5px;
-    font-weight: 500;
-    color:rgb(255, 255, 255);
-    font-family: 'Josefin Sans';
+    height: 100%;
+    z-index: 1;
 }
 
-div.card-galeria-descricao {
+.card-novo__image {
     width: 100%;
-    height: 50%; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
-div.card-galeria-data span{
-    width: 100%;
-    height: 5%; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0px 20px 5px 20px;
-    font-size: 14px;
-    color:rgb(255, 101, 6);    
-    font-weight: 500;
-    font-family: 'Josefin Sans';
-}
-
-input[type="button"].btn-galeria-fotos{
-    width: 150px;
-    margin: 5px auto 0px auto;
-    padding: 0px;
-    height: 40px;
-    line-height: 0px;
-    position: relative;
-    background-color: black;
+    height: 100%;
     display: block;
-    color:white;
-    border: 1px solid rgba(231, 230, 230, 0.801);
-    border-radius: 2px;
-    box-shadow: 1px 1px 8px rgba(149, 149, 149, 0.308);
+    object-fit: cover;
+    transition: transform 3s ease;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: relative;
+    z-index: -1;
 }
 
-
-@media (max-width: 1300px){
-    
-    span.title-galeria-card{
-        font-size: 17px;
-    }
-
-    div.card-galeria-descricao span{
-        font-size: 14px;
-    }
-
-    div.card-galeria-data span{
-        font-size: 13px;
-    }
-
-    input[type="button"].btn-galeria-fotos{
-        width: 120px;
-        height: 35px;
-        font-size: 14px;
-    }
-
+.card-novo__card-text{
+    position: absolute;
+    bottom: 0rem;
+    padding: 1rem;
+    color: white;
+    transition: background-color 1.5s ease;
 }
 
-@media (min-width: 991px) and (max-width: 1200px){
+h2.card-novo__title{
+    font-size: 20px;
+    font-family: 'Roboto', Arial, sans-serif;
+    transition: color 1s ease;
+    margin-bottom: .5rem;
+}
 
-    span.title-galeria-card{
-        font-size: 16px;
-    }
+.card-novo__card-date{
+    font-size: .7rem;
+    margin-bottom: .5rem;
+    color: #CCC;
+}
+.card-novo__card-detalhes {
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 1.5s ease, opacity 1s ease;
+}
 
-    div.card-galeria-descricao span{
-        font-size: 12px;
-    }
+.card-novo__card-descricao {
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    line-height: 19.5px;
+}
 
-    div.card-galeria-data span{
-        font-size: 11px;
-    }
+.card-novo__ver-fotos{
+    background: black;
+    text-align: center;
+    color: #bbb;
+    display: block;
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.3rem;
+    margin-top: 1rem;
+    border: 1px solid #444;
+    font-size: 0.8rem;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    text-decoration: none;
+    transition: color 0.5s ease, color 0.6s ease;
+    width: 7rem;
+    margin-left: auto;
+    position: relative;
+    z-index: 5;}
 
-    input[type="button"].btn-galeria-fotos{
-        width: 120px;
-        height: 30px;
-        font-size: 13px;
-    }
+.card-novo__ver-fotos i {
+    position: relative;
+    left: 0.2rem;
+    color: #888;
+    transition: all 0.5s ease, color 0.6s ease;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;}
 
+.card-novo__ver-fotos:hover i{
+    transform: translateX(3px);
+    color: rgb(255, 157, 0);
+}
+
+a.card-novo__ver-fotos:hover{
+    color: rgb(255, 157, 0);
+    text-decoration: none;
+}
+
+.card-novo:hover .card-novo__card-detalhes{
+    max-height: 20rem;
+    opacity: 1;
+}
+
+.card-novo:hover .card-novo__text-wrapper {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.card-novo:hover h2.card-novo__title {
+    color: rgb(255, 94, 0);
+}
+
+.card-novo:hover .card-novo__image {
+    transform: scale(1.2);
+    z-index: -1;
 }
