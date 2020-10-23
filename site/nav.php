@@ -1,6 +1,6 @@
-<?php            
-    require_once "vendor/autoload.php";
-    \App\Model\Session::startSession();
+<?php
+require_once "vendor/autoload.php";
+\App\Model\Session::startSession();
 ?>
 
 <nav>
@@ -15,28 +15,27 @@
                     <li><a href="projetoTutoria.php">Projeto Tutoria</li></a>
                     <li style="border-top: 1px solid rgba(143, 143, 143, 0.568);"><a href="agendarTutoria.php">Agendar Tutoria</li></a>
                 </ul>
-            </li> 
+            </li>
             <?php
-                if (!isset($_SESSION['usuario'])) {
-                    echo 
+            if (!isset($_SESSION['usuario'])) {
+                echo
                     '<li><a class="login" href="login.php">Login</a></li>
                     <li><a href="cadastro.php">Cadastro</a></li>';
-                } else {
-                    $icon = \App\Model\AlunoService::getFotoPerfil();
+            } else {
+                $icon = \App\Model\AlunoService::getFotoPerfil();
 
-                    if($icon == null)
-                        $icon = "<i style='margin-top: 10px; font-size: 45px; text-align: center;' class='far fa-user-circle'></i>";
-                    else
-                        $icon = "<img style='width: 50px; border-radius: 50%; margin-top: 7px;' src='img-alunos/" . $icon . "' />";
+                if ($icon == null)
+                    $icon = "<i style='margin-top: 10px; font-size: 45px; text-align: center;' class='far fa-user-circle'></i>";
+                else
+                    $icon = "<img style='width: 50px; border-radius: 50%; margin-top: 7px;' src='img-alunos/" . $icon . "' />";
 
-                    echo 
+                echo
                     '<li><a href="functions/logout.php">Logout</a></li>
-                    <li><a href="cadastro.php">' . $icon . '</a></li>'
-                    ;
-                }
+                    <li><a href="cadastro.php">' . $icon . '</a></li>';
+            }
             ?>
-        </ul> 
-    </div> 
+        </ul>
+    </div>
     <span class="icon-menu"></span>
 </nav>
 
