@@ -53,8 +53,9 @@ class EventoService {
                                 <span>Horário</span>
                                 <div class="horarios">
                                     <ul>
-                                        <li>'  . substr($row['inicio'],0,5). ' </li>
-                                        <li> &nbsp- ' . substr($row['termino'],0,5) .'</li>
+                                        <li class="efeito">'  . substr($row['inicio'],0,5). ' </li>
+                                        <li> &nbsp-&nbsp </li>
+                                        <li class="efeito">' . substr($row['termino'],0,5) .'</li>
                                     </ul>
                                 </div>
 
