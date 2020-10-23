@@ -114,80 +114,118 @@
     <div class="content-wrapper">
             <div class="card-novo">
                 <a href="#" class="card-novo__card-link"></a>
-                <img src="https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="" class="card-novo__image">
+                <img src="img/evento4.jpg" class="card-novo__image">
                 <div class="card-novo__card-text">
-                    <h2 class="card-novo__title">Festa na casa do Del Rey parte 22</h2>
+                    <h2 class="card-novo__title">Evento 1</h2>
                     <div class="card-novo__card-date">29/02/2021</div>
                         <div class="card-novo__card-detalhes">
                             <p class="card-novo__card-descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
-                            <a href="#" class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
+                            <a href="#" id="galeria-fotos-1" class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
                         </div>
+                </div>
+            </div>
+
+            <div class="container-fotos" id="modal-fotos__galeria-fotos-1">
+                <div class="modal-fotos">Galeria 1
+                    <i id="close__galeria-fotos-1" class="fas fa-times close"></i>
                 </div>
             </div>
 
             <div class="card-novo">
                 <a href="#" class="card-novo__card-link"></a>
-                <img src="https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="" class="card-novo__image">
+                <img src="img/evento5.jpg" alt="" class="card-novo__image">
                 <div class="card-novo__card-text">
-                    <h2 class="card-novo__title">Roda de Conversa com o Alan</h2>
+                    <h2 class="card-novo__title">Evento 2</h2>
                     <div class="card-novo__card-date">22/02/2021</div>
                         <div class="card-novo__card-detalhes">
                             <p class="card-novo__card-descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
-                            <a href="#" class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
+                            <a href="#"  id="galeria-fotos-2" class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
                         </div>
+                </div>
+            </div>
+
+            <div class="container-fotos" id="modal-fotos__galeria-fotos-2">
+                <div class="modal-fotos">Galeria 2
+                    <i id="close__galeria-fotos-2" class="fas fa-times close"></i>
                 </div>
             </div>
 
             <div class="card-novo">
                 <a href="#" class="card-novo__card-link"></a>
-                <img src="https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="" class="card-novo__image">
+                <img src="img/evento6.jpg" alt="" class="card-novo__image">
                 <div class="card-novo__card-text">
-                    <h2 class="card-novo__title">Show de talentos com o Tawara</h2>
+                    <h2 class="card-novo__title">Evento 3</h2>
                     <div class="card-novo__card-date">15/02/2021</div>
                         <div class="card-novo__card-detalhes">
                             <p class="card-novo__card-descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
-                            <a href="#" class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
+                            <a href="#" id="galeria-fotos-3" class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
                         </div>
                 </div>
             </div>
 
+             <div class="container-fotos" id="modal-fotos__galeria-fotos-3">
+                <div class="modal-fotos">Galeria 3
+                    <i id="close__galeria-fotos-3" class="fas fa-times close"></i>
+                </div>
+            </div>
+
+
             <div class="card-novo">
                 <a href="#" class="card-novo__card-link"></a>
-                <img src="https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="" class="card-novo__image">
+                <img src="img/evento7.jpg" alt="" class="card-novo__image">
                 <div class="card-novo__card-text">
-                    <h2 class="card-novo__title">Oficina de Dança com o Victor</h2>
+                    <h2 class="card-novo__title">Evento 4</h2>
                     <div class="card-novo__card-date">09/02/2021</div>
                         <div class="card-novo__card-detalhes">
                             <p class="card-novo__card-descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
-                            <a href="#" class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
+                            <a href="#"  id="galeria-fotos-4"  class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
                         </div>
                 </div>
             </div>
 
+            <div class="container-fotos" id="modal-fotos__galeria-fotos-4">
+                <div class="modal-fotos">Galeria 4
+                    <i id="close__galeria-fotos-4" class="fas fa-times close"></i>
+                </div>
+            </div>
+
+
             <div class="card-novo">
                 <a href="#" class="card-novo__card-link"></a>
-                <img src="https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="" class="card-novo__image">
+                <img src="img/evento8.jpg" alt="" class="card-novo__image">
                 <div class="card-novo__card-text">
-                    <h2 class="card-novo__title">Sessão cinema com o Del Rey</h2>
+                    <h2 class="card-novo__title">Evento 5</h2>
                     <div class="card-novo__card-date">02/02/2021</div>
                         <div class="card-novo__card-detalhes">
                             <p class="card-novo__card-descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
-                            <a href="#" class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
+                            <a href="#"  id="galeria-fotos-5"  class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
                         </div>
+                </div>
+            </div>
+
+             <div class="container-fotos" id="modal-fotos__galeria-fotos-5">
+                <div class="modal-fotos">Galeria 5
+                    <i id="close__galeria-fotos-5" class="fas fa-times close"></i>
                 </div>
             </div>
 
             <div class="card-novo">
                 <a href="#" class="card-novo__card-link"></a>
-                <img src="https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="" class="card-novo__image">
+                <img src="img/evento9.jpg" alt="" class="card-novo__image">
                 <div class="card-novo__card-text">
-                    <h2 class="card-novo__title">Show de Talentos com geral</h2>
+                    <h2 class="card-novo__title">Evento 6</h2>
                     <div class="card-novo__card-date">10/12/2020</div>
                         <div class="card-novo__card-detalhes">
                             <p class="card-novo__card-descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
-                            <a href="#" class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
+                            <a href="#" id="galeria-fotos-6" class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
                         </div>
                 </div>
+            </div>
+
+             <div class="container-fotos" id="modal-fotos__galeria-fotos-6">
+                    <div class="modal-fotos">Galeria 6
+                        <i id="close__galeria-fotos-6" class="fas fa-times close"></i>
+                    </div>
             </div>
     </div>
 </div>
