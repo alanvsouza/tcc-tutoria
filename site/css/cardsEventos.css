@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400|Poppins:300,400,800&display=swap');
 
-
-p {
-font-size: 14px;
-font-weight: normal;}
-
 .container {
 margin: 0px auto 0px auto;
 width: 100%;
@@ -71,6 +66,10 @@ position: relative;}
 font-size: 20px;
 line-height: 30px;
 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;}
+
+.post_content p {
+font-size: 14px;
+font-weight: normal;}
 
 .container_infos {
 width: 100%;
@@ -216,3 +215,15 @@ height: 120px;}
 
 div.header_post:hover div#triangulo-para-baixo{
 top: 120px;}
+
+
+@media (max-width: 400px){
+    .post {
+    width: 85vw;
+    min-width: 85vw;
+    }
+
+    .post_content p {
+    font-size: 12.5px;
+    font-weight: normal;}
+}
