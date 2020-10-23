@@ -20,7 +20,6 @@ div#modal-galeria-eventos::-webkit-scrollbar-track {background-color: #bbbaba;}
 div#modal-galeria-eventos::-webkit-scrollbar {width: 7px;height:6px;background: #F4F4F4;}
 div#modal-galeria-eventos::-webkit-scrollbar-thumb {background: rgb(93, 93, 93);}
 
-
 div.visibilidade-modal{
     opacity:0;
     visibility: hidden;
@@ -36,11 +35,13 @@ div.header-modal{
     position: relative;
 }
 
-i.fa-times{
-    font-size: 55px;
+i#close-galeria{
+    font-size: 45px;
     padding: 0px;
-    margin-top: 5px;
+    margin-top: 10px;
     cursor: pointer;
+    display: block;
+    margin-left: calc(100% - 45px)
 }
 
 div.filtro{
@@ -95,10 +96,6 @@ input#btn-filtrar{
     flex: 1;
     min-width: 290px;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
-    /* -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -webkit-transform: translate3d(0, 0, 0);
-    -moz-transform: translate3d(0, 0, 0); */
 }
 
 .card-novo::before {
@@ -142,14 +139,14 @@ input#btn-filtrar{
 }
 
 h2.card-novo__title{
-    font-size: 20px;
+    font-size: 22px;
     font-family: 'Roboto', Arial, sans-serif;
     transition: color 1s ease;
     margin-bottom: .5rem;
 }
 
 .card-novo__card-date{
-    font-size: .7rem;
+    font-size: .9rem;
     margin-bottom: .5rem;
     color: #CCC;
 }
@@ -179,7 +176,7 @@ h2.card-novo__title{
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     text-decoration: none;
-    transition: color 0.5s ease, color 0.6s ease;
+    transition: color 0.2s ease, color 0.3s ease;
     width: 7rem;
     margin-left: auto;
     position: relative;
@@ -189,7 +186,7 @@ h2.card-novo__title{
     position: relative;
     left: 0.2rem;
     color: #888;
-    transition: all 0.5s ease, color 0.6s ease;
+    transition: all 0.2s ease, color 0.3s ease;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;}
 
@@ -208,7 +205,7 @@ a.card-novo__ver-fotos:hover{
     opacity: 1;
 }
 
-.card-novo:hover .card-novo__text-wrapper {
+.card-novo:hover .card-novo__card-text {
     background-color: rgba(0, 0, 0, 0.6);
 }
 
@@ -219,4 +216,49 @@ a.card-novo__ver-fotos:hover{
 .card-novo:hover .card-novo__image {
     transform: scale(1.2);
     z-index: -1;
+}
+
+/*MODAL DAS FOTOS*/
+
+i.close{
+    cursor: pointer;
+    color: black;
+    font-size: 35px;
+    margin-top: 5px;
+    margin-right: 10px;
+    transition: all .3s ease;
+}
+
+div.container-fotos{
+    transition: all .3s ease;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    padding: 0px;
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    z-index: 1001;
+    background-color: rgba(0,0,0,0.5);
+}
+
+div.modal-fotos{
+    width: 600px;
+    height: 400px;
+    position: absolute;
+    margin: auto;
+    z-index: 1001;
+    background-color: #f1f1f1;
+}
+
+@media (max-width: 661px){
+    div.modal-fotos{
+        width: 85%;
+        max-height: 85vh;
+    }
 }
