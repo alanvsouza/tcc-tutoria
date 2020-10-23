@@ -1,8 +1,5 @@
 function addClass(id, classe) {
 
-    // if(classe == "capaVisible") delClass(id,"capaInvisible");
-    // else if(classe == "capaInvisible") delClass(id,"capaVisible");
-
     let elemento = document.getElementById(id);
     let classes = elemento.className.split(' ');//Divide um array de strings de acordo com um separador
     let getIndex = classes.indexOf(classe);//O método indexOf() retorna o primeiro índice em que o elemento pode ser encontrado no array, retorna -1 caso o mesmo não esteja presente.
