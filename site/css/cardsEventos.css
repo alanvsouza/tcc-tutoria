@@ -123,14 +123,19 @@ div.horarios ul li{
 font-size: 12px;
 letter-spacing: 2px;
 list-style: none;
+position: relative;
+z-index: 1;}
+
+div.horarios ul li.efeito{
+font-size: 12px;
+letter-spacing: 2px;
+list-style: none;
 text-align: left;
 text-transform: uppercase;
 position: relative;
-z-index: 1;
-display: flex;
-cursor: pointer;}
+z-index: 1;}
 
-div.tags ul li::before{
+div.horarios ul li.efeito::before{
 content: '';
 text-align: center;
 width: 100%;
@@ -147,7 +152,7 @@ padding: 0px 1px;
 -o-transition: cubic-bezier(0.68, -0.55, 0.27, 01.55) 320ms;
 transition: cubic-bezier(0.68, -0.55, 0.27, 01.55) 320ms;}
 
-div.tags ul li:hover::before {
+div.horarios ul li.efeito:hover::before {
 height: 18px;}
 
 @keyframes top {
