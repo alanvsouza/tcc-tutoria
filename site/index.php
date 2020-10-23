@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/notification.css">
     <link rel="stylesheet" href="css/navside.css">
-    <link rel="stylesheet" href="css/galeriaEventos.css">
+    <!-- <link rel="stylesheet" href="css/galeriaEventos.css"> -->
     <link rel="stylesheet" href="css/cardsEventos.css">
 
     <!-- Font Awesome -->
@@ -32,7 +32,6 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Josefin+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
 
@@ -96,139 +95,9 @@
     ?>
 </div>
 
-<button id="btn-ver-galeriaEventos">Galeria de Eventos</button>
-
-<div id="modal-galeria-eventos" class="col-lg-12 visibilidade-modal">
-    <div class="header-modal col-lg-12 row">
-        <div class="col-lg-12 filtro">
-            <!-- <span class="span-evento">Nome:</span>
-            <input class="filtro-evento" id="filtro-evento-nome" type="text" name="filtro-nome" placeholder="Nome do evento">
-            <span class="span-evento">Data:</span>
-            <input class="filtro-evento" id="filtro-evento-data" type="date" name="filtro-data">
-            <input id="btn-filtrar" type="button" value="Procurar"> -->
-            <i id="close-galeria" class="fas fa-times"></i>
-        </div>
-
-    </div>
-
-    <div class="content-wrapper">
-            <div class="card-novo">
-                <a href="#" class="card-novo__card-link"></a>
-                <img src="img/evento4.jpg" class="card-novo__image">
-                <div class="card-novo__card-text">
-                    <h2 class="card-novo__title">Evento 1</h2>
-                    <div class="card-novo__card-date">29/02/2021</div>
-                        <div class="card-novo__card-detalhes">
-                            <p class="card-novo__card-descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
-                            <a href="#" id="galeria-fotos-1" class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
-                        </div>
-                </div>
-            </div>
-
-            <div class="container-fotos" id="modal-fotos__galeria-fotos-1">
-                <div class="modal-fotos">Galeria 1
-                    <i id="close__galeria-fotos-1" class="fas fa-times close"></i>
-                </div>
-            </div>
-
-            <div class="card-novo">
-                <a href="#" class="card-novo__card-link"></a>
-                <img src="img/evento5.jpg" alt="" class="card-novo__image">
-                <div class="card-novo__card-text">
-                    <h2 class="card-novo__title">Evento 2</h2>
-                    <div class="card-novo__card-date">22/02/2021</div>
-                        <div class="card-novo__card-detalhes">
-                            <p class="card-novo__card-descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
-                            <a href="#"  id="galeria-fotos-2" class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
-                        </div>
-                </div>
-            </div>
-
-            <div class="container-fotos" id="modal-fotos__galeria-fotos-2">
-                <div class="modal-fotos">Galeria 2
-                    <i id="close__galeria-fotos-2" class="fas fa-times close"></i>
-                </div>
-            </div>
-
-            <div class="card-novo">
-                <a href="#" class="card-novo__card-link"></a>
-                <img src="img/evento6.jpg" alt="" class="card-novo__image">
-                <div class="card-novo__card-text">
-                    <h2 class="card-novo__title">Evento 3</h2>
-                    <div class="card-novo__card-date">15/02/2021</div>
-                        <div class="card-novo__card-detalhes">
-                            <p class="card-novo__card-descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
-                            <a href="#" id="galeria-fotos-3" class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
-                        </div>
-                </div>
-            </div>
-
-             <div class="container-fotos" id="modal-fotos__galeria-fotos-3">
-                <div class="modal-fotos">Galeria 3
-                    <i id="close__galeria-fotos-3" class="fas fa-times close"></i>
-                </div>
-            </div>
-
-
-            <div class="card-novo">
-                <a href="#" class="card-novo__card-link"></a>
-                <img src="img/evento7.jpg" alt="" class="card-novo__image">
-                <div class="card-novo__card-text">
-                    <h2 class="card-novo__title">Evento 4</h2>
-                    <div class="card-novo__card-date">09/02/2021</div>
-                        <div class="card-novo__card-detalhes">
-                            <p class="card-novo__card-descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
-                            <a href="#"  id="galeria-fotos-4"  class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
-                        </div>
-                </div>
-            </div>
-
-            <div class="container-fotos" id="modal-fotos__galeria-fotos-4">
-                <div class="modal-fotos">Galeria 4
-                    <i id="close__galeria-fotos-4" class="fas fa-times close"></i>
-                </div>
-            </div>
-
-
-            <div class="card-novo">
-                <a href="#" class="card-novo__card-link"></a>
-                <img src="img/evento8.jpg" alt="" class="card-novo__image">
-                <div class="card-novo__card-text">
-                    <h2 class="card-novo__title">Evento 5</h2>
-                    <div class="card-novo__card-date">02/02/2021</div>
-                        <div class="card-novo__card-detalhes">
-                            <p class="card-novo__card-descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
-                            <a href="#"  id="galeria-fotos-5"  class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
-                        </div>
-                </div>
-            </div>
-
-             <div class="container-fotos" id="modal-fotos__galeria-fotos-5">
-                <div class="modal-fotos">Galeria 5
-                    <i id="close__galeria-fotos-5" class="fas fa-times close"></i>
-                </div>
-            </div>
-
-            <div class="card-novo">
-                <a href="#" class="card-novo__card-link"></a>
-                <img src="img/evento9.jpg" alt="" class="card-novo__image">
-                <div class="card-novo__card-text">
-                    <h2 class="card-novo__title">Evento 6</h2>
-                    <div class="card-novo__card-date">10/12/2020</div>
-                        <div class="card-novo__card-detalhes">
-                            <p class="card-novo__card-descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
-                            <a href="#" id="galeria-fotos-6" class="card-novo__ver-fotos">Ver Fotos <i class="fas fa-long-arrow-alt-right"></i></a>
-                        </div>
-                </div>
-            </div>
-
-             <div class="container-fotos" id="modal-fotos__galeria-fotos-6">
-                    <div class="modal-fotos">Galeria 6
-                        <i id="close__galeria-fotos-6" class="fas fa-times close"></i>
-                    </div>
-            </div>
-    </div>
-</div>
+    <form action="galeriaEventos.php">
+        <button id="btn-ver-galeriaEventos" type="submit">Galeria de Eventos</button>
+    </form>
 
 </section>
 
