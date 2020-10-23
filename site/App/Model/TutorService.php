@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model;
 
 class TutorService
@@ -8,14 +9,14 @@ class TutorService
         $tutorDao = new TutorDAO();
         $tutores = $tutorDao->readAll();
 
-        for($i = 0; $i < sizeof($tutores); $i++):
+        for ($i = 0; $i < sizeof($tutores); $i++) :
             $row = $tutores[$i];
             $nome = $row["nometutor"];
             $foto_banco = $row["foto"];
             $id = $row["idtutor"];
 
             $foto = null;
-            if($foto_banco == null)
+            if ($foto_banco == null)
                 $foto = "img/defaultPicture.png";
             else
                 $foto = "img-professores/" . $foto_banco;
@@ -40,8 +41,8 @@ class TutorService
     {
         $tutorDao = new TutorDAO();
         $tutores = $tutorDao->readAll();
-        
-        for($i = 0; $i < sizeof($tutores); $i++):
+
+        for ($i = 0; $i < sizeof($tutores); $i++) :
             $row = $tutores[$i];
             $nome = $row["nometutor"];
             $foto = $row["foto"];
@@ -52,48 +53,54 @@ class TutorService
                     "twitter" => $row["twitter"] == null ? "\"" . "#" . "\"" : "\"" . $row["twitter"] . "\"" .
                         " target='_blank'",
                     "linkedin" => $row["linkedin"] == null ? "\"" . "#" . "\"" : "\"" . $row["linkedin"] . "\"" .
-                        " target='_blank'");
-            $descricao = $row["descricao"];
+                        " target='_blank'",
+                    "instagram" => $row["instagram"] == null ? "\"" . "#" . "\"" : "\"" . $row["instagram"] . "\"" .
+                        " target='_blank'"
+                );
 
-            if($foto == null)
+            $descricao = $row["descricao"];
+            $materias = TutorService::getMateriasString($row['idtutor']) == null
+                ? "" : TutorService::getMateriasString($row['idtutor']);
+
+            if ($foto == null)
                 $foto = "defaultPicture.png";
 
-                echo 
-                '<div class="card-container mt-4" id="'.str_replace(" ","-",(trim($nome))).'" name="'.str_replace("é","e",str_replace(" ","-",(trim($nome)))).'">
-                    <img class="round" src="img-professores/'.$foto.'" alt="user" />
-                    <h3>'.$nome.'</h3>
-                    <h6>Professora de X</h6>
-                    <p class="justify">'.$descricao.'</p>
+            echo
+                '<div class="card-container mt-4" id="' . str_replace(" ", "-", (trim($nome))) . '" name="' . str_replace("é", "e", str_replace(" ", "-", (trim($nome)))) . '">
+                    <img class="round" src="img-professores/' . $foto . '" alt="user" />
+                    <h3>' . $nome . '</h3>
+                    <h6>' . $materias . '</h6>
+                    <p class="justify">' . $descricao . '</p>
                     <div class="skills">
                         <ul>
-                            <li>Linkedin</li>
-                            <li>Twitter</li>
-                            <li>Facebook</li>
-                            <li>Instagram</li>
+                            <li><a href=' . $redesSociais["linkedin"] . '>Linkedin</a></li>
+                            <li><a href=' . $redesSociais["twitter"] . '>Twitter</a></li>
+                            <li><a href=' . $redesSociais["facebook"] . '>Facebook</a></li>
+                            <li><a href=' . $redesSociais["instagram"] . '>Instagram</a></li>
                         </ul>
                     </div>
                 </div>';
         endfor;
     }
-    
+
     public static function renderizarLinksProfessores()
     {
         $tutorDao = new TutorDAO();
         $tutores = $tutorDao->readAll();
 
-        for($i = 0; $i < sizeof($tutores); $i++):
+        for ($i = 0; $i < sizeof($tutores); $i++) :
             $row = $tutores[$i];
-        
+
             $nome = trim($row["nometutor"]);
-            $href = str_replace(" ","-",$nome);
-            echo '<li class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-6"><a class="ancora" href="#'.$href.'">'.$nome.'</a></li>';
-        
+            $href = str_replace(" ", "-", $nome);
+            echo '<li class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-6"><a class="ancora" href="#' . $href . '">' . $nome . '</a></li>';
+
         endfor;
     }
 
     public static function renderizarInformacoes($id)
     {
-//        require_once("functions/tabelaHorarios.php");
+        //        require_once("functions/tabelaHorarios.php");
 
         $query = "SELECT `nometutor`, `descricao` FROM `tbtutor` WHERE `idtutor` = ?";
         $stmt = Connection::getConn()->prepare($query);
@@ -102,7 +109,7 @@ class TutorService
 
         $stmt->execute();
 
-        if($stmt->rowCount() > 0)
+        if ($stmt->rowCount() > 0)
             $row = $stmt->fetch();
         else
             return;
@@ -110,7 +117,7 @@ class TutorService
         $nome = $row["nometutor"];
         $data = "";
 
-        if(isset($_GET["data"])) {
+        if (isset($_GET["data"])) {
             $data = $_GET["data"];
         }
 
@@ -122,7 +129,7 @@ class TutorService
                     <a id='ver-perfil' href='#'>Ver Perfil</a>
                 </div>
                 <div id='body-description'> 
-                    <span>".$row['descricao']."</span>
+                    <span>" . $row['descricao'] . "</span>
                 </div>
             </div>
         </div>
@@ -130,7 +137,9 @@ class TutorService
         <div class='col-lg-12'>
             <div id='agendar-tutoria'  class='col-lg-12' >
                     <div class='calendario' class='col-lg-4 col-md-4 col-sm-7 col-11'>
-                      "; montaCalendario(); echo "
+                      ";
+        montaCalendario();
+        echo "
                     </div>
                     <form method='POST' action='agendamentoTutoria.php'>
                         <div class='linha'>
@@ -159,5 +168,34 @@ class TutorService
 
         var_dump($horarios);
     }
-}
 
+    public static function getMateriasString($id)
+    {
+        $tutorDao = new TutorDAO();
+        $materias = $tutorDao->readMaterias($id);
+
+        if ($materias == null)
+            return null;
+
+        $resultString = "";
+
+
+        $index = 0;
+        foreach ($materias as $materia) {
+            $resultString .= $materia["nome"];
+
+            $existeProxIndex = isset($materias[$index + 1]);
+            $proxIndexUltimo = $index + 1 == count($materias) - 1;
+
+            if ($existeProxIndex && $proxIndexUltimo) {
+                $resultString .= " e ";
+            } else if ($existeProxIndex) {
+                $resultString .= ", ";
+            }
+
+            $index++;
+        }
+
+        return $resultString;
+    }
+}
