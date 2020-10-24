@@ -70,15 +70,15 @@ class TutorService
                     <img class="round" src="img-professores/' . $foto . '" alt="user" />
                     <h3>' . $nome . '</h3>
                     <h6>' . $materias . '</h6>
-                    <p class="justify">' . $descricao . '</p>
-                    <div class="skills">
-                        <ul>
-                            <li><a href=' . $redesSociais["linkedin"] . '>Linkedin</a></li>
-                            <li><a href=' . $redesSociais["twitter"] . '>Twitter</a></li>
-                            <li><a href=' . $redesSociais["facebook"] . '>Facebook</a></li>
-                            <li><a href=' . $redesSociais["instagram"] . '>Instagram</a></li>
-                        </ul>
-                    </div>
+                        <p class="justify">' . $descricao . '</p>
+                        <div class="midias">
+                            <ul>
+                                <li><a href=' . $redesSociais["linkedin"] . '>Linkedin</a></li>
+                                <li><a href=' . $redesSociais["twitter"] . '>Twitter</a></li>
+                                <li><a href=' . $redesSociais["facebook"] . '>Facebook</a></li>
+                                <li><a href=' . $redesSociais["instagram"] . '>Instagram</a></li>
+                            </ul>
+                        </div>
                 </div>';
         endfor;
     }
@@ -136,8 +136,7 @@ class TutorService
     
         <div class='col-lg-12'>
             <div id='agendar-tutoria'  class='col-lg-12' >
-                    <div class='calendario' class='col-lg-4 col-md-4 col-sm-7 col-11'>
-                      ";
+                    <div class='calendario' class='col-lg-4 col-md-4 col-sm-7 col-11'>";
         montaCalendario();
         echo "
                     </div>
