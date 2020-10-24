@@ -35,7 +35,6 @@
 
     <div class="content-wrapper">
             <div class="card-novo">
-                <a href="#" class="card-novo__card-link"></a>
                 <img src="img/evento4.jpg" class="card-novo__image">
                 <div class="card-novo__card-text">
                     <h2 class="card-novo__title">Evento 1</h2>
@@ -53,9 +52,9 @@
                     <div class="arrows">
                         <a href="#" class="btn prev" id="galeria-fotos-1__prev">&#171;</a>
                         <a href="#" class="btn next" id="galeria-fotos-1__next">&#187;</a>
-                        <span>01 / 05</span>
+                        <span id="galeria-fotos-1__index">1 / 2</span>
                     </div>
-                    <div class="fotos-galeria" id="galeria-fotos-1__galeria">
+                    <div id="galeria-fotos-1__galeria">
                         <img src="img/evento1.jpg" class="fotos foto-visivel" id="galeria-fotos-1__foto-1" alt="">
                         <img src="img/evento2.jpg" class="fotos foto-invisivel" id="galeria-fotos-1__foto-2" alt="">
                     </div>
@@ -63,7 +62,6 @@
             </div>
 
             <div class="card-novo">
-                <a href="#" class="card-novo__card-link"></a>
                 <img src="img/evento5.jpg" alt="" class="card-novo__image">
                 <div class="card-novo__card-text">
                     <h2 class="card-novo__title">Evento 2</h2>
@@ -88,7 +86,6 @@
             </div>
 
             <div class="card-novo">
-                <a href="#" class="card-novo__card-link"></a>
                 <img src="img/evento6.jpg" alt="" class="card-novo__image">
                 <div class="card-novo__card-text">
                     <h2 class="card-novo__title">Evento 3</h2>
@@ -125,7 +122,6 @@
             </div>
 
             <div class="card-novo">
-                <a href="#" class="card-novo__card-link"></a>
                 <img src="img/evento7.jpg" alt="" class="card-novo__image">
                 <div class="card-novo__card-text">
                     <h2 class="card-novo__title">Evento 4</h2>
@@ -150,7 +146,6 @@
             </div>
 
             <div class="card-novo">
-                <a href="#" class="card-novo__card-link"></a>
                 <img src="img/evento8.jpg" alt="" class="card-novo__image">
                 <div class="card-novo__card-text">
                     <h2 class="card-novo__title">Evento 5</h2>
@@ -176,7 +171,6 @@
 
 
             <div class="card-novo">
-                <a href="#" class="card-novo__card-link"></a>
                 <img src="img/evento9.jpg" alt="" class="card-novo__image">
                 <div class="card-novo__card-text">
                     <h2 class="card-novo__title">Evento 6</h2>
