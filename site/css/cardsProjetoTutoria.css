@@ -25,6 +25,9 @@
     max-width: 100%;
     text-align: center;
     transition: all .3s ease;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .card-container:hover {
@@ -38,15 +41,16 @@
     width: 50%;
     height: 175px;
     padding: 7px;
+    margin: auto;
 }
 
 .card-container  h3 {
-    margin: 10px 0;
+    margin: 10px auto 0px auto;
     color: rgb(255, 122, 6);
 }
 
 .card-container h6 {
-	margin: 5px 0px 10px 0px;
+	margin: 7px auto 12px auto;
     color: rgb(0, 0, 0);
     font-weight: 500;
     font-family: 'Montserrat', sans-serif;
@@ -60,18 +64,18 @@
 }
 
 h6.midias{
+    display: inline-block;
     color: white;
 }
 
-.skills{
+.midias{
     transition: all .3s ease;
-    background-color: rgb(255, 255, 255);
 	text-align: left;
 	padding: 15px;
 	margin-top: 30px;
 }
 
-.skills ul {
+.midias ul {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -84,22 +88,7 @@ h6.midias{
     outline: none;
 }
 
-/* .skills ul li {
-    transition: all .3s ease;
-    border: 1px solid rgb(255, 87, 21);
-    color:rgb(255, 87, 21);
-	border-radius: 2px;
-	display: inline-block;
-    font-size: 12px;
-    
-    margin: 0 7px 7px 0;    
-    padding: 7px;
-    cursor: pointer;
-    outline: none;
-    font-family: 'Montserrat', sans-serif;
-} */
-
-.skills ul li a {
+.midias ul li a {
     text-decoration: none;
     color: rgb(255, 87, 21);
 
@@ -117,7 +106,7 @@ h6.midias{
     font-family: 'Montserrat', sans-serif;
 }
 
-.skills ul li a:hover {        
+.midias ul li a:hover {        
     border: 1px solid rgb(255, 87, 21);
     color:rgb(255, 255, 255);
     background-color: rgb(255, 87, 21);
