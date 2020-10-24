@@ -23,7 +23,7 @@
 <div id="galeria-eventos" class="col-lg-12 visibilidade-modal">
     <div class="header-modal col-lg-12 row">
         <div class="col-lg-12 filtro">
-            <a  href="index.php" id="close-galeria">Cotil Amigável</a>
+            <a  href="index.php" id="nome-site">Cotil Amigável</a>
             <!-- <span class="span-evento">Nome:</span>
             <input class="filtro-evento" id="filtro-evento-nome" type="text" name="filtro-nome" placeholder="Nome do evento">
             <span class="span-evento">Data:</span>
@@ -52,11 +52,15 @@
                     <div class="arrows">
                         <a href="#" class="btn prev" id="galeria-fotos-1__prev">&#171;</a>
                         <a href="#" class="btn next" id="galeria-fotos-1__next">&#187;</a>
-                        <span id="galeria-fotos-1__index">1 / 2</span>
+                        <span id="galeria-fotos-1__index">1 / 6</span>
                     </div>
                     <div id="galeria-fotos-1__galeria">
                         <img src="img/evento1.jpg" class="fotos foto-visivel" id="galeria-fotos-1__foto-1" alt="">
                         <img src="img/evento2.jpg" class="fotos foto-invisivel" id="galeria-fotos-1__foto-2" alt="">
+                        <img src="img/evento3.jpg" class="fotos foto-invisivel" id="galeria-fotos-1__foto-3" alt="">
+                        <img src="img/evento4.jpg" class="fotos foto-invisivel" id="galeria-fotos-1__foto-4" alt="">
+                        <img src="img/evento5.jpg" class="fotos foto-invisivel" id="galeria-fotos-1__foto-5" alt="">
+                        <img src="img/evento6.jpg" class="fotos foto-invisivel" id="galeria-fotos-1__foto-6" alt="">
                     </div>
                 </div>
             </div>
@@ -77,11 +81,20 @@
                 <div class="modal-fotos">
                     <i id="close__galeria-fotos-2" class="fas fa-times close"></i>
                     <div class="arrows">
-                        <a href="" class="btn prev" id="prev">&#171;</a>
-                        <a href="" class="btn next" id="next">&#187;</a>
-                        <span>01 / 12</span>
+                        <a href="#" class="btn prev" id="galeria-fotos-2__prev">&#171;</a>
+                        <a href="#" class="btn next" id="galeria-fotos-2__next">&#187;</a>
+                        <span id="galeria-fotos-2__index">1 / 8</span>
                     </div>
-                    <img src="img/evento3.jpg" class="fotos" id="img__galeria-fotos-3" alt="">
+                    <div id="galeria-fotos-2__galeria">
+                        <img src="img/evento3.jpg" class="fotos foto-visivel" id="galeria-fotos-2__foto-1" alt="">
+                        <img src="img/evento5.jpg" class="fotos foto-invisivel" id="galeria-fotos-2__foto-2" alt="">
+                        <img src="img/evento1.jpg" class="fotos foto-invisivel" id="galeria-fotos-2__foto-3" alt="">
+                        <img src="img/evento6.jpg" class="fotos foto-invisivel" id="galeria-fotos-2__foto-4" alt="">
+                        <img src="img/evento7.jpg" class="fotos foto-invisivel" id="galeria-fotos-2__foto-5" alt="">
+                        <img src="img/evento2.jpg" class="fotos foto-invisivel" id="galeria-fotos-2__foto-6" alt="">
+                        <img src="img/evento8.jpg" class="fotos foto-invisivel" id="galeria-fotos-2__foto-7" alt="">
+                        <img src="img/evento4.jpg" class="fotos foto-invisivel" id="galeria-fotos-2__foto-8" alt="">
+                    </div>
                 </div>
             </div>
 
@@ -101,11 +114,17 @@
                 <div class="modal-fotos">
                     <i id="close__galeria-fotos-3" class="fas fa-times close"></i>
                     <div class="arrows">
-                        <a href="" class="btn prev" id="prev">&#171;</a>
-                        <a href="" class="btn next" id="next">&#187;</a>
-                        <span>01 / 05</span>
+                        <a href="#" class="btn prev" id="galeria-fotos-3__prev">&#171;</a>
+                        <a href="#" class="btn next" id="galeria-fotos-3__next">&#187;</a>
+                        <span id="galeria-fotos-3__index">1 / 5</span>
                     </div>
-                    <img src="img/evento6.jpg" class="fotos" id="img__galeria-fotos-3" alt="">
+                    <div id="galeria-fotos-3__galeria">
+                        <img src="img/evento3.jpg" class="fotos foto-visivel" id="galeria-fotos-3__foto-1" alt="">
+                        <img src="img/evento5.jpg" class="fotos foto-invisivel" id="galeria-fotos-3__foto-2" alt="">
+                        <img src="img/evento1.jpg" class="fotos foto-invisivel" id="galeria-fotos-3__foto-3" alt="">
+                        <img src="img/evento8.jpg" class="fotos foto-invisivel" id="galeria-fotos-3__foto-4" alt="">
+                        <img src="img/evento4.jpg" class="fotos foto-invisivel" id="galeria-fotos-3__foto-5" alt="">
+                    </div>
                 </div>
             </div>
 

@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400|Poppins:300,400,800&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Berkshire+Swash|Josefin+Sans&display=swap');
 
-
 div#galeria-eventos{
     width: 100%;
     height: 100%;
@@ -12,23 +11,15 @@ div#galeria-eventos{
     background-color:white;
 }
 
-/* div#modal-galeria-eventos::-webkit-scrollbar-track {background-color: #bbbaba;}
-div#modal-galeria-eventos::-webkit-scrollbar {width: 7px;height:6px;background: #F4F4F4;}
-div#modal-galeria-eventos::-webkit-scrollbar-thumb {background: rgb(93, 93, 93);} */
-
-/* div.visibilidade-modal{
-    opacity:0;
-    visibility: hidden;
-} */
-
-a{
-    color: black;
+i:hover{
+    color: white;
     text-decoration: none;
 }
 
+a{ text-decoration: none;}
+
 a:hover{
-    color: black;
-    text-decoration: none;
+    color: white;
 }
 
 div.header-modal{
@@ -41,13 +32,16 @@ div.header-modal{
     position: relative;
 }
 
-a#close-galeria{
+a#nome-site{
     font-size: 35px;
     padding: 0px;
     margin: 0px;
     cursor: pointer;
+    color: black;
     font-family: 'Berkshire Swash';
 }
+
+a#nome-site:hover {text-decoration: none;}
 
 div.filtro{
     height: 50px;
@@ -229,12 +223,9 @@ i.close{
     transition: all .3s ease;
     position: absolute;
     top: 10px;
+    z-index: 3001;
     left: calc(100% - 60px);
     display: block;
-}
-
-i.fa-times:hover{
-    color: white;
     text-decoration: none;
 }
 
@@ -243,8 +234,13 @@ i.close:hover{
     text-decoration: none;
 }
 
+i.fa-times:hover{
+    color: white;
+    text-decoration: none;
+}
+
 div.container-fotos{
-    transition: all .3s ease;
+    transition: all .4s ease;
     width: 100%;
     height: 100%;
     display: none;
@@ -260,6 +256,7 @@ div.container-fotos{
 }
 
 div.modal-fotos{
+    transition: all .4s ease;
     width: 600px;
     height: 400px;
     margin: auto;
@@ -301,6 +298,7 @@ img.fotos{
 }
 
 a.btn{
+    outline: none;
     padding: 0px;
     border-radius: 0px;
     background-color: rgba(0, 0, 0, 0.6);
@@ -312,6 +310,11 @@ a.btn{
     z-index: 2000;
 }
 
+a.btn:hover{
+    color: white;
+    text-decoration: none;
+}
+
 a.prev{
     display: block !important;
     float: left !important;
@@ -319,11 +322,21 @@ a.prev{
     line-height: 40px;
 }
 
+a.prev:hover{
+    text-decoration: none;
+    color: white;
+}
+
 a.next{
     display: block !important;
     float: right !important;
     line-height: 40px;
     z-index: 3000;
+}
+
+a.next:hover{
+    color: white;
+    text-decoration: none;
 }
 
 .foto-visivel{
