@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Berkshire+Swash|Josefin+Sans&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 body{
 width: 100%;
 height: 100%;
@@ -39,7 +39,7 @@ padding: 15px 0px 15px 0px;}
 
 div#header span{
 color: #ff8206;
-font-family: Verdana, Geneva, Tahoma, sans-serif;
+font-family: 'Roboto', sans-serif;
 font-size:38px;
 display: block;
 padding: 0px;
@@ -88,34 +88,38 @@ input{
 display: block;
 margin: 0px auto 12px auto;
 width: 90%;
-text-align: center;
-font-size: 17.4px;
+height: 40px;
+font-size: 15px;
+text-indent: 10px;
 border:2px solid rgb(195, 195, 195);
 outline-color: rgb(165, 165, 165);
 caret-color: rgb(61, 57, 57);
-height: 35px;}
+transition: all .3s ease;}
+
+input.hoverEfect:hover{
+border:2px solid rgb(149, 149, 149);
+}
 
 input::-webkit-input-placeholder{
-color: rgb(117, 139, 137);
-text-align: center;}
+color: rgb(98, 116, 114);
+}
 
 input::-moz-placeholder{
-color: rgb(117, 139, 137);
-text-align: center;}
+color: rgb(98, 116, 114);
+}
 
 input:-moz-placeholder{
-color: rgb(117, 139, 137);
-text-align: center;}
+color: rgb(98, 116, 114);}
 
 input:-ms-input-placeholder{
-color: rgb(117, 139, 137);
-text-align: center;}
+color: rgb(98, 116, 114);;
+}
 
 input#btn-entrar{
-width: 50%;
+width: 80%;
 height: 40px;
 margin: 12px auto 12px auto;
-background-color: rgb(21, 173, 233);
+background-color: rgb(51, 51, 51);
 border: none;
 border-radius: 2px;
 font-size: 20px;
@@ -123,23 +127,29 @@ outline: none;
 color: rgb(255, 255, 255);
 font-weight: 500;
 cursor: pointer;
+transition: all .3s ease;
 font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;}
 
-p.esqueceu-senha{
-    font-size: 15px;
-    line-height: 24px;
-    padding: 0px 15px 0px 15px;
-    margin: 0px 0px 0px 5px;
-    color: rgb(95, 95, 95);
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+input#btn-entrar:hover{
+    background: #ff8206;
+}
+
+p.esqueceu-senha a{
+transition: all .3s ease;
+font-size: 14px;
+line-height: 22.5px;
+padding: 0px 15px 0px 15px;
+margin: 0px 0px 0px 5px;
+color: rgb(0, 178, 248);
+font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 p#cadastre_se{
-font-size: 13px;
-line-height: 24px;
+font-size: 14px;
+line-height: 21px;
 color: rgb(75, 83, 79);
 font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-padding: 0px 25px 0px 25px;
+padding: 0px;
 margin: 0px;
 display: block;
 text-align: center;}
@@ -151,28 +161,28 @@ text-align: center;}
 
 @media (max-width: 400px){
 
-form span{
-font-size:32px;}
+    form span{
+    font-size:32px;}
 
-form p{
-font-size: 26px;}
+    form p{
+    font-size: 26px;}
 
-div#erro span{
-font-size: 15px;}
+    div#erro span{
+    font-size: 15px;}
 
-div#erro_tutoria span{
-font-size: 15px;}
+    div#erro_tutoria span{
+    font-size: 15px;}
 
-div#cadastrado span{
-font-size: 15px;}
+    div#cadastrado span{
+    font-size: 15px;}
 
-input{
-font-size: 15px;
-height: 34px;}
+    input{
+    font-size: 15px;
+    height: 34px;}
 
-input#btn-entrar{
-font-size: 17px;}
+    input#btn-entrar{
+    font-size: 17px;}
 
-p#cadastre_se{
-font-size: 16px;}
+    p#cadastre_se{
+    font-size: 16px;}
 }
