@@ -52,6 +52,7 @@ session_start();
         <div id="body">
             <input type="text" name="usuario" id="usuario" placeholder="Informe seu usuário">
             <input type="password" name="senha" id="senha" placeholder="Informe sua senha" maxlength="70" minlength="1">
+            <p class="esqueceu-senha"><a href="#">Esqueci minha senha!</a></p>
             <input type="submit" id="btn-entrar" value="Entrar">
             <p id="cadastre_se">Ainda não possui uma conta?<a href="cadastro.php"> Cadastre-se aqui!</a></p>
         </div>

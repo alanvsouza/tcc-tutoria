@@ -1,4 +1,5 @@
 var galeriaFotos = document.querySelectorAll('.card-novo__card-detalhes a');
+
 var prevFoto = null;
 var nextFoto = null;
 var fotos = null;
@@ -6,11 +7,14 @@ var index = null;
 var indexFoto = 1;
 var tamanho = 0;
 var count = 0;
-var delay = 500;
+const delay = 500;
 
 for (var i = 0;  i < galeriaFotos.length;  i++) {
     galeriaFotos[i].addEventListener("click", function (e) {
         e.preventDefault();
+
+        indexFoto = 1;
+        count = 0;
         var galeria = document.getElementById("modal-fotos__" + this.id);
 
         galeria.style.visibility = "visible";
@@ -27,6 +31,9 @@ var closeModal = document.querySelectorAll('.modal-fotos i');
 for(var i = 0;  i < closeModal.length;  i++){
 	closeModal[i].addEventListener('click', function(e){
         e.preventDefault();
+
+        indexFoto = 1;
+        count = 0;
 		var vetor = this.id.split("__");
         var modal = document.getElementById("modal-fotos__" + vetor[1]);
 
@@ -35,7 +42,9 @@ for(var i = 0;  i < closeModal.length;  i++){
 
         setTimeout(function(){
             modal.style.display = "none";
+            setInicio();
         },delay)
+
 	});
 }
 
@@ -123,4 +132,21 @@ function exibirFoto(tamanho){
     }
 }
 
-
+function setInicio(){
+    count = 0;
+    while(count < tamanho){
+        let elemento = document.getElementById(fotos[count].id);
+        let classes = elemento.className.split(' ');
+        let getIndex = classes.indexOf("foto-visivel");
+        if(getIndex !== -1){
+             // classEdit.js
+            addClass(elemento.id, "foto-invisivel")
+            delClass(elemento.id, "foto-visivel");;
+            addClass(fotos[0].id, "foto-visivel");
+            delClass(fotos[0].id, "foto-invisivel");
+            index.innerHTML =  + '1 / ' + tamanho; 
+            break;
+        }else if(count == 0) break;
+        count++;
+    }
+}
