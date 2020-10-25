@@ -55,7 +55,6 @@ const nextFotoListener = function (e) {
         let getIndex = classes.indexOf("foto-visivel");
 
         if (getIndex !== -1) {
-            console.debug(count);
             var proxImg = null;
 
             if (count + 1 > tamanho - 1) {
@@ -66,7 +65,6 @@ const nextFotoListener = function (e) {
                 indexFoto++;
                 count++;
                 index.innerHTML = indexFoto + " / " + tamanho;
-                console.log(count);
                 proxImg = document.getElementById(fotos[count].id);
             }
 
@@ -127,17 +125,16 @@ for (var i = 0; i < closeModal.length; i++) {
     });
 }
 
-
 function infoGaleria(id) {
     prevFoto = document.getElementById(id + '__prev');
     nextFoto = document.getElementById(id + '__next');
     fotos = document.querySelectorAll('#' + id + '__galeria img');
     index = document.getElementById(id + '__index');
     tamanho = fotos.length;
-    exibirFoto(tamanho);
+    exibirFoto();
 }
 
-function exibirFoto(tamanho) {
+function exibirFoto() {
 
     if (nextFoto != null) {
         nextFoto.addEventListener("click", nextFotoListener);
