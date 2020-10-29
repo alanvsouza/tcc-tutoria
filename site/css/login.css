@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Berkshire+Swash|Josefin+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 body{
 width: 100%;
 height: 100%;
 padding: 0px;
 margin:0px;
+box-sizing: border-box;
 background-color: rgb(243, 243, 243);}
 
 form{
@@ -20,9 +22,6 @@ margin: auto;}
 a{
 color: rgb(75, 83, 79);
 text-decoration: none;}
-
-p#cadastre_se a{
-color: rgb(0, 178, 248);}
 
 div#header{
 width: 100%;
@@ -54,12 +53,12 @@ margin: 7px 0px 0px 0px;
 display: block;
 text-align: center;}
 
-div#erro{
+div#erroLogin{
 width: 100%;
 text-align: center;
 font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 font-size: 16.4px;
-background-color: rgb(240, 34, 103);
+background-color: rgb(51, 51, 51);
 color: rgb(248, 248, 248);
 margin: 0px 0px 10px 0px;
 padding: 17px 0px 17px 0px;}
@@ -69,7 +68,7 @@ width: 100%;
 font-size: 16.4px;
 text-align: center;
 font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-background-color: rgb(240, 34, 103);
+background-color: rgb(51, 51, 51);
 color: rgb(248, 248, 248);
 margin: 0px 0px 10px 0px;
 padding: 17px 0px 17px 0px;}
@@ -79,7 +78,7 @@ width: 100%;
 text-align: center;
 font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 font-size: 16.4px;
-background-color: rgb(44, 181, 235);
+background-color:rgb(51, 51, 51);
 color: rgb(248, 248, 248);
 margin: 0px 0px 10px 0px;
 padding: 17px 0px 17px 0px;}
@@ -94,26 +93,23 @@ text-indent: 10px;
 border:2px solid rgb(195, 195, 195);
 outline-color: rgb(165, 165, 165);
 caret-color: rgb(61, 57, 57);
-transition: all .3s ease;}
+transition: border .3s ease;}
 
 input.hoverEfect:hover{
-border:2px solid rgb(149, 149, 149);
-}
+border:2px solid rgb(149, 149, 149);}
 
 input::-webkit-input-placeholder{
-color: rgb(98, 116, 114);
-}
+    color: rgb(148, 148, 148);}
 
 input::-moz-placeholder{
-color: rgb(98, 116, 114);
-}
+    color: rgb(148, 148, 148);}
 
 input:-moz-placeholder{
-color: rgb(98, 116, 114);}
+    color: rgb(148, 148, 148);}
 
 input:-ms-input-placeholder{
-color: rgb(98, 116, 114);;
-}
+    color: rgb(148, 148, 148);}
+
 
 input#btn-entrar{
 width: 80%;
@@ -131,28 +127,30 @@ transition: all .3s ease;
 font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;}
 
 input#btn-entrar:hover{
-    background: #ff8206;
-}
+background: #ff8206;}
 
 p.esqueceu-senha a{
-transition: all .3s ease;
 font-size: 14px;
 line-height: 22.5px;
 padding: 0px 15px 0px 15px;
 margin: 0px 0px 0px 5px;
-color: rgb(0, 178, 248);
-font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
+color: rgb(39, 100, 241);
+width: 100%;
+font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;}
 
 p#cadastre_se{
 font-size: 14px;
 line-height: 21px;
-color: rgb(75, 83, 79);
+color: rgb(51, 51, 51);
 font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 padding: 0px;
 margin: 0px;
 display: block;
 text-align: center;}
+
+p#cadastre_se a{
+color: rgb(39, 100, 241);}
+
 
 @media (max-height: 400px){
     form{

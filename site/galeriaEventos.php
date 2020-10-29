@@ -37,7 +37,7 @@
 
         <div class="content-wrapper">
             <div class="card-novo">
-                <img src="img/evento4.jpg" class="card-novo__image">
+                <img src="img-galeria-eventos/evento4.jpg" class="card-novo__image">
                 <div class="card-novo__card-text">
                     <h2 class="card-novo__title">Evento 1</h2>
                     <div class="card-novo__card-date">29/02/2021</div>
@@ -57,18 +57,18 @@
                         <span id="galeria-fotos-1__index">1 / 6</span>
                     </div>
                     <div id="galeria-fotos-1__galeria">
-                        <img src="img/evento1.jpg" class="fotos foto-visivel" id="galeria-fotos-1__foto-1" alt="">
-                        <img src="img/evento2.jpg" class="fotos foto-invisivel" id="galeria-fotos-1__foto-2" alt="">
-                        <img src="img/evento3.jpg" class="fotos foto-invisivel" id="galeria-fotos-1__foto-3" alt="">
-                        <img src="img/evento4.jpg" class="fotos foto-invisivel" id="galeria-fotos-1__foto-4" alt="">
-                        <img src="img/evento5.jpg" class="fotos foto-invisivel" id="galeria-fotos-1__foto-5" alt="">
-                        <img src="img/evento6.jpg" class="fotos foto-invisivel" id="galeria-fotos-1__foto-6" alt="">
+                        <img src="img-galeria-eventos/evento1.jpg" class="fotos foto-visivel" id="galeria-fotos-1__foto-1" alt="">
+                        <img src="img-galeria-eventos/evento2.jpg" class="fotos foto-invisivel" id="galeria-fotos-1__foto-2" alt="">
+                        <img src="img-galeria-eventos/evento3.jpg" class="fotos foto-invisivel" id="galeria-fotos-1__foto-3" alt="">
+                        <img src="img-galeria-eventos/evento4.jpg" class="fotos foto-invisivel" id="galeria-fotos-1__foto-4" alt="">
+                        <img src="img-galeria-eventos/evento5.jpg" class="fotos foto-invisivel" id="galeria-fotos-1__foto-5" alt="">
+                        <img src="img-galeria-eventos/evento6.jpg" class="fotos foto-invisivel" id="galeria-fotos-1__foto-6" alt="">
                     </div>
                 </div>
             </div>
 
             <div class="card-novo">
-                <img src="img/evento5.jpg" alt="" class="card-novo__image">
+                <img src="img-galeria-eventos/evento5.jpg" alt="" class="card-novo__image">
                 <div class="card-novo__card-text">
                     <h2 class="card-novo__title">Evento 2</h2>
                     <div class="card-novo__card-date">21/02/2021</div>
@@ -88,20 +88,20 @@
                         <span id="galeria-fotos-2__index">1 / 8</span>
                     </div>
                     <div id="galeria-fotos-2__galeria">
-                        <img src="img/evento3.jpg" class="fotos foto-visivel" id="galeria-fotos-2__foto-1" alt="">
-                        <img src="img/evento5.jpg" class="fotos foto-invisivel" id="galeria-fotos-2__foto-2" alt="">
-                        <img src="img/evento1.jpg" class="fotos foto-invisivel" id="galeria-fotos-2__foto-3" alt="">
-                        <img src="img/evento6.jpg" class="fotos foto-invisivel" id="galeria-fotos-2__foto-4" alt="">
-                        <img src="img/evento7.jpg" class="fotos foto-invisivel" id="galeria-fotos-2__foto-5" alt="">
-                        <img src="img/evento2.jpg" class="fotos foto-invisivel" id="galeria-fotos-2__foto-6" alt="">
-                        <img src="img/evento8.jpg" class="fotos foto-invisivel" id="galeria-fotos-2__foto-7" alt="">
-                        <img src="img/evento4.jpg" class="fotos foto-invisivel" id="galeria-fotos-2__foto-8" alt="">
+                        <img src="img-galeria-eventos/evento3.jpg" class="fotos foto-visivel" id="galeria-fotos-2__foto-1" alt="">
+                        <img src="img-galeria-eventos/evento5.jpg" class="fotos foto-invisivel" id="galeria-fotos-2__foto-2" alt="">
+                        <img src="img-galeria-eventos/evento1.jpg" class="fotos foto-invisivel" id="galeria-fotos-2__foto-3" alt="">
+                        <img src="img-galeria-eventos/evento6.jpg" class="fotos foto-invisivel" id="galeria-fotos-2__foto-4" alt="">
+                        <img src="img-galeria-eventos/evento7.jpg" class="fotos foto-invisivel" id="galeria-fotos-2__foto-5" alt="">
+                        <img src="img-galeria-eventos/evento2.jpg" class="fotos foto-invisivel" id="galeria-fotos-2__foto-6" alt="">
+                        <img src="img-galeria-eventos/evento8.jpg" class="fotos foto-invisivel" id="galeria-fotos-2__foto-7" alt="">
+                        <img src="img-galeria-eventos/evento4.jpg" class="fotos foto-invisivel" id="galeria-fotos-2__foto-8" alt="">
                     </div>
                 </div>
             </div>
 
             <div class="card-novo">
-                <img src="img/evento6.jpg" alt="" class="card-novo__image">
+                <img src="img-galeria-eventos/evento6.jpg" alt="" class="card-novo__image">
                 <div class="card-novo__card-text">
                     <h2 class="card-novo__title">Evento 3</h2>
                     <div class="card-novo__card-date">15/02/2021</div>
@@ -121,11 +121,11 @@
                         <span id="galeria-fotos-3__index">1 / 5</span>
                     </div>
                     <div id="galeria-fotos-3__galeria">
-                        <img src="img/evento3.jpg" class="fotos foto-visivel" id="galeria-fotos-3__foto-1" alt="">
-                        <img src="img/evento5.jpg" class="fotos foto-invisivel" id="galeria-fotos-3__foto-2" alt="">
-                        <img src="img/evento1.jpg" class="fotos foto-invisivel" id="galeria-fotos-3__foto-3" alt="">
-                        <img src="img/evento8.jpg" class="fotos foto-invisivel" id="galeria-fotos-3__foto-4" alt="">
-                        <img src="img/evento4.jpg" class="fotos foto-invisivel" id="galeria-fotos-3__foto-5" alt="">
+                        <img src="img-galeria-eventos/evento3.jpg" class="fotos foto-visivel" id="galeria-fotos-3__foto-1" alt="">
+                        <img src="img-galeria-eventos/evento5.jpg" class="fotos foto-invisivel" id="galeria-fotos-3__foto-2" alt="">
+                        <img src="img-galeria-eventos/evento1.jpg" class="fotos foto-invisivel" id="galeria-fotos-3__foto-3" alt="">
+                        <img src="img-galeria-eventos/evento8.jpg" class="fotos foto-invisivel" id="galeria-fotos-3__foto-4" alt="">
+                        <img src="img-galeria-eventos/evento4.jpg" class="fotos foto-invisivel" id="galeria-fotos-3__foto-5" alt="">
                     </div>
                 </div>
             </div>
@@ -138,12 +138,12 @@
                         <a href="" class="btn next" id="next">&#187;</a>
                         <span>01 / 05</span>
                     </div>
-                    <img src="img/evento6.jpg" class="fotos" id="img__galeria-fotos-4" alt="">
+                    <img src="img-galeria-eventos/evento6.jpg" class="fotos" id="img__galeria-fotos-4" alt="">
                 </div>
             </div>
 
             <div class="card-novo">
-                <img src="img/evento7.jpg" alt="" class="card-novo__image">
+                <img src="img-galeria-eventos/evento7.jpg" alt="" class="card-novo__image">
                 <div class="card-novo__card-text">
                     <h2 class="card-novo__title">Evento 4</h2>
                     <div class="card-novo__card-date">09/02/2021</div>
@@ -162,12 +162,12 @@
                         <a href="" class="btn next" id="next">&#187;</a>
                         <span>01 / 05</span>
                     </div>
-                    <img src="img/evento7.jpg" class="fotos" id="img__galeria-fotos-5" alt="">
+                    <img src="img-galeria-eventos/evento7.jpg" class="fotos" id="img__galeria-fotos-5" alt="">
                 </div>
             </div>
 
             <div class="card-novo">
-                <img src="img/evento8.jpg" alt="" class="card-novo__image">
+                <img src="img-galeria-eventos/evento8.jpg" alt="" class="card-novo__image">
                 <div class="card-novo__card-text">
                     <h2 class="card-novo__title">Evento 5</h2>
                     <div class="card-novo__card-date">02/02/2021</div>
@@ -186,13 +186,13 @@
                         <a href="" class="btn next" id="next">&#187;</a>
                         <span>01 / 05</span>
                     </div>
-                    <img src="img/evento8.jpg" class="fotos" id="img__galeria-fotos-6" alt="">
+                    <img src="img-galeria-eventos/evento8.jpg" class="fotos" id="img__galeria-fotos-6" alt="">
                 </div>
             </div>
 
 
             <div class="card-novo">
-                <img src="img/evento9.jpg" alt="" class="card-novo__image">
+                <img src="img-galeria-eventos/evento9.jpg" alt="" class="card-novo__image">
                 <div class="card-novo__card-text">
                     <h2 class="card-novo__title">Evento 6</h2>
                     <div class="card-novo__card-date">10/12/2020</div>
@@ -211,7 +211,7 @@
                         <a href="" class="btn next" id="next">&#187;</a>
                         <span>01 / 05</span>
                     </div>
-                    <img src="img/evento9.jpg" class="fotos" id="img__galeria-fotos-7" alt="">
+                    <img src="img-galeria-eventos/evento9.jpg" class="fotos" id="img__galeria-fotos-7" alt="">
                 </div>
             </div>
 

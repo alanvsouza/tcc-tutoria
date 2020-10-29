@@ -20,8 +20,8 @@ session_start();
         <?php
         if (isset($_SESSION['nao_autenticado'])):
         ?>
-        <div id="erro">
-            <span>ERRO: Usuário ou senha incorreto!</span>
+        <div id="erroLogin">
+            <span>Usuário ou senha incorreto!</span>
         </div>
         <?php
         endif;
@@ -32,7 +32,7 @@ session_start();
         if (isset($_SESSION['nao_autenticado_tutoria'])):
         ?>
         <div id="erro_tutoria">
-            <span> AVISO: Efetue o login para continuar!</span>
+            <span> Efetue o login para continuar!</span>
         </div>
         <?php
         endif;

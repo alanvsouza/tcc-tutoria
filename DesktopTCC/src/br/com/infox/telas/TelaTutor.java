@@ -3,12 +3,21 @@ package br.com.infox.telas;
 import java.awt.Color;
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
+import java.awt.FileDialog;
+import java.awt.Frame;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
@@ -18,6 +27,7 @@ Connection conexao = null;
 PreparedStatement pst = null;
 ResultSet rs = null;
 Image icono;
+String nomeImagem = "";
 
     public TelaTutor() {
         initComponents();
@@ -28,7 +38,7 @@ Image icono;
     }
     
     private void pesquisar_tutor(){
-        String sql = "select nometutor as Nome, login as Login, senha as Senha, email as Email, telefone as Telefone, rg as RG, idtutor as ID from tbtutor where nometutor like ?";
+        String sql = "select nometutor as Nome, login as Login, senha as Senha, email as Email, telefone as Telefone, rg as RG, foto as Foto, caminhoFoto as Caminho,idtutor as ID from tbtutor where nometutor like ?";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txtTutPesquisar.getText()+"%");
@@ -42,18 +52,21 @@ Image icono;
     }
     
     private void setar_campos(){
-    int setar = tblTutores.getSelectedRow();
-    txtTutNome.setText(tblTutores.getModel().getValueAt(setar, 0).toString());
-    txtTutLogin.setText(tblTutores.getModel().getValueAt(setar, 1).toString());
-    txtTutSenha.setText(tblTutores.getModel().getValueAt(setar, 2).toString());
-    txtTutEmail.setText(tblTutores.getModel().getValueAt(setar, 3).toString());
-    txtTutFone.setText(tblTutores.getModel().getValueAt(setar, 4).toString());
-    txtTutRg.setText(tblTutores.getModel().getValueAt(setar, 5).toString());
-    txtTutId.setText(tblTutores.getModel().getValueAt(setar, 6).toString());
+        int setar = tblTutores.getSelectedRow();
+        txtTutNome.setText(tblTutores.getModel().getValueAt(setar, 0).toString());
+        txtTutLogin.setText(tblTutores.getModel().getValueAt(setar, 1).toString());
+        txtTutSenha.setText(tblTutores.getModel().getValueAt(setar, 2).toString());
+        txtTutEmail.setText(tblTutores.getModel().getValueAt(setar, 3).toString());
+        txtTutFone.setText(tblTutores.getModel().getValueAt(setar, 4).toString());
+        txtTutRg.setText(tblTutores.getModel().getValueAt(setar, 5).toString());
+        nome.setText(tblTutores.getModel().getValueAt(setar,6).toString().replace(".jpg","").replace(".png",""));
+        arquivo.setText(tblTutores.getModel().getValueAt(setar,7).toString());
+        txtTutId.setText(tblTutores.getModel().getValueAt(setar, 8).toString());
+        carregaImagem(btnImg, tblTutores.getModel().getValueAt(setar,7).toString());
     }
     
     private void adicionar(){
-        String sql = "insert into tbtutor (nometutor,login,senha,email,telefone,rg) values(?,?,?,?,?,?)";
+        String sql = "insert into tbtutor (nometutor,login,senha,email,telefone,rg,foto,caminhoFoto) values(?,?,?,?,?,?,?,?)";
         try{
             pst = conexao.prepareStatement(sql);
             pst.setString(1,txtTutNome.getText());
@@ -62,6 +75,8 @@ Image icono;
             pst.setString(4,txtTutEmail.getText());
             pst.setString(5,txtTutFone.getText());
             pst.setString(6,txtTutRg.getText().replace(",", "."));
+            pst.setString(7,nome.getText() + ".png");
+            pst.setString(8,arquivo.getText());
   
             int verificarCampos = camposObrigatorios();
             
@@ -70,8 +85,10 @@ Image icono;
             }else{
                 int adicionado =  pst.executeUpdate();
                 if(adicionado > 0){
-                    JOptionPane.showMessageDialog(null,"Usuário cadastrado com sucesso!");
+                    JOptionPane.showMessageDialog(null,"Tutor cadastrado com sucesso!");
                     txtTutEmail.setText(null);
+                    pesquisar_tutor();
+                    copiarImagem();
                     clear();
                 }
             }
@@ -82,33 +99,121 @@ Image icono;
     }
     
     private void alterar(){
-    String sql = "update tbtutor set nometutor=?,login=?,senha=?,email=?,telefone=?,rg=? where idtutor=?";
+    String sql = "update tbtutor set nometutor=?,login=?,senha=?,email=?,telefone=?,rg=?,foto=?,caminhoFoto=? where idtutor=?";
         try {
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1,txtTutNome.getText());
-            pst.setString(2,txtTutLogin.getText());
-            pst.setString(3,txtTutSenha.getText());
-            pst.setString(4,txtTutEmail.getText());
-            pst.setString(5,txtTutFone.getText());
-            pst.setString(6,txtTutRg.getText());
-            pst.setString(7,txtTutId.getText());
-            
             int verificarCampos = camposObrigatorios();
-            
-                if (verificarCampos != 1){
-                JOptionPane.showMessageDialog(null,"Preencha todos os campos obrigatórios!");
+                if (verificarCampos != 1 || txtTutId.getText().isEmpty() == true){
+                    if(txtTutId.getText().isEmpty() == true) JOptionPane.showMessageDialog(null,"Selecione um tutor para atualizar!");
+                    else JOptionPane.showMessageDialog(null,"Preencha todos os campos obrigatórios!");
                 }else{
-                    int atualizado = pst.executeUpdate();
-                    if (atualizado > 0){
-                        JOptionPane.showMessageDialog(null,"Dados do usuário alterados com sucesso!");
-                        clear();
-                    }
+                    nomeImagem = nome.getText();
+                    boolean verificarImg = consultarImagem();
+                    int verificar = 0;
+                    
+                    if(verificarImg){
+                    verificar = JOptionPane.showConfirmDialog(null,"Já existe uma imagem cadastrada com esse nome. Deseja sobrescrevê-la com a nova imagem?","AVISO",JOptionPane.YES_NO_OPTION);}
+                    
+                    if(verificar == 0){
+                        //Deleta a imagem que tem o mesmo nome da atual
+                        deletarImagem();
+                        
+                        pst = conexao.prepareStatement(sql);
+                        pst.setString(1,txtTutNome.getText());
+                        pst.setString(2,txtTutLogin.getText());
+                        pst.setString(3,txtTutSenha.getText());
+                        pst.setString(4,txtTutEmail.getText());
+                        pst.setString(5,txtTutFone.getText());
+                        pst.setString(6,txtTutRg.getText());
+                        pst.setString(7,nome.getText() + ".png");
+                        pst.setString(8,"C:\\xampp\\htdocs\\myTCC\\site\\img-professores\\" + nome.getText().replace(".jpg","").replace(".png","") + ".png");
+                        pst.setString(9,txtTutId.getText());
+
+                        int atualizado = pst.executeUpdate();
+                        if (atualizado > 0){
+                            JOptionPane.showMessageDialog(null,"Dados do tutor alterados com sucesso!");
+                            copiarImagem();
+                            pesquisar_tutor();
+                            clear();
+                        }
                 }
+            }
         } catch (Exception e){
             JOptionPane.showMessageDialog(null,"Erro ao tentar atualizar tutor!");
         }
     }
     
+    public boolean consultarImagem(){
+         String sql = "select foto from tbtutor";
+            try{
+                pst = conexao.prepareStatement(sql);
+                rs = pst.executeQuery();
+
+                while(rs.next()){
+                    if(rs.getString(1).equals(nomeImagem + ".png")){
+                        return true;
+                    }
+                }
+            }catch(Exception e){
+                System.out.println(e);
+            }
+            return false;
+         }
+     
+        public void deletarImagem(){
+            String sql = "select caminhoFoto from tbtutor where idtutor=?";
+
+            try{
+             pst = conexao.prepareStatement(sql);
+             pst.setString(1,txtTutId.getText());
+             rs = pst.executeQuery();
+                    if(rs.next()){
+                        File imagem = new File(rs.getString(1));
+                        imagem.delete();
+                    }
+            }
+            catch (Exception e){
+                JOptionPane.showMessageDialog(null,e);
+            }
+        }
+        
+        public void copiarImagem(){
+                         
+            FileInputStream origem = null;
+            FileOutputStream destino = null;
+            FileChannel fcOrigem;
+            FileChannel fcDestino;
+
+            try {
+                origem = new FileInputStream(arquivo.getText());
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(TelaEventos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                destino = new FileOutputStream("C:\\xampp\\htdocs\\myTCC\\site\\img-professores\\" + nome.getText() + ".png");
+            } catch (FileNotFoundException ex) {
+                    Logger.getLogger(TelaEventos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            fcOrigem = origem.getChannel();
+            fcDestino = destino.getChannel();
+            
+                try {
+                    fcOrigem.transferTo(0, fcOrigem.size(), fcDestino);
+                } catch (IOException ex) {
+                    Logger.getLogger(TelaEventos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    origem.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(TelaEventos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    destino.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(TelaEventos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+     }
+        
     private void deletar(){  
     int confirmar = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover esse tutor?","AVISO",JOptionPane.YES_NO_OPTION);
         if(confirmar == JOptionPane.YES_OPTION){
@@ -130,31 +235,7 @@ Image icono;
                     } 
         }
     }
-    private void procurar_foto(){
-    FileInputStream fis;
-    int longitudBytes;
- 
-    JFileChooser foto = new JFileChooser();
-        foto.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        int estado = foto.showOpenDialog(null);
-
-        if(estado == JFileChooser.APPROVE_OPTION){
-            try {
-                longitudBytes = (int) foto.getSelectedFile().length();
-                icono = ImageIO.read(foto.getSelectedFile()).getScaledInstance(lblTutFoto.getWidth(), lblTutFoto.getHeight(), Image.SCALE_DEFAULT);
-                
-                lblTutFoto.setIcon(new ImageIcon(icono));
-                lblTutFoto.updateUI();
-
-                
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-        }
-    }
-
+    
     private void clear(){
         txtTutNome.setText(null);
         txtTutLogin.setText(null);
@@ -163,11 +244,14 @@ Image icono;
         txtTutEmail.setText(null);
         txtTutRg.setText(null);
         txtTutId.setText(null);
-        lblTutFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/addUser.png")));
+        btnImg.setIcon(null);
+        nome.setText(null);
+        arquivo.setText(null);
+        nomeImagem = "";
     }
     
     private int camposObrigatorios(){
-         if (txtTutEmail.getText().isEmpty() || txtTutNome.getText().isEmpty()  || txtTutLogin.getText().isEmpty() || txtTutSenha.getText().isEmpty() || txtTutRg.getText().isEmpty())
+         if (txtTutEmail.getText().isEmpty() || txtTutNome.getText().isEmpty()  || txtTutLogin.getText().isEmpty() || txtTutSenha.getText().isEmpty() || txtTutRg.getText().isEmpty() | arquivo.getText().isEmpty() || nome.getText().isEmpty())
          return 0;
          else
          return 1;
@@ -195,13 +279,15 @@ Image icono;
         txtTutRg = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTutores = new javax.swing.JTable();
-        lblTutFoto = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         txtTutPesquisar = new javax.swing.JTextField();
         txtTutId = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        btnTutFoto = new javax.swing.JButton();
-        btnTutExcluirFoto = new javax.swing.JButton();
+        btnImg = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        nome = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        arquivo = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -334,8 +420,6 @@ Image icono;
         });
         jScrollPane1.setViewportView(tblTutores);
 
-        lblTutFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/adduser.png"))); // NOI18N
-
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tutor", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         txtTutPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -378,24 +462,35 @@ Image icono;
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtTutId, txtTutPesquisar});
 
-        btnTutFoto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnTutFoto.setText("Escolher Foto");
-        btnTutFoto.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnImg.setBorder(null);
+        btnImg.setBorderPainted(false);
+        btnImg.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnTutFotoMouseClicked(evt);
+                btnImgMouseClicked(evt);
+            }
+        });
+        btnImg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImgActionPerformed(evt);
             }
         });
 
-        btnTutExcluirFoto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnTutExcluirFoto.setText("Excluir Foto");
-        btnTutExcluirFoto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnTutExcluirFotoMouseClicked(evt);
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setText("* Nome:");
+
+        nome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomeActionPerformed(evt);
             }
         });
-        btnTutExcluirFoto.addActionListener(new java.awt.event.ActionListener() {
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel10.setText("* Arquivo:");
+
+        arquivo.setEnabled(false);
+        arquivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTutExcluirFotoActionPerformed(evt);
+                arquivoActionPerformed(evt);
             }
         });
 
@@ -406,62 +501,70 @@ Image icono;
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 944, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(234, 234, 234)
                         .addComponent(jLabel7)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnUserAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(btnUserUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(btnUserDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(txtTutFone, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addComponent(jLabel3)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtTutLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(120, 120, 120)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel8)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtTutSenha)
-                                            .addComponent(txtTutRg, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel1))
-                                        .addGap(10, 10, 10)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtTutNome, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
-                                            .addComponent(txtTutEmail))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnTutFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnTutExcluirFoto))
-                            .addComponent(lblTutFoto))
-                        .addGap(18, 18, 18))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 853, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 4, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTutNome)
+                            .addComponent(txtTutEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(txtTutLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTutFone, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(120, 120, 120)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtTutSenha)
+                                    .addComponent(txtTutRg, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(btnUserDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnUserAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59)
+                        .addComponent(btnUserUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(250, 250, 250)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnImg, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(arquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -472,15 +575,8 @@ Image icono;
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 36, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTutFoto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnTutFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnTutExcluirFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(16, 16, 16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -490,30 +586,43 @@ Image icono;
                             .addComponent(txtTutEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addGap(11, 11, 11)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTutLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)
-                            .addComponent(txtTutSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtTutLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3)
+                                .addComponent(txtTutSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtTutFone, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
                             .addComponent(txtTutRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnUserUpdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnUserDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnUserAdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26))))
+                            .addComponent(btnUserDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUserUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUserAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnImg, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(arquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnUserAdd, btnUserDelete, btnUserUpdate});
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtTutEmail, txtTutFone, txtTutLogin, txtTutNome, txtTutRg, txtTutSenha});
 
-        setBounds(0, 0, 883, 534);
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {arquivo, nome});
+
+        setBounds(0, 0, 988, 550);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUserAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserAddActionPerformed
@@ -537,7 +646,7 @@ Image icono;
     }//GEN-LAST:event_tblTutoresMouseClicked
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-    String sql = "select nometutor as nome, login as Login, senha as Senha, email as Email, telefone as Telefone, rg as RG,idtutor as ID from tbtutor";
+    String sql = "select nometutor as nome, login as Login, senha as Senha, email as Email, telefone as Telefone, rg as RG, foto as Foto, caminhoFoto as Caminho, idtutor as ID from tbtutor";
         try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -546,14 +655,6 @@ Image icono;
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_formInternalFrameOpened
-
-    private void btnTutFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTutFotoMouseClicked
-        procurar_foto();
-    }//GEN-LAST:event_btnTutFotoMouseClicked
-
-    private void btnTutExcluirFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTutExcluirFotoMouseClicked
-       lblTutFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/addUser.png")));
-    }//GEN-LAST:event_btnTutExcluirFotoMouseClicked
 
     private void txtTutPesquisarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTutPesquisarKeyPressed
         if (evt.getKeyCode() == evt.VK_ENTER) {
@@ -591,18 +692,53 @@ Image icono;
         }
     }//GEN-LAST:event_txtTutSenhaKeyPressed
 
-    private void btnTutExcluirFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTutExcluirFotoActionPerformed
+    private void btnImgMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImgMouseClicked
+            try {
+            FileDialog fileDialog = new FileDialog((Frame)null);
+            fileDialog.setVisible(true);
+            if(fileDialog.getDirectory() != null){
+                arquivo.setText(fileDialog.getDirectory() + fileDialog.getFile());
+                nome.setText(fileDialog.getFile().replace(".jpg","").replace(".png",""));
+                carregaImagem(btnImg,fileDialog.getDirectory() + fileDialog.getFile());
+            }
+        }catch(Exception e) {
+               JOptionPane.showMessageDialog(null,"Erro ao tentar carregar o arquivo! Verifique se o arquivo selecionado é uma imagem.");
+            }
+    }//GEN-LAST:event_btnImgMouseClicked
+
+     public void carregaImagem(JButton botao, String arquivo){
+            try {
+                File f = new File(arquivo);
+                BufferedImage bufi = ImageIO.read(f);
+                ImageIcon ico = new ImageIcon(bufi);
+                ico.setImage(ico.getImage().getScaledInstance(329, 220, java.awt.Image.SCALE_SMOOTH));
+                botao.setIcon(ico);
+            } 
+            catch(Exception e) {
+               JOptionPane.showMessageDialog(null,"Erro ao tentar carregar o arquivo! Verifique se o arquivo selecionado é uma imagem.");
+            }
+     }
+    private void btnImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImgActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTutExcluirFotoActionPerformed
+    }//GEN-LAST:event_btnImgActionPerformed
+
+    private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nomeActionPerformed
+
+    private void arquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arquivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_arquivoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTutExcluirFoto;
-    private javax.swing.JButton btnTutFoto;
+    private javax.swing.JTextField arquivo;
+    private javax.swing.JButton btnImg;
     private javax.swing.JButton btnUserAdd;
     private javax.swing.JButton btnUserDelete;
     private javax.swing.JButton btnUserUpdate;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -610,9 +746,10 @@ Image icono;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblTutFoto;
+    private javax.swing.JTextField nome;
     private javax.swing.JTable tblTutores;
     private javax.swing.JTextField txtTutEmail;
     private javax.swing.JTextField txtTutFone;

@@ -28,16 +28,16 @@ class AlunoService
 
         if (strlen($a->getNomeAluno()) == 0 || strlen($a->getLogin()) == 0  || strlen($a->getSenha()) == 0  || strlen($a->getEmail()) == 0) {
             $error = true;
-            $_SESSION['errosCadastro'] = "Preencha todos os campos!";
+            $_SESSION['errosCadastro'] = "Todos os campos devem ser preenchidos!";
         } else if (substr_count($a->getEmail(), '@') != 1 || substr_count($a->getEmail(), '.') < 1 ||  substr_count($a->getEmail(), '.') == 0) {
             $error = true;
-            $_SESSION['errosCadastro'] =  "Informe um e-mail válido!";
+            $_SESSION['errosCadastro'] =  "Informe um e-mail válido! Exenplo: email@gmail.com";
         } else if (stristr($a->getSenha(), "'")) {
             $error = true;
-            $_SESSION['errosCadastro'] =  "Caractere ( ' ) inválido!";
+            $_SESSION['errosCadastro'] =  "O caractere ( ' ) é inválido!";
         } else if ($alunoDao->readByLogin($a->getLogin()) != null) {
             $error = true;
-            $_SESSION['errosCadastro'] =  "Login de usuário indisponível!";
+            $_SESSION['errosCadastro'] =  "Login de usuário indisponível! Por favor, escolha outro login";
         }
 
         return !$error;

@@ -12,7 +12,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/style.min.css">
 
+    <!-- My css -->
     <link rel="stylesheet" href="css/cadastro.css">
+
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
@@ -24,13 +26,10 @@
 
 </head>
 <body>
-<form accept-charset="utf-8" class="col-xl-8 col-lg-8 col-md-9 col-sm-11 col-11" action="functions/cadastrar.php" method="post" id="form">
+<form accept-charset="utf-8" class="col-xl-8 col-lg-8 col-md-9 col-sm-11 col-11" action="functions/cadastrar.php" method="post" id="formCadastro">
     <div id="header">
         <p>Sistema de Cadastro</p>
-        <a href="index.php">COTIL AMIGÁVEL</a>
-        <!-- <div style="left: 55%;top:30px;position:absolute;width: 45%;display: flex; align-items: center; color:rgba(6,53,70,1);font-family: 'Source Sans Pro', sans-serif;font-style: italic; font-size:17px; font-weight: 600;">
-        <span>Obs.: Todos os campos são obrigatórios e as informações poderão posteriormente ser alteradas no perfil</span>
-        </div>-->
+        <a class="nomeSite" href="index.php">Cotil Amigável</a>
     </div>
 
     <?php
@@ -44,14 +43,14 @@
 
     <div id="body" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="flex-row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-0">
-            <input  class="input col-lg-5 col-md-10 col-sm-11 col-11" placeholder="Informe seu nome completo" maxlength="50" type="text" id="nome" name="nome">
-            <input  class="input col-lg-5 col-md-10 col-sm-11 col-11" placeholder="Informe seu e-mail" maxlength="50" type="text" id="email" name="email">
+            <input  class="input col-lg-5 col-md-11 col-sm-11 col-11 hoverEfect" placeholder="Informe seu nome completo" maxlength="50" type="text" id="nome" name="nome">
+            <input  class="input col-lg-5 col-md-11 col-sm-11 col-11 hoverEfect" placeholder="Informe seu e-mail" maxlength="50" type="text" id="email" name="email">
         </div>
 
-        <div class="flex-row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-0 m-0" id="selects">
+        <div class="flex-row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-0 m-0 " id="selects">
 
-            <div class="col-lg-5 col-md-5 col-sm-11 col-11 p-0 m-0 ">
-                <select class="input" name="curso" id="curso" style="min-height:40px">
+            <div class="col-lg-5 col-md-5 col-sm-11 col-11 p-0 m-0  ">
+                <select class="input hoverEfect" name="curso" id="curso" style="min-height:40px">
                     <option value="Nenhum Curso">Nenhum Curso</option>
                     <option value="Informática">Informática</option>
                     <option value="Mecânica">Mecânica</option>
@@ -62,10 +61,10 @@
                 </select>
             </div>
 
-            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-0 col-0 p-0 m-0 display"></div>
+            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-0 col-0 p-0 m-0 "></div>
 
             <div class="col-lg-5 col-md-5 col-sm-11 col-11 p-0 m-0 ">
-                <select class="input" name="ano" id="ano" style="min-height:40px">
+                <select class="input hoverEfect" name="ano" id="ano" style="min-height:40px">
                     <option value="2020">Ingressei em 2020</option>
                     <option value="2019">Ingressei em 2019</option>
                     <option value="2018">Ingressei em 2018</option>
@@ -73,22 +72,19 @@
             </div>
         </div>
 
-            <div class="flex-row p-0  col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class=" col-xl-5 col-lg-5 col-md-10 col-sm-11 col-11  p-0 m-auto">
-                    <input  class="input col-lg-12" id="login" name="login" placeholder="Informe um login de usuário" maxlength="50" type="text">
+            <div class="flex-row p-0 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class=" col-xl-5 col-lg-5 col-md-11 col-sm-11 col-11  p-0 m-auto">
+                    <input  class="input col-lg-12 hoverEfect" id="login" name="login" placeholder="Informe um login de usuário" maxlength="50" type="text">
                 </div>
-                <div class="col-xl-5 col-lg-5 col-md-10 col-sm-11 col-11 p-0 m-auto">
-                    <input  class="input col-lg-12" id="senha" name="senha" maxlength="20" placeholder="Informe uma senha" type="password">
+                <div class="col-xl-5 col-lg-5 col-md-11 col-sm-11 col-11 p-0 m-auto">
+                    <input  class="input col-lg-12 hoverEfect" id="senha" name="senha" maxlength="20" placeholder="Informe uma senha" type="password">
                     <i class="fa fa-eye" id="olho" aria-hidden="true"></i>
                 </div>
             </div>
 
-        <input id="btn-submit" type="submit"  value="Cadastrar">
+        <input id="btn-cadastrar" type="submit"  value="Cadastrar">
+        <span class="possuiLogin"><a href="login.php">Já possui uma conta? Então efetue o login para ter acesso completo ao nosso site!</a></span>
     </div>
-
-    <div id="aviso2">
-        <span> <a href="login.php">Já possui uma conta? Então efetue o login para ter acesso completo ao nosso site!</a></span>
-    </div>    
 </form>
 
     <script src="js/cadastro.js"></script>

@@ -32,7 +32,7 @@ class EventoService {
                 echo'
                 <div class="post">
                 <div class="header_post">
-                    <img src="img/'.$row['image'].'" alt="img-card">
+                    <img src="img-eventos/'.$row['image'].'" alt="img-card">
                     <div id="data">'.$dataSplit[2].'<br> '.$meses[$dataSplit[1]].'</div>
                     <div id="triangulo-para-baixo"></div>
                 </div>
