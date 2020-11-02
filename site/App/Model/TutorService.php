@@ -100,8 +100,6 @@ class TutorService
 
     public static function renderizarInformacoes($id)
     {
-        //        require_once("functions/tabelaHorarios.php");
-
         $query = "SELECT `nometutor`, `descricao` FROM `tbtutor` WHERE `idtutor` = ?";
         $stmt = Connection::getConn()->prepare($query);
 
@@ -139,16 +137,16 @@ class TutorService
                     <div class='calendario' class='col-lg-4 col-md-4 col-sm-7 col-11'>";
         montaCalendario();
         echo "
-                    </div>
+                </div>
                     <form method='POST' action='agendamentoTutoria.php'>
                         <div class='linha'>
                             <span  class='col-lg-4 id='span-data'>Data selecionada:</span> 
-                            <input class='col-lg-4' type='text' name='data' disabled id='data-selecionada' value='" . $_GET["data"] . "'>
-                            <input class='col-lg-0' type='hidden' name='professor' value='" . $id . "'>
+                            <input class='col-lg-4' type='text' name='data' disabled id='data-selecionada' value='{$data}'>
+                            <input class='col-lg-0' type='hidden' name='professor' value='{$id}'>
                             <div class='col-lg-4'><input type='button' id='btn-agendar' value='Agendar Tutoria'></div>
                         </div>
                     </form>
-                    <form method='GET' action='" . $_SERVER['PHP_SELF'] . "'>
+                    <form method='GET' action='{$_SERVER['PHP_SELF']}'>
                         <input id='fakeData' type='hidden' name='data'>
                         <input id='idProf' type='hidden' name='id'>
                         <input id='submitFakeData' type='submit' hidden>

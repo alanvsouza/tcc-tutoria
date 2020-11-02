@@ -9,11 +9,9 @@ class AlunoService
         $alunoDao = new \App\Model\AlunoDAO();
         $result = $alunoDao->readByLogin($a->getLogin());
 
-        if ($result != null) :
-            if ($result["senha"] == $a->getSenha()) :
-                $_SESSION["usuario"] = $a->getLogin();
-                header('Location: ../index.php');
-            endif;
+        if ($result != null && $result["senha"] == $a->getSenha()) :
+            $_SESSION["usuario"] = $a->getLogin();
+            header('Location: ../index.php');
         else :
             $_SESSION["nao_autenticado"] = false;
             header('Location: ../login.php');
@@ -42,16 +40,16 @@ class AlunoService
 
         return !$error;
     }
-    
+
     public static function getFotoPerfil()
     {
         $usuario = $_SESSION['usuario'];
-        
-        if(isset($usuario)):        
+
+        if (isset($usuario)) :
             $alunoDao = new AlunoDAO();
             return $alunoDao->readFotoPerfilByLogin($usuario)['foto'];
-        endif;               
-        
+        endif;
+
         return null;
     }
 }

@@ -1,3 +1,5 @@
+<?php require_once('vendor/autoload.php') ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -36,8 +38,10 @@
         </div>
 
         <div class="content-wrapper">
-            <div class="card-novo">
-                <img src="img-galeria-eventos/evento4.jpg" class="card-novo__image">
+            <?php \App\Model\EventoService::renderizarGaleriaEventos() ?>
+
+            <!-- <div class="card-novo">
+                <img src="img-galeria-eventos/e vento4.jpg" class="card-novo__image">
                 <div class="card-novo__card-text">
                     <h2 class="card-novo__title">Evento 1</h2>
                     <div class="card-novo__card-date">29/02/2021</div>
@@ -66,6 +70,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <div class="card-novo">
                 <img src="img-galeria-eventos/evento5.jpg" alt="" class="card-novo__image">
@@ -213,7 +218,7 @@
                     </div>
                     <img src="img-galeria-eventos/evento9.jpg" class="fotos" id="img__galeria-fotos-7" alt="">
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </div>

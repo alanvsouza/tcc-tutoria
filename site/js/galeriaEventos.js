@@ -81,6 +81,8 @@ const nextFotoListener = function (e) {
 
 //abre o modal
 for (var i = 0; i < galeriaFotos.length; i++) {
+    console.log(galeriaFotos[i]);
+
     galeriaFotos[i].addEventListener("click", function (e) {
         e.preventDefault();
 
