@@ -59,8 +59,9 @@ class TutorService
                 );
 
             $descricao = $row["descricao"];
-            $materias = TutorService::getMateriasString($row['idtutor']) == null
-                ? "" : TutorService::getMateriasString($row['idtutor']);
+            $materias = $row["disciplinas"];
+            // $materias = TutorService::getMateriasString($row['idtutor']) == null
+            //     ? "" : TutorService::getMateriasString($row['idtutor']);
 
             if ($foto == null)
                 $foto = "defaultPicture.png";
@@ -83,20 +84,20 @@ class TutorService
         endfor;
     }
 
-    public static function renderizarLinksProfessores()
-    {
-        $tutorDao = new TutorDAO();
-        $tutores = $tutorDao->readAll();
+    // public static function renderizarLinksProfessores()
+    // {
+    //     $tutorDao = new TutorDAO();
+    //     $tutores = $tutorDao->readAll();
 
-        for ($i = 0; $i < sizeof($tutores); $i++) :
-            $row = $tutores[$i];
+    //     for ($i = 0; $i < sizeof($tutores); $i++) :
+    //         $row = $tutores[$i];
 
-            $nome = trim($row["nometutor"]);
-            $href = str_replace(" ", "-", $nome);
-            echo '<li class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-6"><a class="ancora" href="#' . $href . '">' . $nome . '</a></li>';
+    //         $nome = trim($row["nometutor"]);
+    //         $href = str_replace(" ", "-", $nome);
+    //         echo '<li class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-6"><a class="ancora" href="#' . $href . '">' . $nome . '</a></li>';
 
-        endfor;
-    }
+    //     endfor;
+    // }
 
     public static function renderizarInformacoes($id)
     {
@@ -166,33 +167,33 @@ class TutorService
         var_dump($horarios);
     }
 
-    public static function getMateriasString($id)
-    {
-        $tutorDao = new TutorDAO();
-        $materias = $tutorDao->readMaterias($id);
+    //     public static function getMateriasString($id)
+    //     {
+    //         $tutorDao = new TutorDAO();
+    //         $materias = $tutorDao->readMaterias($id);
 
-        if ($materias == null)
-            return null;
+    //         if ($materias == null)
+    //             return null;
 
-        $resultString = "";
+    //         $resultString = "";
 
 
-        $index = 0;
-        foreach ($materias as $materia) {
-            $resultString .= $materia["nome"];
+    //         $index = 0;
+    //         foreach ($materias as $materia) {
+    //             $resultString .= $materia["nome"];
 
-            $existeProxIndex = isset($materias[$index + 1]);
-            $proxIndexUltimo = $index + 1 == count($materias) - 1;
+    //             $existeProxIndex = isset($materias[$index + 1]);
+    //             $proxIndexUltimo = $index + 1 == count($materias) - 1;
 
-            if ($existeProxIndex && $proxIndexUltimo) {
-                $resultString .= " e ";
-            } else if ($existeProxIndex) {
-                $resultString .= ", ";
-            }
+    //             if ($existeProxIndex && $proxIndexUltimo) {
+    //                 $resultString .= " e ";
+    //             } else if ($existeProxIndex) {
+    //                 $resultString .= ", ";
+    //             }
 
-            $index++;
-        }
+    //             $index++;
+    //         }
 
-        return $resultString;
-    }
+    //         return $resultString;
+    //     }
 }
