@@ -1,5 +1,6 @@
 package br.com.infox.telas;
 
+import br.com.infox.classes.documentoLimitado;
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
 import java.awt.Color;
@@ -18,10 +19,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 //a linha abaio importa recursos da biblioteca rs2xml.jar
 import net.proteanit.sql.DbUtils;
 
@@ -29,11 +27,25 @@ public class TelaEventos extends javax.swing.JInternalFrame {
 Connection conexao = null;
 PreparedStatement pst = null;
 ResultSet rs = null;
+
+String nomeEvento = "";
 Image icono;
 String nomeImagem = "";
+boolean camposObrigatorios = false;
+
+
 
     public TelaEventos() {
         initComponents();
+        //Colocando um máximo de caracteres para os campos
+        txtEvtNome.setDocument( new documentoLimitado(60));
+        txtEvtData.setDocument( new documentoLimitado(10));
+        txtEvtInicio.setDocument( new documentoLimitado(5));
+        txtEvtTermino.setDocument( new documentoLimitado(5));
+        taEvtDescricao.setDocument( new documentoLimitado(218));
+        txtEvtLocal.setDocument( new documentoLimitado(50));
+        nome.setDocument( new documentoLimitado(120));
+
         btnAdicionar.setBackground(new Color (0,0,0,0));
         btnAtualizar.setBackground(new Color (0,0,0,0));
         btnRemover.setBackground(new Color (0,0,0,0));
@@ -69,31 +81,45 @@ String nomeImagem = "";
     }
     
      private void adicionarEvento(){
-         
-        String sql = "insert into tbeventos (nome,dataevento,inicio,termino,descricao,localevento,caminhoImg,image) values(?,?,?,?,?,?,?,?)";
-        try {
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1,txtEvtNome.getText());
-            pst.setString(2,txtEvtData.getText().replace("/","-"));
-            pst.setString(3,txtEvtInicio.getText());
-            pst.setString(4,txtEvtTermino.getText());
-            pst.setString(5,taEvtDescricao.getText());
-            pst.setString(6,txtEvtLocal.getText());
-            pst.setString(7,arquivo.getText());
-            pst.setString(8,nome.getText() + ".jpg");
-            
-            int verificarCampos = camposObrigatorios();
-            
-            if (verificarCampos != 1){
-                JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!");
+        try {            
+            boolean verificarCampos = verificarCamposEvento();
+            if (verificarCampos != true || txtEvtId.getText().isEmpty() == false){
+               if(!txtEvtId.getText().isEmpty()) JOptionPane.showMessageDialog(null, "É necessáio limpar os campos antes de criar um novo evento!");
+               else if(camposObrigatorios){ 
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!"); 
+                camposObrigatorios = false;
+               }
             }else{
-                int adicionado =  pst.executeUpdate();
-                if(adicionado > 0){
-                    JOptionPane.showMessageDialog(null,"Evento cadastrado com sucesso!");
-                    pesquisar_evento();
-                    copiarImagem();
-                    clear();
-                }
+                    nomeImagem = nome.getText();
+                    boolean verificarImg = consultarImagem();
+                    int verificar = 0;
+                    
+                    if(verificarImg){
+                        verificar = JOptionPane.showConfirmDialog(null,"Já existe uma imagem cadastrada com esse nome. Deseja sobrescrevê-la com a nova imagem?","AVISO",JOptionPane.YES_NO_OPTION);}
+                            //Deleta a antiga imagem e a imagem com o nome atual
+                            
+                            if(verificar == 0){
+                                deletarImagem();
+                                copiarImagem();
+                                
+                                String sql = "insert into tbeventos (nome,dataevento,inicio,termino,descricao,localevento,caminhoImg,image) values(?,?,?,?,?,?,?,?)";
+                                pst = conexao.prepareStatement(sql);
+                                pst.setString(1,nomeEvento);
+                                pst.setString(2,txtEvtData.getText().replace("-","/"));
+                                pst.setString(3,txtEvtInicio.getText());
+                                pst.setString(4,txtEvtTermino.getText());
+                                pst.setString(5,taEvtDescricao.getText());
+                                pst.setString(6,txtEvtLocal.getText());
+                                pst.setString(7,"C:\\xampp\\htdocs\\myTCC\\site\\img-eventos\\" + nome.getText().replace(".jpg","").replace(".png","") + ".jpg");
+                                pst.setString(8,nome.getText() + ".jpg");
+                            int adicionado =  pst.executeUpdate();
+
+                            if(adicionado > 0){
+                                JOptionPane.showMessageDialog(null,"Evento cadastrado com sucesso!");
+                                pesquisar_evento();
+                                clear();
+                            }
+                        }
             }
         } catch (Exception e) {
            JOptionPane.showMessageDialog(null,"Erro ao tentar inserir evento!");
@@ -101,52 +127,152 @@ String nomeImagem = "";
     }
     
      private void alterarEvento(){
-     String sql = "update tbeventos set nome=?,inicio=?,termino=?,dataevento=?,descricao=?,localevento=?,image=?,caminhoImg=? where idevento=?";
         try {
-            int verificarCampos = camposObrigatorios();
-                if (verificarCampos != 1 || txtEvtId.getText().isEmpty() == true){
+            boolean verificarCampos = verificarCamposEvento();
+                if (verificarCampos != true || txtEvtId.getText().isEmpty() == true){
                     if(txtEvtId.getText().isEmpty() == true) JOptionPane.showMessageDialog(null,"Selecione um evento para atualizar!");
-                    else JOptionPane.showMessageDialog(null,"Preencha todos os campos obrigatórios!");
+                    else if(camposObrigatorios){ 
+                        camposObrigatorios = false;
+                        JOptionPane.showMessageDialog(null,"Preencha todos os campos obrigatórios!");
+                    }
                 }else{
-                    nomeImagem = nome.getText();
-                    boolean verificarImg = consultarImagem();
-                    int verificar = 0;
-                    
-                    if(verificarImg){
-                    verificar = JOptionPane.showConfirmDialog(null,"Já existe uma imagem cadastrada com esse nome. Deseja sobrescrevê-la com a nova imagem?","AVISO",JOptionPane.YES_NO_OPTION);}
-                    
-                    if(verificar == 0){
-                    //Deleta a imagem que tem o mesmo nome da atual
-                    deletarImagem();
-                        
-                        pst = conexao.prepareStatement(sql);
-                        pst.setString(1,txtEvtNome.getText());
-                        pst.setString(2,txtEvtInicio.getText());
-                        pst.setString(3,txtEvtTermino.getText());
-                        pst.setString(4,txtEvtData.getText().replace("/","-"));
-                        pst.setString(5,taEvtDescricao.getText());
-                        pst.setString(6,txtEvtLocal.getText());
-                        pst.setString(7,nome.getText() + ".jpg");
-                        pst.setString(8,"C:\\xampp\\htdocs\\myTCC\\site\\img-eventos\\" + nome.getText().replace(".jpg","").replace(".png","") + ".jpg");
-                        pst.setString(9,txtEvtId.getText());
+                        nomeImagem = nome.getText();
+                        boolean verificarImg = consultarImagem();
+                        int verificar = 0;
 
-                        int adicionado = pst.executeUpdate();
-                        if (adicionado > 0){
-                            JOptionPane.showMessageDialog(null,"Dados do evento alterados com sucesso!");
-                            copiarImagem();
-                            pesquisar_evento();
-                            clear();
-                        }else{
-                        JOptionPane.showMessageDialog(null,"Evento não encontrado! Selecione um evento na tabela.");
-                        }
-                     }
+                        if(verificarImg){
+                        verificar = JOptionPane.showConfirmDialog(null,"Já existe uma imagem cadastrada com esse nome. Deseja sobrescrevê-la com a nova imagem?","AVISO",JOptionPane.YES_NO_OPTION);}
+
+                        if(verificar == 0){
+
+                            String sql = "update tbeventos set nome=?,inicio=?,termino=?,dataevento=?,descricao=?,localevento=?,image=?,caminhoImg=? where idevento=?";
+                            pst = conexao.prepareStatement(sql);
+                            pst.setString(1,txtEvtNome.getText());
+                            pst.setString(2,txtEvtInicio.getText());
+                            pst.setString(3,txtEvtTermino.getText());
+                            pst.setString(4,txtEvtData.getText().replace("-","/"));
+                            pst.setString(5,taEvtDescricao.getText());
+                            pst.setString(6,txtEvtLocal.getText());
+                            pst.setString(7,nome.getText() + ".jpg");
+                            pst.setString(8,"C:\\xampp\\htdocs\\myTCC\\site\\img-eventos\\" + nome.getText().replace(".jpg","").replace(".png","") + ".jpg");
+                            pst.setString(9,txtEvtId.getText());
+
+                            int adicionado = pst.executeUpdate();
+                            if (adicionado > 0){
+                                JOptionPane.showMessageDialog(null,"Dados do evento alterados com sucesso!");
+                                pesquisar_evento();
+                                clear();
+                                
+                                if(!arquivo.getText().equals("C:\\xampp\\htdocs\\myTCC\\site\\img-eventos\\" + nome.getText().replace(".jpg","").replace(".png","") + ".jpg")){
+                                    deletarImagem();
+                                    copiarImagem();   
+                                }  
+                            }else{
+                            JOptionPane.showMessageDialog(null,"Evento não encontrado! Selecione um evento na tabela.");
+                            }
+                         }
                 }
         } catch (Exception e){
-            JOptionPane.showMessageDialog(null,"Falha ao tentar atualizar evento!");
+            JOptionPane.showMessageDialog(null,e);
         }
     }
+
+    private void deletarEvento(){
+    boolean verificarCampos = verificarCamposEvento();
+    if (verificarCampos == true || txtEvtId.getText().isEmpty() == false){
+        int verificar = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja excluir este evento?","AVISO",JOptionPane.YES_NO_OPTION);
+            if(verificar == JOptionPane.YES_OPTION){
+               String sql= "delete from tbeventos where idevento=?";
+                    try{
+                         deletarImagem();
+                         pst = conexao.prepareStatement(sql);
+                         pst.setString(1, txtEvtId.getText());
+                         int apagado = pst.executeUpdate();
+                            if (apagado > 0) {
+                                JOptionPane.showMessageDialog(null,"Evento apagado com sucesso!");
+                                pesquisar_evento();
+                                clear();
+                            } 
+                    } catch (Exception e){
+                        JOptionPane.showMessageDialog(null,"Falha ao tentar remover evento!");
+                    }
+                 }   
+        }else {
+            if(txtEvtId.getText().isEmpty() == true)JOptionPane.showMessageDialog(null,"Selecione um evento para excluir!!"); 
+            else if(camposObrigatorios){ 
+                camposObrigatorios = false;
+                JOptionPane.showMessageDialog(null,"Preencha todos os campos obrigatórios!");}
+        }
+    }
+
+     private void clear(){
+        txtEvtNome.setText(null);
+        txtEvtData.setText(null);
+        txtEvtInicio.setText(null);
+        txtEvtTermino.setText(null);
+        txtEvtLocal.setText(null);
+        txtEvtId.setText(null);
+        taEvtDescricao.setText(null);
+        btnImg.setIcon(null);
+        nome.setText(null);
+        arquivo.setText(null);
+        txtEvtPesquisar.setText(null);
+        nomeImagem = "";
+     }
+   
+    private boolean verificarCamposEvento(){
+         if (txtEvtNome.getText().isEmpty() || txtEvtData.getText().isEmpty() || txtEvtTermino.getText().isEmpty() || txtEvtInicio.getText().isEmpty() || txtEvtLocal.getText().isEmpty() || arquivo.getText().isEmpty() || nome.getText().isEmpty()){ 
+             camposObrigatorios = true;
+             return false;}
+         else{
+            int count = 0;
+            char caractere = ' ';
+            
+            //Nome do evento
+            nomeEvento = txtEvtNome.getText().trim();
+            String[] partes = nomeEvento.split(" ");
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < partes.length; i++) {
+                String word = partes[i];
+                word = word.substring(0, 1).toUpperCase() + word.substring(1);
+                sb.append(" ").append(word);
+            }
+            nomeEvento = sb.toString().replaceFirst(" ", "");
+            
+            //Data do evento
+            String dataEvento = txtEvtData.getText().replace("/","-"); //<= formatar a data
+            
+            if(dataEvento.length() < 10){
+                JOptionPane.showMessageDialog(null,"O campo de DATA do evento deve ter 10 caracteres e deve estar no seguinte formato: dd/MM/yyyy");
+                return false;
+            }
+            
+            for(int i = 0; i < dataEvento.length(); i++){
+               caractere = dataEvento.charAt(i);
+               if(caractere == '-') count++;
+            }
+ 
+            if(count != 2){
+                JOptionPane.showMessageDialog(null,"O campo de DATA do evento deve ter 2 caracteres de barra (/) como no seguinte exemplo: 12/12/2020");
+                return false;
+            }
+            
+            //Início e término
+            if(txtEvtInicio.getText().length() != 5){
+                JOptionPane.showMessageDialog(null,"O campo de INÍCIO deve ter 5 caracteres e deve estar no seguinte formato: hh:mm. Exemplo: 12:10");
+                return false;
+            }
+            
+             if(txtEvtTermino.getText().length() != 5){
+                JOptionPane.showMessageDialog(null,"O campo de TÉRMINO deve ter 5 caracteres e deve estar no seguinte formato: hh:mm. Exemplo: 13:05");
+                return false;
+            }
+
+            return true;
+         }
+     }
      
-        public boolean consultarImagem(){
+     private boolean consultarImagem(){
          String sql = "select image from tbeventos";
             try{
                 pst = conexao.prepareStatement(sql);
@@ -163,7 +289,7 @@ String nomeImagem = "";
             return false;
          }
      
-        public void deletarImagem(){
+        private void deletarImagem(){
             String sql = "select caminhoImg from tbeventos where idevento=?";
 
             try{
@@ -180,7 +306,7 @@ String nomeImagem = "";
             }
         }
         
-        public void copiarImagem(){
+        private void copiarImagem(){
                          
             FileInputStream origem = null;
             FileOutputStream destino = null;
@@ -218,51 +344,6 @@ String nomeImagem = "";
                 }
      }
      
-    private void deletarEvento(){
-    String sql= "delete from tbeventos where idevento=?";
-    int verificar = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja excluir este evento?","AVISO",JOptionPane.YES_NO_OPTION);
-    int camposObritagotrios = camposObrigatorios();
-        if(verificar == JOptionPane.YES_OPTION){
-            if (camposObritagotrios == 1){
-            try{
-                pst = conexao.prepareStatement(sql);
-                pst.setString(1, txtEvtId.getText());
-                int apagado = pst.executeUpdate();
-                  if (apagado > 0) {
-                      JOptionPane.showMessageDialog(null,"Evento apagado com sucesso!");
-                      pesquisar_evento();
-                      clear();
-                  } 
-            } catch (Exception e){
-                JOptionPane.showMessageDialog(null,"Falha ao tentar remover evento!");
-            }
-          }
-          else{
-            JOptionPane.showMessageDialog(null,"Preencha todos os campos obrigatórios!");
-          }
-       }
-    }
-
-     private void clear(){
-        txtEvtNome.setText(null);
-        txtEvtData.setText(null);
-        txtEvtInicio.setText(null);
-        txtEvtTermino.setText(null);
-        txtEvtLocal.setText(null);
-        txtEvtId.setText(null);
-        taEvtDescricao.setText(null);
-        btnImg.setIcon(null);
-        nome.setText(null);
-        arquivo.setText(null);
-        nomeImagem = "";
-     }
-   
-     private int camposObrigatorios(){
-         if (txtEvtNome.getText().isEmpty() || txtEvtData.getText().isEmpty() || txtEvtTermino.getText().isEmpty() || txtEvtInicio.getText().isEmpty() || txtEvtLocal.getText().isEmpty() || arquivo.getText().isEmpty() || nome.getText().isEmpty()) 
-            return 0;
-          else 
-            return 1;
-     }
      
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
