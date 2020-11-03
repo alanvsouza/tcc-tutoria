@@ -31,6 +31,31 @@ include("functions/acesso.php");
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
+    <style>
+        table#horarios-professor,
+        td#horarios-professor,
+        th#horarios-professor {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        table#horarios-professor {
+            text-align: center;
+        }
+
+        td#horarios-professor {
+            padding: 0;
+        }
+
+        table#horarios-professor button[type="submit"] {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: orange;
+            color: white;
+        }
+    </style>
+
 </head>
 
 <body>

@@ -1,6 +1,7 @@
 Todo:
   ✔ Arrumar o login @done(20-11-01 20:47)
   ✔ Deixar dinâmica a galeria de eventos @done(20-11-01 22:05)
+  ☐ Mostrar horários na tela
   ☐ Implementar o agendamento de tutorias
   ☐ Implementar o envio de email:
     ☐ 1 dia antes para tutorias
