@@ -4,13 +4,14 @@ namespace App\Model;
 
 class AlunoService
 {
-    public static function login($a)
+    public static function login(\App\Model\Aluno $a)
     {
         $alunoDao = new \App\Model\AlunoDAO();
         $result = $alunoDao->readByLogin($a->getLogin());
 
         if ($result != null && $result["senha"] == $a->getSenha()) :
             $_SESSION["usuario"] = $a->getLogin();
+            $_SESSION["idUsuario"] = $result["idaluno"];
             header('Location: ../index.php');
         else :
             $_SESSION["nao_autenticado"] = false;

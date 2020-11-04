@@ -141,14 +141,56 @@ class TutorService
             </div>        
         </div>";
 
+        if (isset($data))
+            TutorService::renderizarTabelaHorarios($id, $data);
+
         unset($_GET["data"]);
     }
 
-    public static function renderizarTabelaHorarios($id)
+    public static function renderizarTabelaHorarios($idTutor, $data)
     {
-        $tutorDao = new TutorDAO();
-        $horarios = $tutorDao->readHorariosDiaById($id);
+        $dataFormatada = date_create(strtr($data, array('/' => '-')));
+        $dia = date_format($dataFormatada, 'N');
 
-        var_dump($horarios);
+        $tutorDao = new TutorDAO();
+        $horarios = $tutorDao->readHorariosDiaById($idTutor, $dia);
+
+        $idUsuario = $_SESSION['idUsuario'];
+
+
+        if ($horarios) :
+            echo
+                "<table style='position: absolute; margin-left: 40%; margin-top: 15%;' id='horarios-professor'>
+                    <tr>                    
+                        <th>Horário</th>
+                        <th>Agendar</th>
+                    </tr>";
+
+            foreach ($horarios as $horario) :
+                $idHorario = $horario['idhorario'];
+                $horario = $horario['horarios'];
+
+                echo
+                    "<tr>                    
+                        <td>{$horario}</td>
+                        <td>
+                            <form method='POST' action='functions/agendarTutoria.php'>
+                                <input type='hidden' name='idUser' value='{$idUsuario}' />
+                                <input type='hidden' name='data' value='{$data}' />
+                                <input type='hidden' name='idHorario' value='{$idHorario}'>
+                                <input type='hidden' name='idTutor' value='{$idTutor}' />
+                                <button type='submit'>✓</button>
+                            </form>
+                        </td>
+                    </tr>";
+            endforeach;
+        else :
+            echo "<span style='position: absolute; margin-left: 40%; margin-top: 15%; color: red;'>não existem horários cadastrados!</span>";
+        endif;
+
+
+        echo "</table>";
+
+        // echo '<pre>' . var_export($horarios, true) . '</pre>';
     }
 }
