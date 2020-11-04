@@ -46,7 +46,7 @@ public void logar(){
             }
         }
         catch(Exception e){
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "Falha ao tentar se conecectar com a base de dados!");
         }
         
         //System.out.println(conexao);

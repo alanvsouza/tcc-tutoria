@@ -21,7 +21,7 @@ class EventoDAO
 
     public function readAllFromToday()
     {
-        $query = "SELECT * FROM tbeventos WHERE DATE_FORMAT(NOW(), '%Y-%m-%d') <= dataevento;";
+        $query = "SELECT * FROM tbeventos WHERE DATE_FORMAT(NOW(), '%Y/%m/%d') <= dataevento;";
         $stmt = Connection::getConn()->prepare($query);
 
         $stmt->execute();

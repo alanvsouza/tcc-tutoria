@@ -1,29 +1,14 @@
 package br.com.infox.telas;
 
-import br.com.infox.classes.documentoLimitado;
+import br.com.infox.classes.Tutor;
+import br.com.infox.classes.LimitarCampos;
+import br.com.infox.classes.Imagem;
 import java.awt.Color;
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
-import java.awt.FileDialog;
-import java.awt.Frame;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.channels.FileChannel;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
-import javax.swing.event.DocumentEvent;
+import javax.swing.JTextField;
 import net.proteanit.sql.DbUtils;
 
 public class TelaTutor extends javax.swing.JInternalFrame {
@@ -31,60 +16,42 @@ Connection conexao = null;
 PreparedStatement pst = null;
 ResultSet rs = null;
 
-Image icono;
 String origem = "";
 String nomeImagem = "";
 boolean camposObrigatorios = false;
+
+Tutor tutor = new Tutor();
+Imagem img = new Imagem();
  
     public TelaTutor() {
         initComponents();
-        txtTutNome.setDocument(new documentoLimitado(80));
-        txtTutEmail.setDocument(new documentoLimitado(60));
-        txtTutLogin.setDocument(new documentoLimitado(30));
-        txtTutSenha.setDocument(new documentoLimitado(15));
-        txtTutFone.setDocument( new documentoLimitado(20));
-        taTutDescricao.setDocument( new documentoLimitado(600));
-        txtTutDisciplinas.setDocument( new documentoLimitado(150));
+        txtTutNome.setDocument(new LimitarCampos(80));
+        txtTutEmail.setDocument(new LimitarCampos(60));
+        txtTutLogin.setDocument(new LimitarCampos(30));
+        txtTutSenha.setDocument(new LimitarCampos(15));
+        txtTutFone.setDocument(new LimitarCampos(20));
+        taTutDescricao.setDocument(new LimitarCampos(600));
+        txtTutDisciplinas.setDocument(new LimitarCampos(150));
+        
         arquivo.setVisible(false);
         lblArquivo.setVisible(false);
         btnUserAdd.setBackground(new Color (0,0,0,0));
         btnUserUpdate.setBackground(new Color (0,0,0,0));
         btnUserDelete.setBackground(new Color (0,0,0,0)); 
+        
         conexao = ModuloConexao.conector();
     }
     
     private void pesquisar_tutor(){
-        String sql = "select nometutor as Nome, descricao as Descrição,login as Login, senha as Senha, email as Email, telefone as Telefone, disciplinas as Disciplinas,foto as Foto, caminhoFoto as Caminho,idtutor as ID, facebook as Facebook, instagram as Instagram, linkedin as LinkedIn, twitter as Twitter, youtube as Youtube from tbtutor where nometutor like ?";
-        try {
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1, txtTutPesquisar.getText()+"%");
-            rs = pst.executeQuery();
-           
-            tblTutores.setModel(DbUtils.resultSetToTableModel(rs));
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }
-    
+        tutor.pesquisarTutor("select nometutor as Nome, descricao as Descrição,login as Login, senha as Senha, email as Email, telefone as Telefone, foto as Foto, disciplinas as Disciplinas, caminhoFoto as Caminho,idtutor as ID, facebook as Facebook, instagram as Instagram, linkedin as LinkedIn, twitter as Twitter, youtube as Youtube from tbtutor where nometutor like ?", tblTutores, txtTutPesquisar);
     }
     
     private void setar_campos(){
         int setar = tblTutores.getSelectedRow();
-        txtTutNome.setText(tblTutores.getModel().getValueAt(setar, 0).toString());
-        taTutDescricao.setText(tblTutores.getModel().getValueAt(setar, 1).toString());
-        txtTutLogin.setText(tblTutores.getModel().getValueAt(setar, 2).toString());
-        txtTutSenha.setText(tblTutores.getModel().getValueAt(setar, 3).toString());
-        txtTutEmail.setText(tblTutores.getModel().getValueAt(setar, 4).toString());
-        txtTutFone.setText(tblTutores.getModel().getValueAt(setar, 5).toString());
-        txtTutDisciplinas.setText(tblTutores.getModel().getValueAt(setar, 6).toString());
-        nome.setText(tblTutores.getModel().getValueAt(setar,7).toString().replace(".jpg","").replace(".png",""));
-        arquivo.setText(tblTutores.getModel().getValueAt(setar,8).toString());
-        txtTutId.setText(tblTutores.getModel().getValueAt(setar, 9).toString());       
-        txtFacebook.setText(tblTutores.getModel().getValueAt(setar, 10).toString());
-        txtInstagram.setText(tblTutores.getModel().getValueAt(setar, 11).toString());
-        txtLinkedin.setText(tblTutores.getModel().getValueAt(setar, 12).toString());
-        txtTwitter.setText(tblTutores.getModel().getValueAt(setar, 13).toString());
-        txtYoutube.setText(tblTutores.getModel().getValueAt(setar, 14).toString());
-        carregaImagem(btnImg, tblTutores.getModel().getValueAt(setar,8).toString());
+        JTextField[] camposTutor = {txtTutNome,null,txtTutLogin,txtTutSenha,txtTutEmail,txtTutFone,nome,txtTutDisciplinas,arquivo,txtTutId,txtFacebook,
+        txtInstagram,txtLinkedin,txtTwitter,txtYoutube};
+        tutor.setCamposTutor(tblTutores,camposTutor,taTutDescricao);
+        img.carregaImagem(btnImg, tblTutores.getModel().getValueAt(setar,8).toString(),225,180);
     }
     
     private void adicionar(){
@@ -98,15 +65,15 @@ boolean camposObrigatorios = false;
                 }
             }else{
                 nomeImagem = nome.getText();
-                boolean verificarImg = consultarImagem();
+                boolean verificarImg = img.consultarImagem("select foto from tbtutor", nomeImagem, ".png");
                 int verificar = 0;
                 
                 if(verificarImg){
                     verificar = JOptionPane.showConfirmDialog(null,"Já existe uma imagem cadastrada com esse nome. Deseja sobrescrevê-la com a nova imagem?","AVISO",JOptionPane.YES_NO_OPTION);
                 }
                 if(verificar == 0){
-                    deletarImagem();
-                    copiarImagem();
+                    img.deletarImagem("select caminhoFoto from tbtutor where idtutor=?", txtTutId.getText(),"Falha ao tentar excluir a imagem");
+                    img.copiarImagem("br.com.infox.telas.TelaTutor",arquivo.getText(),"C:\\\\xampp\\\\htdocs\\\\myTCC\\\\site\\\\img-professores\\\\",nome.getText(),".png");
                     
                     String sql = "insert into tbtutor (nometutor,login,senha,email,telefone,foto,caminhoFoto,facebook,linkedin,instagram,twitter,youtube,descricao,disciplinas) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                     pst = conexao.prepareStatement(sql);
@@ -115,7 +82,7 @@ boolean camposObrigatorios = false;
                     pst.setString(3,txtTutSenha.getText().trim());
                     pst.setString(4,txtTutEmail.getText().trim());
                     pst.setString(5,txtTutFone.getText().trim());
-                    pst.setString(6,nome.getText().trim() + ".png");
+                    pst.setString(6,nome.getText().replace(".jpg","").replace(".png","").trim() + ".png");
                     pst.setString(7,"C:\\xampp\\htdocs\\myTCC\\site\\img-eventos\\" + nome.getText().trim().replace(".jpg","").replace(".png","") + ".png");
                     pst.setString(8,txtFacebook.getText().trim());
                     pst.setString(9,txtLinkedin.getText().trim());
@@ -151,7 +118,7 @@ boolean camposObrigatorios = false;
                     }
                 }else{
                     nomeImagem = nome.getText();
-                    boolean verificarImg = consultarImagem();
+                    boolean verificarImg = img.consultarImagem("select foto from tbtutor", nomeImagem, ".png");
                     int verificar = 0;
                     
                     if(verificarImg){
@@ -160,8 +127,8 @@ boolean camposObrigatorios = false;
                     
                     if(verificar == 0){
                         if(!arquivo.getText().equals("C:\\xampp\\htdocs\\myTCC\\site\\img-professores\\" + nome.getText().replace(".jpg","").replace(".png","") + ".png")){
-                            deletarImagem();
-                            copiarImagem();   
+                            img.deletarImagem("select caminhoFoto from tbtutor where idtutor=?", txtTutId.getText(),"Falha ao tentar excluir a imagem");
+                            img.copiarImagem("br.com.infox.telas.TelaTutor",arquivo.getText(),"C:\\\\xampp\\\\htdocs\\\\myTCC\\\\site\\\\img-professores\\\\",nome.getText(),".png");
                         }
                         
                         String sql = "update tbtutor set nometutor=?,login=?,senha=?,email=?,telefone=?,foto=?,caminhoFoto=?,facebook=?,instagram=?,twitter=?,linkedin=?,youtube=?,descricao=?,disciplinas=? where idtutor=?";
@@ -171,7 +138,7 @@ boolean camposObrigatorios = false;
                         pst.setString(3,txtTutSenha.getText().trim());
                         pst.setString(4,txtTutEmail.getText().trim());
                         pst.setString(5,txtTutFone.getText().trim());
-                        pst.setString(6,nome.getText().trim() + ".png");
+                        pst.setString(6,nome.getText().replace(".jpg","").replace(".png","").trim() + ".png");
                         pst.setString(7,"C:\\xampp\\htdocs\\myTCC\\site\\img-professores\\" + nome.getText().replace(".jpg","").replace(".png","") + ".png");
                         pst.setString(8,txtFacebook.getText().trim());
                         pst.setString(9,txtInstagram.getText().trim());
@@ -204,7 +171,7 @@ boolean camposObrigatorios = false;
             if(confirmar == JOptionPane.YES_OPTION){
                 String sql = "delete from tbtutor where idtutor=?";
                         try {
-                            deletarImagem();
+                            img.deletarImagem("select caminhoFoto from tbtutor where idtutor=?", txtTutId.getText(),"Falha ao tentar excluir a imagem");
                             pst = conexao.prepareStatement(sql);
                             pst.setString(1,txtTutId.getText());
                             int apagado =  pst.executeUpdate();
@@ -216,7 +183,7 @@ boolean camposObrigatorios = false;
                                    JOptionPane.showMessageDialog(null,"Tutor não encontrado! Exclusão não realizada!"); 
                                 }
                         } catch (Exception e) {
-                         JOptionPane.showMessageDialog(null,"Erro ao tentar remover tutor!");
+                         JOptionPane.showMessageDialog(null,e);
                         } 
             }
         }
@@ -230,127 +197,25 @@ boolean camposObrigatorios = false;
     }
     
     private void clear(){
-        txtTutNome.setText(null);
-        txtTutLogin.setText(null);
-        txtTutSenha.setText(null);
-        txtTutFone.setText(null);
-        txtTutEmail.setText(null);
-        txtTutId.setText(null);
-        taTutDescricao.setText(null);
-        txtTutDisciplinas.setText(null);
-        btnImg.setIcon(null);
-        nome.setText(null);
-        arquivo.setText(null);
-        txtFacebook.setText(null);
-        txtInstagram.setText(null);
-        txtTwitter.setText(null);
-        txtLinkedin.setText(null);
-        txtYoutube.setText(null);;
-        cbFacebook.setSelected(false);
-        cbInstagram.setSelected(false);
-        cbTwitter.setSelected(false);
-        cbLinkedin.setSelected(false);
-        cbYoutube.setSelected(false);
+        JTextField[] campos = {txtTutNome,txtTutLogin,txtTutEmail,txtTutSenha,txtTutFone,txtTutId,txtTutDisciplinas,nome,arquivo,
+        txtFacebook,txtInstagram,txtTwitter,txtLinkedin,txtYoutube};
+        JCheckBox[] cb = {cbFacebook,cbInstagram,cbTwitter,cbLinkedin,cbYoutube};
+        tutor.clearCamposTutor(campos, taTutDescricao, btnImg, cb);
         nomeImagem = "";
     }
     
     private boolean verificarCamposTutor(){
-         if (txtTutEmail.getText().isEmpty() || txtTutNome.getText().isEmpty()  || txtTutLogin.getText().isEmpty() || txtTutSenha.getText().isEmpty() || arquivo.getText().isEmpty() || nome.getText().isEmpty() || txtTutDisciplinas.getText().isEmpty() || taTutDescricao.getText().isEmpty()){
-             camposObrigatorios = true;
+        String[] camposObri = {txtTutEmail.getText(),txtTutNome.getText(),txtTutLogin.getText(),txtTutSenha.getText(),
+        nome.getText(),txtTutDisciplinas.getText(),arquivo.getText(),taTutDescricao.getText()};
+        
+        int verificacao = tutor.verificarCamposTutor(camposObri, txtTutEmail.getText(), txtTutFone.getText());
+        
+         if (verificacao == 1 || verificacao == 2){ 
+             if(verificacao == 1) camposObrigatorios = true;
              return false;
-         }else{
-            //E-mail
-                String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-                Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-                Matcher matcher = pattern.matcher(txtTutEmail.getText());
-                if (!matcher.matches()) {
-                    JOptionPane.showMessageDialog(null,"O formato de e-mail é inválido!");
-                    return false;
-                }
-            //Telefone
-                String expression2 = "(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})";
-                Pattern pattern2 = Pattern.compile(expression2, Pattern.CASE_INSENSITIVE);
-                Matcher matcher2 = pattern2.matcher(txtTutFone.getText());
-                if (!matcher2.matches()) {
-                    JOptionPane.showMessageDialog(null,"O formato do telefone é inválido!");
-                    return false;
-                }
          }
         return true;
     }
- 
-    public boolean consultarImagem(){
-         String sql = "select foto from tbtutor";
-            try{
-                pst = conexao.prepareStatement(sql);
-                rs = pst.executeQuery();
-
-                while(rs.next()){
-                    if(rs.getString(1).equals(nomeImagem + ".png")){
-                        return true;
-                    }
-                }
-            }catch(Exception e){
-                System.out.println(e);
-            }
-            return false;
-         }
-     
-        public void deletarImagem(){
-            String sql = "select caminhoFoto from tbtutor where idtutor=?";
-
-            try{
-             pst = conexao.prepareStatement(sql);
-             pst.setString(1,txtTutId.getText());
-             rs = pst.executeQuery();
-                    if(rs.next()){
-                        File imagem = new File(rs.getString(1));
-                        imagem.delete();
-                    }
-            }
-            catch (Exception e){
-                JOptionPane.showMessageDialog(null,e);
-            }
-        }
-        
-        public void copiarImagem(){
-                         
-            FileInputStream origem = null;
-            FileOutputStream destino = null;
-            FileChannel fcOrigem;
-            FileChannel fcDestino;
-
-            try {
-                origem = new FileInputStream(arquivo.getText());
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(TelaEventos.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                destino = new FileOutputStream("C:\\xampp\\htdocs\\myTCC\\site\\img-professores\\" + nome.getText() + ".png");
-            } catch (FileNotFoundException ex) {
-                    Logger.getLogger(TelaEventos.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            fcOrigem = origem.getChannel();
-            fcDestino = destino.getChannel();
-            
-                try {
-                    fcOrigem.transferTo(0, fcOrigem.size(), fcDestino);
-                } catch (IOException ex) {
-                    Logger.getLogger(TelaEventos.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    origem.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(TelaEventos.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    destino.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(TelaEventos.class.getName()).log(Level.SEVERE, null, ex);
-                }
-     }
-        
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -893,7 +758,7 @@ boolean camposObrigatorios = false;
     }//GEN-LAST:event_tblTutoresMouseClicked
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-    String sql = "select nometutor as Nome, descricao as Descrição, login as Login, senha as Senha, email as Email, telefone as Telefone, disciplinas as Disciplinas, foto as Foto, caminhoFoto as Caminho,idtutor as ID, facebook as Facebook, instagram as Instagram, linkedin as LinkedIn, twitter as Twitter, youtube as Youtube from tbtutor";
+    String sql = "select nometutor as Nome, descricao as Descrição, login as Login, senha as Senha, email as Email, telefone as Telefone, foto as Foto, disciplinas as Disciplinas, caminhoFoto as Caminho,idtutor as ID, facebook as Facebook, instagram as Instagram, linkedin as LinkedIn, twitter as Twitter, youtube as Youtube from tbtutor";
         try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -940,31 +805,9 @@ boolean camposObrigatorios = false;
     }//GEN-LAST:event_txtTutSenhaKeyPressed
 
     private void btnImgMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImgMouseClicked
-            try {
-            FileDialog fileDialog = new FileDialog((Frame)null);
-            fileDialog.setVisible(true);
-            if(fileDialog.getDirectory() != null){
-                arquivo.setText(fileDialog.getDirectory() + fileDialog.getFile());
-                nome.setText(fileDialog.getFile().replace(".jpg","").replace(".png",""));
-                carregaImagem(btnImg,fileDialog.getDirectory() + fileDialog.getFile());
-            }
-        }catch(Exception e) {
-               JOptionPane.showMessageDialog(null,"Erro ao tentar carregar o arquivo! Verifique se o arquivo selecionado é uma imagem.");
-            }
+         img.selecionarImagem(arquivo,nome, btnImg,225,180);
     }//GEN-LAST:event_btnImgMouseClicked
 
-     public void carregaImagem(JButton botao, String arquivo){
-            try {
-                File f = new File(arquivo);
-                BufferedImage bufi = ImageIO.read(f);
-                ImageIcon ico = new ImageIcon(bufi);
-                ico.setImage(ico.getImage().getScaledInstance(200, 175, java.awt.Image.SCALE_SMOOTH));
-                botao.setIcon(ico);
-            } 
-            catch(Exception e) {
-               JOptionPane.showMessageDialog(null,"Erro ao tentar carregar o arquivo! Verifique se o arquivo selecionado é uma imagem.");
-            }
-     }
     private void btnImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImgActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnImgActionPerformed

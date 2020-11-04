@@ -4,10 +4,10 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
-public class documentoLimitado extends PlainDocument{
+public class LimitarCampos extends PlainDocument{
     private int tamanhoMax = 10;
          
-    public documentoLimitado(int tamanhoMax){
+    public LimitarCampos(int tamanhoMax){
         this.tamanhoMax = tamanhoMax;
     }
     public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {

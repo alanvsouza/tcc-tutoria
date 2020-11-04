@@ -84,21 +84,6 @@ class TutorService
         endfor;
     }
 
-    // public static function renderizarLinksProfessores()
-    // {
-    //     $tutorDao = new TutorDAO();
-    //     $tutores = $tutorDao->readAll();
-
-    //     for ($i = 0; $i < sizeof($tutores); $i++) :
-    //         $row = $tutores[$i];
-
-    //         $nome = trim($row["nometutor"]);
-    //         $href = str_replace(" ", "-", $nome);
-    //         echo '<li class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-6"><a class="ancora" href="#' . $href . '">' . $nome . '</a></li>';
-
-    //     endfor;
-    // }
-
     public static function renderizarInformacoes($id)
     {
         $query = "SELECT `nometutor`, `descricao` FROM `tbtutor` WHERE `idtutor` = ?";
@@ -166,34 +151,4 @@ class TutorService
 
         var_dump($horarios);
     }
-
-    //     public static function getMateriasString($id)
-    //     {
-    //         $tutorDao = new TutorDAO();
-    //         $materias = $tutorDao->readMaterias($id);
-
-    //         if ($materias == null)
-    //             return null;
-
-    //         $resultString = "";
-
-
-    //         $index = 0;
-    //         foreach ($materias as $materia) {
-    //             $resultString .= $materia["nome"];
-
-    //             $existeProxIndex = isset($materias[$index + 1]);
-    //             $proxIndexUltimo = $index + 1 == count($materias) - 1;
-
-    //             if ($existeProxIndex && $proxIndexUltimo) {
-    //                 $resultString .= " e ";
-    //             } else if ($existeProxIndex) {
-    //                 $resultString .= ", ";
-    //             }
-
-    //             $index++;
-    //         }
-
-    //         return $resultString;
-    //     }
 }
