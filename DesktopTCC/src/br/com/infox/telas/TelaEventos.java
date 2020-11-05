@@ -164,7 +164,7 @@ Imagem img = new Imagem();
 
     private void pesquisar_evento(){
         evt.pesquisarEventos("select nome as Nome,dataevento as Data, inicio as Inicio,termino as Término,descricao as Descrição,localevento as Local,"
-        + "image as Imagem," + "caminhoImg as Caminho, idevento as ID from tbeventos where nome like ?", tblEventos, txtEvtPesquisar);
+        + "image as Imagem," + "caminhoImg as Caminho, idevento as ID from tbeventos where DATE_FORMAT(NOW(), '%Y/%m/%d') <= dataevento and nome like ?", tblEventos, txtEvtPesquisar);
     }
     
     private void setar_campos(){

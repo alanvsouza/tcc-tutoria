@@ -117,18 +117,17 @@ Imagem img = new Imagem();
                         camposObrigatorios = false;
                     }
                 }else{
-                    nomeImagem = nome.getText();
+                    nomeImagem = nome.getText().replace(".jpg","").replace(".png","");
                     boolean verificarImg = img.consultarImagem("select foto from tbtutor", nomeImagem, ".png");
                     int verificar = 0;
                     
-                    if(verificarImg){
-                    verificar = JOptionPane.showConfirmDialog(null,"Já existe uma imagem cadastrada com esse nome. Deseja sobrescrevê-la com a nova imagem?","AVISO",JOptionPane.YES_NO_OPTION);
-                    }
+                    if(verificarImg) verificar = JOptionPane.showConfirmDialog(null,"Já existe uma imagem cadastrada com esse nome. Deseja "
+                    + "sobrescrevê-la com a nova imagem?","AVISO",JOptionPane.YES_NO_OPTION);
                     
                     if(verificar == 0){
-                        if(!arquivo.getText().equals("C:\\xampp\\htdocs\\myTCC\\site\\img-professores\\" + nome.getText().replace(".jpg","").replace(".png","") + ".png")){
+                        if(!arquivo.getText().equals("C:\\xampp\\htdocs\\myTCC\\site\\img-professores\\" + nomeImagem + ".png")){
                             img.deletarImagem("select caminhoFoto from tbtutor where idtutor=?", txtTutId.getText(),"Falha ao tentar excluir a imagem");
-                            img.copiarImagem("br.com.infox.telas.TelaTutor",arquivo.getText(),"C:\\\\xampp\\\\htdocs\\\\myTCC\\\\site\\\\img-professores\\\\",nome.getText(),".png");
+                            img.copiarImagem("br.com.infox.telas.TelaTutor",arquivo.getText(),"C:\\xampp\\htdocs\\myTCC\\site\\img-professores\\",nome.getText(),".png");
                         }
                         
                         String sql = "update tbtutor set nometutor=?,login=?,senha=?,email=?,telefone=?,foto=?,caminhoFoto=?,facebook=?,instagram=?,twitter=?,linkedin=?,youtube=?,descricao=?,disciplinas=? where idtutor=?";

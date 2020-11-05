@@ -77,7 +77,7 @@ public class Imagem {
                 Logger.getLogger(tela).log(Level.SEVERE, null, ex);
             }
             try {
-                destino = new FileOutputStream(caminhoDestino + "\\" + nomeEvt + extensao);
+                destino = new FileOutputStream(caminhoDestino + nomeEvt + extensao);
             } catch (FileNotFoundException ex) {
                     Logger.getLogger(tela).log(Level.SEVERE, null, ex);
             }

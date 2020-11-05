@@ -19,10 +19,21 @@ public class GaleriaEventos {
     private PreparedStatement pst;
     private ResultSet rs;
     private File diretorio;
+    Imagem img = new Imagem();
      
     public GaleriaEventos(){
         this.conexao =  ModuloConexao.conector();
     }
+    
+    public void setCamposGaleria(JTable tbl, JTextField[] campos, JTextArea descricao){
+        int setar = tbl.getSelectedRow();
+        for(int i = 0; i < campos.length; i++){
+            if(campos[i] != null) campos[i].setText(tbl.getModel().getValueAt(setar, i).toString()); 
+            else descricao.setText(tbl.getModel().getValueAt(setar, i).toString());
+            campos[6].setText(tbl.getModel().getValueAt(setar, 6).toString().replace(".jpg","").replace(".png", ""));
+        }
+    }
+    
     
     public void pesquisarGaleriaEventos(String sql, JTable tblEventos, String txtEvtPesquisar){
         try{
@@ -31,7 +42,7 @@ public class GaleriaEventos {
             rs = pst.executeQuery();
             tblEventos.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (SQLException e) {
-           JOptionPane.showMessageDialog(null, "Erro ao procurar galeria de eventos");
+           JOptionPane.showMessageDialog(null, e);
         }
     }
     
@@ -59,8 +70,61 @@ public class GaleriaEventos {
         }
         btnIcon.setIcon(null);
         btnFotos.setIcon(null);
-        indexFoto.setText("x / y");
+        indexFoto.setText("0 / 0");
         descricao.setText(null);
+    }
+    
+    public boolean consultarImagem(String sql, String nomeImagem, String extensao, String txtGaleriaEventoId){
+        try{
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1,txtGaleriaEventoId);
+            rs = pst.executeQuery();
+
+            while(rs.next()){
+                if(rs.getString(1).equals(nomeImagem + extensao)){
+                   return true;
+                }
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
+    
+    public String[] adquirirImagens(String txtGaleriaEventoId){
+        String sql = "select imagem from tbimgeventos where idevento = ?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1,txtGaleriaEventoId);
+            rs = pst.executeQuery();
+            
+            int i = 0;
+            int linhas = getRows(rs);
+            String[] fotos = new String[linhas];
+            
+            while(rs.next()){
+                fotos[i] = rs.getString(1);
+                i++;
+            }
+            
+            return fotos;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,ex);
+        }
+        return null;
+    }
+    
+     public int getRows(ResultSet res){
+        int totalRows = 0;
+        try {
+            res.last();
+            totalRows = res.getRow();
+            res.beforeFirst();
+        } 
+        catch(Exception ex)  {
+            return 0;
+        }
+    return totalRows ;    
     }
 
 }

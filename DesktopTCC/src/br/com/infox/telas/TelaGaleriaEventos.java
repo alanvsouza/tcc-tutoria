@@ -2,54 +2,56 @@ package br.com.infox.telas;
 
 import br.com.infox.classes.GaleriaEventos;
 import br.com.infox.classes.Imagem;
+import br.com.infox.classes.LimitarCampos;
 import br.com.infox.dal.ModuloConexao;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import net.proteanit.sql.DbUtils;
 
 public class TelaGaleriaEventos extends javax.swing.JInternalFrame {
 Connection conexao = null;
 PreparedStatement pst = null;
+PreparedStatement pst2 = null;
 ResultSet rs = null;
 
 GaleriaEventos glEventos = new GaleriaEventos();
 Imagem img = new Imagem();
 
 String nomeImagem = "";
+String pasta;
 String fotos[];
+
 int index = 0;
 int count = 1;
 
     public TelaGaleriaEventos() {
         initComponents();
+        taGalDescricao.setDocument(new LimitarCampos(218));
         conexao = ModuloConexao.conector();
     }
     
     private void adicionarFoto(){
         try{
-            String pasta = "C:\\xampp\\htdocs\\myTCC\\site\\img-galeria-eventos\\" + txtGalNome.getText().replace(" ","").trim() + "_" 
-            + txtGalData.getText().replace("/","-").trim() + "_" + txtGaleriaEventoId.getText();
-            File pastaNova;
             boolean camposObrigatorios = verificarCamposGaleria();
-
             if(camposObrigatorios == true || btnImg.getIcon() == null){
                 if(txtGaleriaEventoId.getText().isEmpty() == true) JOptionPane.showMessageDialog(null,"Escolha uma galeria de eventos para inserir uma imagem");
                 else if(btnImg.getIcon() == null) JOptionPane.showMessageDialog(null,"É necessário escolher uma imagem!");
                 else JOptionPane.showMessageDialog(null,"Preencha todos os campos obrigatórios!");
             }else{
                 
+                File pastaNova;
                 if(!glEventos.existeDir(pasta)){
                     pastaNova = new File(pasta);
                     pastaNova.mkdir();
                 }
                 
                 nomeImagem = nome.getText().replace(".jpg","").replace(".png","").replace(".","");
-                boolean verificarImg = consultarImagem("select imagem from tbimgeventos where idevento=?", nomeImagem, ".jpg");
+                boolean verificarImg = glEventos.consultarImagem("select imagem from tbimgeventos where idevento=?", nomeImagem, ".jpg", txtGaleriaEventoId.getText());
                 int verificar = 0;
                 
                 if(verificarImg){
@@ -58,16 +60,14 @@ int count = 1;
                 }
                 
                 if(verificar == 0){
-                    boolean imgExiste = consultarImagem("select imagem from tbimgeventos where idevento=?", nomeImagem, ".jpg");
-                    if(!arquivo.getText().equals(pasta + "\\" + nomeImagem + ".jpg")){
-                       img.copiarImagem("br.com.infox.telas.TelaGaleriaEventos", arquivo.getText(),pasta,nomeImagem,".jpg");
-                        fotos = consultarImagens();
-                        count = 1;
-                        index = 0;
-                        lbGaleriaEventos.setText(count + " / " + fotos.length);
+                    //Se a origem da imagem for igual ao destino da imagem -> false -> não preciso recriar a imagem
+                    if(!arquivo.getText().equals(pasta + nomeImagem + ".jpg")){
+                        img.copiarImagem("br.com.infox.telas.TelaGaleriaEventos", arquivo.getText(),pasta,nomeImagem,".jpg");
                     }
                     
-                    if(!imgExiste){
+                    //Se a imagem tiver o mesmo nome de uma cadastradaa, então eu não quero adicionar outra linha na tabela
+                    //só preciso substituir a antiga imagem pela nova
+                    if(!verificarImg){
                     String sql = "insert into tbimgeventos (idevento,imagem) values (?,?)";
                     pst = conexao.prepareStatement(sql);
                     pst.setString(1,txtGaleriaEventoId.getText());
@@ -77,92 +77,218 @@ int count = 1;
 
                         if(adicionado > 0){
                             JOptionPane.showMessageDialog(null,"Evento cadastrado com sucesso!");
-                            fotos = consultarImagens();
-                            count = 1;
-                            index = 0;
-                            lbGaleriaEventos.setText(count + " / " + fotos.length);
-                            img.carregaImagem(btnGaleriaFotos,"C:\\xampp\\htdocs\\myTCC\\site\\img-galeria-eventos\\" + fotos[0], 294, 235);
-                            glEventos.pesquisarGaleriaEventos("select nome as Nome,replace(DATE_FORMAT(dataevento, '%d-%m-%Y'),'-','/')as Data, "
-                            + "inicio as Inicio,termino as Término,descricao as Descrição,localevento as Local,idevento as ID from tbeventos WHERE "
-                            + "DATE_FORMAT(NOW(), '%Y/%m/%d') >= dataevento",tblGaleriaEventos,null);
+                            pesquisarGaleria();
                         }
                     }
+                    
+                    btnImg.setIcon(null);
+                    nome.setText(null);
+                    fotos = glEventos.adquirirImagens(txtGaleriaEventoId.getText());
+                    count = 1;
+                    index = 0;
+                    lbGaleriaEventos.setText(count + " / " + fotos.length);
+                    img.carregaImagem(btnGaleriaFotos,pasta + fotos[0], 316, 237);
                 }
             }
-        
         } catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Falha ao tentar adicionar a foto! Verifique sua conexão com a internet!");
         }
     }
     
-    public boolean consultarImagem(String sql, String nomeImagem, String extensao){
-        try{
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1,txtGaleriaEventoId.getText());
-            rs = pst.executeQuery();
-
-            while(rs.next()){
-                if(rs.getString(1).equals(nomeImagem + extensao)){
-                   return true;
+    public void  alterarDescricao(){
+        if(!taGalDescricao.getText().isEmpty() && !txtGaleriaEventoId.getText().isEmpty()){
+            try{
+                String sql = "update tbeventos set descricao=? where idevento=?";
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1,taGalDescricao.getText());
+                pst.setString(2,txtGaleriaEventoId.getText());
+                
+                int adicionado = pst.executeUpdate();
+                
+                if(adicionado > 0){
+                     JOptionPane.showMessageDialog(null,"Dados do evento alterados com sucesso!");
+                     pesquisarGaleria();
+                     clear();
                 }
+            } catch(Exception e){
+                JOptionPane.showMessageDialog(null,"Falha ao tentar atualizar a descrição da galeria");
+            }
+        }else {
+            if(taGalDescricao.getText().isEmpty()) JOptionPane.showMessageDialog(null, "É necessário preencher o campo de descrição para atualizá-lo");
+            else  JOptionPane.showMessageDialog(null, "É necessário escolher uma galeria de eventos para atualizar sua descrição!");
+        }
+    }
+    
+    public void excluirFoto(){
+        try{
+            if(fotos.length != 0 && btnGaleriaFotos.getIcon() != null){
+            int verificar = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja excluir esta imagem?","AVISO",JOptionPane.YES_NO_OPTION);
+                if(verificar == JOptionPane.YES_OPTION){
+                    String sql = "delete from tbimgeventos where idevento=? and imagem=?";
+                    pst = conexao.prepareStatement(sql);
+                    pst.setString(1,txtGaleriaEventoId.getText());
+                    pst.setString(2,fotos[index]);
+
+                    int adicionado = pst.executeUpdate();
+
+                    if(adicionado > 0){
+                        File imagem = new File(pasta + fotos[index]);
+                        imagem.delete();
+
+                        fotos = glEventos.adquirirImagens(txtGaleriaEventoId.getText());
+                        count = 1;
+                        index = 0;
+                        
+                        if(fotos.length != 0){
+                            lbGaleriaEventos.setText(count + " / " + fotos.length);
+                            img.carregaImagem(btnGaleriaFotos,pasta + fotos[0], 316, 237);
+                        }else{
+                            lbGaleriaEventos.setText(0 + " / " + fotos.length);
+                            btnGaleriaFotos.setIcon(null);
+                        }
+
+                        JOptionPane.showMessageDialog(null, "Foto excluida com sucesso!");
+                    }
+                }
+            }else JOptionPane.showMessageDialog(null, "Nenhuma foto para excluir!");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Falha ao tentar excluir foto!");
+        }
+    }
+    
+    public void removerGaleria(){
+        if(!txtGaleriaEventoId.getText().isEmpty()){
+            try{
+            int verificar = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja excluir esta galeria? Todas as fotos "
+            + "incluidas nela serão excluídas também?","AVISO",JOptionPane.YES_NO_OPTION);
+        
+            if(verificar == 0){
+                String sql = "delete from tbimgeventos where idevento =?";
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1,txtGaleriaEventoId.getText());
+                int adicionado = pst.executeUpdate();
+                
+                if(adicionado > 0){
+                    String sql2 = "delete from tbeventos where idevento =?";
+                    pst2 = conexao.prepareStatement(sql2);
+                    pst2.setString(1,txtGaleriaEventoId.getText());
+                    int adicionado2 = pst2.executeUpdate();
+ 
+                    if(adicionado2 > 0){  
+                        JOptionPane.showMessageDialog(null, "Galeria excluida com sucesso!");
+                        pesquisarGaleria();
+                        clear();
+                        
+                        removerArquivo (new File (pasta));
+                        count = 1;
+                        index = 0;
+                        lbGaleriaEventos.setText(0 + " / " + 0);
+                        btnGaleriaFotos.setIcon(null);
+                    }
+                }
+            } 
+            } catch(Exception e){
+            
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione uma galeria para excluir!");
+        }
+    }
+    
+     public void removerArquivo (File f) {
+        if (f.isDirectory()) {
+            File[] files = f.listFiles();
+            for (int i = 0; i < files.length; ++i) {
+                removerArquivo (files[i]);
+            }
+        }
+        f.delete();
+    }
+    
+    public void nextFoto(){
+        try{
+            if(fotos.length != 0){
+                index += 1;
+                if(index > fotos.length - 1){
+                    index = 0; 
+                    count = 1;
+                    lbGaleriaEventos.setText(count + " / " + fotos.length);
+                }else {
+                    count += 1;
+                    lbGaleriaEventos.setText(count + " / " + fotos.length);
+                }
+                img.carregaImagem(btnGaleriaFotos,pasta + fotos[index] , 316, 237);
             }
         }catch(Exception e){
-            System.out.println(e);
-        }
-        return false;
-    }
-    
-    public String[] consultarImagens(){
-        String sql = "select imagem from tbimgeventos where idevento = ?";
-        try {
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1,txtGaleriaEventoId.getText());
-            rs = pst.executeQuery();
-            
-            int i = 0;
-            int linhas = getRows(rs);
-            String[] fotos = new String[linhas];
-            
-            while(rs.next()){
-                fotos[i] = rs.getString(1);
-                i++;
-            }
-            
-            return fotos;
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,ex);
-        }
-        return null;
-    }
-    
-    public int getRows(ResultSet res){
-        int totalRows = 0;
-        try {
-            res.last();
-            totalRows = res.getRow();
-            res.beforeFirst();
+                JOptionPane.showMessageDialog(null, "Selecione uma galeria de eventos para ver suas fotos!");
         } 
-        catch(Exception ex)  {
-            return 0;
+    }
+    
+    public void prevFoto(){
+        try{
+            if(fotos.length != 0){
+                index -= 1;
+                if(index < 0){
+                    index = fotos.length - 1; 
+                    count = fotos.length;
+                    lbGaleriaEventos.setText(fotos.length + " / " + fotos.length);
+                }else {
+                    count -= 1;
+                    lbGaleriaEventos.setText(count + " / " + fotos.length);
+                }
+                img.carregaImagem(btnGaleriaFotos,pasta + fotos[index] , 316, 237);
+            }
+        }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Selecione uma galeria de eventos para ver suas fotos!");
+        } 
+    }
+    
+    public void pesquisarGaleria(){
+        glEventos.pesquisarGaleriaEventos("select nome as Nome,replace(DATE_FORMAT(dataevento, '%d-%m-%Y'),'-','/')as Data, "
+        + "inicio as Inicio,termino as Término,descricao as Descrição,localevento as Local,idevento as ID from tbeventos WHERE "
+        + "DATE_FORMAT(NOW(), '%Y/%m/%d') >= dataevento",tblGaleriaEventos,null);
+    }
+    
+    public void setCampos(){
+        try{
+           JTextField[] campos = {txtGalNome, txtGalData, txtGalInicio,txtGalTermino, null, txtGalLocal,txtGaleriaEventoId};
+           glEventos.setCamposGaleria(tblGaleriaEventos, campos, taGalDescricao);
+            
+           pasta = "C:\\xampp\\htdocs\\myTCC\\site\\img-galeria-eventos\\" + 
+           txtGalNome.getText().replace("^",".").replace("|",".").replace("(",".").replace(")",".").replace("[",".").replace("]",".").replace("\\",".")
+           .replace("$",".").replace("+",".").replace(" ","").trim() + "_"  + txtGalData.getText().replace("/","-").trim() + "_" 
+           + txtGaleriaEventoId.getText() + "\\"; 
+           
+           fotos = glEventos.adquirirImagens(txtGaleriaEventoId.getText());
+           count = 1;
+           index = 0; 
+           
+           if(fotos.length != 0 && fotos != null){ 
+                img.carregaImagem(btnGaleriaFotos,pasta + fotos[0], 316, 235);
+                lbGaleriaEventos.setText(count + " / " + fotos.length);
+           } else {
+                lbGaleriaEventos.setText(0 + " / " + 0);
+                btnGaleriaFotos.setIcon(null);
+           }
+           
+        } catch(Exception e){
+             JOptionPane.showMessageDialog(null, "Erro ao tentar selecionar a galeria de eventos");
         }
-    return totalRows ;    
     }
     
     public boolean verificarCamposGaleria(){
-        String[] camposObri = {nome.getText(),txtGaleriaEventoId.getText(),taGalDescricao.getText()};
+        String[] camposObri = {nome.getText(),txtGaleriaEventoId.getText()};
         boolean verificacao = glEventos.verificarCamposGaleria(camposObri);
         if(verificacao) return true;
-        
         return false;
     }
     
     public void clear(){
-    JTextField[] campos = {txtGalNome,txtGalData,txtGalInicio,txtGalTermino,txtGalLocal,txtGaleriaEventoId,nome,txtGaleriaEventoPesquisar};
+        JTextField[] campos = {txtGalNome,txtGalData,txtGalInicio,txtGalTermino,txtGalLocal,txtGaleriaEventoId,nome,txtGaleriaEventoPesquisar};
         glEventos.clearCamposGaleria(campos, taGalDescricao, btnImg, btnGaleriaFotos,lbGaleriaEventos);
         nomeImagem = "";
         fotos = null;
     }
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -195,11 +321,13 @@ int count = 1;
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         arquivo = new javax.swing.JTextField();
-        btnAtualizar = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         btnAdcFoto = new javax.swing.JButton();
         btnGaleriaFotos = new javax.swing.JButton();
         lbGaleriaEventos = new javax.swing.JLabel();
+        btnRemover = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("* Arquivo:");
@@ -288,9 +416,9 @@ int count = 1;
 
         excluirFoto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         excluirFoto.setText("Excluir");
-        excluirFoto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                excluirFotoActionPerformed(evt);
+        excluirFoto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                excluirFotoMouseClicked(evt);
             }
         });
 
@@ -299,11 +427,6 @@ int count = 1;
         btnNextFoto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnNextFotoMouseClicked(evt);
-            }
-        });
-        btnNextFoto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNextFotoActionPerformed(evt);
             }
         });
 
@@ -387,15 +510,6 @@ int count = 1;
 
         arquivo.setEnabled(false);
 
-        btnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/atualizarBlue.png"))); // NOI18N
-        btnAtualizar.setToolTipText("Atualizar");
-        btnAtualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAtualizarActionPerformed(evt);
-            }
-        });
-
         btnClear.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnClear.setText("Clear");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
@@ -414,47 +528,57 @@ int count = 1;
 
         lbGaleriaEventos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbGaleriaEventos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbGaleriaEventos.setText("X / Y");
+        lbGaleriaEventos.setText("0 / 0");
+
+        btnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/fecharRed.png"))); // NOI18N
+        btnRemover.setToolTipText("Remover");
+        btnRemover.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRemover.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRemoverMouseClicked(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton1.setText("Atualizar Descrição");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel11.setText("Nome:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(arquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(arquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(159, 159, 159))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 960, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnImg, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAdcFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnImg, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))))
-                            .addComponent(btnAdcFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(nome)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtGalData))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtGalInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtGalTermino))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -463,26 +587,38 @@ int count = 1;
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtGalNome, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(114, 114, 114)
-                                .addComponent(lbGaleriaEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtGalInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtGalTermino))
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnGaleriaFotos, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnGaleriaFotos, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnPrevFoto)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(excluirFoto)
                                         .addGap(18, 18, 18)
-                                        .addComponent(btnNextFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                                        .addComponent(excluirFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnNextFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(114, 114, 114)
+                                .addComponent(lbGaleriaEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(8, 8, 8)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel3, jLabel4, jLabel6, jLabel7});
@@ -491,9 +627,7 @@ int count = 1;
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtGalInicio, txtGalTermino});
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {arquivo, nome});
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnPrevFoto, excluirFoto});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnNextFoto, btnPrevFoto});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -501,72 +635,73 @@ int count = 1;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(arquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                            .addComponent(arquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnImg, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAdcFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lbGaleriaEventos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel7)
-                                .addComponent(txtGalNome, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(11, 11, 11)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnAtualizar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel3)
-                                        .addComponent(txtGalData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel6)
-                                        .addComponent(txtGalLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtGalInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel7)
+                                        .addComponent(txtGalNome, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lbGaleriaEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnRemover)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(83, 83, 83))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnGaleriaFotos, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(3, 3, 3))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(txtGalTermino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel5)))
-                                    .addGap(14, 14, 14)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnGaleriaFotos, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel11))
                                         .addGroup(layout.createSequentialGroup()
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(excluirFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                                                .addComponent(btnPrevFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(13, 13, 13)
-                                            .addComponent(btnNextFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
-                .addGap(34, 34, 34))
+                                                .addComponent(jLabel3)
+                                                .addComponent(txtGalData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(jLabel6)
+                                                .addComponent(txtGalLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(jLabel4)
+                                                .addComponent(txtGalInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtGalTermino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel5))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnImg, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnAdcFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnPrevFoto)
+                                    .addComponent(excluirFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnNextFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(32, Short.MAX_VALUE))))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnNextFoto, btnPrevFoto, excluirFoto});
-
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtGalData, txtGalInicio, txtGalLocal, txtGalNome, txtGalTermino});
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAdcFoto, btnNextFoto, btnPrevFoto, excluirFoto, jButton1});
 
         setBounds(0, 0, 988, 550);
     }// </editor-fold>//GEN-END:initComponents
@@ -579,39 +714,17 @@ int count = 1;
 
     private void txtGaleriaEventoPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGaleriaEventoPesquisarKeyReleased
         glEventos.pesquisarGaleriaEventos("select nome as Nome,replace(DATE_FORMAT(dataevento, '%d-%m-%Y'),'-','/')as Data, inicio as Inicio,termino as Término,descricao as Descrição,localevento as Local,idevento as "
-        + "ID from tbeventos WHERE DATE_FORMAT(NOW(), '%Y/%m/%d') >= dataevento and where like=?",tblGaleriaEventos,txtGaleriaEventoPesquisar.getText());
+        + "ID from tbeventos WHERE DATE_FORMAT(NOW(), '%Y/%m/%d') >= dataevento and nome like ?",tblGaleriaEventos,txtGaleriaEventoPesquisar.getText());
     }//GEN-LAST:event_txtGaleriaEventoPesquisarKeyReleased
 
     private void tblGaleriaEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGaleriaEventosMouseClicked
-        try{
-            JTextField[] campos = {txtGalNome, txtGalData, txtGalInicio,txtGalTermino, null, txtGalLocal,txtGaleriaEventoId};
-            int setar = tblGaleriaEventos.getSelectedRow();
-            for(int i = 0; i < campos.length; i++){
-                if(campos[i] != null) campos[i].setText(tblGaleriaEventos.getModel().getValueAt(setar, i).toString()); 
-                else taGalDescricao.setText(tblGaleriaEventos.getModel().getValueAt(setar, i).toString());
-            }
-            
-           fotos = consultarImagens();
-           count = 1;
-           index = 0;
-           
-           if(fotos.length != 0){ 
-            img.carregaImagem(btnGaleriaFotos,"C:\\xampp\\htdocs\\myTCC\\site\\img-galeria-eventos\\" + fotos[0], 294, 235);
-            lbGaleriaEventos.setText(count + " / " + fotos.length);
-           }
-        } catch(Exception e){
-             JOptionPane.showMessageDialog(null, e);
-        }
+       setCampos();
     }//GEN-LAST:event_tblGaleriaEventosMouseClicked
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         glEventos.pesquisarGaleriaEventos("select nome as Nome,replace(DATE_FORMAT(dataevento, '%d-%m-%Y'),'-','/')as Data, inicio as Inicio,termino as Término,descricao as Descrição,localevento as Local,idevento as "
         + "ID from tbeventos WHERE DATE_FORMAT(NOW(), '%Y/%m/%d') >= dataevento",tblGaleriaEventos,null);
     }//GEN-LAST:event_formInternalFrameOpened
-
-    private void btnNextFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextFotoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNextFotoActionPerformed
 
     private void txtGalNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGalNomeKeyPressed
         if (evt.getKeyCode() == evt.VK_ENTER){
@@ -647,65 +760,48 @@ int count = 1;
         img.selecionarImagem(arquivo,nome,btnImg,230, 234);
     }//GEN-LAST:event_btnImgMouseClicked
 
-    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-     if(verificarCamposGaleria()) JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!");
-    }//GEN-LAST:event_btnAtualizarActionPerformed
-
-    private void excluirFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirFotoActionPerformed
-        
-    }//GEN-LAST:event_excluirFotoActionPerformed
-
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        clear();
+       clear();
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnAdcFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdcFotoActionPerformed
-        adicionarFoto();
+       adicionarFoto();
     }//GEN-LAST:event_btnAdcFotoActionPerformed
 
     private void btnNextFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNextFotoMouseClicked
-        if(fotos.length != 0){
-            index += 1;
-            if(index > fotos.length - 1){
-                index = 0; 
-                count = 1;
-                lbGaleriaEventos.setText(count + " / " + fotos.length);
-            }else {
-                count += 1;
-                lbGaleriaEventos.setText(count + " / " + fotos.length);
-            }
-            img.carregaImagem(btnGaleriaFotos,"C:\\xampp\\htdocs\\myTCC\\site\\img-galeria-eventos\\" + fotos[index] , 294, 232);
-        }
+       nextFoto();
     }//GEN-LAST:event_btnNextFotoMouseClicked
 
     private void btnPrevFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrevFotoMouseClicked
-        if(fotos.length != 0){
-            index -= 1;
-            if(index < 0){
-                index = fotos.length - 1; 
-                count = fotos.length;
-                lbGaleriaEventos.setText(fotos.length + " / " + fotos.length);
-            }else {
-                count -= 1;
-                lbGaleriaEventos.setText(count + " / " + fotos.length);
-            }
-            img.carregaImagem(btnGaleriaFotos,"C:\\xampp\\htdocs\\myTCC\\site\\img-galeria-eventos\\" + fotos[index] , 294, 232);
-        }
+       prevFoto();
     }//GEN-LAST:event_btnPrevFotoMouseClicked
 
+    private void excluirFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_excluirFotoMouseClicked
+       excluirFoto();
+    }//GEN-LAST:event_excluirFotoMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+       alterarDescricao();
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void btnRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRemoverMouseClicked
+        removerGaleria();
+    }//GEN-LAST:event_btnRemoverMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField arquivo;
     private javax.swing.JButton btnAdcFoto;
-    private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnGaleriaFotos;
     private javax.swing.JButton btnImg;
     private javax.swing.JButton btnNextFoto;
     private javax.swing.JButton btnPrevFoto;
+    private javax.swing.JButton btnRemover;
     private javax.swing.JButton excluirFoto;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
