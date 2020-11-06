@@ -1,15 +1,15 @@
 package br.com.infox.telas;
 
+import br.com.infox.classes.Caminho;
 import br.com.infox.classes.GaleriaEventos;
 import br.com.infox.classes.Imagem;
 import br.com.infox.classes.LimitarCampos;
 import br.com.infox.dal.ModuloConexao;
+import java.awt.Color;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -19,12 +19,14 @@ PreparedStatement pst = null;
 PreparedStatement pst2 = null;
 ResultSet rs = null;
 
+Caminho caminho = new Caminho();
 GaleriaEventos glEventos = new GaleriaEventos();
 Imagem img = new Imagem();
 
 String nomeImagem = "";
 String pasta;
-String fotos[];
+String caminhoPasta;
+String fotos[] = null;
 
 int index = 0;
 int count = 1;
@@ -32,7 +34,15 @@ int count = 1;
     public TelaGaleriaEventos() {
         initComponents();
         taGalDescricao.setDocument(new LimitarCampos(218));
+        btnRemover.setBackground(new Color (0,0,0,0));
+        btnClear.setBackground(new Color (0,0,0,0));
+        
+        caminho.setPastaGaleria("C:\\xampp\\htdocs\\myTCC\\site\\img-galeria-eventos\\");
+        caminhoPasta = caminho.getPastaGaleria();
+        
         conexao = ModuloConexao.conector();
+        arquivo.setVisible(false);
+        lblArquivo.setVisible(false);
     }
     
     private void adicionarFoto(){
@@ -160,7 +170,7 @@ int count = 1;
         if(!txtGaleriaEventoId.getText().isEmpty()){
             try{
             int verificar = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja excluir esta galeria? Todas as fotos "
-            + "incluidas nela serão excluídas também?","AVISO",JOptionPane.YES_NO_OPTION);
+            + "incluidas nela serão excluídas também!","AVISO",JOptionPane.YES_NO_OPTION);
         
             if(verificar == 0){
                 String sql = "delete from tbimgeventos where idevento =?";
@@ -236,7 +246,7 @@ int count = 1;
                     count -= 1;
                     lbGaleriaEventos.setText(count + " / " + fotos.length);
                 }
-                img.carregaImagem(btnGaleriaFotos,pasta + fotos[index] , 316, 237);
+                img.carregaImagem(btnGaleriaFotos,pasta + fotos[index] , 310, 235);
             }
         }catch(Exception e){
                 JOptionPane.showMessageDialog(null, "Selecione uma galeria de eventos para ver suas fotos!");
@@ -254,7 +264,7 @@ int count = 1;
            JTextField[] campos = {txtGalNome, txtGalData, txtGalInicio,txtGalTermino, null, txtGalLocal,txtGaleriaEventoId};
            glEventos.setCamposGaleria(tblGaleriaEventos, campos, taGalDescricao);
             
-           pasta = "C:\\xampp\\htdocs\\myTCC\\site\\img-galeria-eventos\\" + 
+           pasta = caminhoPasta + 
            txtGalNome.getText().replace("^",".").replace("|",".").replace("(",".").replace(")",".").replace("[",".").replace("]",".").replace("\\",".")
            .replace("$",".").replace("+",".").replace(" ","").trim() + "_"  + txtGalData.getText().replace("/","-").trim() + "_" 
            + txtGaleriaEventoId.getText() + "\\"; 
@@ -264,7 +274,7 @@ int count = 1;
            index = 0; 
            
            if(fotos.length != 0 && fotos != null){ 
-                img.carregaImagem(btnGaleriaFotos,pasta + fotos[0], 316, 235);
+                img.carregaImagem(btnGaleriaFotos,pasta + fotos[0], 310, 235);
                 lbGaleriaEventos.setText(count + " / " + fotos.length);
            } else {
                 lbGaleriaEventos.setText(0 + " / " + 0);
@@ -319,15 +329,15 @@ int count = 1;
         btnImg = new javax.swing.JButton();
         nome = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        lblArquivo = new javax.swing.JLabel();
         arquivo = new javax.swing.JTextField();
-        btnClear = new javax.swing.JButton();
         btnAdcFoto = new javax.swing.JButton();
         btnGaleriaFotos = new javax.swing.JButton();
         lbGaleriaEventos = new javax.swing.JLabel();
         btnRemover = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
+        btnClear = new javax.swing.JButton();
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("* Arquivo:");
@@ -339,6 +349,7 @@ int count = 1;
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
             }
             public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -378,7 +389,7 @@ int count = 1;
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtGaleriaEventoPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtGaleriaEventoId, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -505,18 +516,10 @@ int count = 1;
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("* Nome:");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel10.setText("* Arquivo:");
+        lblArquivo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblArquivo.setText("* Arquivo:");
 
         arquivo.setEnabled(false);
-
-        btnClear.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnClear.setText("Clear");
-        btnClear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearActionPerformed(evt);
-            }
-        });
 
         btnAdcFoto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAdcFoto.setText("Adicionar Foto");
@@ -550,75 +553,86 @@ int count = 1;
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setText("Nome:");
 
+        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/claro.png"))); // NOI18N
+        btnClear.setToolTipText("Limpar campos");
+        btnClear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(arquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(159, 159, 159))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 960, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnImg, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAdcFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(nome)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtGalData))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtGalLocal))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtGalNome, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtGalInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtGalTermino))
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(arquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(159, 159, 159))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnImg, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnAdcFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(nome)))
                                 .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtGalData))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtGalLocal))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtGalNome, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane2)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtGalInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtGalTermino))
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnGaleriaFotos, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(btnPrevFoto)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(excluirFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(btnNextFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(btnGaleriaFotos, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(btnClear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnPrevFoto)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(excluirFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnNextFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(114, 114, 114)
-                                .addComponent(lbGaleriaEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(8, 8, 8)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(114, 114, 114)
+                                        .addComponent(lbGaleriaEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 952, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel3, jLabel4, jLabel6, jLabel7});
@@ -628,6 +642,8 @@ int count = 1;
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtGalInicio, txtGalTermino});
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnNextFoto, btnPrevFoto});
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnClear, btnRemover});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -639,7 +655,7 @@ int count = 1;
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(arquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -659,14 +675,7 @@ int count = 1;
                                     .addComponent(lbGaleriaEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnRemover)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(83, 83, 83))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnGaleriaFotos, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(3, 3, 3))
+                                    .addComponent(btnGaleriaFotos, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -686,22 +695,29 @@ int count = 1;
                                                 .addComponent(txtGalTermino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(jLabel5))
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnRemover)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnImg, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(42, 42, 42)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnAdcFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnPrevFoto)
-                                    .addComponent(excluirFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnNextFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnPrevFoto)
+                                        .addComponent(excluirFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnNextFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addContainerGap(32, Short.MAX_VALUE))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtGalData, txtGalInicio, txtGalLocal, txtGalNome, txtGalTermino});
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAdcFoto, btnNextFoto, btnPrevFoto, excluirFoto, jButton1});
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnClear, btnRemover});
 
         setBounds(0, 0, 988, 550);
     }// </editor-fold>//GEN-END:initComponents
@@ -713,8 +729,9 @@ int count = 1;
     }//GEN-LAST:event_txtGaleriaEventoPesquisarKeyPressed
 
     private void txtGaleriaEventoPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGaleriaEventoPesquisarKeyReleased
-        glEventos.pesquisarGaleriaEventos("select nome as Nome,replace(DATE_FORMAT(dataevento, '%d-%m-%Y'),'-','/')as Data, inicio as Inicio,termino as Término,descricao as Descrição,localevento as Local,idevento as "
-        + "ID from tbeventos WHERE DATE_FORMAT(NOW(), '%Y/%m/%d') >= dataevento and nome like ?",tblGaleriaEventos,txtGaleriaEventoPesquisar.getText());
+        glEventos.pesquisarGaleriaEventos("select nome as Nome,replace(DATE_FORMAT(dataevento, '%d-%m-%Y'),'-','/')as Data, "
+        + "inicio as Inicio,termino as Término,descricao as Descrição,localevento as Local,idevento as ID from tbeventos WHERE "
+        + "DATE_FORMAT(NOW(), '%Y/%m/%d') >= dataevento and nome like ?",tblGaleriaEventos, txtGaleriaEventoPesquisar.getText());
     }//GEN-LAST:event_txtGaleriaEventoPesquisarKeyReleased
 
     private void tblGaleriaEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGaleriaEventosMouseClicked
@@ -722,8 +739,7 @@ int count = 1;
     }//GEN-LAST:event_tblGaleriaEventosMouseClicked
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-        glEventos.pesquisarGaleriaEventos("select nome as Nome,replace(DATE_FORMAT(dataevento, '%d-%m-%Y'),'-','/')as Data, inicio as Inicio,termino as Término,descricao as Descrição,localevento as Local,idevento as "
-        + "ID from tbeventos WHERE DATE_FORMAT(NOW(), '%Y/%m/%d') >= dataevento",tblGaleriaEventos,null);
+       pesquisarGaleria();
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void txtGalNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGalNomeKeyPressed
@@ -760,10 +776,6 @@ int count = 1;
         img.selecionarImagem(arquivo,nome,btnImg,230, 234);
     }//GEN-LAST:event_btnImgMouseClicked
 
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-       clear();
-    }//GEN-LAST:event_btnClearActionPerformed
-
     private void btnAdcFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdcFotoActionPerformed
        adicionarFoto();
     }//GEN-LAST:event_btnAdcFotoActionPerformed
@@ -788,6 +800,16 @@ int count = 1;
         removerGaleria();
     }//GEN-LAST:event_btnRemoverMouseClicked
 
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+       clear();
+       pesquisarGaleria();
+    }//GEN-LAST:event_formInternalFrameClosed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        clear();
+        pesquisarGaleria();
+    }//GEN-LAST:event_btnClearActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField arquivo;
     private javax.swing.JButton btnAdcFoto;
@@ -800,7 +822,6 @@ int count = 1;
     private javax.swing.JButton excluirFoto;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -813,6 +834,7 @@ int count = 1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbGaleriaEventos;
+    private javax.swing.JLabel lblArquivo;
     private javax.swing.JTextField nome;
     private javax.swing.JTextArea taGalDescricao;
     private javax.swing.JTable tblGaleriaEventos;

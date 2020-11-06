@@ -79,6 +79,7 @@ public class Eventos {
      public void pesquisarEventos(String sql, JTable tblEventos, JTextField txtEvtPesquisar){
         try{
             pst = conexao.prepareStatement(sql);
+            if(txtEvtPesquisar == null) txtEvtPesquisar.setText("");
             pst.setString(1, txtEvtPesquisar.getText() + "%");
             rs = pst.executeQuery();
             tblEventos.setModel(DbUtils.resultSetToTableModel(rs));

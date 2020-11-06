@@ -21,13 +21,11 @@ TelaGaleriaEventos telagaleria;
         MenCadTutor = new javax.swing.JMenuItem();
         MenEdit = new javax.swing.JMenu();
         openGaleriaEventos = new javax.swing.JMenuItem();
-        MenAjuSob = new javax.swing.JMenu();
         MenOpcSai = new javax.swing.JMenu();
         MenOpcSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Gerenciamento");
-        setPreferredSize(new java.awt.Dimension(1000, 600));
         setResizable(false);
 
         desktop.setPreferredSize(new java.awt.Dimension(1000, 600));
@@ -43,7 +41,7 @@ TelaGaleriaEventos telagaleria;
             .addGap(0, 541, Short.MAX_VALUE)
         );
 
-        MenCadTut.setText("Cadastro");
+        MenCadTut.setText("Cadastrar");
 
         MenCadEvt.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK));
         MenCadEvt.setText("Cadastrar Evento");
@@ -82,9 +80,6 @@ TelaGaleriaEventos telagaleria;
         MenEdit.add(openGaleriaEventos);
 
         Menu.add(MenEdit);
-
-        MenAjuSob.setText("Ajuda");
-        Menu.add(MenAjuSob);
 
         MenOpcSai.setText("Opções");
 
@@ -197,7 +192,6 @@ TelaGaleriaEventos telagaleria;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu MenAjuSob;
     private javax.swing.JMenuItem MenCadEvt;
     private javax.swing.JMenu MenCadTut;
     public static javax.swing.JMenuItem MenCadTutor;

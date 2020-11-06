@@ -1,5 +1,6 @@
 package br.com.infox.telas;
 
+import br.com.infox.classes.Caminho;
 import br.com.infox.classes.Tutor;
 import br.com.infox.classes.LimitarCampos;
 import br.com.infox.classes.Imagem;
@@ -16,15 +17,19 @@ Connection conexao = null;
 PreparedStatement pst = null;
 ResultSet rs = null;
 
+String pastaTutor = "";
 String origem = "";
 String nomeImagem = "";
 boolean camposObrigatorios = false;
 
 Tutor tutor = new Tutor();
 Imagem img = new Imagem();
+Caminho caminho = new Caminho();
  
     public TelaTutor() {
         initComponents();
+        
+        //Colocando um máximo de caracteres para os campos
         txtTutNome.setDocument(new LimitarCampos(80));
         txtTutEmail.setDocument(new LimitarCampos(60));
         txtTutLogin.setDocument(new LimitarCampos(30));
@@ -32,12 +37,18 @@ Imagem img = new Imagem();
         txtTutFone.setDocument(new LimitarCampos(20));
         taTutDescricao.setDocument(new LimitarCampos(600));
         txtTutDisciplinas.setDocument(new LimitarCampos(150));
+        nome.setDocument(new LimitarCampos(150));
         
         arquivo.setVisible(false);
         lblArquivo.setVisible(false);
         btnUserAdd.setBackground(new Color (0,0,0,0));
         btnUserUpdate.setBackground(new Color (0,0,0,0));
         btnUserDelete.setBackground(new Color (0,0,0,0)); 
+        btnClear.setBackground(new Color (0,0,0,0)); 
+        
+        //Mudar a pasta de eventos
+        caminho.setPastaTutor("C:\\xampp\\htdocs\\myTCC\\site\\img-professores\\");
+        pastaTutor = caminho.getPastaTutor();
         
         conexao = ModuloConexao.conector();
     }
@@ -73,7 +84,7 @@ Imagem img = new Imagem();
                 }
                 if(verificar == 0){
                     img.deletarImagem("select caminhoFoto from tbtutor where idtutor=?", txtTutId.getText(),"Falha ao tentar excluir a imagem");
-                    img.copiarImagem("br.com.infox.telas.TelaTutor",arquivo.getText(),"C:\\\\xampp\\\\htdocs\\\\myTCC\\\\site\\\\img-professores\\\\",nome.getText(),".png");
+                    img.copiarImagem("br.com.infox.telas.TelaTutor",arquivo.getText(),pastaTutor,nome.getText(),".png");
                     
                     String sql = "insert into tbtutor (nometutor,login,senha,email,telefone,foto,caminhoFoto,facebook,linkedin,instagram,twitter,youtube,descricao,disciplinas) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                     pst = conexao.prepareStatement(sql);
@@ -83,7 +94,7 @@ Imagem img = new Imagem();
                     pst.setString(4,txtTutEmail.getText().trim());
                     pst.setString(5,txtTutFone.getText().trim());
                     pst.setString(6,nome.getText().replace(".jpg","").replace(".png","").trim() + ".png");
-                    pst.setString(7,"C:\\xampp\\htdocs\\myTCC\\site\\img-eventos\\" + nome.getText().trim().replace(".jpg","").replace(".png","") + ".png");
+                    pst.setString(7,pastaTutor + nome.getText().trim().replace(".jpg","").replace(".png","") + ".png");
                     pst.setString(8,txtFacebook.getText().trim());
                     pst.setString(9,txtLinkedin.getText().trim());
                     pst.setString(10,txtInstagram.getText().trim());
@@ -125,9 +136,9 @@ Imagem img = new Imagem();
                     + "sobrescrevê-la com a nova imagem?","AVISO",JOptionPane.YES_NO_OPTION);
                     
                     if(verificar == 0){
-                        if(!arquivo.getText().equals("C:\\xampp\\htdocs\\myTCC\\site\\img-professores\\" + nomeImagem + ".png")){
+                        if(!arquivo.getText().equals(pastaTutor + nomeImagem + ".png")){
                             img.deletarImagem("select caminhoFoto from tbtutor where idtutor=?", txtTutId.getText(),"Falha ao tentar excluir a imagem");
-                            img.copiarImagem("br.com.infox.telas.TelaTutor",arquivo.getText(),"C:\\xampp\\htdocs\\myTCC\\site\\img-professores\\",nome.getText(),".png");
+                            img.copiarImagem("br.com.infox.telas.TelaTutor",arquivo.getText(),pastaTutor,nome.getText(),".png");
                         }
                         
                         String sql = "update tbtutor set nometutor=?,login=?,senha=?,email=?,telefone=?,foto=?,caminhoFoto=?,facebook=?,instagram=?,twitter=?,linkedin=?,youtube=?,descricao=?,disciplinas=? where idtutor=?";
@@ -138,7 +149,7 @@ Imagem img = new Imagem();
                         pst.setString(4,txtTutEmail.getText().trim());
                         pst.setString(5,txtTutFone.getText().trim());
                         pst.setString(6,nome.getText().replace(".jpg","").replace(".png","").trim() + ".png");
-                        pst.setString(7,"C:\\xampp\\htdocs\\myTCC\\site\\img-professores\\" + nome.getText().replace(".jpg","").replace(".png","") + ".png");
+                        pst.setString(7,pastaTutor + nome.getText().replace(".jpg","").replace(".png","") + ".png");
                         pst.setString(8,txtFacebook.getText().trim());
                         pst.setString(9,txtInstagram.getText().trim());
                         pst.setString(10,txtTwitter.getText().trim());
@@ -175,7 +186,7 @@ Imagem img = new Imagem();
                             pst.setString(1,txtTutId.getText());
                             int apagado =  pst.executeUpdate();
                                 if (apagado > 0) {
-                                    JOptionPane.showMessageDialog(null,"Usuário apagado com sucesso!");
+                                    JOptionPane.showMessageDialog(null,"Tutor apagado com sucesso!");
                                     pesquisar_tutor();
                                     clear();
                                 }else {
@@ -197,7 +208,7 @@ Imagem img = new Imagem();
     
     private void clear(){
         JTextField[] campos = {txtTutNome,txtTutLogin,txtTutEmail,txtTutSenha,txtTutFone,txtTutId,txtTutDisciplinas,nome,arquivo,
-        txtFacebook,txtInstagram,txtTwitter,txtLinkedin,txtYoutube};
+        txtFacebook,txtInstagram,txtTwitter,txtLinkedin,txtYoutube,txtTutPesquisar};
         JCheckBox[] cb = {cbFacebook,cbInstagram,cbTwitter,cbLinkedin,cbYoutube};
         tutor.clearCamposTutor(campos, taTutDescricao, btnImg, cb);
         nomeImagem = "";
@@ -245,7 +256,6 @@ Imagem img = new Imagem();
         nome = new javax.swing.JTextField();
         lblArquivo = new javax.swing.JLabel();
         arquivo = new javax.swing.JTextField();
-        btnClear = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         taTutDescricao = new javax.swing.JTextArea();
         cbFacebook = new javax.swing.JCheckBox();
@@ -260,6 +270,12 @@ Imagem img = new Imagem();
         txtFacebook = new javax.swing.JTextField();
         txtTutDisciplinas = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        btnClear = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -269,6 +285,7 @@ Imagem img = new Imagem();
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
             }
             public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -310,11 +327,6 @@ Imagem img = new Imagem();
             }
         });
 
-        txtTutFone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTutFoneActionPerformed(evt);
-            }
-        });
         txtTutFone.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtTutFoneKeyPressed(evt);
@@ -443,39 +455,15 @@ Imagem img = new Imagem();
                 btnImgMouseClicked(evt);
             }
         });
-        btnImg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImgActionPerformed(evt);
-            }
-        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("* Nome:");
-
-        nome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeActionPerformed(evt);
-            }
-        });
 
         lblArquivo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblArquivo.setText("* Arquivo:");
 
         arquivo.setEnabled(false);
         arquivo.setOpaque(false);
-        arquivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                arquivoActionPerformed(evt);
-            }
-        });
-
-        btnClear.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnClear.setText("Clear");
-        btnClear.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnClearMouseClicked(evt);
-            }
-        });
 
         taTutDescricao.setColumns(20);
         taTutDescricao.setLineWrap(true);
@@ -520,11 +508,6 @@ Imagem img = new Imagem();
 
         txtInstagram.setForeground(new java.awt.Color(51, 51, 51));
         txtInstagram.setEnabled(false);
-        txtInstagram.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtInstagramActionPerformed(evt);
-            }
-        });
 
         txtTwitter.setForeground(new java.awt.Color(51, 51, 51));
         txtTwitter.setEnabled(false);
@@ -538,20 +521,38 @@ Imagem img = new Imagem();
         txtFacebook.setForeground(new java.awt.Color(51, 51, 51));
         txtFacebook.setEnabled(false);
 
-        txtTutDisciplinas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTutDisciplinasActionPerformed(evt);
-            }
-        });
-
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setText("*Disciplinas:");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 5)); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/facebook.png"))); // NOI18N
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 5)); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/instagram.png"))); // NOI18N
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 5)); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/twitter.png"))); // NOI18N
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 5)); // NOI18N
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/linkedin.png"))); // NOI18N
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 5)); // NOI18N
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/youtube.png"))); // NOI18N
+
+        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/claro.png"))); // NOI18N
+        btnClear.setToolTipText("Limpar campos");
+        btnClear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
@@ -565,9 +566,6 @@ Imagem img = new Imagem();
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(45, 45, 45))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 936, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -594,34 +592,49 @@ Imagem img = new Imagem();
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtFacebook, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cbFacebook)
-                                            .addComponent(cbLinkedin))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtLinkedin, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtInstagram, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtYoutube, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtTwitter, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtFacebook, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(20, 20, 20))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cbLinkedin)
+                                            .addComponent(cbFacebook))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGap(0, 0, Short.MAX_VALUE)
                                                 .addComponent(cbInstagram)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                                                 .addComponent(cbTwitter))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(cbYoutube)
-                                                .addGap(0, 0, Short.MAX_VALUE))))
-                                    .addComponent(txtYoutube, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtLinkedin, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtTwitter, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtInstagram, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnImg, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cbYoutube, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnImg, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -633,15 +646,15 @@ Imagem img = new Imagem();
                                     .addComponent(txtTutFone))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnUserUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnUserAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnUserDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnUserDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
                 .addGap(24, 24, 24))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtInstagram, txtLinkedin, txtTwitter, txtYoutube});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -655,9 +668,9 @@ Imagem img = new Imagem();
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(arquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -674,11 +687,14 @@ Imagem img = new Imagem();
                                     .addComponent(jLabel10)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel3)
-                                    .addComponent(txtTutLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtTutLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbFacebook)
+                                    .addComponent(cbInstagram)
+                                    .addComponent(cbTwitter))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtTutSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -687,42 +703,48 @@ Imagem img = new Imagem();
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(cbInstagram)
-                                                .addComponent(cbTwitter))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(cbYoutube)
-                                                .addComponent(cbLinkedin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addComponent(cbFacebook))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtFacebook, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(cbYoutube)
+                                        .addComponent(cbLinkedin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtFacebook, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtInstagram, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtInstagram, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel11))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtTwitter, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtTwitter, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel12))
+                                    .addGap(5, 5, 5)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtLinkedin, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel13))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtLinkedin, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtYoutube, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(5, 5, 5))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtYoutube, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel14))
+                                    .addGap(3, 3, 3))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(btnImg, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(0, 11, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnUserAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnUserUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(11, 11, 11)
                         .addComponent(btnUserDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(20, 20, 20))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(17, 17, 17))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnUserAdd, btnUserDelete, btnUserUpdate});
@@ -804,32 +826,8 @@ Imagem img = new Imagem();
     }//GEN-LAST:event_txtTutSenhaKeyPressed
 
     private void btnImgMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImgMouseClicked
-         img.selecionarImagem(arquivo,nome, btnImg,225,180);
+         img.selecionarImagem(arquivo,nome, btnImg,228,184);
     }//GEN-LAST:event_btnImgMouseClicked
-
-    private void btnImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImgActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnImgActionPerformed
-
-    private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomeActionPerformed
-
-    private void arquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arquivoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_arquivoActionPerformed
-
-    private void btnClearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearMouseClicked
-        clear();
-    }//GEN-LAST:event_btnClearMouseClicked
-
-    private void txtTutFoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTutFoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTutFoneActionPerformed
-
-    private void txtInstagramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInstagramActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtInstagramActionPerformed
 
     private void cbFacebookItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbFacebookItemStateChanged
         if(txtFacebook.isEnabled() == false && cbFacebook.isSelected() == true){
@@ -871,9 +869,15 @@ Imagem img = new Imagem();
         }
     }//GEN-LAST:event_cbYoutubeItemStateChanged
 
-    private void txtTutDisciplinasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTutDisciplinasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTutDisciplinasActionPerformed
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+        clear();
+        pesquisar_tutor();
+    }//GEN-LAST:event_formInternalFrameClosed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        clear();
+        pesquisar_tutor();
+    }//GEN-LAST:event_btnClearActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -890,12 +894,17 @@ Imagem img = new Imagem();
     private javax.swing.JCheckBox cbYoutube;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
