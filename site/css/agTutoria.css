@@ -1,0 +1,320 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    background-color: #FAFAFA;
+    overflow-x: hidden;
+}
+
+.content-tutor,
+.tabela-horarios-tutor {
+    width: 100%;
+}
+
+div.header-tutor {
+    position: relative;
+    padding: 85px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    width: 100%;
+}
+
+div.img-tutor {
+    background-image: url("../img-professores/1.png");
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-size: 100% 100%;
+    border: 1px solid darkgray;
+    padding: 10px;
+    position: relative;
+    display: inline-block;
+}
+
+div.informacoes-tutor {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-left: 52px;
+    width: 86%;
+}
+
+span.nome-tutor {
+    width: 100%;
+    margin: 0px 0px 0px 30px;
+    font-size: 26px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+}
+
+div.informacoes {
+    width: 100%;
+    margin: 0px 0px 0px 30px;
+}
+
+span#disciplinas {
+    display: block;
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+}
+
+div.content-selecionar {
+    width: 90%;
+    margin-left: 45px;
+}
+
+select {
+    width: 96%;
+    background-color: white;
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 2px;
+    text-indent: 5px;
+    height: 40px;
+    margin: 20px 15px 0px 15px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+select option{
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+input#btn-agendar {
+    width: 200px;
+    height: 45px;
+    margin: 0px 0px 0px 32px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 35px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    background-color: #0c0c0c;
+    border: 1px solid rgb(202, 202, 202);
+    color: white;
+    border-radius: 5px;
+    display: block;
+    float: right;
+    transition: all .3s ease;
+}
+
+
+input#btn-agendar:hover {
+    background-color: #ff8206;
+    border: 1px solid #FAFAFA;
+}
+
+div.observacao {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    font-size: 13.5px;
+    color: rgb(88, 88, 88);
+}
+
+.tabela-horarios-tutor {
+    height: calc(90vh - 120px);
+    min-height: 400px;
+    overflow-y: auto;
+    margin: 100px auto 40px auto;
+    padding: 0px 40px 0px 40px;
+    overflow-x: hidden;
+}
+
+h3 {
+    font-size: 26px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+small {
+    font-size: 0.5em;
+}
+
+div#data-tutoria {
+    font-size: 22px;
+    text-align: center;
+    padding: 0px 0px 10px 0px;
+    margin: 0px 0px 15px 0px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.responsive-table li {
+    border-radius: 3px;
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.responsive-table .table-header {
+    background-color: #595959;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    display: flex;
+    flex-wrap: wrap;
+    font-weight: 700;
+    color: white;
+}
+
+.responsive-table .table-row {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+    font-size: 15px;
+    font-family: 'Montserrat', Arial, sans-serif;
+    letter-spacing: 0.03em;
+}
+
+input.btn-selecionar {
+    background-color: #595959;
+    color: white;
+    border: 1px solid white;
+    transition: all .3s ease;
+    border-radius: 4px;
+    padding: 8px 10px 8px 10px;
+    font-size: 15px;
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+input.indisponivel{
+    cursor: unset !important;
+    opacity: 0.65;
+}
+
+input.btn-selecionar.disponivel:focus {
+    background-color: #ff8206;;
+    color: white;
+}
+
+div.footer-tabela-horarios{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+@media (max-width: 1200px) {
+    .content-header-tutor{
+        margin: auto;
+    }
+
+    .header-tutor{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    } 
+
+    .tabela-horarios-tutor {
+        height: auto;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 767px) {
+
+    li {
+        display: block;
+    }
+
+    .col {
+        flex-basis: 100%;
+    }
+}
+
+@media (min-width: 561px) and (max-width: 761px) {
+
+    div.img-tutor {
+        width: 90px;
+        height: 90px;
+    }
+
+    span.nome-tutor {
+        font-size: 24px;
+    }
+
+    span#disciplinas {
+        font-size: 15px;
+    }
+
+    span#idade {
+        font-size: 15px;
+    }
+}
+
+@media  (max-width: 561px) {
+
+    div.img-tutor {
+        width: 85px;
+        height: 85px;
+    }
+
+    span.nome-tutor {
+        font-size: 20px;
+    }
+
+    span#disciplinas {
+        padding-left: 15px;
+        font-size: 14px;
+    }
+
+    div.informacoes-tutor {
+        margin: auto;
+    }
+
+    div.informacoes {
+        margin: 0px 0px 0px 20px;
+    }
+    
+    span#disciplinas {
+        display: block;
+        text-align: left;
+        font-family: 'Montserrat', sans-serif;
+    }
+    
+    div.content-selecionar {
+        width: 88%;
+        margin-left: 0px;
+        transform: translateX(-8px);
+    }
+    
+    .reposicionar{
+        transform: translateX(-20px);
+    }
+
+    div.footer-tabela-horarios{
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .responsive-table .table-header{
+        font-size: 11px;
+        letter-spacing: 0.06rem;
+        font-weight: 600;
+        
+    }
+
+    div#data-tutoria {
+        font-size: 18px;
+        margin: 5px 0px 5px 0px;
+    }
+
+    .responsive-table .table-row {
+        font-size: 12.5px;
+        letter-spacing: 0.03em;
+    }
+
+    input.btn-selecionar {
+        padding: 6px 10px 6px 10px;
+        font-size: 12.5px;
+    }
+    
+    input#btn-agendar {
+        margin: 20px auto 20px auto;
+        float: none;
+    }
+    
+}

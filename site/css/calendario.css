@@ -1,0 +1,70 @@
+    .calendario{
+    width: 90%;
+    min-width: 350px;
+    padding: 0px;
+    margin: 20px auto 0px auto;
+    background-color: rgb(255, 255, 255);
+    font-size: 14px;
+    text-align: center;
+    position: relative;}
+    
+    .calendario table{
+    width: 100%;}
+    
+    .calendario .mes{
+    display: none;}
+    
+    .calendario td{
+    border: 1px solid rgb(199, 199, 199);
+    padding: 10px;
+    color: #666;
+    cursor: pointer;}
+
+    .calendario td.hoverEfect:hover{
+    color: #000000;
+    background-color: rgb(224, 224, 224);}
+    
+    .calendario .mes_title{
+    height: 40px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    font-size: 15px;}
+    
+    .calendario .mes_title td{
+    background-color:#595959;
+    color: white;
+    padding: 5px;
+    padding-bottom: 5px;}
+    
+    .calendario .dias_title{
+    color:black;
+    font-size: 14px;
+    font-weight: 600;}
+    
+    .calendario #volta, .calendario #vai{
+    padding: 0 10px;
+    line-height: 35px;
+    display: flex;
+    align-items: center;
+    height: 35px;
+    font-size:35px;
+    text-decoration: none;
+    padding: 2.5px 10px 2.5px 10px;
+    background-color: transparent;
+    margin: 1.4px 0px 0px 1.4px;
+    position: absolute;
+    color: rgb(255, 255, 255);}
+    
+    .calendario #volta{
+    left: -1px;
+    top: -1px;}
+    
+    .calendario #vai{
+    right: -1px;
+    top: -1px;}
+
+    @media  (max-width: 561px) {
+        .calendario{
+            width: 85%;
+    }
+}

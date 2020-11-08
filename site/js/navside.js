@@ -2,39 +2,40 @@ var navside = document.querySelector('div#navside');
 var iconMenu = document.querySelector('span.icon-menu');
 var aberto = false;
 
-var windowHeight = altura();
 var windowWidth = largura();
 
 window.addEventListener('resize', function () {
-windowWidth = largura(); 
-windowHeight = altura();
+    windowWidth = largura();
 });
 
-function largura(){
-windowWidth = window.innerWidth;
+function largura() {
+    windowWidth = window.innerWidth;
 
-    if(windowWidth >= 991 && aberto == true){
+    if (windowWidth >= 991 && aberto == true) {
         closeNavside();
     }
 
-return windowWidth;}
-
-function altura(){
-    windowHeight = window.innerHeight;
-    return windowHeight;
+    return windowWidth;
 }
 
-iconMenu.addEventListener('click', function navside(){
-    if(aberto == false) openNavside();
+iconMenu.addEventListener('click', function navside() {
+    if (aberto == false) openNavside();
     else closeNavside();
 });
 
-function openNavside(){
-aberto = true;
-navside.style.transform = 'translateX(0px)';}
+function openNavside() {
+    aberto = true;
+    navside.style.transform = 'translateX(0px)';
+}
 
-function closeNavside(){
-aberto = false;
-if (windowWidth <= 767)  navside.style.transform = 'translateX(-200px)';
-else navside.style.transform = 'translateX(-250px)';}
+function closeNavside() {
+    aberto = false;
+    navside.style.transform = 'translateX(-200px)';
+}
 
+//Animação do botão 'Ver Eventos'
+function rolarPara(elemento) {
+    $('html, body').animate({
+        scrollTop: ($(elemento).offset().top - 100)
+    }, 600);
+}

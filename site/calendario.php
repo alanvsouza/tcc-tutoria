@@ -62,7 +62,7 @@
 
         foreach($arrayMes as $num => $mes){
             echo '<tbody id="mes_'. $num .'" class="mes">';
-            echo '<tr class="mes_title"><td colspan="7">'. $mes .'</td></tr>';
+            echo '<tr class="mes_title"><td colspan="7">'. str_replace("ç","Ç",strtoupper($mes)) .'</td></tr>';
             echo '<tr class="dias_title">';
             foreach($diasSemana as $i => $day){
                 echo '<td>'. $day .'</td>';

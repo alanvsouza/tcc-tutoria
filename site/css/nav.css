@@ -22,10 +22,10 @@ nav {
   background-color: #ffffff;
 }
 
-nav ul {
-  width: 100%;
+nav ul#list-navbar {
+  width: 750px;
   padding: 0px;
-  margin: auto auto auto calc(100% - 460px);
+  margin: auto auto auto calc(100% - 730px);
   display: flex;
   flex-direction: row;
 }
@@ -38,11 +38,12 @@ nav ul li {
 }
 
 nav div a {
+  transition: color .3s ease;
   font-size: 19px;
   font-family: "Josefin Sans";
   text-decoration: none;
   color: #292827;
-  width: auto;
+  width: 100%;
   display: flex;
   flex-direction: row;
 }
@@ -107,8 +108,6 @@ a.login:hover {
   color: #ff8817;
 }
 
-/*SOBRE*/
-
 .tutoria {
   cursor: pointer;
   transition: color 0.2s linear;
@@ -119,39 +118,94 @@ a.login:hover {
   cursor: pointer;
 }
 
-ul#items-sobre {
-  width: auto;
+i.sem-foto{
+  margin-top: 10px; 
+  font-size: 45px; 
+  text-align: center;
+}
+
+img.com-foto{
+  width: 50px; 
+  border-radius: 50%;
+  margin-top: 7px;
+}
+
+div.container-user {
+  padding: 0px;
   margin: 0px;
-  transform: translateX(-35px);
-  position: relative;
-  padding: 0px;
-}
-
-ul#items-sobre li {
-  font-size: 14px;
-  padding: 0px;
-  background-color: rgb(255, 255, 255);
-  border: 1px solid rgba(170, 168, 168, 0.2);
-  box-shadow: 1px 1px 5px rgba(158, 158, 158, 0.205);
-  border-top: none;
-}
-
-ul#items-sobre li a {
-  width: 100%;
-  padding: 0px 15px 0px 15px;
-  font-size: 15.5px;
   display: flex;
-  justify-content: center;
+  flex-direction: row;
 }
 
-ul#items-sobre {
+ul.user-perfil {
   display: flex;
   flex-direction: column;
-  opacity: 0;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 150px;
+  padding: 0px;
+  margin: 0px;
+  transform: translateX(-40px);
+}
+
+div.items-sobre {
+  width: 100%;
   visibility: hidden;
-  transition: all ease-in-out 0.2s;
+  opacity: 0;
   position: absolute;
-  top: 65.47px;
+  top: 65px;
+  transition: all .2s ease;
+  transform: translateX(-15px);
+}
+
+div.items-sobre2 {
+  width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 65px;
+  transition: all .2s ease;
+  transform: translateX(-15px);
+}
+
+.user-infos {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  min-width: 160px;
+  background-color: #ffffff;
+  border: 1px solid rgb(207, 207, 207);
+  box-shadow: 1px 1px 4px solid;
+  margin: 0px 0px 0px 0px;
+  padding: 10px 10px 10px 10px;
+}
+
+span.nome-usuario {
+  margin: 0px auto 5px auto;
+  border-bottom: 1px solid rgb(202, 202, 202);
+  width: 100%;
+  font-size: 14px;
+  padding: 0px 0px 7px 0px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  color: #292827;
+}
+
+a.ver-perfil {
+  color: #ff8817;
+  font-size: 13px;
+  padding: 5px 0px 0px 10px;
+  width: 69px;
+}
+
+a.sair {
+  font-size: 13px;
+  color: #ff8817;
+  padding: 5px 10px 0px 0px;
+  width: 69px;
+  display: block;
+  text-align: right;
 }
 
 span.icon-menu {
@@ -161,59 +215,153 @@ span.icon-menu {
   width: 75px;
   height: 40px;
   padding: 0px;
-  margin: auto 2% auto auto;
+  margin: auto 50px auto auto;
+  position: absolute;
   cursor: pointer;
   display: none;
 }
 
-@media (max-width: 991px) {
+.triangulo-cima {
+  width: 0;
+  height: 0;
+  transform: translateX(25px);
+  margin: 0px auto 0px auto;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 20px solid #ffffff;
+}
+
+.aparecer{
+  display: none;
+}
+
+div.header_post:hover div#triangulo-para-baixo {
+  top: 120px;
+}
+
+@media (max-width: 1200px) {
+
+  a.name-site {
+    font-size: 32px;
+  }
+
+  nav ul {
+    width: 750px;
+    padding: 0px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  nav div a {
+    font-size: 17px;
+  }
+
+  ul.user-perfil {
+    max-width: 130px;
+  }
+
+  span.nome-usuario {
+    font-size: 14.5px;
+  }
+
+  a.ver-perfil {
+    font-size: 12.5px;
+    width: 65px;
+    padding: 0px 0px 0px 5px;
+  }
+
+  a.sair {
+    font-size: 12.5px;
+    width: 65px;
+    padding: 0px 5px 0px 0px;
+  }
+
+}
+
+@media (max-width: 961px) {
+
   nav {
     height: 55px;
+  }
+
+  div.container-user{
+    position: absolute;
+    top: -5px;
+    left: calc(95% - 60px);
   }
 
   a.name-site {
     height: 55px;
     line-height: 55px;
-    font-size: 40px;
+    font-size: 32px;
+    margin: auto;
+    width: 210px;
+  }
+
+  i.sem-foto{
+    font-size: 37px; 
+  }
+  
+  img.com-foto{
+    width: 45px; 
+    margin-top: 10px;
+  }
+
+  span.icon-menu {
+    width: 35px;
+    height: 35px;
+    top: 10px;
+    margin-left: 2.5%;
+    display: block;
   }
 
   .sumir {
     display: none;
   }
 
-  span.icon-menu {
+  .aparecer{
     display: block;
-    width: 50px;
-    background-size: contain;
-    height: 35px;
   }
-}
-@media (min-width: 576px) and (max-width: 767px) {
-  a.name-site {
-    max-width: 220px;
-    margin-left: 4%;
-    font-size: 30px;
+
+  div.links-menu{
+    width: auto;
   }
+
+  ul.user-perfil {
+    transform: translateX(-30px);
+  }
+
+  .triangulo-cima {
+    transform: translateX(65px);
+  }
+  
+  div.items-sobre2 {
+    max-width: 150px;
+    width: 150px;
+    min-width: 150px;
+    transform: translateX(-50px);
+  }
+
 }
 
 @media (min-width: 401px) and (max-width: 575px) {
+
   a.name-site {
-    max-width: 220px;
-    margin-left: 3.5%;
-    font-size: 31px;
+    max-width: 190px;
+    font-size: 25px;
   }
 
   span.icon-menu {
-    width: 45px;
+    width: 35px;
     height: 30px;
   }
+
 }
 
 @media (max-width: 400px) {
   a.name-site {
-    max-width: 210px;
-    margin-left: 2.5%;
-    font-size: 29px;
+    max-width: 190px;
+    font-size: 25px;
   }
 
   span.icon-menu {
@@ -225,7 +373,6 @@ span.icon-menu {
 @media (max-width: 300px) {
   a.name-site {
     max-width: 200px;
-    margin-left: 5%;
     font-size: 27px;
   }
 

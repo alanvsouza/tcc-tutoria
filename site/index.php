@@ -62,7 +62,7 @@
             <h2>Bem-Vindo!</h2>
             <h3>Fique li&shy;ga&shy;do nos no&shy;vos even&shy;tos ati&shy;van&shy;do as no&shy;ti&shy;fi&shy;ca&shy;ções!</h3>
             <p>Os even&shy;tos são or&shy;ga&shy;ni&shy;za&shy;dos pela pro&shy;fe&shy;sso&shy;ra de en&shy;fer&shy;ma&shy;gem Daniele Zuza. Você pode acom&shy;panha-los ati&shy;van&shy;do as noti&shy;fica&shy;ções e con&shy;fer&shy;indo os pró&shy;xi&shy;mos even&shy;tos que ocorre&shy;rão logo abaixo.</p>
-            <button class="mt-2" id="btn-ver-eventos">Ver Eventos</button>
+            <a onclick="rolarPara('#eventos')"><button class="mt-2" id="btn-ver-eventos">Ver Eventos</button></a>
         </div>
 
     <div class="col-lg-6 col-md-11 column-two"></div>
@@ -85,7 +85,7 @@
         </div>
     </header>
 
-<div class="container">
+<div class="container" id="eventos">
     <?php 
         error_reporting(6143);
     
@@ -138,16 +138,12 @@
 
 
 <!-- My JS -->
-<!-- <script src="js/nav.js"></script> -->
+
 <script src="js/navside.js"></script>
 <script src="js/notification.js"></script>
 <script src="js/classEdit.js"></script>
 <script src="js/galeriaEventos.js"></script>
-
-<!-- 
-<script type="text/javascrpit" src="node_modules/jquery/dist/jquery.slim.min.js"></script>
-<script type="text/javascrpit" src="node_modules/popper.js/dist/umd/popper.min.js"></script>
-<script type="text/javascrpit" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script> -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 
 </body>
