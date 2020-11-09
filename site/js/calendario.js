@@ -1,26 +1,26 @@
-$(function(){
+$(function () {
     var data = new Date();
-    var mesAtual = data.getMonth()+1;
+    var mesAtual = data.getMonth() + 1;
     $('#mes_' + mesAtual).show();
 
-    function hideShow(){
-        if(mesAtual > 12){
+    function hideShow() {
+        if (mesAtual > 12) {
             mesAtual = 1;
-        }else if(mesAtual < 1){
+        } else if (mesAtual < 1) {
             mesAtual = 12;
         }
         $('.mes').hide();
-        $('#mes_'+mesAtual).show();
+        $('#mes_' + mesAtual).show();
     }
 
-    $('#vai').on('click', function(e){
+    $('#vai').on('click', function (e) {
         e.preventDefault();
         mesAtual++;
         hideShow();
 
         return false;
     });
-    $('#volta').on('click', function(e){
+    $('#volta').on('click', function (e) {
         e.preventDefault();
         mesAtual--;
         hideShow();
@@ -28,3 +28,13 @@ $(function(){
         return false;
     });
 });
+
+function dataTutoria(data) {
+    const inputData = document.querySelector('form > input#data');
+    const submit = document.querySelector('form input#select-professor-combobox');
+
+    inputData.disabled = false;
+    inputData.value = data;
+
+    submit.click();
+}

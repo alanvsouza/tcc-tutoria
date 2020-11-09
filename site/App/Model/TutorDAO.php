@@ -19,6 +19,23 @@ class TutorDAO
         return null;
     }
 
+    public function readById($id)
+    {
+        $query = "SELECT * FROM tbtutor WHERE idtutor = ?";
+        $stmt = Connection::getConn()->prepare($query);
+
+        $stmt->bindValue(1, $id);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            $result = $stmt->fetch();
+            return $result;
+        }
+
+        return null;
+    }
+
     public function readHorariosDiaById($id, $dia)
     {
         $query = "SELECT `idhorario`, `horarios` FROM `tbhorarios` WHERE `idprofessor` = ? AND `diaSemana` = ?";

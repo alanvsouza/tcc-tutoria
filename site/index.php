@@ -1,6 +1,6 @@
-﻿<?php        
-    require_once "vendor/autoload.php";
-    \App\Model\Session::startSession();
+﻿<?php
+require_once "vendor/autoload.php";
+\App\Model\Session::startSession();
 ?>
 
 <!doctype html>
@@ -20,7 +20,7 @@
     <link href="css/style.scss">
     <link rel="stylesheet" href="css/imgEvents.css">
     <link rel="stylesheet" href="css/events.css">
-    <link rel="stylesheet" href="css/nav.css">    
+    <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/notification.css">
     <link rel="stylesheet" href="css/navside.css">
@@ -39,42 +39,42 @@
     <link rel="icon" href="img/logoSite.jpg">
 </head>
 
-<body> 
-    
-    <?php 
-        include("nav.php");
-        include("navside.php");
+<body>
+
+    <?php
+    include("nav.php");
+    include("navside.php");
     ?>
 
     <div class="img-events">
         <div>
-            <h1>Cotil Amigável</h1> 
+            <h1>Cotil Amigável</h1>
             <h2>Novos Eventos Toda Semana</h2>
             <h3>Roda de Conversa / Sessão Cinema e Muito Mais!</h3>
         </div>
     </div>
 
-<section class="m-0">
-<div class="shape-fill"></div>
-    <div class="col-lg-12 flex-box" id="bem-vindo">
+    <section class="m-0">
+        <div class="shape-fill"></div>
+        <div class="col-lg-12 flex-box" id="bem-vindo">
 
-        <div class="col-lg-6 col-md-12 column-one">
-            <h2>Bem-Vindo!</h2>
-            <h3>Fique li&shy;ga&shy;do nos no&shy;vos even&shy;tos ati&shy;van&shy;do as no&shy;ti&shy;fi&shy;ca&shy;ções!</h3>
-            <p>Os even&shy;tos são or&shy;ga&shy;ni&shy;za&shy;dos pela pro&shy;fe&shy;sso&shy;ra de en&shy;fer&shy;ma&shy;gem Daniele Zuza. Você pode acom&shy;panha-los ati&shy;van&shy;do as noti&shy;fica&shy;ções e con&shy;fer&shy;indo os pró&shy;xi&shy;mos even&shy;tos que ocorre&shy;rão logo abaixo.</p>
-            <a onclick="rolarPara('#eventos')"><button class="mt-2" id="btn-ver-eventos">Ver Eventos</button></a>
+            <div class="col-lg-6 col-md-12 column-one">
+                <h2>Bem-Vindo!</h2>
+                <h3>Fique li&shy;ga&shy;do nos no&shy;vos even&shy;tos ati&shy;van&shy;do as no&shy;ti&shy;fi&shy;ca&shy;ções!</h3>
+                <p>Os even&shy;tos são or&shy;ga&shy;ni&shy;za&shy;dos pela pro&shy;fe&shy;sso&shy;ra de en&shy;fer&shy;ma&shy;gem Daniele Zuza. Você pode acom&shy;panha-los ati&shy;van&shy;do as noti&shy;fica&shy;ções e con&shy;fer&shy;indo os pró&shy;xi&shy;mos even&shy;tos que ocorre&shy;rão logo abaixo.</p>
+                <a onclick="rolarPara('#eventos')"><button class="mt-2" id="btn-ver-eventos">Ver Eventos</button></a>
+            </div>
+
+            <div class="col-lg-6 col-md-11 column-two"></div>
         </div>
+    </section>
 
-    <div class="col-lg-6 col-md-11 column-two"></div>
-    </div>
-</section>
+    <section id="prox-events" class="col-lg-12 col-12" style="border-top: 1px solid rgba(150, 150, 151,0.3);">
 
-<section id="prox-events" class="col-lg-12 col-12" style="border-top: 1px solid rgba(150, 150, 151,0.3);" >
-    
-    <header id="header-events" class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11">
-        <div class="info-box">
-            <div class="direction">
-                <div id="img-calendar"></div>
+        <header id="header-events" class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11">
+            <div class="info-box">
+                <div class="direction">
+                    <div id="img-calendar"></div>
                     <div id="info-events">
                         <h2>Próximos Eventos</h2>
                         <h3>Esses são os pró&shy;xi&shy;mos even&shy;tos que es&shy;tão mar&shy;ca&shy;dos pa&shy;ra oco&shy;rrer.</h3>
@@ -82,69 +82,70 @@
                     </div>
                 </div>
             </div>
+            </div>
+        </header>
+
+        <div class="container" id="eventos">
+            <?php
+            error_reporting(6143);
+
+            \App\Model\EventoService::renderizarEventos();
+            $eventoDao = new \App\Model\EventoDAO();
+
+            ?>
         </div>
-    </header>
 
-<div class="container" id="eventos">
-    <?php 
-        error_reporting(6143);
-    
-        \App\Model\EventoService::renderizarEventos();
-        $eventoDao = new \App\Model\EventoDAO();
+        <form action="galeriaEventos.php">
+            <button id="btn-ver-galeriaEventos" type="submit">Galeria de Eventos</button>
+        </form>
 
-    ?>
-</div>
+    </section>
 
-    <form action="galeriaEventos.php">
-        <button id="btn-ver-galeriaEventos" type="submit">Galeria de Eventos</button>
-    </form>
+    <div class="shape-fill2"></div>
 
-</section>
-
-<div class="shape-fill2"></div>
-
-<footer>
-    <div class="img-footer">
+    <footer>
+        <div class="img-footer">
             <div id="conteudo">
-                <h2>Não Fique De Fora!</h2> 
+                <h2>Não Fique De Fora!</h2>
                 <h3>Experimente participar de um dos nossos eventos, garantimos uma experiência muito legal! </h3>
-                
-                <div id="links-footer p-0 m-auto" >
-                <ul class="m-auto list-links p-0 m-auto"> 
-                    <li><a class="actived" href="#">Como marcar uma Tutoria?</a></li>
-                    <li><a href="#">Desenvolvedores</a></li>
-                    <li><a href="https://www.cotil.unicamp.br/portal/">Colégio Técnico de Limeira</a></li>
-                    <li><a href="projetoTutoria.php">Projeto Tutoria</a></li>
-                    <li><a href="#">Esqueceu sua senha?</a></li>
-                </ul>
-            </div>
 
-            <div id="copyright" class="p-0">
-                <span class="p-0">@Copyright | Todos os Direitos Reservados ao COTIL</span>
+                <div id="links-footer p-0 m-auto">
+                    <ul class="m-auto list-links p-0 m-auto">
+                        <li><a class="actived" href="#">Como marcar uma Tutoria?</a></li>
+                        <li><a href="#">Desenvolvedores</a></li>
+                        <li><a href="https://www.cotil.unicamp.br/portal/">Colégio Técnico de Limeira</a></li>
+                        <li><a href="projetoTutoria.php">Projeto Tutoria</a></li>
+                        <li><a href="#">Esqueceu sua senha?</a></li>
+                    </ul>
+                </div>
+
+                <div id="copyright" class="p-0">
+                    <span class="p-0">@Copyright | Todos os Direitos Reservados ao COTIL</span>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
     <notification id="notificacao-actived" class="notificacao noti-none">
         <span id="icone-notification"><i class="fa fa-bell"></i></span>
         <span id="status" class="font-weight-bold">Notificações Ativadas</span>
     </notification>
 
-    <notification id="notificacao-disabled" class="notificacao" >
+    <notification id="notificacao-disabled" class="notificacao">
         <span id="icone-notification-disabled"><i class="fas fa-bell-slash"></i></span>
         <span id="status" class="font-weight-bold">Notificações Desativadas</span>
     </notification>
 
 
-<!-- My JS -->
+    <!-- My JS -->
 
-<script src="js/navside.js"></script>
-<script src="js/notification.js"></script>
-<script src="js/classEdit.js"></script>
-<script src="js/galeriaEventos.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="js/navside.js"></script>
+    <script src="js/notification.js"></script>
+    <script src="js/classEdit.js"></script>
+    <script src="js/galeriaEventos.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 
 </body>
+
 </html>

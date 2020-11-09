@@ -76,21 +76,26 @@ include("functions/acesso.php");
             <div class="header-tutor">
                 <div class="row content-header-tutor">
                     <div class="row informacoes-tutor">
-                        <div class="img-tutor"></div>
-                        <div class="column reposicionar">
-                            <span class="nome-tutor">José Tamióli</span>
-                            <div class="informacoes row">
-                                <span id="disciplinas">Física, Matemática, Mecânica e Química</span>
-                            </div>
-                        </div>
+                        <?php
+                        if (isset($_GET['professor']))
+                            \App\Model\TutorService::renderizarInformacoes($_GET['professor']);
+                        ?>
                     </div>
                     <div class="p-0 m-auto content-selecionar">
-                        <select name="selecionar-tutor" id="selecionar-tutor">
-                            <option value="volvo">Selecione um tutor</option>
-                            <option value="saab">José Tamióli</option>
-                            <option value="mercedes">Carlos Andrade</option>
-                            <option value="audi">Jéssica Costa</option>
-                        </select>
+                        <form action="<?= $_SERVER['PHP_SELF'] ?>">
+                            <select name="professor" id="selecionar-tutor">
+                                <option value="" <?php if (!isset($_GET['professor'])) echo 'selected="selected"' ?> disabled>Selecione um tutor...</option>
+                                <?php \App\Model\TutorService::renderizarComboboxProfessores(); ?>
+                            </select>
+
+                            <?php if (isset($_GET['data'])) : ?>
+                                <input id='data' type="hidden" name="data" value="<?= $_GET['data'] ?>" />
+                            <?php else : ?>
+                                <input id='data' type="hidden" name="data" disabled />
+                            <?php endif; ?>
+
+                            <input id="select-professor-combobox" type="submit" hidden />
+                        </form>
                     </div>
                 </div>
             </div>
@@ -101,70 +106,21 @@ include("functions/acesso.php");
                 </div>
             </div>
         </div>
-        <div class="tabela-horarios-tutor col-xl-6">
-            <ul class="responsive-table">
-            <div id="data-tutoria" class="col">12 de outubro de 2020</div>
-                <li class="table-header">
-                    <div>Início</div>
-                    <div>Término</div>
-                    <div>Disponibilidade</div>
-                    <div>Agendar</div>
-                </li>
-                <li class="table-row">
-                    <div class="" data-label="10:00">10:00</div>
-                    <div data-label="10:20">10:20</div>
-                    <div data-label="Disponível">Disponível</div>
-                    <form class="d-flex align-items-center"><input class="btn-selecionar disponivel" type="button" value="Selecionar"></form>
-                </li>
-                <li class="table-row">
-                    <div data-label="12:00">12:00</div>
-                    <div data-label="12:30">12:30</div>
-                    <div data-label="Disponível">Disponível</div>
-                    <form class="d-flex align-items-center"><input class="btn-selecionar disponivel" type="button" value="Selecionar"></form>
-                </li>
-                <li class="table-row">
-                    <div data-label="12:35">12:35</div>
-                    <div data-label="13:05">13:05</div>
-                    <div data-label="Indiponível" style="cursor: none;">Indisponível</div>
-                    <form class="d-flex align-items-center"><input class="btn-selecionar indisponivel" type="button" value="Selecionar"></form>
-                </li>
-                <li class="table-row">
-                    <div data-label="15:00">15:00</div>
-                    <div data-label="15:20">15:20</div>
-                    <div data-label="Disponível">Disponível</div>
-                    <form class="d-flex align-items-center"><input class="btn-selecionar disponivel" type="button" value="Selecionar"></form>
-                </li>
-            </ul>
-            <div class="footer-tabela-horarios">
-                <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 col-12 observacao">O local da tutoria será definido pelo tutor após este confirmar o agendamento da mesma.</div>
-                <form action=""  class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12">
-                    <input type="button" id="btn-agendar" value="Agendar Tutoria">
-                </form>
-            </div>
-        </div>
+        <?php
+        if (isset($_GET['professor']) && isset($_GET['data'])) {
+            $professor = $_GET['professor'];
+            $data = $_GET['data'];
+
+            \App\Model\TutorService::renderizarTabelaHorarios($professor, $data);
+        }
+        ?>
     </div>
-
-
-
-    <!-- <div id="content">
-        <div id="sidebar">
-            <ul id="list-profs">
-                <?php \App\Model\TutorService::renderizarProfessoresAgendamentoTutoria(); ?>
-            </ul>
-        </div>
-        <div id="body">
-            <?php
-            if (isset($_GET['id']))
-                \App\Model\TutorService::renderizarInformacoes($_GET['id']);
-            ?>
-        </div>
-    </div> -->
 
     <script type="text/javascript" src="js/nav.js"></script>
     <script type="text/javascript" src="js/navside.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/calendario.js"></script>
-    <script type="text/javascript" src="js/selecionarPrimeiroProf.js"></script>
+    <script src="js/selecionarProfessor.js"></script>
 
     <script type="text/javascript">
         function dataTutoria(data) {
