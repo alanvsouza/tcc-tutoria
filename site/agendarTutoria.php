@@ -61,8 +61,6 @@ include("functions/acesso.php");
 <body>
 
     <?php
-    error_reporting(6143);
-
     include("nav.php");
     include("navside.php");
     include('calendario.php');
@@ -121,6 +119,7 @@ include("functions/acesso.php");
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/calendario.js"></script>
     <script src="js/selecionarProfessor.js"></script>
+    <script src="js/agendarTutoria.js"></script>
 
     <script type="text/javascript">
         function dataTutoria(data) {

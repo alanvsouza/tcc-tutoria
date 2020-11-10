@@ -153,7 +153,10 @@ class TutorService
                 <div class='' data-label='{$horario[0]}'>{$horario[0]}</div>
                 <div data-label='{$horario[1]}'>{$horario[1]}</div>
                 <div data-label='Disponível'>Disponível</div>
-                <form class='d-flex align-items-center'><input class='btn-selecionar disponivel' type='button' value='Selecionar'></form>
+                <form class='d-flex align-items-center form-selecionar-horario'>
+                    <input type='hidden' name='idhorario' value='{$id}'>
+                    <input class='btn-selecionar disponivel' type='button' value='Selecionar'>
+                </form>
             </li>
             ";
         }
@@ -161,11 +164,11 @@ class TutorService
         echo "
             <div class='footer-tabela-horarios'>
                 <div class='col-xl-7 col-lg-7 col-md-7 col-sm-7 col-12 observacao'>O local da tutoria será definido pelo tutor após este confirmar o agendamento da mesma.</div>
-                <form action='' class='col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12'>
-                    <input type='hidden' name='idhorario' disabled />
-                    <input type='hidden' name='idtutor' disabled />
-                    <input type='hidden' name='idaluno' disabled />
-                    <input type='hidden' name='data' disabled />
+                <form id='form-envio-tutoria' method='GET' action='functions/agendarTutoria.php' class='col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12'>
+                    <input type='hidden' name='idhorario' />
+                    <input type='hidden' name='idtutor' value='{$_GET['professor']}' />
+                    <input type='hidden' name='idaluno' value='{$_SESSION['usuario']}' />
+                    <input type='hidden' name='data' value='{$_GET['data']}' />
                     
                     <input type='button' id='btn-agendar' value='Agendar Tutoria' />
                     <input type='submit' hidden />

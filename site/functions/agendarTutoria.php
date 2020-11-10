@@ -1,5 +1,18 @@
 <?php
 
-echo "{$_POST['idUser']} - {$_POST['idTutor']} - {$_POST['data']} - {$_POST['idHorario']}";
+require_once "../vendor/autoload.php";
 
-die();
+$idAluno = $_GET['idaluno'];
+$data = $_GET['data'];
+$idTutor = $_GET['idtutor'];
+$idHorario = $_GET['idhorario'];
+
+$tutoria = new \App\Model\Tutoria($idAluno, $idTutor, $data, $idHorario);
+$tutoriaDao = new \App\Model\TutoriaDAO();
+
+try {
+    $tutoriaDao->create($tutoria);
+    header('Location: ../agendarTutoria.php');
+} catch (PDOException $e) {
+    echo "Erro ao salvar tutoria!";
+}
