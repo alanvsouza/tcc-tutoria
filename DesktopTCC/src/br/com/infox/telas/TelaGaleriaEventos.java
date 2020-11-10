@@ -25,6 +25,7 @@ Imagem img = new Imagem();
 
 String nomeImagem = "";
 String pasta;
+String nomePasta;
 String caminhoPasta;
 String fotos[] = null;
 
@@ -57,7 +58,7 @@ int count = 1;
                 File pastaNova;
                 if(!glEventos.existeDir(pasta)){
                     pastaNova = new File(pasta);
-                    pastaNova.mkdir();
+                    pastaNova.mkdir();  
                 }
                 
                 nomeImagem = nome.getText().replace(".jpg","").replace(".png","").replace(".","");
@@ -86,7 +87,8 @@ int count = 1;
                     int adicionado =  pst.executeUpdate();
 
                         if(adicionado > 0){
-                            JOptionPane.showMessageDialog(null,"Evento cadastrado com sucesso!");
+                            salvarPasta();
+                            JOptionPane.showMessageDialog(null,"Foto cadastrada com sucesso!");
                             pesquisarGaleria();
                         }
                     }
@@ -102,6 +104,26 @@ int count = 1;
             }
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Falha ao tentar adicionar a foto! Verifique sua conexão com a internet!");
+        }
+    }
+    
+    public void salvarPasta(){
+        String sql = "select pastaGaleria from tbeventos where idevento = ?";
+        try{
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1,txtGaleriaEventoId.getText());
+            rs = pst.executeQuery();
+            if(rs.next()){
+                 if(rs.getString(1) == null || rs.getString(1) == ""){
+                    String sql2 = "update tbeventos set pastaGaleria=? where idevento=?";
+                    pst2 = conexao.prepareStatement(sql2);
+                    pst2.setString(1,nomePasta);
+                    pst2.setString(2,txtGaleriaEventoId.getText());
+                    pst2.executeUpdate();
+                 }
+            }
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Falha ao tentar inserir o nome da pasta da galeria no Banco de Dados");
         }
     }
     
@@ -176,9 +198,8 @@ int count = 1;
                 String sql = "delete from tbimgeventos where idevento =?";
                 pst = conexao.prepareStatement(sql);
                 pst.setString(1,txtGaleriaEventoId.getText());
-                int adicionado = pst.executeUpdate();
-                
-                if(adicionado > 0){
+                pst.executeUpdate();
+
                     String sql2 = "delete from tbeventos where idevento =?";
                     pst2 = conexao.prepareStatement(sql2);
                     pst2.setString(1,txtGaleriaEventoId.getText());
@@ -194,11 +215,10 @@ int count = 1;
                         index = 0;
                         lbGaleriaEventos.setText(0 + " / " + 0);
                         btnGaleriaFotos.setIcon(null);
-                    }
                 }
             } 
             } catch(Exception e){
-            
+                JOptionPane.showMessageDialog(null, "Falha ao tentar excluir a galeria!");
             }
         }else{
             JOptionPane.showMessageDialog(null, "Selecione uma galeria para excluir!");
@@ -264,10 +284,12 @@ int count = 1;
            JTextField[] campos = {txtGalNome, txtGalData, txtGalInicio,txtGalTermino, null, txtGalLocal,txtGaleriaEventoId};
            glEventos.setCamposGaleria(tblGaleriaEventos, campos, taGalDescricao);
             
-           pasta = caminhoPasta + 
-           txtGalNome.getText().replace("^",".").replace("|",".").replace("(",".").replace(")",".").replace("[",".").replace("]",".").replace("\\",".")
+           nomePasta = txtGalNome.getText().replace("^",".").replace("|",".").replace("(",".").replace(")",".").replace("[",".").replace("]",".").replace("\\",".")
            .replace("$",".").replace("+",".").replace(" ","").trim() + "_"  + txtGalData.getText().replace("/","-").trim() + "_" 
-           + txtGaleriaEventoId.getText() + "\\"; 
+           + txtGaleriaEventoId.getText() + "\\";
+           
+           pasta = caminhoPasta + nomePasta;
+        
            
            fotos = glEventos.adquirirImagens(txtGaleriaEventoId.getText());
            count = 1;
