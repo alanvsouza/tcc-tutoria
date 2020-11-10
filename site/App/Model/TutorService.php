@@ -108,7 +108,7 @@ class TutorService
         $infos = $tutorDao->readById($id);
 
         echo "
-        <div class='img-tutor'></div>
+        <img src='img-professores/1.png' class='img-tutor'></img>
         <div class='column reposicionar'>
             <span class='nome-tutor'>{$infos['nometutor']}</span>
             <div class='informacoes row'>
