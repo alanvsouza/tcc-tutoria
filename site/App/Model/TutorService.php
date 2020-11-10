@@ -138,7 +138,7 @@ class TutorService
                 </li>";
 
         if (!$horarios) {
-            echo "Nenhum horário encontrado!";
+            echo "<div class='sem-resultados'>Nenhum horário encontrado para este dia!</div>";
 
             return;
         }

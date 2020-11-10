@@ -3,7 +3,6 @@
     min-width: 350px;
     padding: 0px;
     margin: 20px auto 0px auto;
-    background-color: rgb(255, 255, 255);
     font-size: 14px;
     text-align: center;
     position: relative;}
@@ -18,7 +17,8 @@
     border: 1px solid rgb(199, 199, 199);
     padding: 10px;
     color: #666;
-    cursor: pointer;}
+    cursor: pointer;
+    background-color: rgb(255, 255, 255);}
 
     .calendario td.hoverEfect:hover{
     color: #000000;
