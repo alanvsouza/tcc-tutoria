@@ -37,6 +37,24 @@ class TutorService
         endfor;
     }
 
+    public static function renderizarComboboxProfessores()
+    {
+        $tutorDao = new TutorDAO();
+        $tutores = $tutorDao->readAll();
+
+        foreach ($tutores as $tutor) {
+            $id = $tutor['idtutor'];
+            $nome = $tutor['nometutor'];
+            $selected = isset($_GET['professor'])
+                && $_GET['professor'] == $id
+                ? 'selected="selected"'
+                : null;
+
+
+            echo "<option value='{$id}' {$selected}>{$nome}</option>";
+        }
+    }
+
     public static function renderizarProfessoresProjetoTutoria()
     {
         $tutorDao = new TutorDAO();
@@ -86,111 +104,74 @@ class TutorService
 
     public static function renderizarInformacoes($id)
     {
-        $query = "SELECT `nometutor`, `descricao` FROM `tbtutor` WHERE `idtutor` = ?";
-        $stmt = Connection::getConn()->prepare($query);
-
-        $stmt->bindParam(1, $id);
-
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0)
-            $row = $stmt->fetch();
-        else
-            return;
-
-        $nome = $row["nometutor"];
-        $data = "";
-
-        if (isset($_GET["data"])) {
-            $data = $_GET["data"];
-        }
+        $tutorDao = new TutorDAO;
+        $infos = $tutorDao->readById($id);
 
         echo "
-        <div id='professor' class='m-0 p-0'>
-            <div class='col-lg-12 m-0' id='description'>
-                <div id='header-description'>
-                    <h3>" . $nome . "</h3>
-                    <a id='ver-perfil' href='#'>Ver Perfil</a>
-                </div>
-                <div id='body-description'> 
-                    <span>" . $row['descricao'] . "</span>
-                </div>
+        <div class='img-tutor'></div>
+        <div class='column reposicionar'>
+            <span class='nome-tutor'>{$infos['nometutor']}</span>
+            <div class='informacoes row'>
+                <span id='disciplinas'>{$infos['disciplinas']}</span>
             </div>
         </div>
-    
-        <div class='col-lg-12'>
-            <div id='agendar-tutoria'  class='col-lg-12' >
-                    <div class='calendario' class='col-lg-4 col-md-4 col-sm-7 col-11'>";
-        montaCalendario();
-        echo "
-                </div>
-                    <form method='POST' action='agendamentoTutoria.php'>
-                        <div class='linha'>
-                            <span  class='col-lg-4 id='span-data'>Data selecionada:</span> 
-                            <input class='col-lg-4' type='text' name='data' disabled id='data-selecionada' value='{$data}'>
-                            <input class='col-lg-0' type='hidden' name='professor' value='{$id}'>
-                            <div class='col-lg-4'><input type='button' id='btn-agendar' value='Agendar Tutoria'></div>
-                        </div>
-                    </form>
-                    <form method='GET' action='{$_SERVER['PHP_SELF']}'>
-                        <input id='fakeData' type='hidden' name='data'>
-                        <input id='idProf' type='hidden' name='id'>
-                        <input id='submitFakeData' type='submit' hidden>
-                    </form>
-                </div>
-            </div>        
-        </div>";
-
-        if (isset($data))
-            TutorService::renderizarTabelaHorarios($id, $data);
-
-        unset($_GET["data"]);
+        ";
     }
 
     public static function renderizarTabelaHorarios($idTutor, $data)
     {
-        $dataFormatada = date_create(strtr($data, array('/' => '-')));
-        $dia = date_format($dataFormatada, 'N');
+        $tutorDao = new TutorDAO;
+        $diaSemana = date_format(date_create($data), 'N');
 
-        $tutorDao = new TutorDAO();
-        $horarios = $tutorDao->readHorariosDiaById($idTutor, $dia);
+        $horarios = $tutorDao->readHorariosDiaById($idTutor, $diaSemana);
+        $dataFormatada = date_format(date_create($data), 'd/m/Y');
 
-        $idUsuario = $_SESSION['idUsuario'];
+        echo "
+        <div class='tabela-horarios-tutor col-xl-6'>
+            <ul class='responsive-table'>
+                <div id='data-tutoria' class='col'>{$dataFormatada}</div>
+                <li class='table-header'>
+                    <div>Início</div>
+                    <div>Término</div>
+                    <div>Disponibilidade</div>
+                    <div>Agendar</div>
+                </li>";
 
+        if (!$horarios) {
+            echo "Nenhum horário encontrado!";
 
-        if ($horarios) :
-            echo
-                "<table style='position: absolute; margin-left: 40%; margin-top: 15%;' id='horarios-professor'>
-                    <tr>                    
-                        <th>Horário</th>
-                        <th>Agendar</th>
-                    </tr>";
+            return;
+        }
 
-            foreach ($horarios as $horario) :
-                $idHorario = $horario['idhorario'];
-                $horario = $horario['horarios'];
+        foreach ($horarios as $horario) {
+            // echo '<pre>' . var_export($horario, true) . '</pre>';
+            $id = $horario['idhorario'];
+            $horario = explode('-', $horario['horarios']);
 
-                echo
-                    "<tr>                    
-                        <td>{$horario}</td>
-                        <td>
-                            <form method='POST' action='functions/agendarTutoria.php'>
-                                <input type='hidden' name='idUser' value='{$idUsuario}' />
-                                <input type='hidden' name='data' value='{$data}' />
-                                <input type='hidden' name='idHorario' value='{$idHorario}'>
-                                <input type='hidden' name='idTutor' value='{$idTutor}' />
-                                <button type='submit'>✓</button>
-                            </form>
-                        </td>
-                    </tr>";
-            endforeach;
-        else :
-            echo "<span style='position: absolute; margin-left: 40%; margin-top: 15%; color: red;'>não existem horários cadastrados!</span>";
-        endif;
+            echo "
+            <li class='table-row'>
+                <div class='' data-label='{$horario[0]}'>{$horario[0]}</div>
+                <div data-label='{$horario[1]}'>{$horario[1]}</div>
+                <div data-label='Disponível'>Disponível</div>
+                <form class='d-flex align-items-center'><input class='btn-selecionar disponivel' type='button' value='Selecionar'></form>
+            </li>
+            ";
+        }
 
-
-        echo "</table>";
-
-        // echo '<pre>' . var_export($horarios, true) . '</pre>';
+        echo "
+            <div class='footer-tabela-horarios'>
+                <div class='col-xl-7 col-lg-7 col-md-7 col-sm-7 col-12 observacao'>O local da tutoria será definido pelo tutor após este confirmar o agendamento da mesma.</div>
+                <form action='' class='col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12'>
+                    <input type='hidden' name='idhorario' disabled />
+                    <input type='hidden' name='idtutor' disabled />
+                    <input type='hidden' name='idaluno' disabled />
+                    <input type='hidden' name='data' disabled />
+                    
+                    <input type='button' id='btn-agendar' value='Agendar Tutoria' />
+                    <input type='submit' hidden />
+                </form>
+            </div>
+        </div>
+        ";
     }
 }
