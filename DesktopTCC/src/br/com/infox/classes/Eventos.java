@@ -3,6 +3,13 @@ package br.com.infox.classes;
 
 import br.com.infox.dal.ModuloConexao;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -29,6 +36,31 @@ public class Eventos {
             campos[6].setText(tbl.getModel().getValueAt(setar, 6).toString().replace(".jpg","").replace(".png", ""));
         }
     }
+     
+    public String formatarData_ValidarData(String txtEvtData){
+    
+        try{;
+            DateTimeFormatter parser = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
+            LocalDate data = LocalDate.parse(txtEvtData, parser);
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null,"A data informada apresenta valores inválidos!");
+            return null;
+        }
+        
+        SimpleDateFormat in= new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat out = new SimpleDateFormat("yyyy-MM-dd");
+        String dataFormatada = "";
+        
+        try {
+            dataFormatada = out.format(in.parse(txtEvtData));
+        } catch (ParseException ex) {
+            Logger.getLogger(Eventos.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Falha ao tentar formatar a data!");
+            return null;
+        }
+
+        return dataFormatada;
+    } 
      
      public int verificarCamposEvento(String[] camposObrigatorios, String data, String inicio, String termino){
         for(int i = 0; i < camposObrigatorios.length; i++){

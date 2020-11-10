@@ -7,6 +7,8 @@ import br.com.infox.classes.Imagem;
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
 import java.awt.Color;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -72,27 +74,32 @@ Imagem img = new Imagem();
                                     img.deletarImagem("select caminhoImg from tbeventos where idevento=?", txtEvtId.getText(),"Falha ao tentar excluir a imagem");
                                     img.copiarImagem("br.com.infox.telas.TelaEventos",arquivo.getText(),"C:\\\\xampp\\\\htdocs\\\\myTCC\\\\site\\\\img-eventos\\\\",nome.getText(),".jpg");
                                 }
-                                String sql = "insert into tbeventos (nome,dataevento,inicio,termino,descricao,localevento,caminhoImg,image) values(?,?,?,?,?,?,?,?)";
-                                pst = conexao.prepareStatement(sql);
-                                pst.setString(1,nomeEvento);
-                                pst.setString(2,txtEvtData.getText().replace("-","/"));
-                                pst.setString(3,txtEvtInicio.getText());
-                                pst.setString(4,txtEvtTermino.getText());
-                                pst.setString(5,taEvtDescricao.getText());
-                                pst.setString(6,txtEvtLocal.getText());
-                                pst.setString(7,pastaEvento + nome.getText().replace(".jpg","").replace(".png","") + ".jpg");
-                                pst.setString(8,nome.getText().replace(".jpg","").replace(".png","") + ".jpg");
-                            int adicionado =  pst.executeUpdate();
+                                
+                                String sql = "insert into tbeventos (nome,dataevento,inicio,termino,descricao,localevento,caminhoImg,image) values(?,?,?,?,?,?,?,?)";   
+                                String dataFormatada = evt.formatarData_ValidarData(txtEvtData.getText().replace("-","/"));
+        
+                                    if(dataFormatada != null){
+                                    pst = conexao.prepareStatement(sql);
+                                    pst.setString(1,nomeEvento);
+                                    pst.setString(2,dataFormatada.replace("-","/"));
+                                    pst.setString(3,txtEvtInicio.getText());
+                                    pst.setString(4,txtEvtTermino.getText());
+                                    pst.setString(5,taEvtDescricao.getText());
+                                    pst.setString(6,txtEvtLocal.getText());
+                                    pst.setString(7,pastaEvento + nome.getText().replace(".jpg","").replace(".png","") + ".jpg");
+                                    pst.setString(8,nome.getText().replace(".jpg","").replace(".png","") + ".jpg");
+                                    int adicionado = pst.executeUpdate();
 
-                            if(adicionado > 0){
-                                JOptionPane.showMessageDialog(null,"Evento cadastrado com sucesso!");
-                                clear();
-                                pesquisar_evento();
-                            }
+                                    if(adicionado > 0){
+                                        JOptionPane.showMessageDialog(null,"Evento cadastrado com sucesso!");
+                                        clear();
+                                        pesquisar_evento();
+                                    }
+                                }
                         }
             }
         } catch (Exception e) {
-           JOptionPane.showMessageDialog(null,"Erro ao tentar inserir evento!");
+           JOptionPane.showMessageDialog(null,e); 
         }
     }
     
@@ -119,24 +126,28 @@ Imagem img = new Imagem();
                                 img.copiarImagem("br.com.infox.telas.TelaEventos",arquivo.getText(),pastaEvento,nome.getText(),".jpg");   
                             } 
                             String sql = "update tbeventos set nome=?,inicio=?,termino=?,dataevento=?,descricao=?,localevento=?,image=?,caminhoImg=? where idevento=?";
-                            pst = conexao.prepareStatement(sql);
-                            pst.setString(1,txtEvtNome.getText());
-                            pst.setString(2,txtEvtInicio.getText());
-                            pst.setString(3,txtEvtTermino.getText());
-                            pst.setString(4,txtEvtData.getText().replace("-","/"));
-                            pst.setString(5,taEvtDescricao.getText());
-                            pst.setString(6,txtEvtLocal.getText());
-                            pst.setString(7,nome.getText().replace(".jpg","").replace(".png","") + ".jpg");
-                            pst.setString(8,pastaEvento + nome.getText().replace(".jpg","").replace(".png","") + ".jpg");
-                            pst.setString(9,txtEvtId.getText());
+                            String dataFormatada = evt.formatarData_ValidarData(txtEvtData.getText().replace("-","/"));
+                            
+                            if(dataFormatada != null){
+                                pst = conexao.prepareStatement(sql);
+                                pst.setString(1,txtEvtNome.getText());
+                                pst.setString(2,txtEvtInicio.getText());
+                                pst.setString(3,txtEvtTermino.getText());
+                                pst.setString(4,dataFormatada.replace("-","/"));
+                                pst.setString(5,taEvtDescricao.getText());
+                                pst.setString(6,txtEvtLocal.getText());
+                                pst.setString(7,nome.getText().replace(".jpg","").replace(".png","") + ".jpg");
+                                pst.setString(8,pastaEvento + nome.getText().replace(".jpg","").replace(".png","") + ".jpg");
+                                pst.setString(9,txtEvtId.getText());
 
-                            int adicionado = pst.executeUpdate();
-                            if (adicionado > 0){
-                                JOptionPane.showMessageDialog(null,"Dados do evento alterados com sucesso!");
-                                clear();
-                                pesquisar_evento();
-                            }else{
-                            JOptionPane.showMessageDialog(null,"Evento não encontrado! Selecione um evento na tabela.");
+                                int adicionado = pst.executeUpdate();
+                                if (adicionado > 0){
+                                    JOptionPane.showMessageDialog(null,"Dados do evento alterados com sucesso!");
+                                    clear();
+                                    pesquisar_evento();
+                                }else{
+                                JOptionPane.showMessageDialog(null,"Evento não encontrado! Selecione um evento na tabela.");
+                                }
                             }
                          }
                 }
@@ -174,8 +185,8 @@ Imagem img = new Imagem();
     }
 
     private void pesquisar_evento(){
-        evt.pesquisarEventos("select nome as Nome,dataevento as Data, inicio as Inicio,termino as Término,descricao as Descrição,localevento as Local,"
-        + "image as Imagem," + "caminhoImg as Caminho, idevento as ID from tbeventos where DATE_FORMAT(NOW(), '%Y/%m/%d') <= dataevento and nome like ?", tblEventos, txtEvtPesquisar);
+        evt.pesquisarEventos("select nome as Nome,DATE_FORMAT(dataevento, '%d/%m/%Y') as Data, inicio as Inicio,termino as Término,descricao as Descrição,localevento as Local,"
+        + "image as Imagem," + "caminhoImg as Caminho, idevento as ID from tbeventos where DATE_FORMAT(NOW(), '%Y/%m/%d') <= DATE_FORMAT(dataevento, '%Y/%m/%d') and nome like ?", tblEventos, txtEvtPesquisar);
     }
     
     private void setar_campos(){

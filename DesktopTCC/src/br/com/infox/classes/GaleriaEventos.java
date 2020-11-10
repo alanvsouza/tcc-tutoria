@@ -34,7 +34,6 @@ public class GaleriaEventos {
         }
     }
     
-    
     public void pesquisarGaleriaEventos(String sql, JTable tblEventos, String txtEvtPesquisar){
         try{
             pst = conexao.prepareStatement(sql);
@@ -42,7 +41,7 @@ public class GaleriaEventos {
             rs = pst.executeQuery();
             tblEventos.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (SQLException e) {
-           JOptionPane.showMessageDialog(null, e);
+           JOptionPane.showMessageDialog(null, "Falha ao tentar pesquisar as galerias de eventos!");
         }
     }
     
@@ -86,7 +85,7 @@ public class GaleriaEventos {
                 }
             }
         }catch(Exception e){
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null,"Falha ao tentar verificar se existem fotos com o duplicado!");
         }
         return false;
     }
@@ -109,7 +108,7 @@ public class GaleriaEventos {
             
             return fotos;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,ex);
+            JOptionPane.showMessageDialog(null,"Falha ao tentar carregar imagens!");
         }
         return null;
     }
