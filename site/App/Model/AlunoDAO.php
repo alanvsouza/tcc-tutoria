@@ -35,21 +35,21 @@ class AlunoDAO
 
         return null;
     }
-    
+
     public function readFotoPerfilByLogin($login)
     {
         $query = "SELECT `foto` FROM `tbaluno` WHERE `login` = ?";
         $stmt = Connection::getConn()->prepare($query);
-        
+
         $stmt->bindValue(1, $login);
-        
+
         $stmt->execute();
-        
-        if($stmt->rowCount() > 0):
-            $result = $stmt->fetch(\PDO::FETCH_ASSOC);        
+
+        if ($stmt->rowCount() > 0) :
+            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
             return $result;
         endif;
-        
+
         return null;
     }
 }
