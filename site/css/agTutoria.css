@@ -185,7 +185,7 @@ input.indisponivel{
 }
 
 input.btn-selecionar.disponivel:focus {
-    background-color: #ff8206;;
+    background-color: #ff8206;
     color: white;
 }
 

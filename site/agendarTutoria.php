@@ -143,6 +143,7 @@ include("functions/acesso.php");
 <script type="text/javascrpit" src="node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script type="text/javascrpit" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script> -->
 <script src="js/selecionarProfessor.js"></script>
+
 </body>
 
 </html>
