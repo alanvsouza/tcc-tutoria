@@ -14,7 +14,7 @@ include("../functions/acesso.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cotíl Amigável - Defininir Horários</title>
+    <title>Cotil Amigável - Definir Horários</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -40,8 +40,8 @@ include("../functions/acesso.php");
 <body>
 
     <?php
-    // include("nav.php");
-    // include("navside.php");
+    // include("../navTutor.php");
+    // include("../navside.php");
     ?>
 
     <div class="content-header">
@@ -114,7 +114,7 @@ include("../functions/acesso.php");
     <div class="content-body">
         <form class="tabela-horarios-tutor2">
             <div class="header-horarios-dinamicos">
-                <span id="title-horarios-dinamicos"> Horários dinâmicos</span>
+                <span id="title-horarios-dinamicos">Horários dinâmicos</span>
                 <div class="div-horarios-dinamicos">
                     <input type="date" name="input-horarios-dinamico" id="input-horarios-dinamico">
                     <form action="">

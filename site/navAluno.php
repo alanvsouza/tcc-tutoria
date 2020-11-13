@@ -9,9 +9,10 @@ require_once "vendor/autoload.php";
     <!-- <div id="logo-site"></div> -->
     <div class="links-menu sumir">
         <ul id="list-navbar">
-            <li><a class="actived" href="index.php">Eventos</a></li>
-            <li><a href="projetoTutoria.php">Projeto Tutoria</a></li>
-            <li><a href="agendarTutoria.php">Agendar Tutoria</a></li>
+            <?php $basename = basename($_SERVER['PHP_SELF'], '.php'); ?>
+            <li><a <?php if ($basename == "index") echo "class = actived" ?> href="index.php">Eventos</a></li>
+            <li><a <?php if ($basename == "projetoTutoria") echo "class = actived" ?> href="projetoTutoria.php">Projeto Tutoria</a></li>
+            <li><a <?php if ($basename == "agendarTutoria") echo "class = actived" ?> href="agendarTutoria.php">Agendar Tutoria</a></li>
             <?php
             if (!isset($_SESSION['usuario'])) {
                 echo

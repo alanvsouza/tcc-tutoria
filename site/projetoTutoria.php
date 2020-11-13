@@ -1,4 +1,7 @@
-<?php require_once "vendor/autoload.php" ?>
+<?php
+require_once "vendor/autoload.php";
+\App\Model\Session::startSession()
+?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -39,7 +42,11 @@
 <body>
 
     <?php
-    include("navAluno.php");
+    echo $_SESSION['tipo'];
+    if (isset($_SESSION['tipo']) && $_SESSION['tipo'] == 'tutor')
+        include("navTutor.php");
+    else
+        include("navAluno.php");
     include("navside.php");
     ?>
 
