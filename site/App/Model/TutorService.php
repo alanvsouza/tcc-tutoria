@@ -52,10 +52,10 @@ class TutorService
                 && $_GET['professor'] == $id
                 ? 'selected="selected"'
                 : null;
-            if($count == 1)
-            echo  "<option class='option-tutor' value='{$id}' selected='selected'>{$nome}</option>";
+            if ($count == 1)
+                echo  "<option class='option-tutor' value='{$id}' selected='selected'>{$nome}</option>";
             else
-            echo "<option class='option-tutor' value='{$id}' {$selected}>{$nome}</option>";
+                echo "<option class='option-tutor' value='{$id}' {$selected}>{$nome}</option>";
         }
     }
 
@@ -125,17 +125,20 @@ class TutorService
     public static function renderizarTabelaHorarios($idTutor, $data)
     {
         $tutorDao = new TutorDAO;
-        $diaSemana = date_format(date_create($data), 'N');
+        echo $data;
+        $dataFormatada = date_format(date_create($data), 'd/m/Y');
+        var_dump($dataFormatada);
+        die();
+        $diaSemana = date_format(date_create($dataFormatada), 'N');
 
         $horarios = $tutorDao->readHorariosDiaById($idTutor, $diaSemana);
-        $dataFormatada = date_format(date_create($data), 'd/m/Y');
 
         if (!$horarios) {
             echo "<div class='tabela-sem-horarios col-xl-6'</div>";
         } else {
             echo "<div class='tabela-horarios-tutor col-xl-6'>";
         }
-        
+
         echo "
             <ul class='responsive-table'>
                 <div id='data-tutoria' class='col'>{$dataFormatada}</div>
@@ -189,7 +192,7 @@ class TutorService
         echo "
             <div class='footer-tabela-horarios'>
                 <div class='col-xl-7 col-lg-7 col-md-7 col-sm-7 col-12 observacao'>O local da tutoria será definido pelo tutor após este confirmar o agendamento da mesma.</div>
-                <form id='form-envio-tutoria' method='GET' action='functions/agendarTutoria.php' class='col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12'>
+                <form id='form-envio-tutoria' method='POST' action='functions/agendarTutoria.php' class='col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12'>
                     <input type='hidden' name='idhorario' />
                     <input type='hidden' name='idtutor' value='{$_GET['professor']}' />
                     <input type='hidden' name='idaluno' value='{$_SESSION['idUsuario']}' />
@@ -203,4 +206,3 @@ class TutorService
         ";
     }
 }
-

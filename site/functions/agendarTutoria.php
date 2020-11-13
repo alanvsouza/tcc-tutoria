@@ -4,9 +4,9 @@ require_once "../vendor/autoload.php";
 
 \App\Model\Session::startSession();
 
-$data = $_GET['data'];
-$idTutor = $_GET['idtutor'];
-$idHorario = $_GET['idhorario'];
+$data = $_POST['data'];
+$idTutor = $_POST['idtutor'];
+$idHorario = $_POST['idhorario'];
 $idAluno = $_SESSION['idUsuario'];
 print_r($idAluno);
 

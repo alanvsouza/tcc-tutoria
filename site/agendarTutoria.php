@@ -61,9 +61,9 @@ include("functions/acesso.php");
 <body>
 
     <?php
-        include("nav.php");
-        include("navside.php");
-        include('calendario.php');
+    include("nav.php");
+    include("navside.php");
+    include('calendario.php');
     ?>
 
     <div class="row container-body">
@@ -74,20 +74,18 @@ include("functions/acesso.php");
                         <?php
                         if (isset($_GET['professor']))
                             \App\Model\TutorService::renderizarInformacoes($_GET['professor']);
-                        echo "<pre style='position: absolute; top: 100px'>" . var_export($_SESSION, true) . "</pre>";
                         ?>
                     </div>
                     <div class="p-0 m-auto content-selecionar">
-                        <form action="<?= $_SERVER['PHP_SELF'] ?>">
+                        <form id="form-info-tutoria" action="<?= $_SERVER['PHP_SELF'] ?>">
                             <select name="professor" id="selecionar-tutor">
-                                <option value="" <?php if (!isset($_GET['professor'])) echo 'selected="selected"' ?> disabled>Selecione um tutor...</option>
                                 <?php \App\Model\TutorService::renderizarComboboxProfessores(); ?>
                             </select>
 
                             <?php if (isset($_GET['data'])) : ?>
                                 <input id='data' type="hidden" name="data" value="<?= $_GET['data'] ?>" />
                             <?php else : ?>
-                                <input id='data' type="hidden" name="data" disabled />
+                                <input id='data' type="hidden" name="data" value="" />
                             <?php endif; ?>
 
                             <input id="select-professor-combobox" type="submit" hidden />
@@ -116,6 +114,7 @@ include("functions/acesso.php");
     <script type="text/javascript" src="js/navside.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/calendario.js"></script>
+    <script src="js/selecionarDataTutoria.js"></script>
     <script src="js/selecionarProfessor.js"></script>
     <script src="js/agendarTutoria.js"></script>
 
@@ -124,19 +123,10 @@ include("functions/acesso.php");
             let dataFormatada = data.split("/");
             data = dataFormatada[1] + "/" + dataFormatada[0] + "/" + dataFormatada[2];
 
-            let inputData = document.querySelector("input#data-selecionada");
-            let fakeData = document.querySelector("#fakeData");
-            let submitFakeData = document.querySelector("#submitFakeData");
-            let idProf = document.querySelector("form input#idProf");
-
-            inputData.value = data;
-            fakeData.value = data;
-            idProf.value = <?= $_GET["professor"] ?>;
-
-            submitFakeData.click();
+            selecionarData(data);
         }
     </script>
-<script src="js/selecionarProfessor.js"></script>
+    <script src="js/selecionarProfessor.js"></script>
 
 </body>
 
