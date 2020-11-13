@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use DateTime;
+
 class TutorService
 {
     public static function renderizarProfessoresAgendamentoTutoria()
@@ -52,10 +54,8 @@ class TutorService
                 && $_GET['professor'] == $id
                 ? 'selected="selected"'
                 : null;
-            if ($count == 1)
-                echo  "<option class='option-tutor' value='{$id}' selected='selected'>{$nome}</option>";
-            else
-                echo "<option class='option-tutor' value='{$id}' {$selected}>{$nome}</option>";
+
+            echo "<option class='option-tutor' value='{$id}' {$selected}>{$nome}</option>";
         }
     }
 
@@ -125,11 +125,9 @@ class TutorService
     public static function renderizarTabelaHorarios($idTutor, $data)
     {
         $tutorDao = new TutorDAO;
-        echo $data;
-        $dataFormatada = date_format(date_create($data), 'd/m/Y');
-        var_dump($dataFormatada);
-        die();
-        $diaSemana = date_format(date_create($dataFormatada), 'N');
+        $dataFormatada = DateTime::createFromFormat('j/m/Y', $data);
+        $dataFormatadaString = $dataFormatada->format('d/m/Y');
+        $diaSemana = date_format($dataFormatada, 'N');
 
         $horarios = $tutorDao->readHorariosDiaById($idTutor, $diaSemana);
 
@@ -141,7 +139,7 @@ class TutorService
 
         echo "
             <ul class='responsive-table'>
-                <div id='data-tutoria' class='col'>{$dataFormatada}</div>
+                <div id='data-tutoria' class='col'>{$dataFormatadaString}</div>
                 <li class='table-header'>
                     <div>Início</div>
                     <div>Término</div>
@@ -160,33 +158,30 @@ class TutorService
             $id = $horario['idhorario'];
             $horario = explode('-', $horario['horarios']);
 
-            if (TutoriaService::existeTutoria($data, $id)) {
+            if (TutoriaService::existeTutoria($dataFormatada->format('Y-m-d'), $id)) {
                 echo "
                 <li class='table-row'>
                     <div class='' data-label='{$horario[0]}'>{$horario[0]}</div>
                     <div data-label='{$horario[1]}'>{$horario[1]}</div>
-                    <div data-label='Disponível'>Indisponível</div>
-                    <form class='d-flex align-items-center form-selecionar-horario'>
-                        <input type='hidden' name='idhorario' value='{$id}'>
-                        <input class='btn-selecionar indisponivel' type='button' value='Selecionar'>
+                    <div data-label='Indisponível'>Indisponível</div>
+                    <form class='d-flex align-items-center form-selecionar-horario'>         
+                        <input class='btn-selecionar indisponivel' disabled type='button' value='Selecionar'>
                     </form>
                 </li>
                 ";
-
-                continue;
+            } else {
+                echo "
+                <li class='table-row'>
+                    <div class='' data-label='{$horario[0]}'>{$horario[0]}</div>
+                    <div data-label='{$horario[1]}'>{$horario[1]}</div>
+                    <div data-label='Disponível'>Disponível</div>
+                    <form class='d-flex align-items-center form-selecionar-horario'>
+                        <input type='hidden' name='idhorario' value='{$id}'>
+                        <input class='btn-selecionar disponivel' type='button' value='Selecionar'>
+                    </form>
+                </li>
+                ";
             }
-
-            echo "
-            <li class='table-row'>
-                <div class='' data-label='{$horario[0]}'>{$horario[0]}</div>
-                <div data-label='{$horario[1]}'>{$horario[1]}</div>
-                <div data-label='Disponível'>Disponível</div>
-                <form class='d-flex align-items-center form-selecionar-horario'>
-                    <input type='hidden' name='idhorario' value='{$id}'>
-                    <input class='btn-selecionar disponivel' type='button' value='Selecionar'>
-                </form>
-            </li>
-            ";
         }
 
         echo "
@@ -196,7 +191,7 @@ class TutorService
                     <input type='hidden' name='idhorario' />
                     <input type='hidden' name='idtutor' value='{$_GET['professor']}' />
                     <input type='hidden' name='idaluno' value='{$_SESSION['idUsuario']}' />
-                    <input type='hidden' name='data' value='{$_GET['data']}' />
+                    <input type='hidden' name='data' value='{$dataFormatadaString}' />
                     
                     <input type='button' id='btn-agendar' value='Agendar Tutoria' />
                     <input type='submit' hidden />
