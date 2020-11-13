@@ -111,13 +111,8 @@ include("../functions/acesso.php");
         </form>
     </div>
 
-<<<<<<< HEAD
-        <div class="content-body">
-            <form method="GET" action="#" class="tabela-horarios-tutor2">
-=======
     <div class="content-body">
-        <form class="tabela-horarios-tutor2">
->>>>>>> 721f932b5e3a30c4f46bbdc0c9c097d5bb11e214
+        <form method="GET" action="#" class="tabela-horarios-tutor2">
             <div class="header-horarios-dinamicos">
                 <span id="title-horarios-dinamicos">Horários dinâmicos</span>
                 <div class="div-horarios-dinamicos">
