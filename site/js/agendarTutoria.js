@@ -1,26 +1,27 @@
 const btnAgendar = document.querySelector('input#btn-agendar');
 
-btnAgendar.addEventListener('mousedown', (event) => {
-    event.preventDefault();
+if (btnAgendar)
+    btnAgendar.addEventListener('mousedown', (event) => {
+        event.preventDefault();
 
-    const formsSelecionar = document.querySelectorAll('form.form-selecionar-horario');
-    let idHorario = null;
+        const formsSelecionar = document.querySelectorAll('form.form-selecionar-horario');
+        let idHorario = null;
 
-    for (let form of formsSelecionar) {
-        const children = form.childNodes;
-        const inputSelecionar = children[3];
+        for (let form of formsSelecionar) {
+            const children = form.childNodes;
+            const inputSelecionar = children[3];
 
-        if (inputSelecionar === document.activeElement) {
-            idHorario = children[1].value;
+            if (inputSelecionar === document.activeElement) {
+                idHorario = children[1].value;
+            }
         }
-    }
 
-    if (idHorario !== null) {
-        agendarTutoria(idHorario);
-    } else {
-        alert('Nenhum horário selecionado!');
-    }
-});
+        if (idHorario !== null) {
+            agendarTutoria(idHorario);
+        } else {
+            alert('Nenhum horário selecionado!');
+        }
+    });
 
 function agendarTutoria(idhorario) {
     const inputHorario = document.querySelector('form#form-envio-tutoria input[name="idhorario"]');

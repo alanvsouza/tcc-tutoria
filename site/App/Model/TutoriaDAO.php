@@ -17,10 +17,27 @@ class TutoriaDAO
         $stmt->execute();
     }
 
+    public function readByHorarioAndData($idHorario, $data)
+    {
+        $query = "SELECT idtutoria FROM `tbtutoria` WHERE `idhorario` = ? AND `datatutoria` = ?";
+        $stmt = Connection::getConn()->prepare($query);
+
+        $stmt->bindValue(1, $idHorario);
+        $stmt->bindValue(2, $data);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            return $stmt->fetch();
+        }
+
+        return null;
+    }
+
     public function readAll()
     {
         $query = "SELECT * FROM tbtutoria";
-        $stmt = Connection::getConn();
+        $stmt = Connection::getConn()->prepare($query);
 
         $stmt->execute();
 

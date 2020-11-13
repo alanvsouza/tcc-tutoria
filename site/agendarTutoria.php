@@ -77,6 +77,7 @@ include("functions/acesso.php");
                         <?php
                         if (isset($_GET['professor']))
                             \App\Model\TutorService::renderizarInformacoes($_GET['professor']);
+                        echo "<pre style='position: absolute; top: 100px'>" . var_export($_SESSION, true) . "</pre>";
                         ?>
                     </div>
                     <div class="p-0 m-auto content-selecionar">
@@ -133,7 +134,7 @@ include("functions/acesso.php");
 
             inputData.value = data;
             fakeData.value = data;
-            idProf.value = <?= $_GET["id"] ?>;
+            idProf.value = <?= $_GET["professor"] ?>;
 
             submitFakeData.click();
         }
@@ -145,3 +146,6 @@ include("functions/acesso.php");
 </body>
 
 </html>
+
+<?php
+unset($_SESSION['tutoria_agendada']);

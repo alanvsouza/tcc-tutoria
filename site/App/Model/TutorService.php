@@ -34,6 +34,7 @@ class TutorService
                         </div>
                     </div>
                 </li>';
+
         endfor;
     }
 
@@ -148,6 +149,22 @@ class TutorService
             $id = $horario['idhorario'];
             $horario = explode('-', $horario['horarios']);
 
+            if (TutoriaService::existeTutoria($data, $id)) {
+                echo "
+                <li class='table-row'>
+                    <div class='' data-label='{$horario[0]}'>{$horario[0]}</div>
+                    <div data-label='{$horario[1]}'>{$horario[1]}</div>
+                    <div data-label='Disponível'>Indisponível</div>
+                    <form class='d-flex align-items-center form-selecionar-horario'>
+                        <input type='hidden' name='idhorario' value='{$id}'>
+                        <input class='btn-selecionar indisponivel' type='button' value='Selecionar'>
+                    </form>
+                </li>
+                ";
+
+                continue;
+            }
+
             echo "
             <li class='table-row'>
                 <div class='' data-label='{$horario[0]}'>{$horario[0]}</div>
@@ -167,7 +184,7 @@ class TutorService
                 <form id='form-envio-tutoria' method='GET' action='functions/agendarTutoria.php' class='col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12'>
                     <input type='hidden' name='idhorario' />
                     <input type='hidden' name='idtutor' value='{$_GET['professor']}' />
-                    <input type='hidden' name='idaluno' value='{$_SESSION['usuario']}' />
+                    <input type='hidden' name='idaluno' value='{$_SESSION['idUsuario']}' />
                     <input type='hidden' name='data' value='{$_GET['data']}' />
                     
                     <input type='button' id='btn-agendar' value='Agendar Tutoria' />
