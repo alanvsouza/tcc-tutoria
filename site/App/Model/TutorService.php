@@ -128,7 +128,7 @@ class TutorService
         echo $data;
         $dataFormatada = date_format(date_create($data), 'd/m/Y');
         var_dump($dataFormatada);
-        die();
+
         $diaSemana = date_format(date_create($dataFormatada), 'N');
 
         $horarios = $tutorDao->readHorariosDiaById($idTutor, $diaSemana);
