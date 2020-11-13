@@ -40,6 +40,18 @@ class TutorService
         endfor;
     }
 
+    public static function getFotoPerfil()
+    {
+        $usuario = $_SESSION['usuario'];
+
+        if (isset($usuario)) :
+            $tutorDao = new TutorDAO();
+            return $tutorDao->readFotoPerfilByLogin($usuario)['foto'];
+        endif;
+
+        return null;
+    }
+
     public static function renderizarComboboxProfessores()
     {
         $tutorDao = new TutorDAO();

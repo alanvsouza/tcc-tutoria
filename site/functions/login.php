@@ -1,8 +1,8 @@
 <?php
-session_start();
-
 require_once "../vendor/autoload.php";
 
-$aluno = new \App\Model\Aluno($_POST['usuario'], md5($_POST['senha'] . "cotilamigavel"));
+\App\Model\Session::startSession();
 
-\App\Model\AlunoService::login($aluno);
+\App\Helper\LoginHelper::login($_POST['usuario'], $_POST['senha']);
+
+header('Location: ../index.php');

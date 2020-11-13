@@ -1,5 +1,6 @@
 ﻿<?php
 require_once "vendor/autoload.php";
+
 \App\Model\Session::startSession();
 ?>
 
@@ -42,7 +43,11 @@ require_once "vendor/autoload.php";
 <body>
 
     <?php
-    include("nav.php");
+    if (isset($_SESSION['tipo']) && $_SESSION['tipo'] == 'tutor')
+        include("navTutor.php");
+    else
+        include("navAluno.php");
+
     include("navside.php");
     ?>
 

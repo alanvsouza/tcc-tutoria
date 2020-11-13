@@ -1,6 +1,10 @@
 <?php
 require_once "vendor/autoload.php";
 \App\Model\Session::startSession();
+
+$nivelAcesso = isset($_SESSION['nivelAcesso']) ? $_SESSION['nivelAcesso'] : NULL;
+\App\Helper\AcessoHelper::nivelAcesso($nivelAcesso, dirname(__FILE__), 'index.php');
+
 include("functions/acesso.php");
 ?>
 
@@ -61,7 +65,7 @@ include("functions/acesso.php");
 <body>
 
     <?php
-    include("nav.php");
+    include("navAluno.php");
     include("navside.php");
     include('calendario.php');
     ?>
