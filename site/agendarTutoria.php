@@ -79,13 +79,14 @@ include("functions/acesso.php");
                     <div class="p-0 m-auto content-selecionar">
                         <form id="form-info-tutoria" action="<?= $_SERVER['PHP_SELF'] ?>">
                             <select name="professor" id="selecionar-tutor">
+                                <option value="" disabled selected="selected">Selecione um professor</option>
                                 <?php \App\Model\TutorService::renderizarComboboxProfessores(); ?>
                             </select>
 
                             <?php if (isset($_GET['data'])) : ?>
                                 <input id='data' type="hidden" name="data" value="<?= $_GET['data'] ?>" />
                             <?php else : ?>
-                                <input id='data' type="hidden" name="data" value="" />
+                                <input id='data' type="hidden" name="data" disabled />
                             <?php endif; ?>
 
                             <input id="select-professor-combobox" type="submit" hidden />

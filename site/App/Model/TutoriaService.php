@@ -10,13 +10,9 @@ class TutoriaService
         $tutoriaDao = new \App\Model\TutoriaDAO();
         $return = false;
 
-        try {
-            $tutoriaDao->create($tutoria);
+        if ($tutoriaDao->create($tutoria)) {
             $_SESSION['tutoria_agendada'] = true;
-
             $return = true;
-        } catch (\PDOException $e) {
-            //
         }
 
         return $return;
