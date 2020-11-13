@@ -4,14 +4,15 @@ namespace App\Model;
 
 class AlunoService
 {
-    public static function login(\App\Model\Aluno $a)
+    public static function login(Aluno $a)
     {
-        $alunoDao = new \App\Model\AlunoDAO();
+        $alunoDao = new AlunoDAO();
         $result = $alunoDao->readByLogin($a->getLogin());
 
         if ($result != null && $result["senha"] == $a->getSenha()) :
             $_SESSION["usuario"] = $a->getLogin();
             $_SESSION["idUsuario"] = $result["idaluno"];
+            $_SESSION["nivelAcesso"] = 0;
             header('Location: ../index.php');
         else :
             $_SESSION["nao_autenticado"] = false;
@@ -23,7 +24,7 @@ class AlunoService
     {
         $error = false;
 
-        $alunoDao = new \App\Model\AlunoDAO();
+        $alunoDao = new AlunoDAO();
 
         if (strlen($a->getNomeAluno()) == 0 || strlen($a->getLogin()) == 0  || strlen($a->getSenha()) == 0  || strlen($a->getEmail()) == 0) {
             $error = true;

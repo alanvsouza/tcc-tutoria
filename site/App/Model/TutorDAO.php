@@ -19,6 +19,36 @@ class TutorDAO
         return null;
     }
 
+    public function readFotoPerfilByLogin($login)
+    {
+        $query = "SELECT foto FROM tbtutor WHERE `login` = ?";
+        $stmt = Connection::getConn()->prepare($query);
+
+        $stmt->bindValue(1, $login);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0)
+            return $stmt->fetch();
+
+        return null;
+    }
+
+    public function readByLogin($login)
+    {
+        $query = "SELECT * FROM tbtutor WHERE `login` = ?";
+        $stmt = Connection::getConn()->prepare($query);
+
+        $stmt->bindValue(1, $login);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0)
+            return $stmt->fetch();
+
+        return null;
+    }
+
     public function readById($id)
     {
         $query = "SELECT * FROM tbtutor WHERE idtutor = ?";
