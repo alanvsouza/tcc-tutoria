@@ -79,7 +79,7 @@
                     }
                 }
                 (string)$data = $num."/".$numero."/".date('Y');
-                echo '<td onclick="dataTutoria(\''.$data.' \')" id="'.$num."/".$numero."/".date('Y').'">' .$numero. '</td>';
+                echo '<td class="hoverEfect" onclick="dataTutoria(\''.$data.' \')" id="'.$num."/".$numero."/".date('Y').'">' .$numero. '</td>';
                 if($y == 7){ 
                     $y=0;
                     echo '<tr></tr>';

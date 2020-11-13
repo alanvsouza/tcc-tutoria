@@ -34,7 +34,7 @@ class AlunoService
         } else if (stristr($a->getSenha(), "'")) {
             $error = true;
             $_SESSION['errosCadastro'] =  "O caractere ( ' ) é inválido!";
-        } else if ($alunoDao->readByLogin($a->getLogin()) != null) {
+        } else if ($alunoDao->readDuplicateLogin($a->getLogin()) != null) {
             $error = true;
             $_SESSION['errosCadastro'] =  "Login de usuário indisponível! Por favor, escolha outro login";
         }

@@ -42,17 +42,20 @@ class TutorService
     {
         $tutorDao = new TutorDAO();
         $tutores = $tutorDao->readAll();
+        $count = 0;
 
         foreach ($tutores as $tutor) {
+            $count += 1;
             $id = $tutor['idtutor'];
             $nome = $tutor['nometutor'];
             $selected = isset($_GET['professor'])
                 && $_GET['professor'] == $id
                 ? 'selected="selected"'
                 : null;
-
-
-            echo "<option value='{$id}' {$selected}>{$nome}</option>";
+            if($count == 1)
+            echo  "<option class='option-tutor' value='{$id}' selected='selected'>{$nome}</option>";
+            else
+            echo "<option class='option-tutor' value='{$id}' {$selected}>{$nome}</option>";
         }
     }
 
@@ -109,7 +112,7 @@ class TutorService
         $infos = $tutorDao->readById($id);
 
         echo "
-        <img src='img-professores/1.png' class='img-tutor'></img>
+        <img src='img-professores/{$infos['foto']}' class='img-tutor'></img>
         <div class='column reposicionar'>
             <span class='nome-tutor'>{$infos['nometutor']}</span>
             <div class='informacoes row'>
@@ -127,8 +130,13 @@ class TutorService
         $horarios = $tutorDao->readHorariosDiaById($idTutor, $diaSemana);
         $dataFormatada = date_format(date_create($data), 'd/m/Y');
 
+        if (!$horarios) {
+            echo "<div class='tabela-sem-horarios col-xl-6'</div>";
+        } else {
+            echo "<div class='tabela-horarios-tutor col-xl-6'>";
+        }
+        
         echo "
-        <div class='tabela-horarios-tutor col-xl-6'>
             <ul class='responsive-table'>
                 <div id='data-tutoria' class='col'>{$dataFormatada}</div>
                 <li class='table-header'>
@@ -195,3 +203,4 @@ class TutorService
         ";
     }
 }
+

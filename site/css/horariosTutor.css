@@ -1,0 +1,660 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #FAFAFA;
+}
+
+a, a:hover{
+    text-decoration: none;
+    color: white;
+}
+
+a.logo-site{
+    text-decoration: none;
+    font-size: 36px;
+    width: 223px;
+    font-family: "Berkshire Swash", sans-serif;
+    color: white;
+    margin: 25px auto 0px auto;
+    display: block;
+    text-align: center;
+}
+
+.content-body {
+    width: 80vw;
+    min-width: 350px;
+    height: auto;
+    margin: 100px auto 80px auto;
+    padding: 0px;
+    background-color: white;
+    border: 1px solid rgb(168, 168, 168);
+    box-shadow: 1px 1px 5px rgb(185, 185, 185);
+    z-index: 1000;
+    overflow-x: auto;
+}
+
+.content-header {
+    width: 100%;
+    height: 55vh;
+    min-height: 350px;
+    background-color: rgb(58, 58, 58);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+
+#title-horarios {
+    width: 95%;
+    height: 50px;
+    font-size: 28px;
+    text-align: left;
+    display:block;
+    margin: 20px auto 20px auto;
+    padding: 0px;
+    border-bottom: 1px solid gray;
+    letter-spacing: 0.04rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    color: #2a2a25;
+}
+
+.responsive-table {
+    width: 45%;
+    display: block;
+    padding: 0px;
+    margin: 0px auto 0px auto;
+}
+
+.responsive-table li {
+    border-radius: 3px;
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    text-align: center;
+    align-items: center;
+}
+
+.responsive-table .table-header {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    display: flex;
+    flex-wrap: wrap;
+    font-weight: 700;
+    color: white;
+    padding: 20px 0px 20px 0px;
+    background-color: #252525;
+}
+
+.responsive-table .table-header div.dia-semana {
+    width: 33.333%;
+    text-align: center;
+}
+
+.responsive-table .table-row {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.3);
+    font-size: 15px;
+    font-family: 'Montserrat', Arial, sans-serif;
+    letter-spacing: 0.03em;
+    padding: 12px 0px 12px 0px;
+}
+
+input.input-hora {
+    width: 25%;
+    text-align: center;
+    margin: auto;
+    border-top: 0px solid transparent;
+    border-left: 0px solid transparent;
+    border-right: 0px solid transparent;
+    border-bottom: 1px solid #959595;
+}
+
+div.content-footer{
+    width:92.5%;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid gray; 
+    margin-bottom: 50px;
+    padding: 0px;
+}
+
+input.input-date {
+    width: 120px;
+    margin: 5px 0px 0px 20px;
+    text-align: center;
+    font-size: 18px;
+    height: 30px;
+    border-top: 0px solid transparent;
+    border-left: 0px solid transparent;
+    border-right: 0px solid transparent;
+    border-bottom: 1px solid #6d6d6d;
+}
+
+form.tabela-horarios-tutor {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    padding: 0px 20px 0px 20px;
+}
+
+
+/*TABELA DE HORÁRIOS DINÂMICOS */
+
+form.tabela-horarios-tutor2 {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    padding: 0px 20px 0px 20px;
+}
+
+.header-horarios-dinamicos{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 95%;
+    padding:20px 0px 10px 0px;
+    margin: 0px 0px 10px 0px;
+    border-bottom: 1px solid gray;
+}
+
+#title-horarios-dinamicos{
+    font-size: 28px;
+    display: inline-block;
+    text-align: left;
+    padding: 0px;
+    margin: 0px 0px 0px 0px;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.04rem;
+    color: #2a2a25;
+}
+
+div.div-horarios-dinamicos{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    margin-left: auto;    
+}
+
+div.div-horarios-dinamicos span{
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #353535;
+    letter-spacing: 0.07rem;
+}
+
+input#input-horarios-dinamico{
+    width: 150px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-indent: 15px;
+    margin-left: 10px;
+    border: 0px;
+    box-shadow: 1px 1px 6px rgb(184, 184, 184);
+    background-color: white;
+    transform: translateY(-2px);
+}
+
+#btn-consultar-horarios{
+    margin-left: 15px;
+    height: 35px;
+    padding: 0px 15px 0px 5px;
+    border: 0px;
+    color: white;
+    font-size: 15px;
+    left: 0.02rem;
+    line-height: 35px;
+    background-color: transparent;
+    outline: none;
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.atualizar-horarios{
+    width: 92%;
+    height: 60px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-submeter{
+    margin: 0px 0px 0px auto;
+    display: block;
+    width: 150px;
+    color: white;
+    background-color: #252525;
+    border: 0px;
+    height: 40px;
+    font-size: 17px;
+    font-weight: 500;
+    font-family: 'Montserrat', Arial, sans-serif;
+    letter-spacing: 0.04rem;
+}
+
+.fa-search{
+    color: rgb(65, 64, 64);
+    font-size: 22px;
+}
+
+.responsive-table2 {
+    width: 92.5%;
+    display: block;
+    padding: 0px;
+    margin: 10px auto 0px auto;
+    overflow-x: auto;
+}
+
+.responsive-table2 .table-row {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.3);
+    font-size: 15px;
+    font-family: 'Montserrat', Arial, sans-serif;
+    letter-spacing: 0.03em;
+    padding: 12px 0px 12px 0px;
+}
+
+.responsive-table2 li {
+    border-radius: 3px;
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    text-align: center;
+    align-items: center;
+}
+
+.responsive-table2  div.dia-semana {
+    width: 15%;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.03rem;
+    color: #252525;
+    text-transform: uppercase;
+}
+
+.content-header2{
+    width: 100%;
+    height: 55vh;
+    min-height: 350px;
+    background-color: rgb(58, 58, 58);
+    margin-top: -55vh;
+    position: absolute;
+    z-index: -1;
+}
+
+input.input-hora2 {
+    width: 15%;
+    text-align: center;
+    margin: auto;
+    border-top: 0px solid transparent;
+    border-left: 0px solid transparent;
+    border-right: 0px solid transparent;
+    border-bottom: 1px solid #959595;
+}
+
+@media  (min-width: 1500px) {
+    .content-body {
+        margin: 30px auto 30px auto;
+    }
+
+    .content-body:before {
+        border-bottom: 620px solid rgba(126, 126, 126, .1);
+    }
+
+    .content-body:after {
+        background-color: rgb(255, 255, 255);
+        border-top: 620px solid rgb(66, 66, 66);
+    }
+
+    #title-horarios {
+        font-size: 32px;
+        width: 95%;
+        margin: 30px auto 25px auto;
+        display: block;
+    }
+
+    .responsive-table .table-header {
+        font-size: 16px;
+        letter-spacing: 0.05em;
+    }
+
+    .responsive-table .table-row {
+        font-size: 15px;
+    }
+
+    input.input-hora {
+        width: 18%;
+    }
+
+    .content-header {
+        height: 25vh;
+    }
+
+    .content-header2{
+        height: 25vh;
+        margin-top: -25vh;
+    }
+}
+
+@media (max-width: 1200px)
+{
+    .btn-submeter{
+        margin: 0px auto 0px auto;
+        width: 250px;
+        font-size: 18px;
+    }
+
+    #btn-horarios-dinamicos{
+        margin: auto;
+        position: absolute;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .content-body {
+        width: 85vw;
+    }
+
+    .responsive-table {
+        width: 85%;
+    }
+
+    input.input-hora {
+        width: 17.5%;
+    }
+
+    #title-horarios {
+        margin: 20px auto 20px auto;
+        display: block;
+    }
+}
+
+@media (min-width: 762px) and (max-width: 991px) {
+
+    .content-body {
+        width: 85vw;
+    }
+
+    .responsive-table .table-header {
+        font-size: 15px;
+        letter-spacing: 0.04em;
+    }
+
+    .responsive-table .table-header {
+        font-size: 14px;
+        letter-spacing: 0.04em;
+    }
+
+    .responsive-table {
+        width: 85%;
+    }
+
+    .responsive-table .table-row {
+        font-size: 14px;
+    }
+
+    input.input-hora {
+        width: 20%;
+    }
+
+    #title-horarios {
+        width: 85%;
+        margin: 20px auto 20px auto;
+    }
+}
+
+@media (max-width: 561px){
+    form.tabela-horarios-tutor2 {
+        width: 521px;
+        padding: 0px 20px 0px 20px;
+    }
+
+    .header-horarios-dinamicos{
+        width: 521px;
+    }
+    
+    .responsive-table2 {
+        width: 521px;
+        padding: 0px 20px 0px 20px
+    }
+    
+    #title-horarios-dinamicos{
+        font-size: 20px;
+    }
+    
+    div.div-horarios-dinamicos span{
+        font-size: 14px;
+        letter-spacing: 0.05rem;
+    }
+    
+    input#input-horarios-dinamico{
+        width: 120px;
+        font-size: 15px;
+    }
+
+    .responsive-table2 .table-row {
+        padding: 12px 10px 12px 10px;
+    }
+
+    div.div-horarios-dinamicos span{
+        font-size: 17px;
+        font-weight: 600;
+    }
+    
+    input#input-horarios-dinamico{
+        height: 27px;
+        line-height: 27px;
+    }
+    
+    #btn-consultar-horarios{
+        margin-left: 15px;
+    }
+
+    input.input-hora2 {
+        width: 18%;
+        font-size: 12.5px;
+    }
+
+    .responsive-table2  div.dia-semana {
+        width: 18%;
+        font-size: 12px;
+    }
+}
+
+@media (min-width: 562px) and (max-width: 761px) {
+
+    .content-body {
+        width: 95vw;
+    }
+
+    .responsive-table .table-header {
+        font-size: 14px;
+        letter-spacing: 0.04em;
+    }
+
+    .responsive-table {
+        width: 90%;
+    }
+
+    .responsive-table .table-row {
+        font-size: 14px;
+    }
+
+    input.input-hora {
+        width: 25%;
+    }
+
+    #title-horarios {
+        font-size: 24px;
+        text-align: center;
+        width: 80%;
+        margin: 20px auto 20px auto;
+        display: block;
+    }
+
+    #title-horarios-dinamicos{
+        font-size: 21px;
+    }
+}
+
+
+@media (min-width: 401px) and (max-width: 561px) {
+
+    .content-body {
+        width: 90vw;
+        padding: 0px;
+    }
+
+    .content-header {
+        height: 50vh;
+    }
+
+    #title-horarios {
+        font-size: 22px;
+        width: 100%;
+        padding: 0px;
+        margin: 20px auto 20px auto;
+    }
+
+    .responsive-table li {
+        padding: 20px 25px;
+        display: flex;
+        margin-bottom: 20px;
+    }
+
+    .responsive-table .table-header {
+        font-size: 13px;
+        letter-spacing: 0.02em;
+        padding: 12px;
+    }
+
+    .responsive-table .table-row {
+        font-size: 13px;
+        letter-spacing: 0.02em;
+        padding: 12px 0px 12px 0px;
+    }
+
+    .responsive-table {
+        width: 100%;
+        margin: 0px auto 20px auto;
+        padding: 0px 0px 0px 0px;
+        transform: translateX(0px);
+    }
+
+    input.input-hora {
+        width: 30%;
+    }
+}
+
+@media (max-width: 400px) {
+    .content-body {
+        width: 85vw;
+        padding: 0px;
+    }
+
+    form.tabela-horarios-tutor {
+        padding: 0px;
+        width: 90%;
+        margin: auto;
+    }
+
+    #title-horarios {
+        font-size: 22px;
+        margin: 20px auto 0px auto;
+    }
+
+    .responsive-table li {
+        padding: 15px 25px;
+        margin-bottom: 15px;
+    }
+
+    .responsive-table .table-header {
+        font-size: 11px;
+        padding: 10px;
+    }
+
+    .responsive-table .table-row {
+        font-size: 11px;
+        padding: 8px 0px 8px 0px;
+    }
+
+    .responsive-table {
+        width: 100%;
+        margin: 20px auto 20px auto;
+    }
+
+    input.input-hora {
+        width: 25%;
+        min-width: 75px;
+        font-size: 11px;
+    }
+}
+
+
+/* @media (min-width: 1201px) {
+
+    .content-body:before {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        content: "";
+        background-color: rgb(255, 255, 255);
+        border-bottom: 85vh solid rgba(126, 126, 126, .1);
+        border-left: 80vw solid transparent;
+        transition: all 1s ease;
+    }
+
+    .content-body:hover:before {
+        border-bottom: 0px solid rgba(126, 126, 126, .7);
+        border-left: 0px solid transparent;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .content-body:after {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 0px;
+        height: 0px;
+        content: "";
+        border-top: 85vh solid rgb(66, 66, 66);
+        border-right: 80vw solid transparent;
+        width: 100%;
+        height: 100%;
+        transition: all 1s ease;
+    }
+
+    .content-body:hover:after {
+        border-top: 0px solid rgba(126, 126, 126, .7);
+        border-right: 0px solid transparent;
+        visibility: hidden;
+        opacity: 0;
+    }
+} */

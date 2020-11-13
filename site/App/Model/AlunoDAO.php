@@ -36,6 +36,21 @@ class AlunoDAO
         return null;
     }
 
+    public function readDuplicateLogin($login){
+        $query = "SELECT `t1`.login from `tbaluno` as `t1` WHERE login = ? union all SELECT `t2`.login from `tbtutor` as `t2` where login = ?";
+        $stmt = Connection::getConn()->prepare($query);
+        $stmt->bindValue(1, $login);
+        $stmt->bindValue(2, $login);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) :
+            return true;
+        endif;
+
+        return false;
+    }
+
     public function readFotoPerfilByLogin($login)
     {
         $query = "SELECT `foto` FROM `tbaluno` WHERE `login` = ?";
