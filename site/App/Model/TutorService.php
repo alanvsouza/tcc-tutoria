@@ -125,17 +125,9 @@ class TutorService
     public static function renderizarTabelaHorarios($idTutor, $data)
     {
         $tutorDao = new TutorDAO;
-<<<<<<< HEAD
-        echo $data;
-        $dataFormatada = date_format(date_create($data), 'd/m/Y');
-        var_dump($dataFormatada);
-
-        $diaSemana = date_format(date_create($dataFormatada), 'N');
-=======
         $dataFormatada = DateTime::createFromFormat('j/m/Y', $data);
         $dataFormatadaString = $dataFormatada->format('d/m/Y');
         $diaSemana = date_format($dataFormatada, 'N');
->>>>>>> ebdddec5fb7cf4a2f78ecd77d05753e0e97ba4b2
 
         $horarios = $tutorDao->readHorariosDiaById($idTutor, $diaSemana);
 

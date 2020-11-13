@@ -106,12 +106,12 @@ include("../functions/acesso.php");
         </div>
 
         <div class="content-body">
-            <form class="tabela-horarios-tutor2">
+            <form method="GET" action="#" class="tabela-horarios-tutor2">
             <div class="header-horarios-dinamicos">
                 <span id="title-horarios-dinamicos"> Horários dinâmicos</span>
                 <div class="div-horarios-dinamicos">
                     <input type="date" name="input-horarios-dinamico" id="input-horarios-dinamico">
-                    <form action="">
+                    <form>
                         <button type="submit" id="btn-consultar-horarios"><i class="fas fa-search"></i></button>
                     </form>
                 </div>

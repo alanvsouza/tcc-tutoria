@@ -312,16 +312,8 @@ input.input-hora2 {
 
 @media  (min-width: 1500px) {
     .content-body {
-        margin: 30px auto 30px auto;
-    }
-
-    .content-body:before {
-        border-bottom: 620px solid rgba(126, 126, 126, .1);
-    }
-
-    .content-body:after {
-        background-color: rgb(255, 255, 255);
-        border-top: 620px solid rgb(66, 66, 66);
+        margin: 100px auto 60px auto;
+        max-width: 1200px;
     }
 
     #title-horarios {
@@ -341,16 +333,16 @@ input.input-hora2 {
     }
 
     input.input-hora {
-        width: 18%;
+        width: 21%;
     }
 
     .content-header {
-        height: 25vh;
+        height: 30vh;
     }
 
     .content-header2{
-        height: 25vh;
-        margin-top: -25vh;
+        height: 30vh;
+        margin-top: -30vh;
     }
 }
 
