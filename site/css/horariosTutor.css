@@ -204,7 +204,7 @@ input#input-horarios-dinamico{
     display: flex;
     align-items: center;
     justify-content: center;
-    text-indent: 13px;
+    text-indent: 15px;
     margin-left: 10px;
     border: 0px;
     box-shadow: 1px 1px 6px rgb(184, 184, 184);

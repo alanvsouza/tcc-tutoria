@@ -1,7 +1,7 @@
 <?php
-require_once "vendor/autoload.php";
+require_once "../vendor/autoload.php";
 \App\Model\Session::startSession();
-include("functions/acesso.php");
+include("../functions/acesso.php");
 ?>
 
 <!DOCTYPE html>
@@ -16,13 +16,11 @@ include("functions/acesso.php");
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="../css/style.min.css">
 
     <!-- My styles CSS -->
-    <link href="css/style.scss">
-    <link rel="stylesheet" href="css/nav.css">
-    <link rel="stylesheet" href="css/navside.css">
-    <link rel="stylesheet" href="css/horariosTutor.css">
+    <link href="../css/style.scss">
+    <link rel="stylesheet" href="../css/horariosTutor.css">
 
     <!-- Font Awesome -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
@@ -41,7 +39,7 @@ include("functions/acesso.php");
 ?>
 
     <div class="content-header">
-        <a href="index.php" class="logo-site">Cotil Amigável</a>
+        <a href="../index.php" class="logo-site">Cotil Amigável</a>
     </div>
     <div class="content-body">
         <form class="tabela-horarios-tutor">

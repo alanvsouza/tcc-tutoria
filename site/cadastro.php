@@ -41,7 +41,7 @@
         }
     ?>
 
-    <div id="body" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div id="content-body" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="flex-row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-0">
             <input  class="input col-lg-5 col-md-11 col-sm-11 col-11 hoverEfect" placeholder="Informe seu nome completo" maxlength="50" type="text" id="nome" name="nome">
             <input  class="input col-lg-5 col-md-11 col-sm-11 col-11 hoverEfect" placeholder="Informe seu e-mail" maxlength="50" type="text" id="email" name="email">
@@ -86,7 +86,6 @@
         <span class="possuiLogin"><a href="login.php">Já possui uma conta? Então efetue o login para ter acesso completo ao nosso site!</a></span>
     </div>
 </form>
-
     <script src="js/cadastro.js"></script>
     <script src="https://kit.fontawesome.com/bc2be06805.js"></script>
 </body>

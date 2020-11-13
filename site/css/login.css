@@ -127,7 +127,7 @@ transition: all .3s ease;
 font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;}
 
 input#btn-entrar:hover{
-background: #ff8206;}
+width: 90%;}
 
 p.esqueceu-senha a{
 font-size: 14px;

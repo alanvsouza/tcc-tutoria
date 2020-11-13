@@ -129,8 +129,13 @@ class TutorService
         $horarios = $tutorDao->readHorariosDiaById($idTutor, $diaSemana);
         $dataFormatada = date_format(date_create($data), 'd/m/Y');
 
+        if (!$horarios) {
+            echo "<div class='tabela-sem-horarios col-xl-6'</div>";
+        } else {
+            echo "<div class='tabela-horarios-tutor col-xl-6'>";
+        }
+        
         echo "
-        <div class='tabela-horarios-tutor col-xl-6'>
             <ul class='responsive-table'>
                 <div id='data-tutoria' class='col'>{$dataFormatada}</div>
                 <li class='table-header'>

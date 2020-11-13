@@ -61,16 +61,13 @@ include("functions/acesso.php");
 <body>
 
     <?php
-    include("nav.php");
-    include("navside.php");
-    include('calendario.php');
-    //    include("db/credentials.php");
-    //    include("db/db_connect.php");
-    //    include("functions/agendarTutoria.php");
+        include("nav.php");
+        include("navside.php");
+        include('calendario.php');
     ?>
 
     <div class="row container-body">
-        <div class="content-tutor p-0 m-0 col-xl-6">
+        <div class="content-tutor m-0 col-xl-6">
             <div class="header-tutor">
                 <div class="row content-header-tutor">
                     <div class="row informacoes-tutor">
@@ -138,10 +135,6 @@ include("functions/acesso.php");
             submitFakeData.click();
         }
     </script>
-
-    <!-- <script type="text/javascrpit" src="node_modules/jquery/dist/jquery.slim.min.js"></script>
-<script type="text/javascrpit" src="node_modules/popper.js/dist/umd/popper.min.js"></script>
-<script type="text/javascrpit" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script> -->
 <script src="js/selecionarProfessor.js"></script>
 
 </body>
