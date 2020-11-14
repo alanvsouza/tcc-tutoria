@@ -12,7 +12,7 @@ require_once "vendor/autoload.php";
             <?php $basename = basename($_SERVER['PHP_SELF'], '.php'); ?>
             <li><a <?php if ($basename == "index") echo "class = actived" ?> href="index.php">Eventos</a></li>
             <li><a <?php if ($basename == "projetoTutoria") echo "class = actived" ?> href="projetoTutoria.php">Projeto Tutoria</a></li>
-            <li><a <?php if ($basename == "horariosTutor") echo "class = actived" ?> href="tutor/horariosTutor.php">Horários</a></li>
+            <li><a <?php if ($basename == "horariosTutor") echo "class = actived" ?> href="horariosTutor.php">Horários</a></li>
             <?php
             if (!isset($_SESSION['usuario'])) {
                 echo
