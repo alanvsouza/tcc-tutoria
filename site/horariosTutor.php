@@ -1,11 +1,9 @@
 <?php
-require_once "../vendor/autoload.php";
+require_once "vendor/autoload.php";
 \App\Model\Session::startSession();
+\App\Helper\AcessoHelper::nivelAcesso($_SESSION['nivelAcesso'], __FILE__);
 
-$nivelAcesso = isset($_SESSION['nivelAcesso']) ? $_SESSION['nivelAcesso'] : NULL;
-\App\Helper\AcessoHelper::nivelAcesso($nivelAcesso, dirname(__FILE__), '../index.php');
-
-include("../functions/acesso.php");
+include("functions/acesso.php");
 ?>
 
 <!DOCTYPE html>
@@ -21,11 +19,11 @@ include("../functions/acesso.php");
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../css/style.min.css">
+    <link rel="stylesheet" href="css/style.min.css">
 
     <!-- My styles CSS -->
-    <link href="../css/style.scss">
-    <link rel="stylesheet" href="../css/horariosTutor.css">
+    <link href="css/style.scss">
+    <link rel="stylesheet" href="css/horariosTutor.css">
 
     <!-- Font Awesome -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
@@ -38,14 +36,8 @@ include("../functions/acesso.php");
 </head>
 
 <body>
-
-    <?php
-    // include("../navTutor.php");
-    // include("../navside.php");
-    ?>
-
     <div class="content-header">
-        <a href="../index.php" class="logo-site">Cotil Amigável</a>
+        <a href="index.php" class="logo-site">Cotil Amigável</a>
     </div>
     <div class="content-body">
         <form class="tabela-horarios-tutor">

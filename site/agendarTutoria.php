@@ -3,7 +3,7 @@ require_once "vendor/autoload.php";
 \App\Model\Session::startSession();
 
 $nivelAcesso = isset($_SESSION['nivelAcesso']) ? $_SESSION['nivelAcesso'] : NULL;
-\App\Helper\AcessoHelper::nivelAcesso($nivelAcesso, dirname(__FILE__), 'index.php');
+\App\Helper\AcessoHelper::nivelAcesso($nivelAcesso, __FILE__);
 
 include("functions/acesso.php");
 ?>
@@ -83,7 +83,6 @@ include("functions/acesso.php");
                     <div class="p-0 m-auto content-selecionar">
                         <form id="form-info-tutoria" action="<?= $_SERVER['PHP_SELF'] ?>">
                             <select name="professor" id="selecionar-tutor">
-                                <option value="" disabled selected="selected">Selecione um professor</option>
                                 <?php \App\Model\TutorService::renderizarComboboxProfessores(); ?>
                             </select>
 
@@ -121,6 +120,7 @@ include("functions/acesso.php");
     <script type="text/javascript" src="js/calendario.js"></script>
     <script src="js/selecionarDataTutoria.js"></script>
     <script src="js/selecionarProfessor.js"></script>
+    <script src="js/selecionarPrimeiroProf.js"></script>
     <script src="js/agendarTutoria.js"></script>
 
     <script type="text/javascript">

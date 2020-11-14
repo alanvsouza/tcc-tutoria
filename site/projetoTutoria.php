@@ -1,6 +1,6 @@
 <?php
 require_once "vendor/autoload.php";
-\App\Model\Session::startSession()
+\App\Model\Session::startSession();
 ?>
 
 <!DOCTYPE html>

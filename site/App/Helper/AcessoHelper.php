@@ -4,32 +4,23 @@ namespace App\Helper;
 
 class AcessoHelper
 {
-    public static function nivelAcesso($nivelAcesso, $dirname, $redirectFile)
+    public static function nivelAcesso($nivelAcesso, $arquivo)
     {
-        $pastaAtual = explode('/', $dirname);
-        $pastaAtual = $pastaAtual[sizeof($pastaAtual) - 1];
+        $arquivo = basename($arquivo, '.php');
 
         $falha = false;
 
         if (is_null($nivelAcesso)) {
             $falha = true;
         } else {
-            switch ($nivelAcesso) {
-                case 0:
-                    if ($pastaAtual == "tutor") {
-                        $falha = true;
-                    }
-                    break;
-                case 1:
-                    if ($pastaAtual != "tutor")
-                        $falha = true;
-                    break;
-                default:
-                    break;
-            }
+            $acessoDao = new \App\Model\AcessoDAO();
+            $result = $acessoDao->readByNivelAcessoAndFuncionalidade($nivelAcesso, $arquivo);
+
+            if (is_null($result))
+                $falha = true;
         }
 
         if ($falha)
-            header("Location: {$redirectFile}");
+            header("Location: index.php");
     }
 }
