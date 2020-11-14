@@ -138,6 +138,7 @@ class TutorService
     {
         $tutorDao = new TutorDAO;
         $dataFormatada = DateTime::createFromFormat('j/m/Y', $data);
+        $dataHoje = new DateTime();
         $dataFormatadaString = $dataFormatada->format('d/m/Y');
         $diaSemana = date_format($dataFormatada, 'N');
 
@@ -159,6 +160,10 @@ class TutorService
                     <div>Agendar</div>
                 </li>";
 
+        if ($dataHoje > $dataFormatada) {
+            echo "<div class='sem-resultados'>Este dia não pode ser selecionado!</div>";
+            return;
+        }
         if (!$horarios) {
             echo "<div class='sem-resultados'>Nenhum horário encontrado para este dia!</div>";
 

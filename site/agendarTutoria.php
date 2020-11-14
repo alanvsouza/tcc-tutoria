@@ -2,6 +2,9 @@
 require_once "vendor/autoload.php";
 \App\Model\Session::startSession();
 
+if (isset($_SESSION['tutoria_agendada']))
+    header('refresh: 0.7');
+
 $nivelAcesso = isset($_SESSION['nivelAcesso']) ? $_SESSION['nivelAcesso'] : NULL;
 \App\Helper\AcessoHelper::nivelAcesso($nivelAcesso, __FILE__);
 
@@ -110,6 +113,24 @@ include("functions/acesso.php");
             $data = $_GET['data'];
 
             \App\Model\TutorService::renderizarTabelaHorarios($professor, $data);
+        } else if (isset($_SESSION['tutoria_agendada'])) {
+            echo "
+            <div class='tabela-sem-horarios col-xl-6'</div>
+            <ul class='responsive-table'>                
+                <li class='table-header'>
+                    <div>Início</div>
+                    <div>Término</div>
+                    <div>Disponibilidade</div>
+                    <div>Agendar</div>
+                </li>";
+
+            if ($_SESSION['tutoria_agendada']) {
+                echo "<div id='tutoria-agendada-sucesso' class='sem-resultados'>Tutoria agendada com sucesso!</div>";
+            } else {
+                echo "<div id='tutoria-agendada-falha' class='sem-resultados'>Erro ao agendar tutoria!</div>";
+            }
+
+            unset($_SESSION['tutoria_agendada']);
         }
         ?>
     </div>
