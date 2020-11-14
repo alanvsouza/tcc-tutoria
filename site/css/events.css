@@ -5,6 +5,7 @@
 }
 
 .img-events{
+max-height: 750px !important;
 background-image: url('../img/backgrounEvents.jpg') !important;}
 
 .shape-fill{
@@ -84,6 +85,7 @@ background-color: #f06d15;}
 .column-two{
 background-image: url('../img/EventosPessoas.jpg');
 background-size: 100% 100%;
+background-repeat: no-repeat;
 padding: 0px;
 margin: 0px;
 height:370px;
@@ -173,7 +175,7 @@ color: white;
 border-radius: 50px;
 font-family: 'Josefin Sans', sans-serif;}
 
-@media(min-width: 1560px){
+@media(min-width: 1500px){
 
     div.cardWidth{
     max-width: 26%;}
@@ -183,7 +185,24 @@ font-family: 'Josefin Sans', sans-serif;}
 
     div#bem-vindo{
     margin: auto;
-    max-width: 80%;}
+    max-width: 85%;}
+
+    .column-one{
+    text-align: left;
+    height: auto;
+    margin: -20px 0px 0px 0px;
+    padding: 0px 40px 0px 0px;}
+
+    .column-two{
+    background-image: url('../img/EventosPessoas.jpg');
+    background-size: 100% 100%;
+    width:90%;
+    padding: 0px;
+    margin: auto;
+    height:370px;
+    max-width: 650px;
+    position: relative;}
+
 }
 
 @media(max-width: 1151px){
