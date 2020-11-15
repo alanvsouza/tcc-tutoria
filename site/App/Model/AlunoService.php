@@ -49,7 +49,10 @@ class AlunoService
 
         if (isset($usuario)) :
             $alunoDao = new AlunoDAO();
-            return $alunoDao->readFotoPerfilByLogin($usuario)['foto'];
+            $result = isset($alunoDao->readFotoPerfilByLogin($usuario)['foto'])
+                ? $alunoDao->readFotoPerfilByLogin($usuario)['foto'] : null;
+
+            return $result;
         endif;
 
         return null;
