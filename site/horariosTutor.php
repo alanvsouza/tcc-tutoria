@@ -47,50 +47,6 @@ include("functions/acesso.php");
             <?php
             \App\Model\TutorService::renderizarTabelaHorariosFixosTutor();
             ?>
-            <!-- <ul class="responsive-table more-width">
-                <li class="table-row" id="segunda">
-                    <div class="dia-semana">SEGUNDA</div>
-                    <input class="input-hora" type="text" />
-                    <input class="input-hora" type="text" />
-                    <input class="input-hora" type="text" />
-                    <input class="input-hora" type="text" />
-                </li>
-                <li class="table-row" id="terca">
-                    <div class="dia-semana">TERÇA</div>
-                    <input class="input-hora" type="text" />
-                    <input class="input-hora" type="text" />
-                    <input class="input-hora" type="text" />
-                    <input class="input-hora" type="text" />
-                </li>
-                <li class="table-row" id="quarta">
-                    <div class="dia-semana">QUARTA</div>
-                    <input class="input-hora" type="text" />
-                    <input class="input-hora" type="text" />
-                    <input class="input-hora" type="text" />
-                    <input class="input-hora" type="text" />
-                </li>
-                <li class="table-row" id="quinta">
-                    <div class="dia-semana">QUINTA</div>
-                    <input class="input-hora" type="text" />
-                    <input class="input-hora" type="text" />
-                    <input class="input-hora" type="text" />
-                    <input class="input-hora" type="text" />
-                </li>
-                <li class="table-row" id="sexta">
-                    <div class="dia-semana">SEXTA</div>
-                    <input class="input-hora" type="text" />
-                    <input class="input-hora" type="text" />
-                    <input class="input-hora" type="text" />
-                    <input class="input-hora" type="text" />
-                </li>
-                <li class="table-row" id="sabado">
-                    <div class="dia-semana">SÁBADO</div>
-                    <input class="input-hora" type="text" />
-                    <input class="input-hora" type="text" />
-                    <input class="input-hora" type="text" />
-                    <input class="input-hora" type="text" />
-                </li>
-            </ul> -->
         </form>
         <form method='POST' action="functions/atualizarHorariosFixosTutor.php" class="atualizar-horarios">
             <input type='hidden' id='dia-1' name='dia-1' class='input-horarios-fixos' value='' />
