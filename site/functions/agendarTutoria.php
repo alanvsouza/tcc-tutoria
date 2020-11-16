@@ -11,6 +11,10 @@ $idAluno = $_SESSION['idUsuario'];
 
 $tutoria = new \App\Model\Tutoria($idAluno, $idTutor, $data, $idHorario);
 
-\App\Model\TutoriaService::agendarTutoria($tutoria);
+if (\App\Model\TutoriaService::agendarTutoria($tutoria)) {
+    $_SESSION['tutoria_agendada'] = true;
+} else {
+    $_SESSION['tutoria_agendada'] = false;
+}
 
 header('Location: ../agendarTutoria.php');

@@ -8,14 +8,11 @@ class TutoriaService
     {
         Session::startSession();
         $tutoriaDao = new \App\Model\TutoriaDAO();
-        $return = false;
 
-        if ($tutoriaDao->create($tutoria)) {
-            $_SESSION['tutoria_agendada'] = true;
-            $return = true;
-        }
+        if ($tutoriaDao->create($tutoria))
+            return true;
 
-        return $return;
+        return false;
     }
 
     public static function existeTutoria($data, $idHorario)

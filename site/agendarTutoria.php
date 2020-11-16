@@ -2,6 +2,11 @@
 require_once "vendor/autoload.php";
 \App\Model\Session::startSession();
 
+date_default_timezone_set('America/Sao_Paulo');
+
+if (isset($_SESSION['tutoria_agendada']))
+    header('refresh: 0.7');
+
 $nivelAcesso = isset($_SESSION['nivelAcesso']) ? $_SESSION['nivelAcesso'] : NULL;
 \App\Helper\AcessoHelper::nivelAcesso($nivelAcesso, __FILE__);
 
@@ -89,7 +94,7 @@ include("functions/acesso.php");
                             <?php if (isset($_GET['data'])) : ?>
                                 <input id='data' type="hidden" name="data" value="<?= $_GET['data'] ?>" />
                             <?php else : ?>
-                                <input id='data' type="hidden" name="data" disabled />
+                                <input id='data' type="hidden" name="data" value="<?= date('d/m/Y', time() + 24 * 60 * 60) ?>" />
                             <?php endif; ?>
 
                             <input id="select-professor-combobox" type="submit" hidden />
@@ -110,6 +115,24 @@ include("functions/acesso.php");
             $data = $_GET['data'];
 
             \App\Model\TutorService::renderizarTabelaHorarios($professor, $data);
+        } else if (isset($_SESSION['tutoria_agendada'])) {
+            echo "
+            <div class='tabela-sem-horarios col-xl-6'</div>
+            <ul class='responsive-table'>                
+                <li class='table-header'>
+                    <div>Início</div>
+                    <div>Término</div>
+                    <div>Disponibilidade</div>
+                    <div>Agendar</div>
+                </li>";
+
+            if ($_SESSION['tutoria_agendada']) {
+                echo "<div id='tutoria-agendada-sucesso' class='sem-resultados'>Tutoria agendada com sucesso!</div>";
+            } else {
+                echo "<div id='tutoria-agendada-falha' class='sem-resultados'>Erro ao agendar tutoria!</div>";
+            }
+
+            unset($_SESSION['tutoria_agendada']);
         }
         ?>
     </div>

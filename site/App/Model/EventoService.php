@@ -76,12 +76,13 @@ class EventoService
     public static function renderizarGaleriaEventos()
     {
         $eventoDao = new EventoDAO();
-        $eventos = $eventoDao->readAll();
+        $eventos = $eventoDao->readAllBeforeToday();
 
         foreach ($eventos as $evento) :
             $idEvento = $evento['idevento'];
             $dataEvento = date_format(date_create($evento['dataevento']), 'd/m/Y');
             $thumbEvento = $evento['image'];
+            $pastaEvento = $evento['pastaGaleria'];
             $galeriaEvento = $eventoDao->readImagensEventoById($idEvento);
             $totalImagens = sizeof($galeriaEvento);
 
@@ -110,7 +111,7 @@ class EventoService
                 $index++;
                 $class = $index == 1 ? 'foto-visivel' : 'foto-invisivel';
 
-                echo "<img src='img-galeria-eventos/{$imagem['imagem']}' class='fotos {$class}' id='galeria-fotos-{$idEvento}__foto-{$index}' alt=''>";
+                echo "<img src='img-galeria-eventos/{$pastaEvento}/{$imagem['imagem']}' class='fotos {$class}' id='galeria-fotos-{$idEvento}__foto-{$index}' alt=''>";
             endforeach;
             echo "</div>
                 </div>
