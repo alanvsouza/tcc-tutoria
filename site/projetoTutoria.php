@@ -42,11 +42,16 @@ require_once "vendor/autoload.php";
 <body>
 
     <?php
-    if (isset($_SESSION['tipo']) && $_SESSION['tipo'] == 'tutor')
-        include("navTutor.php");
-    else
-        include("navAluno.php");
-    include("navside.php");
+        if (isset($_SESSION['tipo']) && $_SESSION['tipo'] == 'tutor')
+            include("navTutor.php");
+        else
+            include("navAluno.php");
+        
+        if (isset($_SESSION['tipo']) && $_SESSION['tipo'] == 'tutor')
+            include("navsideTutor.php");
+        else 
+            include("navside.php");
+        ?>  
     ?>
 
     <div class="img-events">

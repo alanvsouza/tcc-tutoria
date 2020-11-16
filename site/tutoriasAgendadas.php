@@ -140,7 +140,7 @@ include("functions/acesso.php");
                                     </div>
                                     <form class="form-btn-tutoria">
                                         <div class="line">
-                                            <button type="submit" class="btn-cancelar-tutoria">Cancelar Tutoria</button>
+                                            <button type="submit" class="btn-cancelar-tutoria">Confirmar Tutoria</button>
                                         </div>
                                     </form>
                                 </div>
