@@ -49,13 +49,13 @@ public class Imagem {
         return false;
     }
      
-    public void deletarImagem(String sql, String txtEvtId, String excecao){
+    public void deletarImagem(String sql, String txtEvtId, String excecao, String caminhoImg){
         try{
             pst = conexao.prepareStatement(sql);
             pst.setString(1,txtEvtId);
             rs = pst.executeQuery();
                 if(rs.next()){
-                   File imagem = new File(rs.getString(1));
+                   File imagem = new File(caminhoImg + rs.getString(1));
                    imagem.delete();
                 }
         }

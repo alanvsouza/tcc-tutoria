@@ -79,6 +79,7 @@ class EventoService
         $eventos = $eventoDao->readAllBeforeToday();
 
         foreach ($eventos as $evento) :
+            $nomeEvento = $evento['nome'];
             $idEvento = $evento['idevento'];
             $dataEvento = date_format(date_create($evento['dataevento']), 'd/m/Y');
             $thumbEvento = $evento['image'];
@@ -89,7 +90,7 @@ class EventoService
             echo "<div class='card-novo'>
                 <img src='img-eventos/{$thumbEvento}' class='card-novo__image'>
                 <div class='card-novo__card-text'>
-                    <h2 class='card-novo__title'>Evento {$idEvento}</h2>
+                    <h2 class='card-novo__title'>{$nomeEvento}</h2>
                     <div class='card-novo__card-date'>{$dataEvento}</div>
                     <div class='card-novo__card-detalhes'>
                         <p class='card-novo__card-descricao'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>

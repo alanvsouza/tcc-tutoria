@@ -96,6 +96,7 @@ input#btn-filtrar{
     border-radius: 0.5rem;
     flex: 1;
     min-width: 290px;
+    max-width: 25%;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
 }
 
