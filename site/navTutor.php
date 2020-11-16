@@ -11,10 +11,10 @@ require_once "vendor/autoload.php";
             <?php $basename = basename($_SERVER['PHP_SELF'], '.php'); ?>
             <li class="li-nome-site"><h1><a href="index.php" class="name-site">Cotil Amigável</a></h1></li>
             <div class="links-menu">
-                <li><a <?php if ($basename == "index") echo "class = actived" ?> href="index.php">Eventos</a></li>
-                <li><a <?php if ($basename == "projetoTutoria") echo "class = actived" ?> href="projetoTutoria.php">Projeto Tutoria</a></li>
-                <li><a <?php if ($basename == "horariosTutor") echo "class = actived" ?> href="horariosTutor.php">Horários Tutoria</a></li>
-                <li><a <?php if ($basename == "tutoriasAgendadas") echo "class = actived" ?> href="tutoriasAgendadas.php">Tutorias Agendadas</a></li>
+                <li class="item-menu"><a <?php if ($basename == "index") echo "class = actived" ?> href="index.php">Eventos</a></li>
+                <li class="item-menu"><a <?php if ($basename == "projetoTutoria") echo "class = actived" ?> href="projetoTutoria.php">Projeto Tutoria</a></li>
+                <li class="item-menu"><a <?php if ($basename == "horariosTutor") echo "class = actived" ?> href="horariosTutor.php">Horários Tutoria</a></li>
+                <li class="item-menu"><a <?php if ($basename == "tutoriasAgendadas") echo "class = actived" ?> href="tutoriasAgendadas.php">Tutorias Agendadas</a></li>
             </div>
             <?php
             if (!isset($_SESSION['usuario'])) {
