@@ -272,4 +272,31 @@ class TutorService
 
         echo "</ul>";
     }
+
+    public static function renderizarInputsHorarioDinamico($data)
+    {
+        $idTutor = $_SESSION['idUsuario'];
+        $tutorDao = new TutorDAO();
+
+        $horarios = $tutorDao->readHorariosDinamicosByIdAndData($idTutor, $data);
+
+        if (is_null($horarios)) {
+            echo "
+                <input class='input-hora' type='text' />
+                <input class='input-hora' type='text' />
+                <input class='input-hora' type='text' />
+                <input class='input-hora' type='text' />
+            ";
+        } else {
+            foreach ($horarios as $key => $horario) {
+                echo "<input class='input-hora' type='text' value='{$horario['horarios']}' />";
+            }
+
+            $numInputs = count($horarios) / 2.0;
+
+            for ($i = $numInputs; $i < 4; $i++) {
+                echo "<input class='input-hora' type='text' />";
+            }
+        }
+    }
 }

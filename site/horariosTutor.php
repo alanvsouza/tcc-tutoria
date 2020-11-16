@@ -4,6 +4,16 @@ require_once "vendor/autoload.php";
 \App\Helper\AcessoHelper::nivelAcesso($_SESSION['nivelAcesso'], __FILE__);
 
 include("functions/acesso.php");
+
+$diasSemanaNomes = array(
+    1 => 'SEGUNDA',
+    2 => 'TERÇA',
+    3 => 'QUARTA',
+    4 => 'QUINTA',
+    5 => 'SEXTA',
+    6 => 'SÁBADO',
+    7 => 'DOMINGO'
+);
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +50,7 @@ include("functions/acesso.php");
         <a href="index.php" class="logo-site">Cotil Amigável</a>
     </div>
     <div class="content-body">
+        <!-- DFJSOIFJSDOIFJSOIDFJSOIDFJ -->
         <form method="POST" id="form-horarios-fixos" action="#" class="tabela-horarios-tutor">
             <div class="header-horarios">
                 <span class="title-horarios">Horários fixos</span>
@@ -48,6 +59,7 @@ include("functions/acesso.php");
             \App\Model\TutorService::renderizarTabelaHorariosFixosTutor();
             ?>
         </form>
+        <!-- SDKFHSIADFHIUSDFHUISDHF -->
         <form method='POST' action="functions/atualizarHorariosFixosTutor.php" class="atualizar-horarios">
             <input type='hidden' id='dia-1' name='dia-1' class='input-horarios-fixos' value='' />
             <input type='hidden' id='dia-2' name='dia-2' class='input-horarios-fixos' value='' />
@@ -62,28 +74,48 @@ include("functions/acesso.php");
     </div>
 
     <div class="content-body">
-        <form method="GET" action="#" class="tabela-horarios-tutor">
+        <form id='form-horarios-dinamicos' class="tabela-horarios-tutor">
             <div class="header-horarios">
                 <span class="title-horarios">Horários dinâmicos</span>
                 <div class="div-horarios-dinamicos">
-                    <input type="date" name="input-horarios-dinamico" id="input-horarios-dinamico">
                     <form>
-                        <button type="submit" id="btn-consultar-horarios"><i class="fas fa-search"></i></button>
+                        <input type="date" id="input-horarios-dinamico" <?php
+                                                                        if (isset($_GET['data-horario-dinamico']))
+                                                                            echo "value='{$_GET['data-horario-dinamico']}'";
+                                                                        ?>>
+                        <button type="button" id="btn-consultar-horarios"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
             </div>
             <ul class="responsive-table">
                 <li class="table-row" id="dia-semana">
-                    <div class="dia-semana">Day of Week</div>
-                    <input class="input-hora" disabled type="text" />
-                    <input class="input-hora" disabled type="text" />
-                    <input class="input-hora" disabled type="text" />
-                    <input class="input-hora" disabled type="text" />
+
+                    <?php
+                    if (isset($_GET['data-horario-dinamico'])) :
+                        $dataSelecionada = $_GET['data-horario-dinamico']; ?>
+
+                        <div class="dia-semana">
+                            <?= $diasSemanaNomes[DateTime::createFromFormat('Y-m-d', $_GET['data-horario-dinamico'])->format('N')] ?>
+                        </div>
+
+                    <?php
+                        \App\Model\TutorService::renderizarInputsHorarioDinamico($_GET['data-horario-dinamico']);
+                    else :
+                        $dataSelecionada = ""; ?>
+
+                        <div class="dia-semana">SELECIONE UMA DATA!</div>
+
+                    <?php endif; ?>
                 </li>
             </ul>
         </form>
-        <form action="" class="atualizar-horarios">
-            <input id="btn-horarios-dinamicos" class="btn-submeter" type="button" value="Atualizar">
+        <form id="form-consultar-data" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="get">
+            <input id="input-horarios-dinamico-hidden" type="hidden" name="data-horario-dinamico" />
+        </form>
+        <form method="POST" action="functions/atualizarHorariosDinamicosTutor.php" class="atualizar-horarios">
+            <input name="data" type="hidden" value="<?= $dataSelecionada ?>">
+            <input id="input-atualizar-horarios-dinamicos" name="horarios" type="hidden" value="">
+            <input id="btn-atualizar-horarios-dinamicos" class="btn-submeter" type="button" value="Atualizar">
         </form>
     </div>
     <div class="content-header2"></div>
@@ -102,6 +134,8 @@ include("functions/acesso.php");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
     <script src="js/horariosFixosProfessor.js"></script>
+    <script src="js/horariosDinamicosProfessor.js"></script>
+    <script src="js/consultarDataHorariosDinamicos.js"></script>
 
     <script type="text/javascript">
         $('.input-hora').mask('00:00 - 00:00');
