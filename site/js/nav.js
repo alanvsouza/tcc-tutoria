@@ -101,9 +101,3 @@ if(sobre2 != null){
         }
     });
 }
-
-imgUser = document.getElementById('icon-perfil');
-if(imgUser != null){ 
-    nav = document.getElementById('list-navbar');
-    nav.style.margin  = "auto auto auto calc(100% - 590px)";
-}

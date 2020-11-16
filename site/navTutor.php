@@ -5,14 +5,17 @@ require_once "vendor/autoload.php";
 
 <nav class="type-position">
     <span class="icon-menu"></span>
-    <h1><a href="index.php" class="name-site"> Cotil Amigável</a></h1>
     <!-- <div id="logo-site"></div> -->
-    <div class="links-menu sumir">
+    <div class="menu">
         <ul id="list-navbar">
             <?php $basename = basename($_SERVER['PHP_SELF'], '.php'); ?>
-            <li><a <?php if ($basename == "index") echo "class = actived" ?> href="index.php">Eventos</a></li>
-            <li><a <?php if ($basename == "projetoTutoria") echo "class = actived" ?> href="projetoTutoria.php">Projeto Tutoria</a></li>
-            <li><a <?php if ($basename == "horariosTutor") echo "class = actived" ?> href="horariosTutor.php">Horários</a></li>
+            <li><h1><a href="index.php" class="name-site">Cotil Amigável</a></h1></li>
+            <div class="links-menu">
+                <li><a <?php if ($basename == "index") echo "class = actived" ?> href="index.php">Eventos</a></li>
+                <li><a <?php if ($basename == "projetoTutoria") echo "class = actived" ?> href="projetoTutoria.php">Projeto Tutoria</a></li>
+                <li><a <?php if ($basename == "horariosTutor") echo "class = actived" ?> href="horariosTutor.php">Horários Tutoria</a></li>
+                <li><a <?php if ($basename == "tutoriasAgendadas") echo "class = actived" ?> href="tutoriasAgendadas.php">Tutorias Agendadas</a></li>
+            </div>
             <?php
             if (!isset($_SESSION['usuario'])) {
                 echo
@@ -33,10 +36,11 @@ require_once "vendor/autoload.php";
                                 <div class="items-sobre">
                                     <div class="triangulo-cima"></div>
                                     <div class="user-infos">
-                                        <div class="row p-0 m-0">
+                                        <a class="row p-0 m-0">
                                             <span class="nome-usuario">' . $_SESSION['nome'] . '</span>
-                                            <a href="#" class="ver-perfil">Ver Perfil</a>
-                                            <a href="functions/logout.php" class="sair">Sair</a>
+                                            <div class="logout">
+                                                <a href="functions/logout.php" class="sair"> <i class="fas fa-sign-out-alt"></i>Sair</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -68,7 +72,6 @@ require_once "vendor/autoload.php";
                                     <div class="user-infos">
                                         <div class="row p-0 m-0">
                                             <span class="nome-usuario">Carla Pereira Costa</span>
-                                            <a href="#" class="ver-perfil">Ver Perfil</a>
                                             <a href="functions/logout.php" class="sair">Sair</a>
                                         </div>
                                     </div>

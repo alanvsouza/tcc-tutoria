@@ -8,7 +8,7 @@ require_once "vendor/autoload.php";
 <html lang="pt-br">
 
 <head>
-    <title>Cotil Amigável</title>
+    <title>Cotil Amigável - Eventos</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">

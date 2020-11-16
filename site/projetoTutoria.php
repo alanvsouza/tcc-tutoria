@@ -42,7 +42,6 @@ require_once "vendor/autoload.php";
 <body>
 
     <?php
-    echo $_SESSION['tipo'];
     if (isset($_SESSION['tipo']) && $_SESSION['tipo'] == 'tutor')
         include("navTutor.php");
     else

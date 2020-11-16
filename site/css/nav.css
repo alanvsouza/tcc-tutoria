@@ -23,17 +23,20 @@ nav {
 }
 
 nav ul#list-navbar {
-  width: 750px;
+  width: 100vw;
   padding: 0px;
-  margin: auto auto auto calc(100% - 730px);
   display: flex;
   flex-direction: row;
+  min-width: 700px;
 }
 
 nav ul li {
   height: 65px;
-  line-height: 67px;
-  padding: 0px 20px 0px 20px;
+  line-height: 65px;
+  padding: 0px 15px 0px 15px !important;
+  margin: 0px !important;
+  width: auto;
+  text-align: center;
   list-style: none;
 }
 
@@ -63,8 +66,6 @@ h1 {
 
 a.name-site {
   width: auto;
-  max-width: 250px;
-  margin-left: 4%;
   line-height: 65px;
   font-size: 40px;
   padding: 0px;
@@ -74,6 +75,7 @@ a.name-site {
   align-items: center;
   cursor: pointer;
   color: black;
+  font-family: "Berkshire Swash", sans-serif;
 }
 
 h2 {
@@ -94,12 +96,21 @@ a.actived {
   flex-direction: row;
 }
 
-.links-menu {
-  width: 100%;
+div.menu {
+  width: 100vw;
   display: flex;
   flex-direction: row;
   padding: 0px;
 }
+
+div.links-menu{
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    margin-left: auto;
+}
+
 
 .login {
   cursor: pointer;
@@ -186,7 +197,7 @@ span.nome-usuario {
   margin: 0px auto 5px auto;
   border-bottom: 1px solid rgb(202, 202, 202);
   width: 100%;
-  font-size: 14px;
+  font-size: 14.4px;
   padding: 0px 0px 7px 0px;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
@@ -201,12 +212,26 @@ a.ver-perfil {
 }
 
 a.sair {
-  font-size: 13px;
+  font-size: 14px;
   color: #ff8817;
   padding: 5px 10px 0px 0px;
   width: 69px;
   display: block;
   text-align: right;
+}
+
+div.logout{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0px;
+  margin: 0px;
+}
+
+i.fa-sign-out-alt{
+  margin: 0px 7px 0px 0px;
 }
 
 span.icon-menu {
@@ -246,15 +271,8 @@ div.header_post:hover div#triangulo-para-baixo {
     font-size: 32px;
   }
 
-  nav ul {
-    width: 750px;
-    padding: 0px;
-    display: flex;
-    flex-direction: row;
-  }
-
   nav div a {
-    font-size: 17px;
+    font-size: 14px;
   }
 
   ul.user-perfil {
@@ -285,6 +303,10 @@ div.header_post:hover div#triangulo-para-baixo {
     height: 55px;
   }
 
+  nav ul li{
+    margin: auto !important;
+  }
+
   div.container-user{
     position: absolute;
     top: -5px;
@@ -296,7 +318,8 @@ div.header_post:hover div#triangulo-para-baixo {
     line-height: 55px;
     font-size: 32px;
     margin: auto;
-    width: 210px;
+    width: auto;
+    display: block;
   }
 
   i.sem-foto{
@@ -316,16 +339,12 @@ div.header_post:hover div#triangulo-para-baixo {
     display: block;
   }
 
-  .sumir {
+  div.links-menu {
     display: none;
   }
 
   .aparecer{
     display: block;
-  }
-
-  div.links-menu{
-    width: auto;
   }
 
   ul.user-perfil {

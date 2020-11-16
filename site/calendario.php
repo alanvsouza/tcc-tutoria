@@ -67,7 +67,7 @@ function montaCalendario()
         echo '<tr class="mes_title"><td colspan="7">' . str_replace("ç", "Ç", strtoupper($mes)) . '</td></tr>';
         echo '<tr class="dias_title">';
         foreach ($diasSemana as $i => $day) {
-            echo '<td>' . $day . '</td>';
+            echo '<td class="dia-semana">' . $day . '</td>';
         }
         echo '</tr><tr>';
         $y = 0;
@@ -76,12 +76,13 @@ function montaCalendario()
             if ($numero == 1) {
                 $qtd = array_search($dia, $daysWeek);
                 for ($i = 1; $i <= $qtd; $i++) {
-                    echo '<td></td>';
+                    echo '<td class="disabled"></td>';
                     $y += 1;
                 }
             }
             (string)$data = $num . "/" . $numero . "/" . date('Y');
-            echo '<td class="hoverEfect" onclick="dataTutoria(\'' . $data . '\')" id="' . $num . "/" . $numero . "/" . date('Y') . '">' . $numero . '</td>';
+            if (strtotime($data) < strtotime(date('d-m-Y'))) echo '<td class="disabled">' . $numero . '</td>';
+            else echo '<td class="hoverEfect" onclick="dataTutoria(\'' . $data . '\')" id="' . $num . "/" . $numero . "/" . date('Y') . '">' . $numero . '</td>';
             if ($y == 7) {
                 $y = 0;
                 echo '<tr></tr>';
