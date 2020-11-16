@@ -67,9 +67,11 @@ background: #fff;
 position: relative;}
 
 .post_content h1{
-font-size: 20px;
+font-size: 19px;
 line-height: 30px;
-font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;}
+letter-spacing: 0.03rem;
+color: black;
+font-family: 'Montserrat', Arial, sans-serif;}
 
 .post_content p {
 font-size: 14px;

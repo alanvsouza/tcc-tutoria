@@ -1,7 +1,11 @@
-*{
+* {
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
+}
+
+nav.type-position {
+    position: relative !important;
 }
 
 body {
@@ -11,131 +15,585 @@ body {
     overflow-x: hidden;
 }
 
-div.content-body{
+div.content-body {
     width: 100%;
     height: 100%;
     margin: 0px;
     padding: 0px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
-
-div.content-header{
-    width: 100vw;
-    height: 30vh;
-    min-height: 300px;
-    max-height: 300px;
+div.content-header {
+    width: 100%;
+    height: 40vh;
+    margin: 0px;
+    padding: 0px;
     position: absolute;
     display: block;
-    top: 0;
+    top: 60vh;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #595959;
-    margin: 0px;
-    padding: 0px;
     z-index: -1;
+    background-color: #595959;
 }
 
-div.hidden-scrool{
-    width: 80vw;
-    min-height: 80vh;
-    min-width: 375px;
-    max-width: 1250px;
+div.hidden-scrool {
+    width: 50vw;
+    min-height: 60vh;
+    height: auto;
+    min-width: 300px;
     position: absolute;
     display: block;
-    top: 50px;
-    left: 0px;
-    bottom: 0px;
-    right: 0px;
+    top: 90px;
+    left: 0;
+    bottom: 0;
+    right: 0;
     margin: auto;
     border: none;
     overflow: hidden;
 }
 
-section.content-tutorias-agendadas{
-    width: 87.5vw;
-    min-width: 350px;
-    max-width: 1200px;
+section.content-tutorias-agendadas {
+    width: 52.5vw;
+    height: auto;
+    min-width: 300px;
     min-height: 80vh;
     max-height: 80vh;
-    padding: 0px;
     border: 1px solid rgb(190, 190, 190);
-    height: auto;
     background-color: white;
     overflow-y: auto;
     overflow-x: hidden;
+    margin: 10px auto;
+    padding: 0px;
+}
+
+div.table-header {
+    width: 50vw;
+    min-width: 300px;
+    padding: 10px;
+    border-bottom: 1px solid gray;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: rgb(102, 102, 102);
+    color: black;
+    background-color: whitesmoke;
+}
+
+.title {
+    font-size: 19px;
+}
+
+.filtrar {
+    display: block;
+    margin-left: auto;
+}
+
+input.input-date {
+    width: 140px;
+    height: 24px;
+    margin-right: 10px;
+    color: black;
+    text-indent: 10px;
+    font-size: 14px;
+    background-color: white;
+    text-align: center;
+    border: 0px;
+}
+
+.fa-search {
+    font-size: 16px;
+}
+
+button {
+    background-color: transparent;
+    border: 0px;
+    padding: 0px;
+    margin: 0px;
+    outline: none;
+}
+
+div.table-body {
+    width: 50vw;
+    min-width: 300px;
+    height: 100%;
+    margin: 0px;
+    padding: 0px 0px 0px 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+div.table-row {
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0px 0px 0px;
+    padding: 0px 7px 7px 7px;
+    width: 50vw;
+    min-width: 300px;
+    justify-content: center;
+    height: 200px;
+    border: none;
+    border-bottom: 1px solid rgb(185, 185, 185);
+}
+
+.tutoria-agendada {
+    width: 100%;
+    height: 100%;
+}
+
+.tutoria-agendada-header {
+    width: 50vw;
+    min-width: 300px;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+img.img-usuario {
+    width: 100px;
+    height: 100%;
+    border-radius: 50%;
+    margin: 0px 15px 0px 0px;
+    border: 1px solid gray;
+    transform: translateX(-10px);
+}
+
+div.column {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+div.column-header {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 0px;
+    margin: 0px;
+    transform: translateX(-10px);
+}
+
+div.line {
+    width: 100%;
+    height: 35px;
+    padding: 0px 0px 0px 5px;
+}
+
+span.nome-usuario-tutoria {
+    font-size: 24px !important;
+    letter-spacing: 0.02rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+span.disciplinas {
+    font-size: 17px;
+    width: 100%;
+}
+
+div.tutoria-agendada-body {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0px 0px 0px;
     margin: auto;
 }
 
-@media (min-width: 401px) and (max-width: 561px){
+div.infos-tutoria-agendada {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.04rem;
+}
 
-    div.table-header{
-        width: 87.5vw;
-        padding: 15px 15px 10px 15px;
-        border-bottom: 1px solid gray;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 600;
-        color: rgb(102, 102, 102);
-        font-size: 16px;
-        color: black;
-        background-color: whitesmoke;
+i.fa-calendar-alt,
+i.fa-clock,
+i.fa-map-marker-alt,
+i.fa-envelope,
+i.fa-star {
+    font-size: 20px;
+    color: rgb(77, 72, 72);
+    transform: translateY(2px);
+    text-align: left;
+    width: 18px;
+}
+
+span.info {
+    padding: 0px 10px 0px 10px;
+}
+
+.form-btn-tutoria {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+button.btn-cancelar-tutoria {
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    width: 150px;
+    height: 35px;
+    display: block;
+    color: white;
+    background-color: #383838;
+    transition: background .3s ease;
+}
+
+button.btn-cancelar-tutoria:hover {
+    background-color: #ff8206;
+}
+
+span.email {
+    line-break: auto;
+    word-wrap: break-word;
+    font-size: 18px;
+}
+
+div.the-end {
+    border-bottom: 0px solid gray;
+}
+
+
+@media (min-width: 1500px) {
+    div.hidden-scrool {
+        width: 40vw;
     }
 
-    .filtrar{
-        display: block;
-        margin-left: auto;
+    section.content-tutorias-agendadas {
+        width: 42.5vw;
     }
 
-    input[type="date"]{
-        width: 110px;
-        height: 24px;
-        margin-right: 10px;
-        color: black;
-        text-indent: 10px;
+    div.table-header {
+        width: 40vw;
+    }
+
+    div.table-row {
+        width: 40vw;
+    }
+
+    .tutoria-agendada-header {
+        width: 40vw;
+    }
+
+}
+
+@media (min-width: 991px) and (max-width: 1250px) {
+    div.hidden-scrool {
+        width: 60vw;
+    }
+
+    section.content-tutorias-agendadas {
+        width: 61.25vw
+    }
+
+    div.table-header {
+        width: 60vw;
+    }
+
+    div.table-row {
+        width: 60vw;
+    }
+
+    .tutoria-agendada-header {
+        width: 60vw;
+    }
+}
+
+@media (min-width: 761px) and (max-width: 990px) {
+    div.hidden-scrool {
+        width: 65vw;
+        min-width: 500px;
+    }
+
+    section.content-tutorias-agendadas {
+        width: 66.625vw;
+        min-width: 520px;
+    }
+
+    div.table-header {
+        width: 65vw;
+        min-width: 500px;
+    }
+
+    .title {
+        font-size: 18px;
+    }
+
+    div.table-row {
+        width: 65vw;
+        min-width: 500px;
+    }
+
+    .tutoria-agendada-header {
+        width: 65vw;
+        min-width: 500px;
+    }
+
+    div.infos-tutoria-agendada {
+        font-size: 12px;
+    }
+
+    i.fa-calendar-alt,
+    i.fa-clock,
+    i.fa-map-marker-alt,
+    i.fa-envelope,
+    i.fa-star {
+        font-size: 24px;
+    }
+
+    button.btn-cancelar-tutoria {
+        font-size: 15px;
+        width: auto;
+        padding: 7px;
+        margin-right: 0px;
+        transform: translateX(-15px);
+    }
+
+    input.input-date {
+        width: 140px;
         font-size: 14px;
-        background-color: white;
-        text-align: center;
+    }
+}
+
+@media (min-width: 580px) and (max-width: 760px) {
+    div.hidden-scrool {
+        width: 80vw;
+        min-width: 0px;
     }
 
-    .fa-search{
+    section.content-tutorias-agendadas {
+        width: 82vw;
+        min-width: 0px;
+    }
+
+    div.table-header {
+        width: 80vw;
+        min-width: 0px;
+    }
+
+    div.table-row {
+        width: 80vw;
+        min-width: 0px;
+    }
+
+    .tutoria-agendada-header {
+        width: 80vw;
+        min-width: 0px;
+    }
+
+    .title {
+        font-size: 17px;
+    }
+
+    span.nome-usuario-tutoria {
+        font-size: 19px !important;
+    }
+
+    span.email {
+        line-break: auto;
+        word-wrap: break-word;
+        font-size: 17px;
+    }
+
+    div.infos-tutoria-agendada {
+        font-size: 12.5px;
+    }
+
+    i.fa-calendar-alt,
+    i.fa-clock,
+    i.fa-map-marker-alt,
+    i.fa-envelope,
+    i.fa-star {
+        font-size: 20px;
+        width: 15px;
+    }
+
+    button.btn-cancelar-tutoria {
+        font-size: 13.5px;
+        width: auto;
+        padding: 7px;
+        margin-right: 0px;
+        transform: translateX(-5px);
+    }
+
+    input.input-date {
+        width: 130px;
+        font-size: 13px;
+    }
+
+}
+
+
+@media (min-width: 400px) and (max-width: 579px) {
+    div.hidden-scrool {
+        width: 90vw;
+        min-width: 330px;
+    }
+
+    section.content-tutorias-agendadas {
+        width: 92.25vw;
+        min-width: 338.25px;
+    }
+
+    div.table-header {
+        width: 90vw;
+        min-width: 330px;
+    }
+
+    div.table-row {
+        width: 90vw;
+        min-width: 330px;
+    }
+
+    .tutoria-agendada-header {
+        width: 90vw;
+        min-width: 330px;
+    }
+    
+    .title {
         font-size: 16px;
     }
 
-    button{
-        background-color: transparent;
-        border: none;
+    span.nome-usuario-tutoria {
+        margin-top: 10px;
+        font-size: 20px !important;
+    }
+
+    span.email {
+        line-break: auto;
+        word-wrap: break-word;
+        font-size: 14px;
+    }
+
+    div.infos-tutoria-agendada {
+        font-size: 11px;
+    }
+
+    i.fa-calendar-alt,
+    i.fa-clock,
+    i.fa-map-marker-alt,
+    i.fa-envelope,
+    i.fa-star {
+        font-size: 14px;
+        width: 7px;
+    }
+
+    button.btn-cancelar-tutoria {
+        font-size: 11px;
+        height: auto;
+        width: auto;
+        padding: 7px;
+        transform: translate(0px, -5px);
+    }
+
+    div.line,
+    div.column {
+
+        text-align: center;
         padding: 0px;
         margin: 0px;
-        outline: none;
     }
 
-    div.table-body{
+    img.img-usuario {
+        width: 80px;
+        height: 80%;
+        margin: 0px 10px 0px 0px;
+    }
+
+    input.input-date {
+        width: 120px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 400px){
+    div.hidden-scrool {
+        width: 90vw;
+    }
+
+    section.content-tutorias-agendadas {
+        width: 92.25vw;
+    }
+
+    div.table-header {
+        width: 90vw;
+    }
+
+    div.table-row {
+        width: 90vw;
+    }
+
+    .tutoria-agendada-header {
+        width: 90vw;
+    }
+
+    .title {
+        font-size: 14px;
+    }
+
+    span.nome-usuario-tutoria {
+        margin-top: 10px;
+        font-size: 17px !important;
+    }
+
+    span.email {
+        line-break: auto;
+        word-wrap: break-word;
+        font-size: 13px;
+    }
+
+    div.infos-tutoria-agendada {
+        font-size: 10px;
+    }
+
+    i.fa-calendar-alt,
+    i.fa-clock,
+    i.fa-map-marker-alt,
+    i.fa-envelope,
+    i.fa-star {
+        font-size: 13px;
+        width: 5px;
+    }
+
+    button.btn-cancelar-tutoria {
+        font-size: 10px;
+        height: auto;
+        width: auto;
+        padding: 5px;
+        transform: translate(0px, -5px);
+    }
+
+    div.line,
+    div.column {
         width: 100%;
-        height: 100%;
-        padding: 10px 0px 0px 0px;
-        display: flex;
-        flex-direction: column;
-        margin: auto;
+        text-align: center;
+        padding: 0px;
+        margin: 0px 0px 0px 0px;
     }
 
-    div.table-row{
-        display: flex;
-        flex-direction: row;
-        margin: 0px auto 5px auto;
-        height: 190px;
-        border: none;
-        border-bottom: 1px solid gray;
-        width: 100%;
+    img.img-usuario {
+        width: 70px;
+        height: 70%;
+        margin: 0px 10px 0px 0px;
     }
 
-    div.the-end{
-        border-bottom: 0px solid gray;
+    input.input-date {
+        width: 100px;
+        font-size: 11px;
     }
 }

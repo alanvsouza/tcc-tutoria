@@ -3,7 +3,7 @@ require_once "vendor/autoload.php";
 \App\Model\Session::startSession();
 ?>
 
-<nav>
+<nav class="type-position">
     <span class="icon-menu"></span>
     <h1><a href="index.php" class="name-site"> Cotil Amigável</a></h1>
     <!-- <div id="logo-site"></div> -->

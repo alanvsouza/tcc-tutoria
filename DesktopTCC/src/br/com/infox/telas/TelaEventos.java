@@ -48,7 +48,7 @@ Imagem img = new Imagem();
         //Mudar a pasta de eventos
         caminho.setPastaEventos("C:\\xampp\\htdocs\\myTCC\\site\\img-eventos\\");
         pastaEvento = caminho.getPastaEventos();
-        
+
         conexao = ModuloConexao.conector();
     }
 
@@ -70,12 +70,15 @@ Imagem img = new Imagem();
                         verificar = JOptionPane.showConfirmDialog(null,"Já existe uma imagem cadastrada com esse nome. Deseja sobrescrevê-la com a nova imagem?","AVISO",JOptionPane.YES_NO_OPTION);}
                             
                             if(verificar == 0){
-                                if(!arquivo.getText().equals(pastaEvento + nome.getText().replace(".jpg","").replace(".png","") + ".jpg")){
-                                    img.deletarImagem("select caminhoImg from tbeventos where idevento=?", txtEvtId.getText(),"Falha ao tentar excluir a imagem");
-                                    img.copiarImagem("br.com.infox.telas.TelaEventos",arquivo.getText(),"C:\\\\xampp\\\\htdocs\\\\myTCC\\\\site\\\\img-eventos\\\\",nome.getText(),".jpg");
+                                
+                                String nomeImg = nome.getText().replace(".jpg","").replace(".png","");
+                                
+                                if(!arquivo.getText().equals(pastaEvento + nomeImg + ".jpg")){
+                                    img.deletarImagem("select image from tbeventos where idevento=?", txtEvtId.getText(),"Falha ao tentar excluir a imagem",pastaEvento);
+                                    img.copiarImagem("br.com.infox.telas.TelaEventos",arquivo.getText(),pastaEvento,nomeImg,".jpg");
                                 }
                                 
-                                String sql = "insert into tbeventos (nome,dataevento,inicio,termino,descricao,localevento,caminhoImg,image) values(?,?,?,?,?,?,?,?)";   
+                                String sql = "insert into tbeventos (nome,dataevento,inicio,termino,descricao,localevento,image) values(?,?,?,?,?,?,?)";   
                                 String dataFormatada = evt.formatarData_ValidarData(txtEvtData.getText().replace("-","/"));
         
                                     if(dataFormatada != null){
@@ -85,9 +88,8 @@ Imagem img = new Imagem();
                                     pst.setString(3,txtEvtInicio.getText());
                                     pst.setString(4,txtEvtTermino.getText());
                                     pst.setString(5,taEvtDescricao.getText());
-                                    pst.setString(6,txtEvtLocal.getText());
-                                    pst.setString(7,pastaEvento + nome.getText().replace(".jpg","").replace(".png","") + ".jpg");
-                                    pst.setString(8,nome.getText().replace(".jpg","").replace(".png","") + ".jpg");
+                                    pst.setString(6,txtEvtLocal.getText().trim());
+                                    pst.setString(7,nomeImg + ".jpg");
                                     int adicionado = pst.executeUpdate();
 
                                     if(adicionado > 0){
@@ -99,7 +101,7 @@ Imagem img = new Imagem();
                         }
             }
         } catch (Exception e) {
-           JOptionPane.showMessageDialog(null,e); 
+           JOptionPane.showMessageDialog(null,"Falha ao tentar inserir o evento!"); 
         }
     }
     
@@ -121,11 +123,14 @@ Imagem img = new Imagem();
                         verificar = JOptionPane.showConfirmDialog(null,"Já existe uma imagem cadastrada com esse nome. Deseja sobrescrevê-la com a nova imagem?","AVISO",JOptionPane.YES_NO_OPTION);}
 
                         if(verificar == 0){
-                            if(!arquivo.getText().equals(pastaEvento + nome.getText().replace(".jpg","").replace(".png","") + ".jpg")){
-                                img.deletarImagem("select caminhoImg from tbeventos where idevento=?", txtEvtId.getText(),"Falha ao tentar excluir a imagem");
-                                img.copiarImagem("br.com.infox.telas.TelaEventos",arquivo.getText(),pastaEvento,nome.getText(),".jpg");   
+                            
+                            String nomeImg = nome.getText().replace(".jpg","").replace(".png","");
+                            
+                            if(!arquivo.getText().equals(pastaEvento + nomeImg + ".jpg")){
+                                    img.deletarImagem("select image from tbeventos where idevento=?", txtEvtId.getText(),"Falha ao tentar excluir a imagem",pastaEvento);
+                                    img.copiarImagem("br.com.infox.telas.TelaEventos",arquivo.getText(),pastaEvento, nomeImg,".jpg");  
                             } 
-                            String sql = "update tbeventos set nome=?,inicio=?,termino=?,dataevento=?,descricao=?,localevento=?,image=?,caminhoImg=? where idevento=?";
+                            String sql = "update tbeventos set nome=?,inicio=?,termino=?,dataevento=?,descricao=?,localevento=?,image=? where idevento=?";
                             String dataFormatada = evt.formatarData_ValidarData(txtEvtData.getText().replace("-","/"));
                             
                             if(dataFormatada != null){
@@ -136,9 +141,8 @@ Imagem img = new Imagem();
                                 pst.setString(4,dataFormatada.replace("-","/"));
                                 pst.setString(5,taEvtDescricao.getText());
                                 pst.setString(6,txtEvtLocal.getText());
-                                pst.setString(7,nome.getText().replace(".jpg","").replace(".png","") + ".jpg");
-                                pst.setString(8,pastaEvento + nome.getText().replace(".jpg","").replace(".png","") + ".jpg");
-                                pst.setString(9,txtEvtId.getText());
+                                pst.setString(7,nomeImg + ".jpg");
+                                pst.setString(8,txtEvtId.getText());
 
                                 int adicionado = pst.executeUpdate();
                                 if (adicionado > 0){
@@ -163,7 +167,7 @@ Imagem img = new Imagem();
             if(verificar == JOptionPane.YES_OPTION){
                String sql= "delete from tbeventos where idevento=?";
                     try{
-                         img.deletarImagem("select caminhoImg from tbeventos where idevento=?", txtEvtId.getText(),"Falha ao tentar excluir a imagem");
+                         img.deletarImagem("select image from tbeventos where idevento=?", txtEvtId.getText(),"Falha ao tentar excluir a imagem",pastaEvento);
                          pst = conexao.prepareStatement(sql);
                          pst.setString(1, txtEvtId.getText());
                          int apagado = pst.executeUpdate();
@@ -186,25 +190,25 @@ Imagem img = new Imagem();
 
     private void pesquisar_evento(){
         evt.pesquisarEventos("select nome as Nome,DATE_FORMAT(dataevento, '%d/%m/%Y') as Data, inicio as Inicio,termino as Término,descricao as Descrição,localevento as Local,"
-        + "image as Imagem," + "caminhoImg as Caminho, idevento as ID from tbeventos where DATE_FORMAT(NOW(), '%Y/%m/%d') <= DATE_FORMAT(dataevento, '%Y/%m/%d') and nome like ?", tblEventos, txtEvtPesquisar);
+        + "image as Imagem," + "idevento as ID from tbeventos where DATE_FORMAT(NOW(), '%Y/%m/%d') <= DATE_FORMAT(dataevento, '%Y/%m/%d') and nome like ?", tblEventos, txtEvtPesquisar);
     }
     
     private void setar_campos(){
         int setar = tblEventos.getSelectedRow();
-        JTextField[] camposEvento = {txtEvtNome,txtEvtData,txtEvtInicio,txtEvtTermino,null,txtEvtLocal,nome,arquivo,txtEvtId};
+        JTextField[] camposEvento = {txtEvtNome,txtEvtData,txtEvtInicio,txtEvtTermino,null,txtEvtLocal,nome,txtEvtId};
         evt.setCamposEvento(tblEventos,camposEvento,taEvtDescricao);
-        img.carregaImagem(btnImg, tblEventos.getModel().getValueAt(setar,7).toString(),374,220);
+        img.carregaImagem(btnImg, pastaEvento + tblEventos.getModel().getValueAt(setar,6).toString(),374,220);
     }
     
      private void clear(){
-        JTextField[] campos = {txtEvtNome,txtEvtData,txtEvtInicio,txtEvtTermino,txtEvtLocal,txtEvtId,nome,arquivo,txtEvtPesquisar};
+        JTextField[] campos = {txtEvtNome,txtEvtData,txtEvtInicio,txtEvtTermino,txtEvtLocal,txtEvtId,nome,txtEvtPesquisar};
         evt.clearCamposEvento(campos, taEvtDescricao, btnImg);
         nomeImagem = "";
      }
    
     private boolean verificarCamposEvento(){
         String[] camposObri = {txtEvtNome.getText(),txtEvtData.getText(),txtEvtInicio.getText(),txtEvtTermino.getText(),txtEvtLocal.getText()
-        ,nome.getText(),arquivo.getText(),taEvtDescricao.getText()};
+        ,nome.getText(), taEvtDescricao.getText()};
         
         int verificacao = evt.verificarCamposEvento(camposObri, txtEvtData.getText(), txtEvtInicio.getText(), txtEvtTermino.getText());
         

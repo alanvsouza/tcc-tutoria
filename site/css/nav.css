@@ -39,8 +39,9 @@ nav ul li {
 
 nav div a {
   transition: color .3s ease;
-  font-size: 19px;
-  font-family: "Josefin Sans";
+  font-size: 16px;
+  font-family: 'Montserrat';
+  letter-spacing: 0.07rem;
   text-decoration: none;
   color: #292827;
   width: 100%;

@@ -54,15 +54,15 @@ Caminho caminho = new Caminho();
     }
     
     private void pesquisar_tutor(){
-        tutor.pesquisarTutor("select nometutor as Nome, descricao as Descrição,login as Login, senha as Senha, email as Email, telefone as Telefone, foto as Foto, disciplinas as Disciplinas, caminhoFoto as Caminho,idtutor as ID, facebook as Facebook, instagram as Instagram, linkedin as LinkedIn, twitter as Twitter, youtube as Youtube from tbtutor where nometutor like ?", tblTutores, txtTutPesquisar);
+        tutor.pesquisarTutor("select nometutor as Nome, descricao as Descrição,login as Login, senha as Senha, email as Email, telefone as Telefone, foto as Foto, disciplinas as Disciplinas,idtutor as ID, facebook as Facebook, instagram as Instagram, linkedin as LinkedIn, twitter as Twitter, youtube as Youtube from tbtutor where nometutor like ?", tblTutores, txtTutPesquisar);
     }
     
     private void setar_campos(){
         int setar = tblTutores.getSelectedRow();
-        JTextField[] camposTutor = {txtTutNome,null,txtTutLogin,txtTutSenha,txtTutEmail,txtTutFone,nome,txtTutDisciplinas,arquivo,txtTutId,txtFacebook,
+        JTextField[] camposTutor = {txtTutNome,null,txtTutLogin,txtTutSenha,txtTutEmail,txtTutFone,nome,txtTutDisciplinas,txtTutId,txtFacebook,
         txtInstagram,txtLinkedin,txtTwitter,txtYoutube};
         tutor.setCamposTutor(tblTutores,camposTutor,taTutDescricao);
-        img.carregaImagem(btnImg, tblTutores.getModel().getValueAt(setar,8).toString(),225,180);
+        img.carregaImagem(btnImg, pastaTutor + tblTutores.getModel().getValueAt(setar,6).toString(),225,180);
     }
     
     private void adicionar(){
@@ -75,33 +75,37 @@ Caminho caminho = new Caminho();
                     camposObrigatorios = false;
                 }
             }else{
-                nomeImagem = nome.getText();
+                nomeImagem = nome.getText().replace(".jpg","").replace(".png","").trim();
                 boolean verificarImg = img.consultarImagem("select foto from tbtutor", nomeImagem, ".png");
                 int verificar = 0;
                 
                 if(verificarImg){
                     verificar = JOptionPane.showConfirmDialog(null,"Já existe uma imagem cadastrada com esse nome. Deseja sobrescrevê-la com a nova imagem?","AVISO",JOptionPane.YES_NO_OPTION);
                 }
+                
                 if(verificar == 0){
-                    img.deletarImagem("select caminhoFoto from tbtutor where idtutor=?", txtTutId.getText(),"Falha ao tentar excluir a imagem");
-                    img.copiarImagem("br.com.infox.telas.TelaTutor",arquivo.getText(),pastaTutor,nome.getText(),".png");
                     
-                    String sql = "insert into tbtutor (nometutor,login,senha,email,telefone,foto,caminhoFoto,facebook,linkedin,instagram,twitter,youtube,descricao,disciplinas) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                                
+                    if(!arquivo.getText().equals(pastaTutor + nomeImagem + ".png")){
+                        img.deletarImagem("select foto from tbtutor where idtutor=?", txtTutId.getText(),"Falha ao tentar excluir a imagem", pastaTutor);
+                        img.copiarImagem("br.com.infox.telas.TelaTutor",arquivo.getText(),pastaTutor,nomeImagem,".png");
+                    }
+                    
+                    String sql = "insert into tbtutor (nometutor,login,senha,email,telefone,foto,facebook,linkedin,instagram,twitter,youtube,descricao,disciplinas) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
                     pst = conexao.prepareStatement(sql);
                     pst.setString(1,txtTutNome.getText().trim());
                     pst.setString(2,txtTutLogin.getText().trim());
                     pst.setString(3,txtTutSenha.getText().trim());
                     pst.setString(4,txtTutEmail.getText().trim());
                     pst.setString(5,txtTutFone.getText().trim());
-                    pst.setString(6,nome.getText().replace(".jpg","").replace(".png","").trim() + ".png");
-                    pst.setString(7,pastaTutor + nome.getText().trim().replace(".jpg","").replace(".png","") + ".png");
-                    pst.setString(8,txtFacebook.getText().trim());
-                    pst.setString(9,txtLinkedin.getText().trim());
-                    pst.setString(10,txtInstagram.getText().trim());
-                    pst.setString(11,txtTwitter.getText().trim());
-                    pst.setString(12,txtYoutube.getText().trim());    
-                    pst.setString(13,taTutDescricao.getText().trim());
-                    pst.setString(14,txtTutDisciplinas.getText().trim()); 
+                    pst.setString(6,nomeImagem + ".png");
+                    pst.setString(7,txtFacebook.getText().trim());
+                    pst.setString(8,txtLinkedin.getText().trim());
+                    pst.setString(9,txtInstagram.getText().trim());
+                    pst.setString(10,txtTwitter.getText().trim());
+                    pst.setString(11,txtYoutube.getText().trim());    
+                    pst.setString(12,taTutDescricao.getText().trim());
+                    pst.setString(13,txtTutDisciplinas.getText().trim()); 
                     int adicionado =  pst.executeUpdate();
 
                     if(adicionado > 0){
@@ -114,7 +118,7 @@ Caminho caminho = new Caminho();
             }
         }
         catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao tentar adicionar tutor");
+            JOptionPane.showMessageDialog(null, e);
         }
     }
     
@@ -128,7 +132,7 @@ Caminho caminho = new Caminho();
                         camposObrigatorios = false;
                     }
                 }else{
-                    nomeImagem = nome.getText().replace(".jpg","").replace(".png","");
+                    nomeImagem = nome.getText().replace(".jpg","").replace(".png","").trim();
                     boolean verificarImg = img.consultarImagem("select foto from tbtutor", nomeImagem, ".png");
                     int verificar = 0;
                     
@@ -137,27 +141,26 @@ Caminho caminho = new Caminho();
                     
                     if(verificar == 0){
                         if(!arquivo.getText().equals(pastaTutor + nomeImagem + ".png")){
-                            img.deletarImagem("select caminhoFoto from tbtutor where idtutor=?", txtTutId.getText(),"Falha ao tentar excluir a imagem");
-                            img.copiarImagem("br.com.infox.telas.TelaTutor",arquivo.getText(),pastaTutor,nome.getText(),".png");
+                            img.deletarImagem("select foto from tbtutor where idtutor=?", txtTutId.getText(),"Falha ao tentar excluir a imagem",pastaTutor);
+                            img.copiarImagem("br.com.infox.telas.TelaTutor",arquivo.getText(),pastaTutor,nomeImagem,".png");
                         }
                         
-                        String sql = "update tbtutor set nometutor=?,login=?,senha=?,email=?,telefone=?,foto=?,caminhoFoto=?,facebook=?,instagram=?,twitter=?,linkedin=?,youtube=?,descricao=?,disciplinas=? where idtutor=?";
+                        String sql = "update tbtutor set nometutor=?,login=?,senha=?,email=?,telefone=?,foto=?,facebook=?,instagram=?,twitter=?,linkedin=?,youtube=?,descricao=?,disciplinas=? where idtutor=?";
                         pst = conexao.prepareStatement(sql);
                         pst.setString(1,txtTutNome.getText().trim());
                         pst.setString(2,txtTutLogin.getText().trim());
                         pst.setString(3,txtTutSenha.getText().trim());
                         pst.setString(4,txtTutEmail.getText().trim());
                         pst.setString(5,txtTutFone.getText().trim());
-                        pst.setString(6,nome.getText().replace(".jpg","").replace(".png","").trim() + ".png");
-                        pst.setString(7,pastaTutor + nome.getText().replace(".jpg","").replace(".png","") + ".png");
-                        pst.setString(8,txtFacebook.getText().trim());
-                        pst.setString(9,txtInstagram.getText().trim());
-                        pst.setString(10,txtTwitter.getText().trim());
-                        pst.setString(11,txtLinkedin.getText().trim());
-                        pst.setString(12,txtYoutube.getText().trim());    
-                        pst.setString(13,taTutDescricao.getText().trim());
-                        pst.setString(14,txtTutDisciplinas.getText().trim()); 
-                        pst.setString(15,txtTutId.getText());
+                        pst.setString(6,nomeImagem + ".png");
+                        pst.setString(7,txtFacebook.getText().trim());
+                        pst.setString(8,txtInstagram.getText().trim());
+                        pst.setString(9,txtTwitter.getText().trim());
+                        pst.setString(10,txtLinkedin.getText().trim());
+                        pst.setString(11,txtYoutube.getText().trim());    
+                        pst.setString(12,taTutDescricao.getText().trim());
+                        pst.setString(13,txtTutDisciplinas.getText().trim()); 
+                        pst.setString(14,txtTutId.getText());
 
                         int atualizado = pst.executeUpdate();
                         if (atualizado > 0){
@@ -181,7 +184,7 @@ Caminho caminho = new Caminho();
             if(confirmar == JOptionPane.YES_OPTION){
                 String sql = "delete from tbtutor where idtutor=?";
                         try {
-                            img.deletarImagem("select caminhoFoto from tbtutor where idtutor=?", txtTutId.getText(),"Falha ao tentar excluir a imagem");
+                            img.deletarImagem("select foto from tbtutor where idtutor=?", txtTutId.getText(),"Falha ao tentar excluir a imagem", pastaTutor);
                             pst = conexao.prepareStatement(sql);
                             pst.setString(1,txtTutId.getText());
                             int apagado =  pst.executeUpdate();
@@ -216,7 +219,7 @@ Caminho caminho = new Caminho();
     
     private boolean verificarCamposTutor(){
         String[] camposObri = {txtTutEmail.getText(),txtTutNome.getText(),txtTutLogin.getText(),txtTutSenha.getText(),
-        nome.getText(),txtTutDisciplinas.getText(),arquivo.getText(),taTutDescricao.getText()};
+        nome.getText(),txtTutDisciplinas.getText(),taTutDescricao.getText()};
         
         int verificacao = tutor.verificarCamposTutor(camposObri, txtTutEmail.getText(), txtTutFone.getText());
         
@@ -779,7 +782,7 @@ Caminho caminho = new Caminho();
     }//GEN-LAST:event_tblTutoresMouseClicked
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-    String sql = "select nometutor as Nome, descricao as Descrição, login as Login, senha as Senha, email as Email, telefone as Telefone, foto as Foto, disciplinas as Disciplinas, caminhoFoto as Caminho,idtutor as ID, facebook as Facebook, instagram as Instagram, linkedin as LinkedIn, twitter as Twitter, youtube as Youtube from tbtutor";
+    String sql = "select nometutor as Nome, descricao as Descrição, login as Login, senha as Senha, email as Email, telefone as Telefone, foto as Foto, disciplinas as Disciplinas,idtutor as ID, facebook as Facebook, instagram as Instagram, linkedin as LinkedIn, twitter as Twitter, youtube as Youtube from tbtutor";
         try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
