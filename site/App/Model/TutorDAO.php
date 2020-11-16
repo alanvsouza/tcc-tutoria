@@ -112,19 +112,41 @@ class TutorDAO
 
     public function readHorariosDinamicosByIdAndData($id, $data)
     {
-        $dataFormatada = \DateTime::createFromFormat('d/m/Y', $data)->format('Y-m-d');
         $query = "SELECT horarios FROM tbhorariosdinamicos WHERE idprofessor = ? AND data = ?";
         $stmt = Connection::getConn()->prepare($query);
 
         $stmt->bindValue(1, $id);
-        $stmt->bindValue(2, $dataFormatada);
+        $stmt->bindValue(2, $data);
 
         $stmt->execute();
 
         if ($stmt->rowCount() > 0)
-            return $stmt->fetch();
+            return $stmt->fetchAll();
 
         return null;
+    }
+
+    public function deleteAllHorariosDinamicosByData($id, $data)
+    {
+        $query = "DELETE FROM tbhorariosdinamicos WHERE idprofessor = ? AND `data` = ?";
+        $stmt = Connection::getConn()->prepare($query);
+
+        $stmt->bindValue(1, $id);
+        $stmt->bindValue(2, $data);
+
+        $stmt->execute();
+    }
+
+    public function createHorarioDinamico($id, $horario, $data)
+    {
+        $query = "INSERT INTO tbhorariosdinamicos (idprofessor, horarios, `data`) VALUES (?, ?, ?)";
+        $stmt = Connection::getConn()->prepare($query);
+
+        $stmt->bindValue(1, $id);
+        $stmt->bindValue(2, $horario);
+        $stmt->bindValue(3, $data);
+
+        $stmt->execute();
     }
 
     public function createHorario($id, $horario, $dia)
