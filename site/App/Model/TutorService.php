@@ -142,10 +142,13 @@ class TutorService
         $dataFormatadaString = $dataFormatada->format('d/m/Y');
         $diaSemana = date_format($dataFormatada, 'N');
 
-        $horarios = $tutorDao->readHorariosDinamicosByIdAndData($idTutor, $dataFormatadaString);
+        $horarios = $tutorDao->readHorariosDinamicosByIdAndData($idTutor, $dataFormatada->format('Y-m-d'));
+        $tipoHorario = 'dinamico';
 
-        if (is_null($horarios))
+        if (is_null($horarios)) {
             $horarios = $tutorDao->readHorariosDiaById($idTutor, $diaSemana);
+            $tipoHorario = 'fixo';
+        }
 
         if (!$horarios) {
             echo "<div class='tabela-sem-horarios col-xl-6'</div>";
@@ -162,11 +165,6 @@ class TutorService
                     <div>Disponibilidade</div>
                     <div>Agendar</div>
                 </li>";
-
-        if ($dataHoje > $dataFormatada) {
-            echo "<div class='sem-resultados'>Este dia não pode ser selecionado!</div>";
-            return;
-        }
         if (!$horarios) {
             echo "<div class='sem-resultados'>Nenhum horário encontrado para este dia!</div>";
 
@@ -178,7 +176,7 @@ class TutorService
             $id = $horario['idhorario'];
             $horario = explode('-', $horario['horarios']);
 
-            if (TutoriaService::existeTutoria($dataFormatada->format('Y-m-d'), $id)) {
+            if (TutoriaService::existeTutoria($dataFormatada->format('Y-m-d'), $id, $tipoHorario)) {
                 echo "
                 <li class='table-row'>
                     <div class='' data-label='{$horario[0]}'>{$horario[0]}</div>
@@ -212,6 +210,7 @@ class TutorService
                     <input type='hidden' name='idtutor' value='{$_GET['professor']}' />
                     <input type='hidden' name='idaluno' value='{$_SESSION['idUsuario']}' />
                     <input type='hidden' name='data' value='{$dataFormatadaString}' />
+                    <input type='hidden' name='tipo' value='{$tipoHorario}'>
                     
                     <input type='button' id='btn-agendar' value='Agendar Tutoria' />
                     <input type='submit' hidden />

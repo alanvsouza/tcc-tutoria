@@ -9,7 +9,13 @@ require_once "vendor/autoload.php";
     <div class="menu">
         <ul id="list-navbar">
             <?php $basename = basename($_SERVER['PHP_SELF'], '.php'); ?>
+<<<<<<< HEAD
             <li class="li-nome-site"><h1><a href="index.php" class="name-site">Cotil Amigável</a></h1></li>
+=======
+            <li>
+                <h1><a href="index.php" class="name-site">Cotil Amigável</a></h1>
+            </li>
+>>>>>>> a783b99ddec3d6e5b5ef00b31296aad64ee74828
             <div class="links-menu">
                 <li class="item-menu"><a <?php if ($basename == "index") echo "class = actived" ?> href="index.php">Eventos</a></li>
                 <li class="item-menu"><a <?php if ($basename == "projetoTutoria") echo "class = actived" ?> href="projetoTutoria.php">Projeto Tutoria</a></li>
