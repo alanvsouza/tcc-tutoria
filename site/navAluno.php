@@ -72,7 +72,7 @@ require_once "vendor/autoload.php";
                                     <div class="triangulo-cima"></div>
                                     <div class="user-infos">
                                         <div class="row p-0 m-0">
-                                            <span class="nome-usuario">Carla Pereira Costa</span>
+                                            <span class="nome-usuario">' . $_SESSION['nome'] .'</span>
                                             <a href="functions/logout.php" class="sair">Sair</a>
                                         </div>
                                     </div>

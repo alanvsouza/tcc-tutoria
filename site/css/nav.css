@@ -303,8 +303,10 @@ div.header_post:hover div#triangulo-para-baixo {
     height: 55px;
   }
 
-  nav ul li{
-    margin: auto !important;
+  li.li-nome-site{
+    position: absolute;
+    left: 0;
+    right: 0;
   }
 
   div.container-user{
