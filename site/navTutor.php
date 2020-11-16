@@ -9,9 +9,7 @@ require_once "vendor/autoload.php";
     <div class="menu">
         <ul id="list-navbar">
             <?php $basename = basename($_SERVER['PHP_SELF'], '.php'); ?>
-            <li>
-                <h1><a href="index.php" class="name-site">Cotil Amigável</a></h1>
-            </li>
+            <li class="li-nome-site"><h1><a href="index.php" class="name-site">Cotil Amigável</a></h1></li>
             <div class="links-menu">
                 <li><a <?php if ($basename == "index") echo "class = actived" ?> href="index.php">Eventos</a></li>
                 <li><a <?php if ($basename == "projetoTutoria") echo "class = actived" ?> href="projetoTutoria.php">Projeto Tutoria</a></li>
@@ -32,22 +30,24 @@ require_once "vendor/autoload.php";
                     $icon = "<img id='icon-perfil' class='com-foto' src='" . $icon . "' />";
 
                 echo
-                    '<div class="container-user">
-                        <ul class="user-perfil">
-                                <li class="ml-4 sobre"><a>' . $icon . '</a> </li>
-                                <div class="items-sobre">
-                                    <div class="triangulo-cima"></div>
-                                    <div class="user-infos">
-                                        <a class="row p-0 m-0">
-                                            <span class="nome-usuario">' . $_SESSION['nome'] . '</span>
-                                            <div class="logout">
-                                                <a href="functions/logout.php" class="sair"> <i class="fas fa-sign-out-alt"></i>Sair</a>
-                                            </div>
-                                        </div>
+                '<div class="container-user">
+                <ul class="user-perfil">
+                        <li class="ml-4 sobre"><a>' . $icon . '</a> </li>
+                        <div class="items-sobre">
+                            <div class="triangulo-cima"></div>
+                            <div class="user-infos">
+                                <div class="row p-0 m-0">
+                                    <span class="nome-usuario">' . $_SESSION['nome'] . '</span>
+                                    <div class="logout">
+                                        <a href="functions/logout.php" class="sair"><i class="fas fa-sign-out-alt"></i>Sair</a>
                                     </div>
                                 </div>
-                        </ul>
-                    </div>
+                            </div>
+                        </div>
+                </ul>
+            </div>
+            
+            
                     
                     ';
             }
@@ -73,7 +73,7 @@ require_once "vendor/autoload.php";
                                     <div class="triangulo-cima"></div>
                                     <div class="user-infos">
                                         <div class="row p-0 m-0">
-                                            <span class="nome-usuario">Carla Pereira Costa</span>
+                                            <span class="nome-usuario">' . $_SESSION['nome'] . '</span>
                                             <a href="functions/logout.php" class="sair">Sair</a>
                                         </div>
                                     </div>
