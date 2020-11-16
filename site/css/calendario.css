@@ -21,9 +21,9 @@
     background-color: rgb(255, 255, 255);}
 
     .calendario td.hoverEfect:hover{
-    color: #000000;
-    background-color: rgb(243, 243, 243);}
-    
+    color: black;
+    background-color: #dfdfdf;}
+
     .calendario .mes_title{
     height: 40px;
     font-weight: 700;
@@ -34,13 +34,20 @@
     background-color:#595959;
     color: white;
     padding: 5px;
-    padding-bottom: 5px;}
+    padding-bottom: 5px;
+    letter-spacing: 0.08rem;}
     
     .calendario .dias_title{
     color:black;
     font-size: 14px;
     font-weight: 600;}
     
+    .calendario .dia-semana{
+        color: rgb(34, 34, 34);
+        font-weight: 500;
+        background-color: rgb(238, 238, 238);
+    }
+
     .calendario #volta, .calendario #vai{
     padding: 0 10px;
     line-height: 35px;
@@ -56,12 +63,17 @@
     color: rgb(255, 255, 255);}
     
     .calendario #volta{
-    left: -1px;
-    top: -1px;}
+    left: 0px;
+    top: -3px;}
     
     .calendario #vai{
-    right: -1px;
-    top: -1px;}
+    right: 2px;
+    top: -3px;}
+
+    td.disabled{
+        cursor: unset;
+        background-color: rgba(240, 240, 240, 0.3);
+    }
 
     @media  (max-width: 561px) {
         .calendario{
