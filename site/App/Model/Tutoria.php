@@ -10,18 +10,21 @@ class Tutoria
         $idAluno,
         $dataTutoria,
         $idHorario,
-        $localTutoria;
+        $localTutoria,
+        $tipoHorario;
 
     public function __construct(
         $idAluno,
         $idTutor,
         $dataTutoria,
-        $idHorario
+        $idHorario,
+        $tipoHorario
     ) {
         $this->idAluno = $idAluno;
         $this->idTutor = $idTutor;
         $this->dataTutoria = $dataTutoria;
         $this->idHorario = $idHorario;
+        $this->tipoHorario = $tipoHorario;
     }
 
     /**
@@ -140,6 +143,26 @@ class Tutoria
     public function setIdTutor($idTutor)
     {
         $this->idTutor = $idTutor;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of tipoHorario
+     */
+    public function getTipoHorario()
+    {
+        return $this->tipoHorario;
+    }
+
+    /**
+     * Set the value of tipoHorario
+     *
+     * @return  self
+     */
+    public function setTipoHorario($tipoHorario)
+    {
+        $this->tipoHorario = $tipoHorario;
 
         return $this;
     }

@@ -112,7 +112,7 @@ class TutorDAO
 
     public function readHorariosDinamicosByIdAndData($id, $data)
     {
-        $query = "SELECT horarios FROM tbhorariosdinamicos WHERE idprofessor = ? AND data = ?";
+        $query = "SELECT * FROM tbhorariosdinamicos WHERE idprofessor = ? AND `data` = ?";
         $stmt = Connection::getConn()->prepare($query);
 
         $stmt->bindValue(1, $id);

@@ -94,7 +94,7 @@ include("functions/acesso.php");
                             <?php if (isset($_GET['data'])) : ?>
                                 <input id='data' type="hidden" name="data" value="<?= $_GET['data'] ?>" />
                             <?php else : ?>
-                                <input id='data' type="hidden" name="data" value="<?= date('d/m/Y', time() + 24 * 60 * 60) ?>" />
+                                <input id='data' type="hidden" name="data" value="<?= date('d/m/Y', time()) ?>" />
                             <?php endif; ?>
 
                             <input id="select-professor-combobox" type="submit" hidden />
