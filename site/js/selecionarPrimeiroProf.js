@@ -17,7 +17,7 @@ const tutoriaAgendadaSucesso =
         || document.querySelector('div#tutoria-agendada-falha') != null
         ? true : false;
 
-if (!params.hasOwnProperty("professor") && !tutoriaAgendadaSucesso) {
+if (!tutoriaAgendadaSucesso && !params.hasOwnProperty("professor")) {
     const submitComboboxButton = document.querySelector('input#select-professor-combobox');
     submitComboboxButton.click();
 }

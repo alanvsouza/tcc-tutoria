@@ -36,7 +36,8 @@ class AlunoDAO
         return null;
     }
 
-    public function readDuplicateLogin($login){
+    public function readDuplicateLogin($login)
+    {
         $query = "SELECT `t1`.login from `tbaluno` as `t1` WHERE login = ? union all SELECT `t2`.login from `tbtutor` as `t2` where login = ?";
         $stmt = Connection::getConn()->prepare($query);
         $stmt->bindValue(1, $login);
@@ -62,6 +63,7 @@ class AlunoDAO
 
         if ($stmt->rowCount() > 0) :
             $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
             return $result;
         endif;
 

@@ -2,6 +2,8 @@
 require_once "vendor/autoload.php";
 \App\Model\Session::startSession();
 
+date_default_timezone_set('America/Sao_Paulo');
+
 if (isset($_SESSION['tutoria_agendada']))
     header('refresh: 0.7');
 
@@ -92,7 +94,7 @@ include("functions/acesso.php");
                             <?php if (isset($_GET['data'])) : ?>
                                 <input id='data' type="hidden" name="data" value="<?= $_GET['data'] ?>" />
                             <?php else : ?>
-                                <input id='data' type="hidden" name="data" disabled />
+                                <input id='data' type="hidden" name="data" value="<?= date('d/m/Y', time() + 24 * 60 * 60) ?>" />
                             <?php endif; ?>
 
                             <input id="select-professor-combobox" type="submit" hidden />

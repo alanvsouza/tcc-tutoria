@@ -40,57 +40,68 @@ include("functions/acesso.php");
         <a href="index.php" class="logo-site">Cotil Amigável</a>
     </div>
     <div class="content-body">
-        <form method="GET" action="#" class="tabela-horarios-tutor">
+        <form method="POST" id="form-horarios-fixos" action="#" class="tabela-horarios-tutor">
             <div class="header-horarios">
-                <span class="title-horarios">Horários dinâmicos</span>
+                <span class="title-horarios">Horários fixos</span>
             </div>
-            <ul class="responsive-table more-width">
+            <?php
+            \App\Model\TutorService::renderizarTabelaHorariosFixosTutor();
+            ?>
+            <!-- <ul class="responsive-table more-width">
                 <li class="table-row" id="segunda">
                     <div class="dia-semana">SEGUNDA</div>
-                    <input class="input-hora" value="07:00 - 07:30" type="text"></input>
-                    <input class="input-hora" type="text"></input>
-                    <input class="input-hora" type="text"></input>
-                    <input class="input-hora" type="text"></input>
+                    <input class="input-hora" type="text" />
+                    <input class="input-hora" type="text" />
+                    <input class="input-hora" type="text" />
+                    <input class="input-hora" type="text" />
                 </li>
                 <li class="table-row" id="terca">
                     <div class="dia-semana">TERÇA</div>
-                    <input class="input-hora" type="text"></input>
-                    <input class="input-hora" type="text"></input>
-                    <input class="input-hora" type="text"></input>
-                    <input class="input-hora" type="text"></input>
+                    <input class="input-hora" type="text" />
+                    <input class="input-hora" type="text" />
+                    <input class="input-hora" type="text" />
+                    <input class="input-hora" type="text" />
                 </li>
                 <li class="table-row" id="quarta">
                     <div class="dia-semana">QUARTA</div>
-                    <input class="input-hora" type="text"></input>
-                    <input class="input-hora" type="text"></input>
-                    <input class="input-hora" type="text"></input>
-                    <input class="input-hora" type="text"></input>
+                    <input class="input-hora" type="text" />
+                    <input class="input-hora" type="text" />
+                    <input class="input-hora" type="text" />
+                    <input class="input-hora" type="text" />
                 </li>
                 <li class="table-row" id="quinta">
                     <div class="dia-semana">QUINTA</div>
-                    <input class="input-hora" type="text"></input>
-                    <input class="input-hora" type="text"></input>
-                    <input class="input-hora" type="text"></input>
-                    <input class="input-hora" type="text"></input>
+                    <input class="input-hora" type="text" />
+                    <input class="input-hora" type="text" />
+                    <input class="input-hora" type="text" />
+                    <input class="input-hora" type="text" />
                 </li>
                 <li class="table-row" id="sexta">
                     <div class="dia-semana">SEXTA</div>
-                    <input class="input-hora" type="text"></input>
-                    <input class="input-hora" type="text"></input>
-                    <input class="input-hora" type="text"></input>
-                    <input class="input-hora" type="text"></input>
+                    <input class="input-hora" type="text" />
+                    <input class="input-hora" type="text" />
+                    <input class="input-hora" type="text" />
+                    <input class="input-hora" type="text" />
                 </li>
                 <li class="table-row" id="sabado">
                     <div class="dia-semana">SÁBADO</div>
-                    <input class="input-hora" type="text"></input>
-                    <input class="input-hora" type="text"></input>
-                    <input class="input-hora" type="text"></input>
-                    <input class="input-hora" type="text"></input>
+                    <input class="input-hora" type="text" />
+                    <input class="input-hora" type="text" />
+                    <input class="input-hora" type="text" />
+                    <input class="input-hora" type="text" />
                 </li>
-            </ul>
+            </ul> -->
         </form>
-        <form action="" class="atualizar-horarios">
-            <input id="btn-horarios-dinamicos" class="btn-submeter" type="button" value="Atualizar">
+        <form method='POST' action="functions/atualizarHorariosFixosTutor.php" class="atualizar-horarios">
+            <input type='hidden' id='dia-1' name='dia-1' class='input-horarios-fixos' value='' />
+            <input type='hidden' id='dia-2' name='dia-2' class='input-horarios-fixos' value='' />
+            <input type='hidden' id='dia-3' name='dia-3' class='input-horarios-fixos' value='' />
+            <input type='hidden' id='dia-4' name='dia-4' class='input-horarios-fixos' value='' />
+            <input type='hidden' id='dia-5' name='dia-5' class='input-horarios-fixos' value='' />
+            <input type='hidden' id='dia-6' name='dia-6' class='input-horarios-fixos' value='' />
+
+            <input id="btn-horarios-fixos" class="btn-submeter" type="button" value="Atualizar" />
+            <input id="btn-submit-horarios-fixos" hidden type="submit" />
         </form>
     </div>
 
@@ -108,10 +119,10 @@ include("functions/acesso.php");
             <ul class="responsive-table">
                 <li class="table-row" id="dia-semana">
                     <div class="dia-semana">Day of Week</div>
-                    <input class="input-hora" disabled type="text"></input>
-                    <input class="input-hora" disabled type="text"></input>
-                    <input class="input-hora" disabled type="text"></input>
-                    <input class="input-hora" disabled type="text"></input>
+                    <input class="input-hora" disabled type="text" />
+                    <input class="input-hora" disabled type="text" />
+                    <input class="input-hora" disabled type="text" />
+                    <input class="input-hora" disabled type="text" />
                 </li>
             </ul>
         </form>
@@ -134,6 +145,7 @@ include("functions/acesso.php");
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+    <script src="js/horariosFixosProfessor.js"></script>
 
     <script type="text/javascript">
         $('.input-hora').mask('00:00 - 00:00');

@@ -142,7 +142,10 @@ class TutorService
         $dataFormatadaString = $dataFormatada->format('d/m/Y');
         $diaSemana = date_format($dataFormatada, 'N');
 
-        $horarios = $tutorDao->readHorariosDiaById($idTutor, $diaSemana);
+        $horarios = $tutorDao->readHorariosDinamicosByIdAndData($idTutor, $dataFormatadaString);
+
+        if (is_null($horarios))
+            $horarios = $tutorDao->readHorariosDiaById($idTutor, $diaSemana);
 
         if (!$horarios) {
             echo "<div class='tabela-sem-horarios col-xl-6'</div>";
@@ -216,5 +219,57 @@ class TutorService
             </div>
         </div>
         ";
+    }
+
+    public static function renderizarTabelaHorariosFixosTutor()
+    {
+        $diaSemana = 1;
+        $tutorDao = new TutorDAO;
+
+        $diasSemanaNomes = array(
+            1 => 'SEGUNDA',
+            2 => 'TERÇA',
+            3 => 'QUARTA',
+            4 => 'QUINTA',
+            5 => 'SEXTA',
+            6 => 'SÁBADO'
+        );
+
+        echo "<ul id='ul-horarios-fixos' class='responsive-table more-width'>";
+
+        while ($diaSemana < 7) {
+            $horarios = $tutorDao->readHorariosDiaById($_SESSION['idUsuario'], $diaSemana);
+
+            if (is_null($horarios)) {
+                echo "<li class='table-row' id='{$diaSemana}'>
+                    <div class='dia-semana'>{$diasSemanaNomes[$diaSemana]}</div>
+                    <input class='input-hora' type='text' />
+                    <input class='input-hora' type='text' />
+                    <input class='input-hora' type='text' />
+                    <input class='input-hora' type='text' />
+                </li>";
+
+                $diaSemana++;
+                continue;
+            }
+
+            echo "<li class='table-row' id='sabado'>
+                    <div class='dia-semana'>{$diasSemanaNomes[$diaSemana]}</div>";
+
+            $tamanho = count($horarios);
+            foreach ($horarios as $horario) {
+                echo "<input class='input-hora' type='text' value='{$horario['horarios']}' />";
+            }
+
+            for ($i = $tamanho; $i < 4; $i++) {
+                echo "<input class='input-hora' type='text' />";
+            }
+
+            echo "</li>";
+
+            $diaSemana++;
+        }
+
+        echo "</ul>";
     }
 }
