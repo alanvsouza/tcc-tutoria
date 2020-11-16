@@ -14,6 +14,10 @@ $diasSemanaNomes = array(
     6 => 'SÁBADO',
     7 => 'DOMINGO'
 );
+
+if ($_GET['data-horario-dinamico'] == "" || !isset($_GET['data-horario-dinamico']))
+    $_GET['data-horario-dinamico'] = date('Y-m-d', time());
+
 ?>
 
 <!DOCTYPE html>
