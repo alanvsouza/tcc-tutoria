@@ -20,8 +20,8 @@ require_once "vendor/autoload.php";
             <?php
             if (!isset($_SESSION['usuario'])) {
                 echo
-                    '<li class="sumir"><a class="login" href="login.php">Login</a></li>
-                    <li class="sumir mr-4"><a href="cadastro.php">Cadastro</a></li>';
+                    '<li class="item-menu sumir"><a class="login" href="login.php">Login</a></li>
+                    <li class="item-menu sumir mr-4"><a href="cadastro.php">Cadastro</a></li>';
             } else {
                 $icon = $_SESSION['tipo'] == 'aluno'
                     ? 'img-alunos/' . \App\Model\AlunoService::getFotoPerfil()
