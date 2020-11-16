@@ -76,7 +76,7 @@ class EventoService
     public static function renderizarGaleriaEventos()
     {
         $eventoDao = new EventoDAO();
-        $eventos = $eventoDao->readAll();
+        $eventos = $eventoDao->readAllBeforeToday();
 
         foreach ($eventos as $evento) :
             $idEvento = $evento['idevento'];
