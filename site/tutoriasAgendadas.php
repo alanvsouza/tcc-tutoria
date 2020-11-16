@@ -107,12 +107,16 @@ include("functions/acesso.php");
                     <div class="table-row">
                         <div class="tutoria-agendada">
                             <div class="tutoria-agendada-header">
-                                <img src="img-professores/1.png" class="img-usuario" alt="">
+                                <img src="img-alunos/1.jpeg" class="img-usuario" alt="">
                                 <div class="column-header">
-                                    <span class="nome-usuario-tutoria">José Tamióli de Andrade </span>
-                                    <div class="line">
-                                            <i class="far fa-envelope"></i>
-                                            <span class="info email">josetamiolia@gmail.com</span>
+                                    <span class="nome-usuario-tutoria">Maria Pereira Costa Da Silva </span>
+                                    <div class="row-header mt-1">
+                                        <div class="line mr-5">
+                                            <i class="fas fa-street-view"></i><span class="info ml-1">2° Ano</span>
+                                        </div>
+                                        <div class="line">
+                                            <i class="far fa-address-card"></i><span class="info ml-1">Informática</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +135,7 @@ include("functions/acesso.php");
                                     <div class="column">
                                         <div class="line local">
                                             <i class="fas fa-map-marker-alt"></i>
-                                            <span class="info">Indefinido</span>
+                                            <input type="text" class="info input-local"></input>
                                         </div>
                                     </div>
                                     <form class="form-btn-tutoria">

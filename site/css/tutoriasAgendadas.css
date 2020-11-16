@@ -144,7 +144,7 @@ div.table-row {
 }
 
 .tutoria-agendada-header {
-    width: 50vw;
+    width: 100%;
     min-width: 300px;
     height: 50%;
     display: flex;
@@ -181,10 +181,19 @@ div.column-header {
     transform: translateX(-10px);
 }
 
+div.row-header{
+    width: auto;
+    display: flex;
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    padding: 0px;
+    margin: 0px;
+}
+
 div.line {
-    width: 100%;
+    width: auto;
     height: 35px;
-    padding: 0px 0px 0px 5px;
+    padding: 0px 0px 0px 0px;
 }
 
 span.nome-usuario-tutoria {
@@ -224,21 +233,37 @@ i.fa-calendar-alt,
 i.fa-clock,
 i.fa-map-marker-alt,
 i.fa-envelope,
-i.fa-star {
+i.fa-star,
+i.fa-street-view,
+i.fa-address-card {
     font-size: 20px;
     color: rgb(77, 72, 72);
-    transform: translateY(2px);
     text-align: left;
-    width: 18px;
+    width: 20px;
+}
+
+i.fa-envelope{
+    transform: translateY(2px) !important;
 }
 
 span.info {
-    padding: 0px 10px 0px 10px;
+    font-family: 'Montserrat', sans-serif;
+    padding: 0px 8px 0px 8px;
+}
+
+input.input-local{
+    width: 100px;
+    border: 0px solid black;
+    border-bottom: 1px solid gray;
+    background-color: transparent;
+    height: 30px;
+    text-align: center;
 }
 
 .form-btn-tutoria {
     width: 100%;
     display: flex;
+    justify-content: left;
     align-items: center;
 }
 
@@ -348,11 +373,17 @@ div.the-end {
         font-size: 12px;
     }
 
+    span.info {
+        font-size: 15px;
+    }
+
     i.fa-calendar-alt,
     i.fa-clock,
     i.fa-map-marker-alt,
     i.fa-envelope,
-    i.fa-star {
+    i.fa-star,
+    i.fa-street-view,
+    i.fa-address-card {
         font-size: 24px;
     }
 
@@ -414,11 +445,17 @@ div.the-end {
         font-size: 12.5px;
     }
 
+    span.info {
+        font-size: 14.5px;
+    }
+
     i.fa-calendar-alt,
     i.fa-clock,
     i.fa-map-marker-alt,
     i.fa-envelope,
-    i.fa-star {
+    i.fa-star,
+    i.fa-street-view,
+    i.fa-address-card {
         font-size: 20px;
         width: 15px;
     }
@@ -484,11 +521,17 @@ div.the-end {
         font-size: 11px;
     }
 
+    span.info {
+        font-size: 14px;
+    }
+
     i.fa-calendar-alt,
     i.fa-clock,
     i.fa-map-marker-alt,
     i.fa-envelope,
-    i.fa-star {
+    i.fa-star,
+    i.fa-street-view,
+    i.fa-address-card {
         font-size: 14px;
         width: 7px;
     }
@@ -503,7 +546,6 @@ div.the-end {
 
     div.line,
     div.column {
-
         text-align: center;
         padding: 0px;
         margin: 0px;
@@ -561,11 +603,17 @@ div.the-end {
         font-size: 10px;
     }
 
+    span.info {
+        font-size: 13.5px;
+    }
+
     i.fa-calendar-alt,
     i.fa-clock,
     i.fa-map-marker-alt,
     i.fa-envelope,
-    i.fa-star {
+    i.fa-star,
+    i.fa-street-view,
+    i.fa-address-card {
         font-size: 13px;
         width: 5px;
     }
@@ -580,7 +628,7 @@ div.the-end {
 
     div.line,
     div.column {
-        width: 100%;
+        width: auto;
         text-align: center;
         padding: 0px;
         margin: 0px 0px 0px 0px;

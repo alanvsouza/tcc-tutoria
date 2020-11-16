@@ -9,7 +9,6 @@ require_once "vendor/autoload.php";
     <div class="menu">
         <ul id="list-navbar">
             <?php $basename = basename($_SERVER['PHP_SELF'], '.php'); ?>
-<<<<<<< HEAD
             <li><h1><a href="index.php" class="name-site">Cotil Amigável</a></h1></li>
             <div class="links-menu">
                 <li><a <?php if ($basename == "index") echo "class = actived" ?> href="index.php">Eventos</a></li>
@@ -17,12 +16,6 @@ require_once "vendor/autoload.php";
                 <li><a <?php if ($basename == "horariosTutor") echo "class = actived" ?> href="horariosTutor.php">Horários Tutoria</a></li>
                 <li><a <?php if ($basename == "tutoriasAgendadas") echo "class = actived" ?> href="tutoriasAgendadas.php">Tutorias Agendadas</a></li>
             </div>
-=======
-            <li><a <?php if ($basename == "index") echo "class = actived" ?> href="index.php">Eventos</a></li>
-            <li><a <?php if ($basename == "projetoTutoria") echo "class = actived" ?> href="projetoTutoria.php">Projeto Tutoria</a></li>
-            <li><a <?php if ($basename == "horariosTutor") echo "class = actived" ?> href="horariosTutor.php">Tutor horários</a></li>
-            <li><a <?php if ($basename == "tutoriasAgendadas") echo "class = actived" ?> href="tutoriasAgendadas.php">Tutorias Agendadas</a></li>
->>>>>>> 2cecf1beb23da2c5781948cab2d7d2f6ddcf84aa
             <?php
             if (!isset($_SESSION['usuario'])) {
                 echo
