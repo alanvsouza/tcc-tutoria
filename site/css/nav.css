@@ -23,9 +23,7 @@ nav {
 }
 
 nav ul#list-navbar {
-  width: 750px;
   padding: 0px;
-  margin: auto auto auto calc(100% - 730px);
   display: flex;
   flex-direction: row;
 }
@@ -33,7 +31,8 @@ nav ul#list-navbar {
 nav ul li {
   height: 65px;
   line-height: 67px;
-  padding: 0px 20px 0px 20px;
+  padding: 0px !important;
+  margin: 0px 20px 0px 20px !important;
   list-style: none;
 }
 
