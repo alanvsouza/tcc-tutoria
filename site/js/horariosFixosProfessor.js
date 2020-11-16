@@ -3,13 +3,16 @@ const horariosFixos = document.querySelectorAll('ul#ul-horarios-fixos > li > inp
 const buttonSubmitHorariosFixos = document.querySelector('#btn-horarios-fixos');
 
 buttonSubmitHorariosFixos.addEventListener('click', (event) => {
+    event.preventDefault();
     let horarios = [];
 
-    console.log(horariosFixos);
+    // console.log(horariosFixos);
 
     let numHorario = 0;
     let stringHorarios = '';
     for (let horario of horariosFixos) {
+        // console.log(horario);
+
         if (horario.value != '') {
             stringHorarios += horario.value + ';';
         }
@@ -17,19 +20,15 @@ buttonSubmitHorariosFixos.addEventListener('click', (event) => {
         if (numHorario === 3) {
             numHorario = 0;
 
-            if (stringHorarios != '') {
-                horarios.push(stringHorarios);
+            horarios.push(stringHorarios);
 
-                stringHorarios = '';
-            }
+            stringHorarios = '';
 
             continue;
         }
 
         numHorario++;
     }
-
-    console.log(horarios);
 
     for (let [index, horario] of horarios.entries()) {
         let inputHorario = document.querySelector(`input#dia-${index + 1}`);
