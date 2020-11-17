@@ -39,13 +39,16 @@ class TutoriaService
             $tutoria['datatutoria'] = \DateTime::createFromFormat('Y-m-d', $tutoria['datatutoria'])->format('d/m/Y');
             $horario = $tutorDao->readHorarioById($tutoria['idhorario']);
 
+            if (is_null($aluno['foto']))
+                $aluno['foto'] = 'default.png';
+
             switch ($tutoria['confirmada']) {
                 case 0:
                     echo "<div class='table-body'>
                     <div class='table-row'>
                         <div class='tutoria-agendada'>
                             <div class='tutoria-agendada-header'>
-                                <img src='img-alunos/1.jpeg' class='img-usuario' alt=''>
+                                <img src='img-alunos/{$aluno['foto']}' class='img-usuario' alt=''>
                                 <div class='column-header'>
                                     <span class='nome-usuario-tutoria'>{$aluno['nomealuno']}</span>
                                     <div class='line'>
@@ -97,7 +100,7 @@ class TutoriaService
                     <div class='table-row'>
                         <div class='tutoria-agendada'>
                             <div class='tutoria-agendada-header'>
-                                <img src='img-alunos/1.jpeg' class='img-usuario' alt=''>
+                                <img src='img-alunos/{$aluno['foto']}' class='img-usuario' alt=''>
                                 <div class='column-header'>
                                     <span class='nome-usuario-tutoria'>{$aluno['nomealuno']}</span>
                                     <div class='line'>
@@ -171,13 +174,16 @@ class TutoriaService
             $tutoria['data'] = \DateTime::createFromFormat('Y-m-d', $tutoria['data'])->format('d/m/Y');
             $horario = $tutorDao->readHorarioDinamicoById($tutoria['idhorario']);
 
+            if (is_null($aluno['foto']))
+                $aluno['foto'] = 'default.png';
+
             switch ($tutoria['confirmada']) {
                 case 0:
                     echo "<div class='table-body'>
                     <div class='table-row'>
                         <div class='tutoria-agendada'>
                             <div class='tutoria-agendada-header'>
-                                <img src='img-alunos/1.jpeg' class='img-usuario' alt=''>
+                                <img src='img-alunos/{$aluno['foto']}' class='img-usuario' alt=''>
                                 <div class='column-header'>
                                     <span class='nome-usuario-tutoria'>{$aluno['nomealuno']}</span>
                                     <div class='line'>
@@ -229,7 +235,7 @@ class TutoriaService
                     <div class='table-row'>
                         <div class='tutoria-agendada'>
                             <div class='tutoria-agendada-header'>
-                                <img src='img-alunos/1.jpeg' class='img-usuario' alt=''>
+                                <img src='img-alunos/{$aluno['foto']}' class='img-usuario' alt=''>
                                 <div class='column-header'>
                                     <span class='nome-usuario-tutoria'>{$aluno['nomealuno']}</span>
                                     <div class='line'>
