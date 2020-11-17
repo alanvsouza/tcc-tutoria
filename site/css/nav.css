@@ -179,7 +179,7 @@ div.items-sobre {
   position: absolute;
   top: 65px;
   transition: all .2s ease;
-  transform: translateX(-15px);
+  left: calc(100% - 140px);
 }
 
 div.items-sobre2 {
@@ -189,8 +189,9 @@ div.items-sobre2 {
   position: absolute;
   top: 65px;
   transition: all .2s ease;
-  transform: translateX(-15px);
+  left: calc(100% - 140px);
 }
+
 
 .user-infos {
   display: flex;
@@ -261,7 +262,7 @@ span.icon-menu {
 .triangulo-cima {
   width: 0;
   height: 0;
-  transform: translateX(25px);
+  transform: translateX(35px);
   margin: 0px auto 0px auto;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
@@ -369,14 +370,18 @@ div.header_post:hover div#triangulo-para-baixo {
   }
 
   .triangulo-cima {
-    transform: translateX(65px);
+    transform: translateX(75px);
   }
   
   div.items-sobre2 {
     max-width: 150px;
     width: 150px;
     min-width: 150px;
-    transform: translateX(-50px);
+    left: calc(100% - 190px);
+  }
+
+  div.items-sobre{
+    left: calc(100% - 190px);
   }
 }
 
@@ -397,6 +402,18 @@ div.header_post:hover div#triangulo-para-baixo {
   img.com-foto{
     margin-right: 50px;
   }
+
+
+  div.items-sobre2 {
+    max-width: 150px;
+    width: 150px;
+    min-width: 150px;
+    left: calc(100% - 200px);
+  }
+
+  div.items-sobre {
+    left: calc(100% - 200px);
+  }
 }
 
 @media (max-width: 400px) {
@@ -404,7 +421,6 @@ div.header_post:hover div#triangulo-para-baixo {
   nav ul li.li-nome-site {
     max-width: 180px;
   }
-
 
   a.name-site {
     max-width: 160px;
@@ -421,9 +437,18 @@ div.header_post:hover div#triangulo-para-baixo {
   img.com-foto{
     margin-right: 60px;
   }
+
+  div.items-sobre2 {
+    max-width: 150px;
+    width: 150px;
+    min-width: 150px;
+    left: calc(100% - 210px);
+  }
+
+  div.items-sobre {
+    left: calc(100% - 210px);
+  }
 }
-
-
 
 @media (max-width: 300px) {
   nav ul li.li-nome-site {
@@ -438,5 +463,16 @@ div.header_post:hover div#triangulo-para-baixo {
   span.icon-menu {
     width: 30px;
     height: 27px;
+  }
+
+  div.items-sobre2 {
+    max-width: 150px;
+    width: 150px;
+    min-width: 150px;
+    left: calc(100% - 220px);
+  }
+
+  div.items-sobre {
+    left: calc(100% - 220px);
   }
 }
