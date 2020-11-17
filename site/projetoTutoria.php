@@ -20,6 +20,8 @@ require_once "vendor/autoload.php";
     <link rel="stylesheet" href="css/imgEvents.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/navside.css">
+    <link rel="stylesheet" href="css/fotoPerfil.css">
+
 <!--     <link rel="stylesheet" href="css/notification.css"> -->
     <link rel="stylesheet" href="css/cardsProjetoTutoria.css">
     <link rel="stylesheet" href="css/projetoTutoria.css">
@@ -53,6 +55,15 @@ require_once "vendor/autoload.php";
             include("navside.php");
         ?>  
     ?>
+
+     <div id="modal-selecionar-foto">
+        <form class="form-foto-perfil">
+             <i id="close-selecionar-foto" class='fas fa-times close'></i>
+            <label for='selecao-arquivo'><img id="img-upload" src="img/upload.png"></label>
+            <input id='selecao-arquivo' type='file'>
+        </form>
+    </div>
+
 
     <div class="img-events">
         <div>
@@ -143,6 +154,7 @@ require_once "vendor/autoload.php";
     <!-- My JS -->
     <script src='js/nav.js'></script>
     <script src="js/navside.js"></script>
+       <script type="text/javascript" src="js/fotoPerfil.js"></script>
     <!-- <script src="js/notification.js"></script> -->
     <script src="js/classEdit.js"></script>
     <script src='js/cardsProjetoTutoria.js'></script>

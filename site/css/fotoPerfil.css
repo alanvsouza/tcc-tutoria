@@ -1,0 +1,76 @@
+#modal-selecionar-foto{
+    transition: all .4s ease;
+    width: 100%;
+    height: 100%;
+    display: none;
+    visibility: hidden;
+    margin: auto;
+    padding: 0px;
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    z-index: 10010;
+    background-color: rgba(0,0,0,0.75);
+    transition: all .3s ease; 
+}
+
+form.form-foto-perfil{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+}
+
+input#input-foto-perfil{
+    min-width: 75vw;
+    min-height: 75vh;
+    margin: auto;
+    background-color: transparent;
+    border: 2px solid gray;
+    border-radius: 5px;
+}
+
+input[type='file'] {
+    display: none;
+}
+
+label {
+    min-width:50vw;
+    min-height: 60vh;
+    max-width: 400px;
+    max-height: 400px;
+    margin: auto;
+    display: block;
+    background-color: rgba(255,255,255,.3);
+    border: 2px solid gray;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1000px;
+}
+
+img#img-upload{
+    width: 15%;
+    height: 20%;    
+    position: absolute;
+    left: 35%;
+    right: 35%;
+    top: 30%;
+    bottom: 30%;
+    display: block;
+    margin: auto;
+    z-index: 1000px;
+}
+
+i#close-selecionar-foto{
+    width: 70px !important;
+    height: 70px !important;
+    font-size:54px !important;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    top: 10px !important;
+    left: calc(100% - 50px)  !important;
+}

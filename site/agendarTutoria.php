@@ -32,6 +32,7 @@ include("functions/acesso.php");
     <link rel="stylesheet" href="css/navside.css">
     <link rel="stylesheet" href="css/agTutoria.css">
     <link rel="stylesheet" href="css/calendario.css">
+    <link rel="stylesheet" href="css/fotoPerfil.css">
 
     <!-- Font Awesome -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
@@ -74,6 +75,14 @@ include("functions/acesso.php");
     include("navside.php");
     include('calendario.php');
     ?>
+
+<div id="modal-selecionar-foto">
+        <form class="form-foto-perfil">
+             <i id="close-selecionar-foto" class='fas fa-times close'></i>
+            <label for='selecao-arquivo'><img id="img-upload" src="img/upload.png"></label>
+            <input id='selecao-arquivo' type='file'>
+        </form>
+    </div>
 
     <div class="row container-body">
         <div class="content-tutor m-0 col-xl-6">
@@ -158,6 +167,7 @@ include("functions/acesso.php");
 
 </body>
 
+<script type="text/javascript" src="js/fotoPerfil.js"></script>
 </html>
 
 <?php
