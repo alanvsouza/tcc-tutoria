@@ -13,15 +13,15 @@ $aluno = new \App\Model\Aluno(
     $_POST['ano']
 );
 
+
 if (\App\Model\AlunoService::checkCredentials($aluno)) :
     $alunoDao = new \App\Model\AlunoDAO();
 
-    $alunoDao->create($aluno);
-
-    $_SESSION['cadastro_sucesso'] = true;
+    if ($alunoDao->create($aluno))
+        $_SESSION['cadastro_sucesso'] = true;
 
     \App\Helper\RequestHelper::makeRequest(
-        'http://localhost:8080/tcc/site/mail-sender/sendEmail.php',
+        'mail-sender/sendEmail.php',
         'POST',
         array(
             'subject' => 'Conta cadastrada com sucesso!',

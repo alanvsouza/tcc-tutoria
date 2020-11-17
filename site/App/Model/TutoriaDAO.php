@@ -20,6 +20,36 @@ class TutoriaDAO
         return false;
     }
 
+    public function readById($id)
+    {
+        $query = "SELECT * FROM tbtutoria WHERE idtutoria = ?";
+        $stmt = Connection::getConn()->prepare($query);
+
+        $stmt->bindValue(1, $id);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0)
+            return $stmt->fetch();
+
+        return null;
+    }
+
+    public function readDinamicaById($id)
+    {
+        $query = "SELECT * FROM tbtutoriadinamica WHERE idtutoria = ?";
+        $stmt = Connection::getConn()->prepare($query);
+
+        $stmt->bindValue(1, $id);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0)
+            return $stmt->fetch();
+
+        return null;
+    }
+
     public function confirmarTutoria($id, $local)
     {
         $query = "UPDATE tbtutoria SET confirmada = 1, `localtutoria` = ? WHERE idtutoria = ?";
