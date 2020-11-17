@@ -19,6 +19,36 @@ class TutorDAO
         return null;
     }
 
+    public function readHorarioById($id)
+    {
+        $query = "SELECT * FROM `tbhorarios` WHERE `idhorario` = ?";
+        $stmt = Connection::getConn()->prepare($query);
+
+        $stmt->bindParam(1, $id);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0)
+            return $stmt->fetch();
+
+        return null;
+    }
+
+    public function readHorarioDinamicoById($id)
+    {
+        $query = "SELECT * FROM `tbhorariosdinamicos` WHERE `idhorario` = ?";
+        $stmt = Connection::getConn()->prepare($query);
+
+        $stmt->bindParam(1, $id);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0)
+            return $stmt->fetch();
+
+        return null;
+    }
+
     public function readFotoPerfilByLogin($login)
     {
         $query = "SELECT foto FROM tbtutor WHERE `login` = ?";
