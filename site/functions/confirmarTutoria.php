@@ -44,7 +44,7 @@ switch ($_POST['tipo-tutoria']) {
 
         $alunoInfos = $alunoDao->readById($tutoriaInfos['idaluno']);
         $tutorInfos = $tutorDao->readById($tutoriaInfos['idtutor']);
-        $horarioInfos = $tutorDao->readHorarioById($tutoriaInfos['idhorario']);
+        $horarioInfos = $tutorDao->readHorarioDinamicoById($tutoriaInfos['idhorario']);
         $horarios = explode('-', $horarioInfos['horarios']);
 
         \App\Helper\RequestHelper::makeRequest(
@@ -61,7 +61,7 @@ switch ($_POST['tipo-tutoria']) {
                     'data' => DateTime::createFromFormat('Y-m-d', $tutoriaInfos['data'])->format('d/m/Y'),
                     'inicio' => $horarios[0],
                     'termino' => $horarios[1],
-                    'local' => $tutoriaInfos['localtutoria']
+                    'local' => $tutoriaInfos['local']
                 )
             )
         );
