@@ -54,6 +54,13 @@ require_once "vendor/autoload.php";
         include("navside.php");
     ?>
 
+    <div id="modal-selecionar-foto">
+        <form class="form-foto-perfil">
+            <label for='selecao-arquivo'><img id="img-upload" src="img/upload.png"></label>
+            <input id='selecao-arquivo' type='file'>
+        </form>
+    </div>
+
     <div class="img-events">
         <div>
             <h1>Cotil Amigável</h1>
@@ -151,6 +158,7 @@ require_once "vendor/autoload.php";
     <!-- <script src="js/notification.js"></script> -->
     <script src="js/classEdit.js"></script>
     <script src="js/galeriaEventos.js"></script>
+    <script type="text/javascript" src="js/fotoPerfil.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 
