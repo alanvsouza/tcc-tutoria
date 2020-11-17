@@ -208,6 +208,7 @@ form.form-foto-perfil{
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: -1;
 }
 
 input#input-foto-perfil{
@@ -220,7 +221,7 @@ input#input-foto-perfil{
 }
 
 input[type='file'] {
-  display: none
+    display: none;
 }
 
 label {
@@ -233,6 +234,8 @@ label {
     background-color: rgba(255,255,255,.3);
     border: 2px solid gray;
     border-radius: 5px;
+    position: absolute;
+    z-index: 1000px;
 }
 
 img#img-upload{
@@ -245,6 +248,18 @@ img#img-upload{
     bottom: 30%;
     display: block;
     margin: auto;
+    z-index: 1000px;
+}
+
+i#close-selecionar-foto{
+    width: 70px !important;
+    height: 70px !important;
+    font-size:54px !important;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    top: 10px !important;
+    left: calc(100% - 50px)  !important;
 }
 
 @media(min-width: 1500px){

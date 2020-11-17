@@ -32,6 +32,7 @@ include("functions/acesso.php");
     <link rel="stylesheet" href="css/tutoriasAgendadas.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/navside.css">
+    <link rel="stylesheet" href="css/fotoPerfil.css">
 
 
     <!-- Font Awesome -->
@@ -47,6 +48,14 @@ include("functions/acesso.php");
     include("navTutor.php");
     include("navside.php");
     ?>
+
+    <div id="modal-selecionar-foto">
+        <form class="form-foto-perfil">
+             <i id="close-selecionar-foto" class='fas fa-times close'></i>
+            <label for='selecao-arquivo'><img id="img-upload" src="img/upload.png"></label>
+            <input id='selecao-arquivo' type='file'>
+        </form>
+    </div>
 
     <div class="content-body">
         <div class="content-header"></div>
@@ -86,6 +95,7 @@ include("functions/acesso.php");
 <!-- My JS -->
 
 <script src="js/navside.js"></script>
+   <script type="text/javascript" src="js/fotoPerfil.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
 <script src="js/tutoriasAgendadas.js"></script>
