@@ -16,7 +16,10 @@ class AlunoDAO
         $stmt->bindValue(5, $a->getCurso());
         $stmt->bindValue(6, $a->getAnoIngresso());
 
-        $stmt->execute();
+        if ($stmt->execute())
+            return true;
+
+        return false;
     }
 
     public function readById($id)

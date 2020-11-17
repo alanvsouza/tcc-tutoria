@@ -9,7 +9,9 @@ require_once "vendor/autoload.php";
     <div class="menu">
         <ul id="list-navbar">
             <?php $basename = basename($_SERVER['PHP_SELF'], '.php'); ?>
-            <li class="li-nome-site"><h1><a href="index.php" class="name-site">Cotil Amigável</a></h1></li>
+            <li class="li-nome-site">
+                <h1><a href="index.php" class="name-site">Cotil Amigável</a></h1>
+            </li>
             <div class="links-menu">
                 <li class="item-menu"><a <?php if ($basename == "index") echo "class = actived" ?> href="index.php">Eventos</a></li>
                 <li class="item-menu"><a <?php if ($basename == "projetoTutoria") echo "class = actived" ?> href="projetoTutoria.php">Projeto Tutoria</a></li>
@@ -21,9 +23,11 @@ require_once "vendor/autoload.php";
                     '<li class="sumir item-menu"><a class="login" href="login.php">Login</a></li>
                     <li class="sumir item-menu"><a href="cadastro.php" class="mr-4">Cadastro</a></li>';
             } else {
-                $icon = $_SESSION['tipo'] == 'aluno'
-                    ? 'img-alunos/' . \App\Model\AlunoService::getFotoPerfil()
-                    : 'img-professores/' . \App\Model\TutorService::getFotoPerfil();
+                $fotoPerfil = \App\Model\AlunoService::getFotoPerfil();
+
+                $icon = !is_null($fotoPerfil)
+                    ? 'img-alunos/' . $fotoPerfil
+                    : 'img-alunos/default.png';
 
                 if ($icon == null)
                     $icon = "<i id='icon-perfil' class='sem-foto' class='far fa-user-circle'></i>";

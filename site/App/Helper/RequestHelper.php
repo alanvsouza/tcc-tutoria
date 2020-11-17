@@ -15,7 +15,7 @@ class RequestHelper
         );
 
         $context  = stream_context_create($options);
-        $result = file_get_contents($url, false, $context);
+        $result = file_get_contents("http://localhost:8080/tcc/site/" . $url, false, $context);
 
 
         if ($result === FALSE)
