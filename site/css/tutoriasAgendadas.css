@@ -115,6 +115,7 @@ button {
     padding: 0px;
     margin: 0px;
     outline: none;
+    transform: translateX(10px);
 }
 
 div.table-body {
@@ -258,8 +259,9 @@ input.input-local{
     border: 0px solid black;    
     border-bottom: 1px solid gray;    
     background-color: transparent;
-    height: 30px;
+    height: auto;
     text-align: center;
+    margin-right: 20px;
 }
 
 .form-btn-tutoria {

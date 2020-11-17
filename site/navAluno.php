@@ -21,7 +21,9 @@ require_once "vendor/autoload.php";
             if (!isset($_SESSION['usuario'])) {
                 echo
                     '<li class="sumir item-menu"><a class="login" href="login.php">Login</a></li>
-                    <li class="sumir item-menu"><a href="cadastro.php" class="mr-4">Cadastro</a></li>';
+                    <li class="sumir item-menu"><a href="cadastro.php" class="mr-4">Cadastro</a></li>
+                    ';
+                    
             } else {
                 $fotoPerfil = \App\Model\AlunoService::getFotoPerfil();
 
