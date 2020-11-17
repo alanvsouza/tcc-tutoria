@@ -125,3 +125,9 @@ h6.midias{
         justify-content: center;
     }
 }
+
+@media (max-width: 500px){
+    .card-container {
+        min-width: 85vw;
+    }
+}

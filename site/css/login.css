@@ -165,11 +165,9 @@ color: rgb(39, 100, 241);}
     form p{
     font-size: 26px;}
 
-    div#erro span{
-    font-size: 15px;}
+    form span{
+    font-size: 15px !important;}
 
-    div#erro_tutoria span{
-    font-size: 15px;}
 
     div#cadastrado span{
     font-size: 15px;}
