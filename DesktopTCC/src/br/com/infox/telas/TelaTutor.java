@@ -20,7 +20,7 @@ ResultSet rs = null;
 String pastaTutor = "";
 String origem = "";
 String nomeImagem = "";
-
+String loginInicial;
 
 boolean imagemModificada;
 boolean camposObrigatorios = false;
@@ -67,11 +67,12 @@ Caminho caminho = new Caminho();
         tutor.setCamposTutor(tblTutores,camposTutor,taTutDescricao);
         img.carregaImagem(btnImg, pastaTutor + tblTutores.getModel().getValueAt(setar,6).toString(),225,180);
         imagemModificada = false;
+        loginInicial = tblTutores.getModel().getValueAt(setar, 2).toString(); 
     }
     
     private void adicionar(){
         try{
-            boolean verificarCampos = verificarCamposTutor();
+            boolean verificarCampos = verificarCamposTutor(true);
             if (verificarCampos != true  || txtTutId.getText().isEmpty() == false){
                 if(!txtTutId.getText().isEmpty()) JOptionPane.showMessageDialog(null, "É necessáio limpar os campos antes de adicionar um novo evento!");
                 else if(camposObrigatorios){
@@ -127,7 +128,13 @@ Caminho caminho = new Caminho();
     
     private void alterar(){
         try {
-            boolean verificarCampos = verificarCamposTutor();
+            boolean verificarLogin = true;
+            if(loginInicial.equals(txtTutLogin.getText().trim())){
+                System.out.println("entrou");
+                verificarLogin = false;
+            }
+            
+            boolean verificarCampos = verificarCamposTutor(verificarLogin);
                 if (verificarCampos != true || txtTutId.getText().isEmpty() == true){
                     if(txtTutId.getText().isEmpty() == true) JOptionPane.showMessageDialog(null,"Selecione um tutor para atualizar!");
                     else if(camposObrigatorios){
@@ -180,7 +187,7 @@ Caminho caminho = new Caminho();
     }
 
     private void deletar(){  
-    boolean verificarCampos = verificarCamposTutor();
+    boolean verificarCampos = verificarCamposTutor(false);
     
     if(verificarCampos == true || txtTutId.getText().isEmpty() == false){
         int confirmar = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover esse tutor?","AVISO",JOptionPane.YES_NO_OPTION);
@@ -211,6 +218,7 @@ Caminho caminho = new Caminho();
             }
         }
     }
+ 
     
     private void clear(){
         JTextField[] campos = {txtTutNome,txtTutLogin,txtTutEmail,txtTutSenha,txtTutFone,txtTutId,txtTutDisciplinas,nome,arquivo,
@@ -220,14 +228,20 @@ Caminho caminho = new Caminho();
         nomeImagem = "";
     }
     
-    private boolean verificarCamposTutor(){
+    private boolean verificarCamposTutor(boolean verificarLogin){
         String[] camposObri = {txtTutEmail.getText(),txtTutNome.getText(),txtTutLogin.getText(),txtTutSenha.getText(),
         nome.getText(),txtTutDisciplinas.getText(),taTutDescricao.getText()};
+        int verificacao = 0;
         
-        int verificacao = tutor.verificarCamposTutor(camposObri, txtTutEmail.getText(), txtTutFone.getText());
+        if(verificarLogin == true){
+            verificacao = tutor.verificarCamposTutor(camposObri, txtTutEmail.getText(), txtTutFone.getText(), txtTutLogin.getText().trim(), true);}
+        else{
+            verificacao = tutor.verificarCamposTutor(camposObri, txtTutEmail.getText(), txtTutFone.getText(), txtTutLogin.getText().trim(),false);
+        }
         
-         if (verificacao == 1 || verificacao == 2){ 
+         if (verificacao == 1 || verificacao == 2 || verificacao ==  3){ 
              if(verificacao == 1) camposObrigatorios = true;
+             else if(verificacao == 3) JOptionPane.showMessageDialog(null,"Já existe um usuário utilizando este login!");
              return false;
          }
         return true;

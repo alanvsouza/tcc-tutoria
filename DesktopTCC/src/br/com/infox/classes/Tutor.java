@@ -59,7 +59,7 @@ public class Tutor {
         descricao.setText(null);
     }
     
-    public int verificarCamposTutor(String[] camposObrigatorios, String txtTutEmail, String txtTutFone){
+    public int verificarCamposTutor(String[] camposObrigatorios, String txtTutEmail, String txtTutFone, String login, boolean verificarLogin){
         for(int i = 0; i < camposObrigatorios.length; i++){
             if(camposObrigatorios[i].length() == 0 ){
                 return 1;
@@ -72,6 +72,7 @@ public class Tutor {
                     JOptionPane.showMessageDialog(null,"O formato de e-mail é inválido!");
                     return 2;
                 }
+
             //Telefone
                 String expression2 = "(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})";
                 Pattern pattern2 = Pattern.compile(expression2, Pattern.CASE_INSENSITIVE);
@@ -80,8 +81,26 @@ public class Tutor {
                     JOptionPane.showMessageDialog(null,"O formato do telefone é inválido!");
                     return 2;
                 }
-            
-        }
+                
+             if(verificarLogin){
+                try{
+                   String sql =  "SELECT t1.login from tbaluno as t1 WHERE login = ? union all SELECT t2.login from tbtutor as t2 where login = ?";
+                   pst = conexao.prepareStatement(sql);
+                   pst.setString(1,login);
+                   pst.setString(2,login);
+                   rs = pst.executeQuery();
+
+                   if(rs.next()) return 3;
+
+               } catch(Exception e){
+
+               }
+
+               return 0;
+
+               }
+            }
+
         return 0;
     }
 }
