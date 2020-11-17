@@ -108,6 +108,10 @@ background-color: #FAFAFA;
 height: auto;
 width: 100%;}
 
+.container{
+    max-width: 1500px;
+}
+
 #header-events{
 display: flex;
 flex-direction: row;

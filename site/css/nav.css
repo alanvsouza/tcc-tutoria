@@ -69,6 +69,7 @@ h1 {
 }
 
 a.name-site {
+  margin-left: 20px;
   width: auto;
   line-height: 65px;
   font-size: 40px;
@@ -144,6 +145,7 @@ img.com-foto{
   width: 50px; 
   border-radius: 50%;
   margin-top: 7px;
+  margin: 14px 15px 0px 30px;
 }
 
 div.container-user {
@@ -316,7 +318,6 @@ div.header_post:hover div#triangulo-para-baixo {
     max-width: 250px;
   }
 
-
   div.container-user{
     position: absolute;
     top: -5px;
@@ -337,6 +338,7 @@ div.header_post:hover div#triangulo-para-baixo {
   img.com-foto{
     width: 45px; 
     margin-top: 10px;
+    margin-right: 30px;
   }
 
   span.icon-menu {
@@ -369,7 +371,6 @@ div.header_post:hover div#triangulo-para-baixo {
     min-width: 150px;
     transform: translateX(-50px);
   }
-
 }
 
 @media (min-width: 401px) and (max-width: 575px) {
@@ -386,23 +387,45 @@ div.header_post:hover div#triangulo-para-baixo {
     height: 30px;
   }
 
+  img.com-foto{
+    margin-right: 50px;
+  }
 }
 
 @media (max-width: 400px) {
+
+  nav ul li.li-nome-site {
+    max-width: 180px;
+  }
+
+
   a.name-site {
-    width: 180px !important;
-    font-size: 25px;
+    max-width: 160px;
+    font-size: 22px;
+    display: block;
+    margin: auto;
   }
 
   span.icon-menu {
     width: 33px;
     height: 27px;
   }
+
+  img.com-foto{
+    margin-right: 60px;
+  }
 }
 
+
+
 @media (max-width: 300px) {
+  nav ul li.li-nome-site {
+    max-width: 270px;
+  }
+
   a.name-site {
-    font-size: 27px;
+    max-width: 170px;
+    font-size: 24px;
   }
 
   span.icon-menu {

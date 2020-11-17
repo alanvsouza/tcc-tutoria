@@ -19,8 +19,8 @@ require_once "vendor/autoload.php";
             <?php
             if (!isset($_SESSION['usuario'])) {
                 echo
-                    '<li class="sumir"><a class="login" href="login.php">Login</a></li>
-                    <li class="sumir"><a href="cadastro.php">Cadastro</a></li>';
+                    '<li class="sumir item-menu"><a class="login" href="login.php">Login</a></li>
+                    <li class="sumir item-menu"><a href="cadastro.php" class="mr-4">Cadastro</a></li>';
             } else {
                 $icon = 'img-professores/' . \App\Model\TutorService::getFotoPerfil();
 

@@ -73,13 +73,11 @@ input#btn-filtrar{
 
 .content-wrapper {
     margin: 0 auto;
-    width: 100vw;
     width: 100%;
-    max-width: 1420px;
+    max-width: 1700px;
     height: 100%;
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
     align-items: center;
     box-sizing: border-box;
     padding: 0.5rem;
@@ -95,8 +93,9 @@ input#btn-filtrar{
     cursor: pointer;
     border-radius: 0.5rem;
     flex: 1;
-    min-width: 290px;
-    max-width: 25%;
+    width: auto;
+    min-width: 25%;
+    max-width: 50%;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
 }
 
@@ -259,7 +258,10 @@ div.modal-fotos{
     transition: all .4s ease;
     width: 600px;
     height: 400px;
+    min-width: 60vw;
+    min-height: 60vh;
     margin: auto;
+    display: block;
     z-index: 2000;
     background-color: beige;
     transition: all .3s ease;
@@ -276,6 +278,8 @@ img.fotos{
     position: absolute;
     width: 600px;
     height: 350px;
+    min-width: 60vw;
+    min-height: 60vh;
 }
 
 .arrows{
@@ -349,14 +353,85 @@ a.next:hover{
     visibility: hidden;
 }
 
+@media(min-width: 1500px){
+   
+    h2.card-novo__title{
+        font-size: 25px;
+    }
+
+    .card-novo__card-date{
+        font-size: 1rem;
+    }
+
+    .card-novo__card-descricao {
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .card-novo__ver-fotos{
+        font-size: 0.9rem;
+       }
+
+    .card-novo__ver-fotos i {
+        font-size: 0.8rem;
+    }
+}
+
+
+@media (min-width: 662px) and (max-width: 991px){
+    .card-novo {
+        width: 40%;
+        min-width: 300px;
+    }
+}
+
 @media (max-width: 661px){
+
+    div.filtro{
+        display: flex;
+        justify-content: ;
+        align-items: center;
+    }
+
+    .content-wrapper {
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .card-novo {
+        width: 100%;
+        min-width: 350px;
+        max-width: 95%;
+    }
+
     div.modal-fotos{
         width: 85%;
-        max-height: 85vh;
+        max-height: 50vh;
+        min-height: 400px;
     }
     
     img.fotos{
         width: 85%;
-        max-height: 85vh;
+        max-height: 50vh;
+        min-height: 400px;
     }
+}
+
+
+@media (max-height: 450px){
+    div.modal-fotos{
+        margin:  20px auto;
+        min-height: 0px;
+        max-width: 80vw;
+        max-height: 75vh;
+    }
+    
+    img.fotos{
+        margin: auto;
+        min-height: 0px;
+        max-width: 80vw;
+        max-height: 75vh;
+    }
+
 }

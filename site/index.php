@@ -23,7 +23,7 @@ require_once "vendor/autoload.php";
     <link rel="stylesheet" href="css/events.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/notification.css">
+    <!-- <link rel="stylesheet" href="css/notification.css"> -->
     <link rel="stylesheet" href="css/navside.css">
     <!-- <link rel="stylesheet" href="css/galeriaEventos.css"> -->
     <link rel="stylesheet" href="css/cardsEventos.css">
@@ -48,7 +48,10 @@ require_once "vendor/autoload.php";
     else
         include("navAluno.php");
 
-    include("navside.php");
+    if (isset($_SESSION['tipo']) && $_SESSION['tipo'] == 'tutor')
+        include("navsideTutor.php");
+    else 
+        include("navside.php");
     ?>
 
     <div class="img-events">
@@ -131,7 +134,7 @@ require_once "vendor/autoload.php";
         </div>
     </footer>
 
-    <notification id="notificacao-actived" class="notificacao noti-none">
+    <!-- <notification id="notificacao-actived" class="notificacao noti-none">
         <span id="icone-notification"><i class="fa fa-bell"></i></span>
         <span id="status" class="font-weight-bold">Notificações Ativadas</span>
     </notification>
@@ -139,13 +142,13 @@ require_once "vendor/autoload.php";
     <notification id="notificacao-disabled" class="notificacao">
         <span id="icone-notification-disabled"><i class="fas fa-bell-slash"></i></span>
         <span id="status" class="font-weight-bold">Notificações Desativadas</span>
-    </notification>
+    </notification> -->
 
 
     <!-- My JS -->
 
     <script src="js/navside.js"></script>
-    <script src="js/notification.js"></script>
+    <!-- <script src="js/notification.js"></script> -->
     <script src="js/classEdit.js"></script>
     <script src="js/galeriaEventos.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

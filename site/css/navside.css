@@ -55,23 +55,32 @@ div ul.list-navside li a:hover {
 }
 
 @media (max-width: 767px) {
-    a.item-navside {
-        font-size: 15px;
+    div ul.list-navside li a.item-navside {
+        font-size: 14px;
     }
 }
 
 @media(min-width: 301px) and (max-width: 575px) {
+    div ul.list-navside li i {
+        min-width: 20px;
+        font-size: 16px;
+    }
 
-    a.item-navside {
+    div ul.list-navside li a.item-navside {
         width: 100%;
-        font-size: 14px;
+        font-size: 14.5px;
     }
 }
 
 @media(max-width: 300px) {
 
-    a.item-navside {
+    div ul.list-navside li i {
+        min-width: 20px;
+        font-size: 14px;
+    }
+
+    div ul.list-navside li a.item-navside {
         height: 50px;
-        font-size: 13px;
+        font-size: 13.5px;
     }
 }
