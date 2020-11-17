@@ -19,6 +19,23 @@ class AlunoDAO
         $stmt->execute();
     }
 
+    public function readById($id)
+    {
+        $query = "SELECT * from `tbaluno` WHERE idaluno = ?";
+        $stmt = Connection::getConn()->prepare($query);
+
+        $stmt->bindValue(1, $id);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) :
+            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+            return $result;
+        endif;
+
+        return null;
+    }
+
     public function readByLogin($login)
     {
         $query = "SELECT * from `tbaluno` WHERE login = ?";

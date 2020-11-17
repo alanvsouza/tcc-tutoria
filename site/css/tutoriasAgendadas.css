@@ -253,8 +253,8 @@ span.info {
 
 input.input-local{
     width: 100px;
-    border: 0px solid black;
-    border-bottom: 1px solid gray;
+    border: 0px solid black;    
+    border-bottom: 1px solid gray;    
     background-color: transparent;
     height: 30px;
     text-align: center;
@@ -279,7 +279,23 @@ button.btn-cancelar-tutoria {
     transition: background .3s ease;
 }
 
+button.btn-confirmar-tutoria {
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    width: 150px;
+    height: 35px;
+    display: block;
+    color: white;
+    background-color: #383838;
+    transition: background .3s ease;
+}
+
 button.btn-cancelar-tutoria:hover {
+    background-color: #ff8206;
+}
+
+button.btn-confirmar-tutoria:hover {
     background-color: #ff8206;
 }
 
@@ -293,6 +309,28 @@ div.the-end {
     border-bottom: 0px solid gray;
 }
 
+.header-horarios{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 95%;
+    padding:20px 0px 10px 0px;
+    margin: 0px 0px 10px 0px;
+    border-bottom: 1px solid gray;
+}
+
+.title-horarios{
+    width: 100%;    
+    font-size: 23px;
+    display: inline-block;
+    text-align: center;
+    padding: 0px;
+    margin: 15px 0px 0px 0px;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.04rem;
+    color: #2a2a25;
+}
 
 @media (min-width: 1500px) {
     div.hidden-scrool {
