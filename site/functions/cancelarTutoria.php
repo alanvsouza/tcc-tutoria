@@ -20,7 +20,7 @@ switch ($_POST['tipo-tutoria']) {
             'mail-sender/sendEmail.php',
             'POST',
             array(
-                'subject' => 'Tutoria confirmada!',
+                'subject' => 'Tutoria cancelada!',
                 'from' => 'cotiltutoria@gmail.com',
                 'to' => $alunoInfos['email'],
                 'model' => 'tutoria-cancelada',

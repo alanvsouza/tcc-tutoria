@@ -82,14 +82,10 @@ class TutorService
             $foto = $row["foto"];
             $redesSociais =
                 array(
-                    "facebook" => $row["facebook"] == null ? "\"" . "#" . "\"" : "\"" . $row["facebook"] . "\"" .
-                        " target='_blank'",
-                    "twitter" => $row["twitter"] == null ? "\"" . "#" . "\"" : "\"" . $row["twitter"] . "\"" .
-                        " target='_blank'",
-                    "linkedin" => $row["linkedin"] == null ? "\"" . "#" . "\"" : "\"" . $row["linkedin"] . "\"" .
-                        " target='_blank'",
-                    "instagram" => $row["instagram"] == null ? "\"" . "#" . "\"" : "\"" . $row["instagram"] . "\"" .
-                        " target='_blank'"
+                    "facebook" => $row["facebook"] == null ? "" : "<li><a href='{$row["facebook"]}' target='_blank'>Facebook</a></li>",
+                    "twitter" => $row["twitter"] == null ? "" : "<li><a href='{$row["twitter"]}' target='_blank'>Twitter</a></li>",
+                    "linkedin" => $row["linkedin"] == null ? "" : "<li><a href='{$row["linkedin"]}' target='_blank'>Linkedin</a></li>",
+                    "instagram" => $row["instagram"] == null ? "" : "<li><a href='{$row["instagram"]}' target='_blank'>Instagram</a></li>"
                 );
 
             $descricao = $row["descricao"];
@@ -108,10 +104,10 @@ class TutorService
                         <p class="justify">' . $descricao . '</p>
                         <div class="midias">
                             <ul>
-                                <li><a href=' . $redesSociais["linkedin"] . '>Linkedin</a></li>
-                                <li><a href=' . $redesSociais["twitter"] . '>Twitter</a></li>
-                                <li><a href=' . $redesSociais["facebook"] . '>Facebook</a></li>
-                                <li><a href=' . $redesSociais["instagram"] . '>Instagram</a></li>
+                                ' . $redesSociais["linkedin"] . '
+                                ' . $redesSociais["twitter"] . '
+                                ' . $redesSociais["facebook"] . '
+                                ' . $redesSociais["instagram"] . '
                             </ul>
                         </div>
                 </div>';
