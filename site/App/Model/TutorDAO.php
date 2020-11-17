@@ -34,6 +34,20 @@ class TutorDAO
         return null;
     }
 
+    public function updateFotoPerfil($id, $arquivo)
+    {
+        $query = "UPDATE tbtutor SET foto = ? WHERE idtutor = ?";
+        $stmt = Connection::getConn()->prepare($query);
+
+        $stmt->bindValue(1, $arquivo);
+        $stmt->bindValue(2, $id);
+
+        if ($stmt->execute())
+            return true;
+
+        return false;
+    }
+
     public function readHorarioDinamicoById($id)
     {
         $query = "SELECT * FROM `tbhorariosdinamicos` WHERE `idhorario` = ?";

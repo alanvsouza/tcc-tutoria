@@ -51,15 +51,17 @@ require_once "vendor/autoload.php";
 
     if (isset($_SESSION['tipo']) && $_SESSION['tipo'] == 'tutor')
         include("navsideTutor.php");
-    else 
+    else
         include("navside.php");
     ?>
 
     <div id="modal-selecionar-foto">
-        <form class="form-foto-perfil">
-             <i id="close-selecionar-foto" class='fas fa-times close'></i>
+        <form action="functions/uploadFotoPerfil.php" method="POST" class="form-foto-perfil" enctype="multipart/form-data">
+            <i id="close-selecionar-foto" class='fas fa-times close'></i>
             <label for='selecao-arquivo'><img id="img-upload" src="img/upload.png"></label>
-            <input id='selecao-arquivo' type='file'>
+            <input id='selecao-arquivo' name="foto-perfil" type='file'>
+
+            <input style="position: absolute; top: 65vh" type="submit" name="submit" id="btn-ver-eventos" value="Enviar">
         </form>
     </div>
 
