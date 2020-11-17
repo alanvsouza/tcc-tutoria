@@ -20,7 +20,7 @@ require_once "vendor/autoload.php";
     <link rel="stylesheet" href="css/imgEvents.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/navside.css">
-    <link rel="stylesheet" href="css/notification.css">
+<!--     <link rel="stylesheet" href="css/notification.css"> -->
     <link rel="stylesheet" href="css/cardsProjetoTutoria.css">
     <link rel="stylesheet" href="css/projetoTutoria.css">
 
@@ -130,7 +130,7 @@ require_once "vendor/autoload.php";
         </div>
     </footer>
 
-    <notification id="notificacao-actived" class="notificacao noti-none">
+    <!-- <notification id="notificacao-actived" class="notificacao noti-none">
         <span id="icone-notification"><i class="fa fa-bell"></i></span>
         <span id="status" class="font-weight-bold">Notificações Ativadas</span>
     </notification>
@@ -138,12 +138,12 @@ require_once "vendor/autoload.php";
     <notification id="notificacao-disabled" class="notificacao">
         <span id="icone-notification-disabled"><i class="fas fa-bell-slash"></i></span>
         <span id="status" class="font-weight-bold">Notificações Desativadas</span>
-    </notification>
+    </notification> -->
 
     <!-- My JS -->
     <script src='js/nav.js'></script>
     <script src="js/navside.js"></script>
-    <script src="js/notification.js"></script>
+    <!-- <script src="js/notification.js"></script> -->
     <script src="js/classEdit.js"></script>
     <script src='js/cardsProjetoTutoria.js'></script>
 

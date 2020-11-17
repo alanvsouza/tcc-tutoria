@@ -102,21 +102,26 @@ public class Imagem {
                 }
      }
     
-    public void selecionarImagem(JTextField arquivo,JTextField nome, JButton btnImg,int largura,int altura){
+    public boolean selecionarImagem(JTextField arquivo,JTextField nome, JButton btnImg,int largura,int altura){
      try {
             FileDialog fileDialog = new FileDialog((Frame)null);
             fileDialog.setVisible(true);
             if(fileDialog.getDirectory() != null){
                 arquivo.setText(fileDialog.getDirectory() + fileDialog.getFile());
                 nome.setText(fileDialog.getFile().replace(".jpg","").replace(".png",""));
-                carregaImagem(btnImg,fileDialog.getDirectory() + fileDialog.getFile(), largura, altura);
+               boolean tudoCerto = carregaImagem(btnImg,fileDialog.getDirectory() + fileDialog.getFile(), largura, altura);
+               if(tudoCerto)
+               return true;
+               else 
+               return false;
             }
         }catch(Exception e) {
            JOptionPane.showMessageDialog(null,"Erro ao tentar carregar o arquivo! Verifique se o arquivo selecionado é uma imagem.");
         }   
+     return false;
     }
     
-     public void carregaImagem(JButton botao, String arquivo, int largura, int altura){
+     public boolean carregaImagem(JButton botao, String arquivo, int largura, int altura){
             try {
                 File f = new File(arquivo);
                 BufferedImage bufi = ImageIO.read(f);
@@ -126,7 +131,9 @@ public class Imagem {
             } 
             catch(Exception e) {
                JOptionPane.showMessageDialog(null,"Erro ao tentar carregar o arquivo! Verifique se o arquivo selecionado é uma imagem.");
+               return false;
             }
+        return true;
      }
 
 }

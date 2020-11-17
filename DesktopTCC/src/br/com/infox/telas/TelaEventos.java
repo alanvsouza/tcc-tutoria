@@ -9,8 +9,10 @@ import br.com.infox.dal.ModuloConexao;
 import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 public class TelaEventos extends javax.swing.JInternalFrame {
 Connection conexao = null;
@@ -19,6 +21,8 @@ ResultSet rs = null;
 String nomeEvento = "";
 String nomeImagem = "";
 String pastaEvento = "";
+
+boolean imagemModificada;
 boolean camposObrigatorios = false;
 
 Caminho caminho = new Caminho();
@@ -38,7 +42,7 @@ Imagem img = new Imagem();
         taEvtDescricao.setDocument(new LimitarCampos(218));
         txtEvtLocal.setDocument(new LimitarCampos(50));
         nome.setDocument(new LimitarCampos(120));
-        
+  
         //setando o estilo em alguns componentes
         btnAdicionar.setBackground(new Color (0,0,0,0));
         btnAtualizar.setBackground(new Color (0,0,0,0));
@@ -73,7 +77,7 @@ Imagem img = new Imagem();
                                 
                                 String nomeImg = nome.getText().replace(".jpg","").replace(".png","");
                                 
-                                if(!arquivo.getText().equals(pastaEvento + nomeImg + ".jpg")){
+                                if(imagemModificada){
                                     img.deletarImagem("select image from tbeventos where idevento=?", txtEvtId.getText(),"Falha ao tentar excluir a imagem",pastaEvento);
                                     img.copiarImagem("br.com.infox.telas.TelaEventos",arquivo.getText(),pastaEvento,nomeImg,".jpg");
                                 }
@@ -126,7 +130,7 @@ Imagem img = new Imagem();
                             
                             String nomeImg = nome.getText().replace(".jpg","").replace(".png","");
                             
-                            if(!arquivo.getText().equals(pastaEvento + nomeImg + ".jpg")){
+                            if(imagemModificada){
                                     img.deletarImagem("select image from tbeventos where idevento=?", txtEvtId.getText(),"Falha ao tentar excluir a imagem",pastaEvento);
                                     img.copiarImagem("br.com.infox.telas.TelaEventos",arquivo.getText(),pastaEvento, nomeImg,".jpg");  
                             } 
@@ -198,6 +202,7 @@ Imagem img = new Imagem();
         JTextField[] camposEvento = {txtEvtNome,txtEvtData,txtEvtInicio,txtEvtTermino,null,txtEvtLocal,nome,txtEvtId};
         evt.setCamposEvento(tblEventos,camposEvento,taEvtDescricao);
         img.carregaImagem(btnImg, pastaEvento + tblEventos.getModel().getValueAt(setar,6).toString(),374,220);
+        imagemModificada = false;
     }
     
      private void clear(){
@@ -648,7 +653,8 @@ Imagem img = new Imagem();
     }//GEN-LAST:event_txtEvtTerminoKeyPressed
 
     private void btnImgMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImgMouseClicked
-        img.selecionarImagem(arquivo, nome, btnImg, 374,220);
+      boolean modificouImagem =  img.selecionarImagem(arquivo, nome, btnImg, 374,220);
+        if(modificouImagem) imagemModificada = true;
     }//GEN-LAST:event_btnImgMouseClicked
    
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed

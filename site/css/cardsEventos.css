@@ -11,7 +11,7 @@ align-items: center;}
 
 .post {
 margin: 20px auto 20px auto;
-width: 30%;
+width: 27%;
 min-width: 350px;
 height: 500px;
 display: flex;
@@ -238,6 +238,12 @@ height: 120px;}
 div.header_post:hover div#triangulo-para-baixo{
 top: 120px;}
 
+
+@media (min-width: 1050px){
+    .container{
+        padding: 0px 50px 0px 50px
+    }
+}
 
 @media (max-width: 400px){
     .post {

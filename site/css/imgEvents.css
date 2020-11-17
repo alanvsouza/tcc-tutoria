@@ -55,6 +55,11 @@ font-size: 30px;
 font-family: 'Josefin Sans',sans-serif;}
 
 
+@media (max-width: 567px){
+    .img-events::before{
+    top: 55px;}
+}
+
 @media(max-width: 1151px){
     .img-events{
     height: 100vh;}
