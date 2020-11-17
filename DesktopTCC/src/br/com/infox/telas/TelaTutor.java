@@ -50,7 +50,7 @@ Caminho caminho = new Caminho();
         btnClear.setBackground(new Color (0,0,0,0)); 
         
         //Mudar a pasta de eventos
-        caminho.setPastaTutor("C:\\xampp\\htdocs\\myTCC\\site\\img-professores\\");
+        caminho.setPastaTutor("/opt/lampp/htdocs/tcc/site/img-professores/");
         pastaTutor = caminho.getPastaTutor();
         
         conexao = ModuloConexao.conector();
