@@ -116,6 +116,7 @@ public class Imagem {
                return false;
             }
         }catch(Exception e) {
+            System.out.println(e);
            JOptionPane.showMessageDialog(null,"Erro ao tentar carregar o arquivo! Verifique se o arquivo selecionado é uma imagem.");
         }   
      return false;
@@ -130,6 +131,7 @@ public class Imagem {
                 botao.setIcon(ico);
             } 
             catch(Exception e) {
+               System.out.println(e);
                JOptionPane.showMessageDialog(null,"Erro ao tentar carregar o arquivo! Verifique se o arquivo selecionado é uma imagem.");
                return false;
             }

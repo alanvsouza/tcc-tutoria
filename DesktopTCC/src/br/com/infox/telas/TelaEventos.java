@@ -50,7 +50,7 @@ Imagem img = new Imagem();
         btnClear.setBackground(new Color (0,0,0,0));
         
         //Mudar a pasta de eventos
-        caminho.setPastaEventos("C:\\xampp\\htdocs\\myTCC\\site\\img-eventos\\");
+        caminho.setPastaEventos("/opt/lampp/htdocs/tcc/site/img-eventos/");
         pastaEvento = caminho.getPastaEventos();
 
         conexao = ModuloConexao.conector();

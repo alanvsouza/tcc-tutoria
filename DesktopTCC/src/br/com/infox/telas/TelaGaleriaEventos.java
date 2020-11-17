@@ -38,7 +38,7 @@ int count = 1;
         btnRemover.setBackground(new Color (0,0,0,0));
         btnClear.setBackground(new Color (0,0,0,0));
         
-        caminho.setPastaGaleria("C:\\xampp\\htdocs\\myTCC\\site\\img-galeria-eventos\\");
+        caminho.setPastaGaleria("/opt/lampp/htdocs/tcc/site/img-galeria-eventos/");
         caminhoPasta = caminho.getPastaGaleria();
         
         conexao = ModuloConexao.conector();
