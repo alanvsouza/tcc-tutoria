@@ -654,7 +654,7 @@ Imagem img = new Imagem();
 
     private void btnImgMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImgMouseClicked
       boolean modificouImagem =  img.selecionarImagem(arquivo, nome, btnImg, 374,220);
-        if(modificouImagem) imagemModificada = true;
+      if(modificouImagem) imagemModificada = true;
     }//GEN-LAST:event_btnImgMouseClicked
    
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed

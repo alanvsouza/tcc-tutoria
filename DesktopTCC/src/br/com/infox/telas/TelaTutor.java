@@ -20,6 +20,9 @@ ResultSet rs = null;
 String pastaTutor = "";
 String origem = "";
 String nomeImagem = "";
+
+
+boolean imagemModificada;
 boolean camposObrigatorios = false;
 
 Tutor tutor = new Tutor();
@@ -63,6 +66,7 @@ Caminho caminho = new Caminho();
         txtInstagram,txtLinkedin,txtTwitter,txtYoutube};
         tutor.setCamposTutor(tblTutores,camposTutor,taTutDescricao);
         img.carregaImagem(btnImg, pastaTutor + tblTutores.getModel().getValueAt(setar,6).toString(),225,180);
+        imagemModificada = false;
     }
     
     private void adicionar(){
@@ -84,9 +88,8 @@ Caminho caminho = new Caminho();
                 }
                 
                 if(verificar == 0){
-                    
                                 
-                    if(!arquivo.getText().equals(pastaTutor + nomeImagem + ".png")){
+                    if(imagemModificada){
                         img.deletarImagem("select foto from tbtutor where idtutor=?", txtTutId.getText(),"Falha ao tentar excluir a imagem", pastaTutor);
                         img.copiarImagem("br.com.infox.telas.TelaTutor",arquivo.getText(),pastaTutor,nomeImagem,".png");
                     }
@@ -140,7 +143,7 @@ Caminho caminho = new Caminho();
                     + "sobrescrevê-la com a nova imagem?","AVISO",JOptionPane.YES_NO_OPTION);
                     
                     if(verificar == 0){
-                        if(!arquivo.getText().equals(pastaTutor + nomeImagem + ".png")){
+                        if(imagemModificada){
                             img.deletarImagem("select foto from tbtutor where idtutor=?", txtTutId.getText(),"Falha ao tentar excluir a imagem",pastaTutor);
                             img.copiarImagem("br.com.infox.telas.TelaTutor",arquivo.getText(),pastaTutor,nomeImagem,".png");
                         }
@@ -829,7 +832,8 @@ Caminho caminho = new Caminho();
     }//GEN-LAST:event_txtTutSenhaKeyPressed
 
     private void btnImgMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImgMouseClicked
-         img.selecionarImagem(arquivo,nome, btnImg,228,184);
+        boolean modificouImagem  = img.selecionarImagem(arquivo,nome, btnImg,228,184);
+        if(modificouImagem) imagemModificada = true;
     }//GEN-LAST:event_btnImgMouseClicked
 
     private void cbFacebookItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbFacebookItemStateChanged
